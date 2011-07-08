@@ -47,7 +47,11 @@
 #include <QDebug>
 
 #define FLVSTREAMER "flvstreamer"
+#ifdef Q_WS_WIN
+#define Timeout " -m 10000 "
+#else
 #define Timeout " -m 10 "
+#endif
 #define ScrambleLength 14
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false) {
