@@ -639,16 +639,18 @@ void DownloadThread::run() {
 		if ( scramble.length() )
 			emit information( QString::fromUtf8( "wikiから取得したコード：" ) + scramble );
 		else
-			emit information( QString::fromUtf8( "wikiから取得したコード： 取得に失敗したか、まだwikiのxmlが更新されていません。" ) );
+			emit information( QString::fromUtf8( "wikiから取得したコード：取得に失敗したか、wikiのxmlが更新されていません。" ) );
 	}
 
 	if ( !scramble.length() ) {
 		QString error;
 		scramble = Utility::gnash( error );
-		if ( scramble.length() )
+		if ( error.length() )
+			emit information( QString::fromUtf8( "gnashを利用して解析したコード：" ) + error );
+		else if ( scramble.length() )
 			emit information( QString::fromUtf8( "gnashを利用して解析したコード：" ) + scramble );
 		else
-			emit information( QString::fromUtf8( "gnashを利用して解析したコード： " ) + error );
+			emit information( QString::fromUtf8( "gnashを利用して解析したコード：取得に失敗しました" ) );
 	}
 
 	if ( !scramble.length() ) {
@@ -656,7 +658,10 @@ void DownloadThread::run() {
 		scramble = Utility::flare( error );
 		if ( scramble.length() == ScrambleLength )
 			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + scramble );
-		else
+		else if ( scramble.length() > 0 ) {
+			emit information( QString::fromUtf8( "flareを利用して解析したコード：長さが足りません：" ) + scramble );
+			scramble = "";
+		} else if ( error.length() > 0 )
 			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + error );
 	}
 
