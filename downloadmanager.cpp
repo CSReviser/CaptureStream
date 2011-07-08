@@ -60,8 +60,6 @@ void DownloadManager::downloadFinished( QNetworkReply *reply ) {
 		QString urlStr = url.toString();
 		if ( !reread && urlStr.startsWith( "http://www.google.co.jp/" ) ) {
 			QString page = QString::fromUtf8( reply->readAll().constData() );
-			//qDebug() << page;
-			//QString rx = "http://cgi2.nhk.or.jp/e-news/swfp/video_player.swf.type=real&m_name=([^\"]*)";
 			QString rx = "http://cgi2.nhk.or.jp/e-news/swfp/video_player(?:_wide)?.swf.type=real&amp;m_name=([^\"]*)";
 			QRegExp regexp( rx, Qt::CaseInsensitive );
 			QList<QString> tempList;
@@ -89,7 +87,6 @@ void DownloadManager::downloadFinished( QNetworkReply *reply ) {
 			}
 		} else {
 			QString page( reply->readAll() );
-			//QString rx = reread ? "audio_player2.swf.type=real&m_name=([^\"]*)" : "video_player.swf.type=real&m_name=([^\"]*)";
 			QString rx = reread ? "mp3player.swf.type=real&m_name=([^&\"]*)" : "video_player_wide.swf.type=real&m_name=([^\"]*)";
 			QRegExp regexp( rx, Qt::CaseInsensitive );
 			if ( regexp.indexIn( page ) > -1 && !flvList.contains( regexp.cap( 1 ) ) )

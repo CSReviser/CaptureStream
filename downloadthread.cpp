@@ -30,14 +30,8 @@ using namespace MP3;
 #include <QDebug>
 
 #define FLVSTREAMER "flvstreamer"
-#define FFMPEG "ffmpeg"
+#define Timeout " -m 10 "
 #define ScrambleLength 14
-
-#ifdef Q_WS_WIN
-static const char* Timeout = " -m 10000 ";
-#else
-static const char* Timeout = " -m 10 ";
-#endif
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false) {
 	this->ui = ui;
@@ -262,15 +256,13 @@ void DownloadThread::downloadCharo() {
 	QString flvstreamer;
 	if ( !checkFlvstreamer( flvstreamer ) )
 		return;
-	//QString kouza = QString::fromUtf8( "チャロの英語実力講座" );
-        QString kouza = QString::fromUtf8( "リトル・チャロ2" );
+	QString kouza = QString::fromUtf8( "リトル・チャロ2" );
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
 		return;
 	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
 	QString flv_host( "flv9.nhk.or.jp");
 	QString flv_app( "flv9/_definst_/" );
-	//QString flv_service_prefix( "flv:charo/php/flv/radio/" );
 	QString flv_service_prefix( "flv:charo/streams/radio/" );
 #ifdef Q_WS_WIN
 	QString null( "nul" );
@@ -289,8 +281,6 @@ void DownloadThread::downloadCharo() {
 
 	for ( QDate i = from; i <= today && !isCanceled; i = i.addDays( 1 ) ) {
 		if ( i.dayOfWeek() < Qt::Saturday ) {	//2010年度は月〜金
-			//QString hdate = QString::number( i.month() ) + QString::fromUtf8( "月" ) +
-					//i.toString( "dd" ) + QString::fromUtf8( "日放送分" );
 			QString hdate = i.toString( "yyyy_MM_dd" );
 			QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
 			QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
@@ -327,16 +317,8 @@ void DownloadThread::downloadCharo() {
 				}
 
 				if ( ( !exitCode || keep_on_error ) && !isCanceled ) {
-					//emit current( QString::fromUtf8( "音声抽出中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 					if ( flv2mp3( flv_file, mp3_file ) )
 						id3tag( mp3_file, kouza, kouza + "_" + hdate, i.toString( "yyyy" ), "NHK" );
-					/*
-					if ( !process.execute( "\"" + ffmpeg + "\"" + " -y -vn -i " + "\"" + flv_file +
-								"\" -acodec copy " + "\"" + mp3_file + "\"" ) ) {
-						QFile::remove( flv_file );
-						id3tag( mp3_file, kouza, hdate, i.toString( "yyyy" ), "NHK" );
-					}
-					*/
 				}
 				if ( QFile::exists( flv_file ) )
 					QFile::remove( flv_file );
@@ -352,7 +334,6 @@ void DownloadThread::downloadENews( bool re_read ) {
 	DownloadManager manager( re_read );
 	manager.singleShot();
 	qSort( manager.flvList.begin(), manager.flvList.end(), qGreater<QString>() );
-	//emit current( QString::fromUtf8( "ニュースで英会話のダウンロード済みファイルをスキップ中" ) );
 
 	QString flvstreamer;
 	if ( !checkFlvstreamer( flvstreamer ) )
@@ -450,20 +431,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 						if ( flv2mp3( flv_file, mp3_file ) )
 							id3tag( mp3_file, kouza, kouza + "_" + hdate, flv.left( 4 ), "NHK" );
 					}
-					/*
-					if ( !process.execute( "\"" + ffmpeg + "\"" + " -y -vn -i " + "\"" + flv_file +
-								"\" -acodec copy " + "\"" + mp3_file + "\"" ) ) {
-						QFile::remove( flv_file );
-						id3tag( mp3_file, kouza, hdate, flv.left( 4 ), "NHK" );
-					}
-					*/
 					if ( saveMovie && ( !skip || !movieExists ) ) {
-						/*
-						emit current( QString::fromUtf8( "動画変換中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-						if ( process.execute( "\"" + ffmpeg + "\"" + " -y -i " + "\"" + flv_file +
-											  "\" -vcodec copy " + "\"" + movie_file + "\"" ) )
-							emit critical( QString::fromUtf8( "動画の変換に失敗しました。" ) );
-						*/
 						if ( movieExists ) {
 							if ( !QFile::remove( movie_file ) ) {
 								emit critical( QString::fromUtf8( "古い動画ファイルの削除に失敗しました：　" ) +
@@ -648,22 +616,6 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 	if ( file.right( 4 ) == ".flv" )
 		file = file.left( file.length() - 4 );
 
-	/*
-	format.replace( QRegExp( "%k" ), kouza );
-	format.replace( QRegExp( "%h" ), hdate );
-	format.replace( QRegExp( "%f" ), file );
-	format.replace( QRegExp( "%r" ), applicationDirPath() );
-	format.replace( QRegExp( "%p" ), QDir::separator() );
-	format.replace( QRegExp( "%Y" ), QString::number( year ) );
-	format.replace( QRegExp( "%y" ), QString::number( year ).right( 2 ) );
-	format.replace( QRegExp( "%M" ), QString::number( month + 100 ).right( 2 ) );
-	format.replace( QRegExp( "%m" ), QString::number( month ) );
-	format.replace( QRegExp( "%D" ), QString::number( day + 100 ).right( 2 ) );
-	format.replace( QRegExp( "%d" ), QString::number( day ) );
-	format.replace( QRegExp( "%%" ), "%" );
-	return format;
-	*/
-
 	QString result;
 
 	bool percent = false;
@@ -717,8 +669,6 @@ QString DownloadThread::flv_app = "flv9/_definst_/";
 QString DownloadThread::flv_service_prefix = "flv:gogaku/streaming/flv/";
 
 QString DownloadThread::flvstreamer;
-//QString DownloadThread::ffmpeg;
-//QString DownloadThread::random = "0077PTLP2BX71C";
 QString DownloadThread::scramble;
 
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount, bool guess ) {
@@ -786,13 +736,6 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 				id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK" );
 				result = true;
 			}
-			/*
-			 if ( !process.execute( "\"" + ffmpeg + "\"" + " -y -vn -i " + "\"" + outputDir + outBasename +
-			 ".flv\" -acodec copy " + "\"" + outputDir + outBasename + ".mp3\"" ) ) {
-			 QFile::remove( flv_file );
-			 id3tag( outputDir + outBasename + ".mp3", kouza, yyyymmdd, "20" + file.left( 2 ), "NHK" );
-			 }
-			 */
 		}
 		if ( QFile::exists( flv_file ) )
 			QFile::remove( flv_file );
@@ -868,13 +811,6 @@ bool DownloadThread::captureStreamPast( QString kouza, QString file, int retryCo
 				id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK" );
 				result = true;
 			}
-			/*
-			 if ( !process.execute( "\"" + ffmpeg + "\"" + " -y -vn -i " + "\"" + outputDir + outBasename +
-			 ".flv\" -acodec copy " + "\"" + outputDir + outBasename + ".mp3\"" ) ) {
-			 QFile::remove( flv_file );
-			 id3tag( outputDir + outBasename + ".mp3", kouza, yyyymmdd, "20" + file.left( 2 ), "NHK" );
-			 }
-			 */
 		}
 		if ( QFile::exists( flv_file ) )
 			QFile::remove( flv_file );
@@ -1017,7 +953,7 @@ void DownloadThread::run() {
 		ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, NULL
 	};
 
-	if ( !checkFlvstreamer( flvstreamer/*, ffmpeg*/ ) )
+	if ( !checkFlvstreamer( flvstreamer ) )
 		return;
 
 	scramble = MainWindow::scramble;

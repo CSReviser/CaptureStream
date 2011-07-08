@@ -20,7 +20,7 @@
 #include <QInputDialog>
 #include <QFileDialog>
 
-#define VERSION " (2011/07/04)"
+#define VERSION " (2011/07/06)"
 
 #define SETTING_GROUP "MainWindow"
 #define SETTING_GEOMETRY "geometry"
