@@ -39,8 +39,7 @@
 #include <QDesktopWidget>
 #include <QInputDialog>
 #include <QFileDialog>
-
-#define VERSION " (2011/07/06)"
+#include <QTextStream>
 
 #define SETTING_GROUP "MainWindow"
 #define SETTING_GEOMETRY "geometry"
@@ -49,6 +48,22 @@
 
 namespace {
 	bool outputDirSpecified = false;
+	QString version() {
+		QString result;
+		// 日本語ロケールではQDate::fromStringで曜日なしは動作しないのでQRegExpを使う
+		// __DATE__の形式： "Jul  8 2011"
+		static QRegExp regexp( "([a-zA-Z]{3})\\s+(\\d{1,2})\\s+(\\d{4})" );
+		static QStringList months = QStringList()
+				<< "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"
+				<< "Jul" << "Aug" << "Sep" << "Oct" << "Nov" << "Dec";
+		if ( regexp.indexIn( __DATE__ ) != -1 ) {
+			int month = months.indexOf( regexp.cap( 1 ) ) + 1;
+			int day = regexp.cap( 2 ).toInt();
+			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
+					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
+		}
+		return result;
+	}
 }
 
 QString MainWindow::outputDir;	// 読み出し用の関数を作り、この変数は公開しない。そうすればoutputDirSpecifiedがいらなくなる
@@ -58,7 +73,7 @@ MainWindow::MainWindow( QWidget *parent )
 		: QMainWindow( parent ), ui( new Ui::MainWindowClass ), downloadThread( NULL ) {
 	ui->setupUi( this );
 	settings( ReadMode );
-	this->setWindowTitle( this->windowTitle() + VERSION );
+	this->setWindowTitle( this->windowTitle() + version() );
 
 #ifdef Q_WS_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
 	setMaximumHeight( maximumHeight() - menuBar()->height() );
