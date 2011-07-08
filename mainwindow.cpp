@@ -66,7 +66,7 @@ namespace {
 	}
 }
 
-QString MainWindow::outputDir;	// 読み出し用の関数を作り、この変数は公開しない。そうすればoutputDirSpecifiedがいらなくなる
+QString MainWindow::outputDir;
 QString MainWindow::scramble;
 
 MainWindow::MainWindow( QWidget *parent )
@@ -184,7 +184,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 
 	if ( mode == ReadMode ) {	// 設定読み込み
 		QVariant saved;
-#if defined( Q_WS_MAC ) || defined( Q_WS_WIN )
+#if defined( Q_WS_MAC ) || defined( Q_WS_WIN )	// X11では正しく憶えられないので位置をリストアしない
 		saved = settings.value( SETTING_GEOMETRY );
 		if ( saved.type() == QVariant::Invalid )
 			move( 70, 22 );

@@ -44,7 +44,8 @@ namespace {
 	const QString TEMPLATE( "streamingXXXXXX.swf" );
 
 	const QRegExp REGEXP( "function startInit\\(\\) \\{[^}]*\\}\\s*function (\\w*).*startInit\\(\\);" );
-	const QRegExp TAIL( "CONNECT_DIRECTORY \\+ '(.*)/' \\+ INIT_URI" );
+	const QRegExp PREFIX( "load\\('([A-Z0-9]*)' \\+ CONNECT_DIRECTORY" );
+	const QRegExp SUFFIX( "CONNECT_DIRECTORY \\+ '(.*)/' \\+ INIT_URI" );
 
 	const QString LISTDATAFLV( "http://www.nhk.or.jp/gogaku/common/swf/(\\w+)/listdataflv.xml" );
 	const QString WIKIXML2( "doc('http://www47.atwiki.jp/jakago/pub/scramble.xml')/flv/scramble[@date=\"" );
@@ -85,9 +86,12 @@ QString Utility::flare( QString& error ) {
 					scriptFile.close();
 					if ( REGEXP.indexIn( contents, 0 ) != -1 )
 						contents = REGEXP.cap();
-					QString tail;
-					if ( TAIL.indexIn( contents, 0 ) != -1 )
-						tail = TAIL.cap( 1 );
+					QString prefix;
+					if ( PREFIX.indexIn( contents, 0 ) != -1 )
+						prefix = PREFIX.cap( 1 );
+					QString suffix;
+					if ( SUFFIX.indexIn( contents, 0 ) != -1 )
+						suffix = SUFFIX.cap( 1 );
 					QScriptEngine myEngine;
 					myEngine.evaluate( contents );
 					QScriptValue generator = myEngine.globalObject().property( REGEXP.cap( 1 ) );
@@ -100,7 +104,7 @@ QString Utility::flare( QString& error ) {
 						generator.call();
 						QRegExp variable( "(\\w+)[^\\n=]*=[^\\n]*\\n[^\\n]*\\}" );
 						if ( variable.indexIn( generator.toString(), 0 ) != -1 )
-							result = myEngine.globalObject().property( variable.cap( 1 ) ).toString() + tail;
+							result = prefix + myEngine.globalObject().property( variable.cap( 1 ) ).toString() + suffix;
 					}
 				}
 				QFile::remove( flr );

@@ -646,7 +646,7 @@ void DownloadThread::run() {
 		if ( scramble.length() == ScrambleLength )
 			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + scramble );
 		else if ( scramble.length() > 0 ) {
-			emit information( QString::fromUtf8( "flareを利用して解析したコード：長さが足りません：" ) + scramble );
+			emit information( QString::fromUtf8( "flareを利用して解析したコード：長さが間違っています：" ) + scramble );
 			scramble = "";
 		} else if ( error.length() > 0 )
 			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + error );

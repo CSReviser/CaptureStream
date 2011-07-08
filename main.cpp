@@ -21,6 +21,7 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
 #include <stdio.h>
+#include <QDebug>
 
 bool oneTime = false;
 
@@ -37,8 +38,7 @@ int main(int argc, char *argv[])
 #endif
 
 	QApplication a(argc, argv);
-	// 直接argcを参照してはいけない。ダブルクリックして実行するとargcは2になっている
-	oneTime = QCoreApplication::arguments().size() > 1;
+	oneTime = QCoreApplication::arguments().contains( "-nogui" );
 	MainWindow w;
 	oneTime ? w.download() : w.show();
 	return a.exec();
