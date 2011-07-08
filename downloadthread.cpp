@@ -664,82 +664,6 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			exitCode = process.execute( command80 );
 		}
 		if ( exitCode ) {
-			//emit critical( QString::fromUtf8( "リトライしましたが、ダウンロードを完了できませんでした：　" ) +
-			emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
-						  kouza + QString::fromUtf8( "　" ) + yyyymmdd );
-		}
-		QFileInfo fileInfo( flv_file );	// ストリーミングが存在しなかった場合は13バイト
-		if ( fileInfo.size() > 100 && ( !exitCode || ui->checkBox_keep_on_error->isChecked() ) ) {
-			QString error;
-			if ( MP3::flv2mp3( flv_file, outputDir + outFileName, error ) ) {
-				id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK" );
-				result = true;
-			} else
-				emit critical( error );
-		}
-		if ( QFile::exists( flv_file ) )
-			QFile::remove( flv_file );
-	}
-
-	return result;
-}
-
-bool DownloadThread::captureStreamPast( QString kouza, QString file, int retryCount, bool guess ) {
-	Q_UNUSED( guess )
-	QString hdate = QString::fromUtf8( "00月00日放送分" );
-	QString outputDir = MainWindow::outputDir + kouza;
-	if ( !checkOutputDir( outputDir ) )
-		return false;
-	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
-
-#ifdef Q_WS_WIN
-	QString null( "nul" );
-#else
-	QString null( "/dev/null" );
-#endif
-
-	//QString titleFormat;
-	//QString fileNameFormat;
-	//CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
-	QString id3tagTitle = formatName( "%f", kouza, hdate, file, false );
-	QString outFileName = formatName( "%f.mp3", kouza, hdate, file, true );
-	QFileInfo fileInfo( outFileName );
-	QString outBasename = fileInfo.completeBaseName();
-
-	bool result = false;
-
-	if ( file.endsWith( ".flv", Qt::CaseInsensitive ) ) {
-		int month = hdate.left( 2 ).toInt();
-		int year = 2000 + file.left( 2 ).toInt();
-		if ( month <= 3 && QDate::currentDate().year() > year )
-			year += 1;
-		int day = hdate.mid( 3, 2 ).toInt();
-		QDate onair( year, month, day );
-		QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
-		QString basename = file.left( file.size() - 4 );
-		//QString outBasename = kouza + "_" + yyyymmdd;
-		if ( ui->checkBox_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
-			emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + file );
-			return true;
-		}
-		QString flv_file = outputDir + outBasename + ".flv";
-		QString command1935 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmp://" + flv_host + "/" + flv_app +
-		flv_service_prefix + basename + "\" -o " + "\"" + flv_file + "\" > " + null;
-		QString command80 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmpt://" + flv_host + ":80/" + flv_app +
-		flv_service_prefix + basename + "\" -o " + "\"" + flv_file + "\" --resume > " + null;
-		QProcess process;
-		//if ( guess ) {
-			//emit current( QString::fromUtf8( "別ファイル名でリトライ中．．．" ) );
-			//emit messageWithoutBreak( QString::fromUtf8( "．" ) );
-		//} else
-			emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + file );
-		int exitCode = process.execute( command1935 );
-		while ( exitCode && retryCount-- > 0 ) {
-			emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + file );
-			exitCode = process.execute( command80 );
-		}
-		if ( exitCode ) {
-			//emit critical( QString::fromUtf8( "リトライしましたが、ダウンロードを完了できませんでした：　" ) +
 			emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
 						  kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		}
@@ -784,53 +708,6 @@ static int offsets[langCount][7] = {
 	{ 4, 4, 4, 4, 1 },	//まいにちドイツ語
 	{ 5, 5, 5, 5, 5 }	//まいにちスペイン語
 };
-
-void DownloadThread::downloadPast( int count, QString file, QString kouza ) {
-	for ( int j = 1; j <= count && !isCanceled; j++ ) {
-		QRegExp rx2( "^(\\d+-\\w+-\\d+-)(\\d+)([a-zA-Z]*)(?:[^-_.]*)(?:[^.]*)(.flv)$" );
-		if ( rx2.indexIn( file, 0 ) != -1 ) {
-			QString prefix = rx2.cap( 1 );
-			QString number = rx2.cap( 2 );
-			QString addition = rx2.cap( 3 );
-			QString suffix = rx2.cap( 4 );
-
-			QStringList tempList = (QStringList() << "" << "2" << "3" << "4");
-			QStringList additions;
-			additions << "";
-			for ( int k = 0; k < tempList.count(); k++ ) {
-				if ( addition.length() > 0 )
-					additions << (addition + tempList[k]);
-				if ( addition != "mm" )
-					additions << ("mm" + tempList[k]);
-				if ( addition != "vip" )
-					additions << ("vip" + tempList[k]);
-			}
-			//#define Variants 6
-			//static QString revisions[Variants] = { "", "-re01", "-re02", "_re01", "_re02", "-re" };
-			//for ( int k = 0; k < Variants && !isCanceled; k++ ) {
-			QStringList revisions = (QStringList() << "" << "-re01" << "-re02" << "_re01" << "_re02" << "-re");
-			bool done = false;
-			for ( int k = 0; k < revisions.count() && !isCanceled && !done; k++ ) {
-				for ( int m = 0; m < additions.count() && !isCanceled && !done; m++ ) {
-					QString file = QString( "%1%2%3%4%5" )
-								   .arg( prefix ).arg( number.toInt() - j, 3, 10, QChar( '0' ) )
-								   .arg( additions[m] ).arg( revisions[k] ).arg( suffix );
-					//emit current( file );
-					if ( captureStreamPast( kouza, file, 1, k || m ) )
-						done = true;
-					//else if ( !k && !m )
-						//emit current( QString::fromUtf8( "別ファイル名でリトライ中\n" ) );
-				}
-			}
-			if ( !done ) {
-				//emit current( QString::fromUtf8( "" ) );
-				//emit messageWithoutBreak( QString::fromUtf8( "サーバ上にファイルが存在しないか、ファイル名の推測に失敗しました。" ) );
-				emit current( QString::fromUtf8( "サーバ上にファイルが存在しないか、ファイル名の推測に失敗しました。" ) );
-			}
-			//file = "#{prefix}#{sprintf( "%03d", number.to_i + offset[$target][count] )}#{revision}#{suffix}"
-		}
-	}
-}
 
 void DownloadThread::downloadOneWeek( int i, int addDays, QStringList& fileList, QStringList& kouzaList, QStringList& hdateList ) {
 	for ( int j = 0; j < fileList.count() && !isCanceled; j++ ) {
@@ -942,13 +819,6 @@ void DownloadThread::run() {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ )
 						captureStream( kouzaList[j], hdateList[j], fileList[j], 5 );
-				}
-
-				if ( false /*ui->checkBox_past_week->isChecked()*/ ) {
-					emit current( QString::fromUtf8( "＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊" ) );
-					emit current( QString::fromUtf8( "「過去のストリーミング」は試験的に搭載された機能です。" ) );
-					emit current( QString::fromUtf8( "＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊" ) );
-					downloadPast( ui->past_days->text().toInt(), fileList[0], kouzaList[0] );
 				}
 
 				if ( false /*ui->checkBox_next_week->isChecked()*/ ) {
