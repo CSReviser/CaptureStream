@@ -692,77 +692,6 @@ QDate onAirDate( QString hdate, QString file ) {
 	return QDate( year, month, day );
 }
 
-static const int langCount = 13;
-static int offsets[langCount][7] = {
-	{ 5, 5, 5, 5, 5 },	//基礎英語１
-	{ 5, 5, 5, 5, 5 },	//基礎英語２
-	{ 5, 5, 5, 5, 5 },	//基礎英語３
-	{ 7, 7, 7, 7, 7, 7, 7 },	//英語５分間トレーニング
-	{ 5, 5, 5, 5, 5 },	//ラジオ英会話
-	{ 2, 2 },			//入門ビジネス英語
-	{ 3, 3, 3 },		//実践ビジネス英語
-	{ 3, 3, 3, 2, 2 },	//まいにち中国語
-	{ 3, 3, 3, 2, 2 },	//まいにちフランス語:2011/01/19修正
-	{ 2, 2, 2, 2, 1 },	//まいにちイタリア語:2011/01/19修正
-	{ 3, 3, 3, 2, 2 },	//まいにちハングル講座
-	{ 4, 4, 4, 4, 1 },	//まいにちドイツ語
-	{ 5, 5, 5, 5, 5 }	//まいにちスペイン語
-};
-
-void DownloadThread::downloadOneWeek( int i, int addDays, QStringList& fileList, QStringList& kouzaList, QStringList& hdateList ) {
-	for ( int j = 0; j < fileList.count() && !isCanceled; j++ ) {
-		QDate onair = onAirDate( hdateList[j], fileList[j] );
-		onair = onair.addDays( addDays );
-		QRegExp rx( "^(?:\\d+)(\\D+)(?:\\d+)(\\D+)$" );
-		if ( rx.indexIn( hdateList[j], 0 ) != -1 ) {
-			QString hdate = QString( "%1%2%3%4" )
-					.arg( onair.month(), 2, 10, QChar( '0' ) ).arg( rx.cap( 1 ) )
-					.arg( (int)onair.day(), 2, 10, QChar( '0' ) ).arg( rx.cap( 2 ) );
-			QRegExp rx2( "^(\\d+-\\w+-\\d+-)(\\d+)([a-zA-Z]*)(?:[^-_.]*)(?:[^.]*)(.flv)$" );
-			if ( rx2.indexIn( fileList[j], 0 ) != -1 ) {
-				QString prefix = rx2.cap( 1 );
-				QString number = rx2.cap( 2 );
-				QString addition = rx2.cap( 3 );
-				QString suffix = rx2.cap( 4 );
-
-				QStringList tempList = (QStringList() << "" << "2" << "3" << "4");
-				QStringList additions;
-				additions << "";
-				for ( int k = 0; k < tempList.count(); k++ ) {
-					if ( addition.length() > 0 )
-						additions << (addition + tempList[k]);
-					if ( addition != "mm" )
-						additions << ("mm" + tempList[k]);
-					if ( addition != "vip" )
-						additions << ("vip" + tempList[k]);
-				}
-//#define Variants 6
-				//static QString revisions[Variants] = { "", "-re01", "-re02", "_re01", "_re02", "-re" };
-				//for ( int k = 0; k < Variants && !isCanceled; k++ ) {
-				QStringList revisions = (QStringList() << "" << "-re01" << "-re02" << "_re01" << "_re02" << "-re");
-				bool done = false;
-				for ( int k = 0; k < revisions.count() && !isCanceled && !done; k++ ) {
-					for ( int m = 0; m < additions.count() && !isCanceled && !done; m++ ) {
-						QString file = QString( "%1%2%3%4%5" )
-									   .arg( prefix ).arg( number.toInt() + offsets[i][j], 3, 10, QChar( '0' ) )
-									   .arg( additions[m] ).arg( revisions[k] ).arg( suffix );
-						if ( captureStream( kouzaList[j], hdate, file, 1, k || m ) )
-							done = true;
-						//else if ( !k && !m )
-							//emit current( QString::fromUtf8( "別ファイル名でリトライ中\n" ) );
-					}
-				}
-				if ( !done ) {
-					//emit current( QString::fromUtf8( "" ) );
-					//emit messageWithoutBreak( QString::fromUtf8( "サーバ上にファイルが存在しないか、ファイル名の推測に失敗しました。" ) );
-					emit current( QString::fromUtf8( "サーバ上にファイルが存在しないか、ファイル名の推測に失敗しました。" ) );
-				}
-				//file = "#{prefix}#{sprintf( "%03d", number.to_i + offset[$target][count] )}#{revision}#{suffix}"
-			}
-		}
-	}
-}
-
 void DownloadThread::run() {
 	QCheckBox* checkbox[] = {
 		ui->checkBox_0, ui->checkBox_1, ui->checkBox_2, ui->checkBox_3, ui->checkBox_4,
@@ -819,39 +748,6 @@ void DownloadThread::run() {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ )
 						captureStream( kouzaList[j], hdateList[j], fileList[j], 5 );
-				}
-
-				if ( false /*ui->checkBox_next_week->isChecked()*/ ) {
-					emit current( QString::fromUtf8( "＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊" ) );
-					emit current( QString::fromUtf8( "「次週のストリーミング」は試験的に搭載された機能です。" ) );
-					emit current( QString::fromUtf8( "＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊" ) );
-					//ゴールデンウィーク対応
-					QString lastFile = fileList[fileList.count() - 1];
-					QRegExp rx2( "^(\\d+-\\w+-\\d+-)(\\d+)([a-zA-Z]*)(?:[^-_.]*)(?:[^.]*)(.flv)$" );
-					if ( rx2.indexIn( lastFile, 0 ) != -1 && rx2.cap( 3 ) == "gw" ) {
-						QString prefix = rx2.cap( 1 );
-						QString number = rx2.cap( 2 );
-						QString suffix = rx2.cap( 4 );
-						QString lastHdate = hdateList[hdateList.count() - 1];
-
-						QDate onair = onAirDate( lastHdate, lastFile );
-						onair = onair.addDays( -hdateList.count() + 1 );
-						QRegExp rx( "^(?:\\d+)(\\D+)(?:\\d+)(\\D+)$" );
-						if ( rx.indexIn( lastHdate, 0 ) != -1 ) {
-							for ( int j = 0; j < hdateList.count(); j++ ) {
-								hdateList[j] = QString( "%1%2%3%4" )
-										.arg( onair.month(), 2, 10, QChar( '0' ) ).arg( rx.cap( 1 ) )
-										.arg( (int)onair.day(), 2, 10, QChar( '0' ) ).arg( rx.cap( 2 ) );
-								onair = onair.addDays( 1 );
-								fileList[j] = QString( "%1%2%3" )
-										   .arg( prefix ).arg( number.toInt() - hdateList.count() + j + 1, 3, 10, QChar( '0' ) )
-										   .arg( suffix );
-							}
-						}
-					}
-					//ゴールデンウィークここまで
-
-					downloadOneWeek( i, 7, fileList, kouzaList, hdateList );
 				}
 			}
 		}

@@ -50,7 +50,6 @@ private:
 	void downloadCharo();
 	void downloadENews( bool re_read );
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount, bool guess = false );
-	void downloadOneWeek( int i, int addDays, QStringList& fileList, QStringList& kouzaList, QStringList& hdateList );
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
 	void downloadShower();
