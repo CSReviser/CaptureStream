@@ -46,7 +46,6 @@ private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkFlvstreamer( QString& path );
 	bool checkOutputDir( QString dirPath );
-	void id3tag( QString fullPath, QString album, QString title, QString year, QString artist );
 	void downloadCharo();
 	void downloadENews( bool re_read );
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount, bool guess = false );

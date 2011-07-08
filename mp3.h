@@ -29,6 +29,7 @@ namespace MP3 {
 	void createTag( QByteArray& tagBytes, QString album, QString title, QString year, QString artist, QTextCodec* utf16 );
 	long tagSize( QByteArray buffer );
 	bool flv2mp3( const QString& flvPath, const QString& mp3Path, QString& error );
+	bool id3tag( QString fullPath, QString album, QString title, QString year, QString artist, QString error );
 }
 
 #endif // MP3_H

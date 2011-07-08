@@ -105,83 +105,6 @@ bool DownloadThread::checkOutputDir( QString dirPath ) {
 	return result;
 }
 
-QString mkTempName( QString original ) {
-	QString result;
-
-	for ( int i = 0; i < 100; i++ ) {
-		QString now = QDateTime::currentDateTime().toString( "yyyyMMddhhmmsszzz" );
-		if ( !QFile::exists( original + now ) ) {
-			result = original + now;
-			break;
-		}
-	}
-
-	return result;
-}
-
-void DownloadThread::id3tag( QString fullPath, QString album, QString title, QString year, QString artist ) {
-	QTextCodec* utf16 = QTextCodec::codecForName( "UTF-16" );
-	if ( !utf16 ) {
-		emit information( QString::fromUtf8( "文字コードの変換ができないのでID3v1の書き込みを中止します。" ) );
-		return;
-	}
-
-	QByteArray tagBytes;
-	MP3::createTag( tagBytes, album, title, year, artist, utf16 );
-	if ( !tagBytes.size() ) {
-		emit critical( QString::fromUtf8( "書き込むべきタグが見当たらないため、タグの書き込みを中止します。" ) );
-		return;
-	}
-
-	QString tempName = mkTempName( fullPath );
-	if ( !tempName.size() ) {
-		emit critical( QString::fromUtf8( "作業用ファイル名が作成できないため、タグの書き込みを中止します。" ) );
-		return;
-	}
-
-	if ( !QFile::rename( fullPath, tempName ) ) {
-			emit critical( QString::fromUtf8( "ダウンロードしたMP3のファイル名が変更できないため、タグの書き込みを中止します。" ) );
-			return;
-	}
-
-	QFile srcFile( tempName );
-	if ( !srcFile.open( QIODevice::ReadOnly ) ) {
-		emit critical( QString::fromUtf8( "ダウンロードしたMP3ファイルを開けないため、タグの書き込みを中止します。" ) );
-		return;
-	}
-
-	QFile dstFile( fullPath );
-	if ( !dstFile.open( QIODevice::WriteOnly ) ) {
-		emit critical( QString::fromUtf8( "作業用ファイルの作成に失敗したため、タグの書き込みを中止します。Code:" ) +
-					   QString::number( dstFile.error() ) + " Description:" + dstFile.errorString() );
-		srcFile.close();
-		return;
-	}
-
-	qint64 writtenSize = dstFile.write( tagBytes );
-	if ( writtenSize != tagBytes.size() ) {
-		dstFile.remove();
-		srcFile.rename( fullPath );
-		emit critical( QString::fromUtf8( "作業用ファイルへの書き込みに失敗しました。" ) );
-		return;
-	}
-
-	QByteArray buffer = srcFile.readAll();
-	srcFile.close();
-	long skip = MP3::tagSize( buffer );
-	writtenSize = dstFile.write( buffer.constData() + skip, buffer.size() - skip );
-	dstFile.close();
-	if ( writtenSize != buffer.size() - skip ) {
-		dstFile.remove();
-		srcFile.rename( fullPath );
-		emit critical( QString::fromUtf8( "作業用ファイルへの書き込みに失敗しました。" ) );
-		return;
-	}
-
-	if ( !srcFile.remove() )
-		emit critical( QString::fromUtf8( "「" ) + tempName + QString::fromUtf8( "」の削除に失敗しました。" ) );
-}
-
 //--------------------------------------------------------------------------------
 
 void DownloadThread::downloadCharo() {
@@ -250,9 +173,10 @@ void DownloadThread::downloadCharo() {
 
 				if ( ( !exitCode || keep_on_error ) && !isCanceled ) {
 					QString error;
-					if ( MP3::flv2mp3( flv_file, mp3_file, error ) )
-						id3tag( mp3_file, kouza, kouza + "_" + hdate, i.toString( "yyyy" ), "NHK" );
-					else
+					if ( MP3::flv2mp3( flv_file, mp3_file, error ) ) {
+						if ( !MP3::id3tag( mp3_file, kouza, kouza + "_" + hdate, i.toString( "yyyy" ), "NHK", error ) )
+							emit critical( error );
+					} else
 						emit critical( error );
 				}
 				if ( QFile::exists( flv_file ) )
@@ -363,9 +287,10 @@ void DownloadThread::downloadENews( bool re_read ) {
 				if ( ( !exitCode || keep_on_error ) && !isCanceled ) {
 					if ( saveAudio && ( !skip || !mp3Exists ) ) {
 						QString error;
-						if ( MP3::flv2mp3( flv_file, mp3_file, error ) )
-							id3tag( mp3_file, kouza, kouza + "_" + hdate, flv.left( 4 ), "NHK" );
-						else
+						if ( MP3::flv2mp3( flv_file, mp3_file, error ) ) {
+							if ( !MP3::id3tag( mp3_file, kouza, kouza + "_" + hdate, flv.left( 4 ), "NHK", error ) )
+								emit critical( error );
+						} else
 							emit critical( error );
 					}
 					if ( saveMovie && ( !skip || !movieExists ) ) {
@@ -482,9 +407,10 @@ void DownloadThread::downloadShower() {
 				if ( ( !exitCode || keep_on_error ) && !isCanceled ) {
 					if ( saveAudio && ( !skip || !mp3Exists ) ) {
 						QString error;
-						if ( MP3::flv2mp3( flv_file, mp3_file, error ) )
-							id3tag( mp3_file, kouza, kouza + "_" + hdate, date.toString( "yyyy" ), "NHK" );
-						else
+						if ( MP3::flv2mp3( flv_file, mp3_file, error ) ) {
+							if ( !MP3::id3tag( mp3_file, kouza, kouza + "_" + hdate, date.toString( "yyyy" ), "NHK", error ) )
+								emit critical( error );
+						} else
 							emit critical( error );
 					}
 				}
@@ -671,7 +597,8 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		if ( fileInfo.size() > 100 && ( !exitCode || ui->checkBox_keep_on_error->isChecked() ) ) {
 			QString error;
 			if ( MP3::flv2mp3( flv_file, outputDir + outFileName, error ) ) {
-				id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK" );
+				if ( !MP3::id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK", error ) )
+					emit critical( error );
 				result = true;
 			} else
 				emit critical( error );

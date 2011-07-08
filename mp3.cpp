@@ -21,6 +21,7 @@
 #include "mp3.h"
 
 #include <QFile>
+#include <QDateTime>
 
 namespace MP3 {
 	struct id3v22_header {
@@ -208,4 +209,76 @@ namespace MP3 {
 		return result;
 	}
 
+	//--------------------------------------------------------------------------------
+
+	QString mkTempName( QString original ) {
+		QString result;
+
+		for ( int i = 0; i < 100; i++ ) {
+			QString now = QDateTime::currentDateTime().toString( "yyyyMMddhhmmsszzz" );
+			if ( !QFile::exists( original + now ) ) {
+				result = original + now;
+				break;
+			}
+		}
+
+		return result;
+	}
+
+	bool id3tag( QString fullPath, QString album, QString title, QString year, QString artist, QString error ) {
+		bool result = false;
+		try {
+			QTextCodec* utf16 = QTextCodec::codecForName( "UTF-16" );
+			if ( !utf16 )
+				throw QString::fromUtf8( "文字コードの変換ができないのでID3v1の書き込みを中止します。" );
+
+			QByteArray tagBytes;
+			MP3::createTag( tagBytes, album, title, year, artist, utf16 );
+			if ( !tagBytes.size() )
+				throw QString::fromUtf8( "書き込むべきタグが見当たらないため、タグの書き込みを中止します。" );
+
+			QString tempName = mkTempName( fullPath );
+			if ( !tempName.size() )
+				throw QString::fromUtf8( "作業用ファイル名が作成できないため、タグの書き込みを中止します。" );
+
+			if ( !QFile::rename( fullPath, tempName ) )
+				throw QString::fromUtf8( "ダウンロードしたMP3のファイル名が変更できないため、タグの書き込みを中止します。" );
+
+			QFile srcFile( tempName );
+			if ( !srcFile.open( QIODevice::ReadOnly ) )
+				throw QString::fromUtf8( "ダウンロードしたMP3ファイルを開けないため、タグの書き込みを中止します。" );
+
+			QFile dstFile( fullPath );
+			if ( !dstFile.open( QIODevice::WriteOnly ) ) {
+				srcFile.close();
+				throw QString::fromUtf8( "作業用ファイルの作成に失敗したため、タグの書き込みを中止します。Code:" ) +
+							   QString::number( dstFile.error() ) + " Description:" + dstFile.errorString();
+			}
+
+			qint64 writtenSize = dstFile.write( tagBytes );
+			if ( writtenSize != tagBytes.size() ) {
+				dstFile.remove();
+				srcFile.rename( fullPath );
+				throw QString::fromUtf8( "作業用ファイルへの書き込みに失敗しました。" );
+			}
+
+			QByteArray buffer = srcFile.readAll();
+			srcFile.close();
+			long skip = MP3::tagSize( buffer );
+			writtenSize = dstFile.write( buffer.constData() + skip, buffer.size() - skip );
+			dstFile.close();
+			if ( writtenSize != buffer.size() - skip ) {
+				dstFile.remove();
+				srcFile.rename( fullPath );
+				throw QString::fromUtf8( "作業用ファイルへの書き込みに失敗しました。" );
+			}
+
+			if ( !srcFile.remove() )
+				throw QString::fromUtf8( "「" ) + tempName + QString::fromUtf8( "」の削除に失敗しました。" );
+			result = true;
+		} catch ( QString& message ) {
+			error = message;
+		}
+		return result;
+	}
 }
