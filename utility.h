@@ -4,7 +4,7 @@
 #include <QString>
 
 namespace Utility {
-	QString applicationDirPath();
+	QString applicationBundlePath();
 	QString flare( QString& error );
 	QString gnash( QString& error );
 	QString wiki();

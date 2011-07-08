@@ -38,8 +38,8 @@ QStringList CustomizeDialog::fileNameKeys = QStringList()
 void CustomizeDialog::formats( QString course, QString& titleFormat, QString& fileNameFormat ) {
 	int index = courses.indexOf( course );
 	if ( index >= 0 ) {
-		QString applicationDirPath = Utility::applicationDirPath();
-		QSettings settings( applicationDirPath + INI_FILE, QSettings::IniFormat );
+		QString path = Utility::applicationBundlePath();
+		QSettings settings( path + INI_FILE, QSettings::IniFormat );
 		settings.beginGroup( SETTING_GROUP );
 		titleFormat = settings.value( titleKeys[index], DefaultTitle ).toString();
 		fileNameFormat = settings.value( fileNameKeys[index], DefaultFileName ).toString();
@@ -69,8 +69,8 @@ void CustomizeDialog::settings( bool write ) {
 		NULL
 	};
 
-	QString applicationDirPath = Utility::applicationDirPath();
-	QSettings settings( applicationDirPath + INI_FILE, QSettings::IniFormat );
+	QString path = Utility::applicationBundlePath();
+	QSettings settings( path + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
 
 	if ( !write ) {

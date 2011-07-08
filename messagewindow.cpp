@@ -85,7 +85,7 @@ void MessageWindow::clearText() {
 
 void MessageWindow::settings( bool write ) {
 #if defined( Q_WS_MAC ) || defined( Q_WS_WIN )
-	QSettings settings( Utility::applicationDirPath() + INI_FILE, QSettings::IniFormat );
+	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
 
 	if ( !write ) {

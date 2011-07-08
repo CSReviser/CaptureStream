@@ -9,9 +9,6 @@
 #include "utility.h"
 #include "mp3.h"
 
-using namespace Utility;
-using namespace MP3;
-
 #include <QCheckBox>
 #include <QDir>
 #include <QFileInfo>
@@ -48,7 +45,7 @@ QStringList DownloadThread::getAttribute( QString url, QString attribute ) {
 }
 
 bool DownloadThread::checkFlvstreamer( QString& path ) {
-	path = applicationDirPath() + FLVSTREAMER;
+	path = Utility::applicationBundlePath() + FLVSTREAMER;
 #ifdef Q_WS_WIN
 	path += ".exe";
 #endif
@@ -110,7 +107,7 @@ void DownloadThread::id3tag( QString fullPath, QString album, QString title, QSt
 	}
 
 	QByteArray tagBytes;
-	createTag( tagBytes, album, title, year, artist, utf16 );
+	MP3::createTag( tagBytes, album, title, year, artist, utf16 );
 	if ( !tagBytes.size() ) {
 		emit critical( QString::fromUtf8( "書き込むべきタグが見当たらないため、タグの書き込みを中止します。" ) );
 		return;
@@ -151,7 +148,7 @@ void DownloadThread::id3tag( QString fullPath, QString album, QString title, QSt
 
 	QByteArray buffer = srcFile.readAll();
 	srcFile.close();
-	long skip = tagSize( buffer );
+	long skip = MP3::tagSize( buffer );
 	writtenSize = dstFile.write( buffer.constData() + skip, buffer.size() - skip );
 	dstFile.close();
 	if ( writtenSize != buffer.size() - skip ) {
@@ -962,7 +959,7 @@ void DownloadThread::run() {
 		emit information( QString::fromUtf8( "ユーザ設定によるコード：" ) + scramble );
 
 	if ( !scramble.length() ) {
-		scramble = wiki();
+		scramble = Utility::wiki();
 		if ( scramble.length() )
 			emit information( QString::fromUtf8( "wikiから取得したコード：" ) + scramble );
 		else
@@ -971,7 +968,7 @@ void DownloadThread::run() {
 
 	if ( !scramble.length() ) {
 		QString error;
-		scramble = gnash( error );
+		scramble = Utility::gnash( error );
 		if ( scramble.length() )
 			emit information( QString::fromUtf8( "gnashを利用して解析したコード：" ) + scramble );
 		else
@@ -980,7 +977,7 @@ void DownloadThread::run() {
 
 	if ( !scramble.length() ) {
 		QString error;
-		scramble = flare( error );
+		scramble = Utility::flare( error );
 		if ( scramble.length() == ScrambleLength )
 			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + scramble );
 		else

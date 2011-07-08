@@ -25,7 +25,6 @@ signals:
 private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkFlvstreamer( QString& path );
-	//bool checkTools( QString& flvstreamer/*, QString& ffmpeg*/ );
 	bool checkOutputDir( QString dirPath );
 	void id3tag( QString fullPath, QString album, QString title, QString year, QString artist );
 	bool flv2mp3( const QString& flvPath, const QString& mp3Path );
@@ -51,8 +50,6 @@ private:
 	static QString flv_service_prefix;
 
 	static QString flvstreamer;
-	//static QString ffmpeg;
-	//static QString random;
 	static QString scramble;
 
 };

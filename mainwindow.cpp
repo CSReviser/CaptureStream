@@ -144,7 +144,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ NULL, NULL, false }
 	};
 
-	QSettings settings( Utility::applicationDirPath() + INI_FILE, QSettings::IniFormat );
+	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
 
 	if ( mode == ReadMode ) {	// 設定読み込み
@@ -162,7 +162,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #endif
 
 		saved = settings.value( SETTING_SAVE_FOLDER );
-		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationDirPath() : saved.toString();
+		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationBundlePath() : saved.toString();
 
 		saved = settings.value( SETTING_SCRAMBLE );
 		scramble = saved.type() == QVariant::Invalid ? "" : saved.toString();
