@@ -9,15 +9,6 @@ require 'date'
 require 'jcode'
 require "tempfile"
 
-# Windowsでのエラー回避のために追加。MacではなくてもOK
-require 'openssl'
-module OpenSSL
-	module SSL
-		remove_const :VERIFY_PEER
-	end
-end
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-
 =begin
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【注意事項】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -25,6 +16,7 @@ OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2011/07/06　xmlの取得元をwikiに再変更。
 2011/07/02　デフォルトの動作を基礎英語１のダウンロードから何もダウンロードしないように変更。
 　　　　　　flvstreamerの実行をカレントディレクトリからパスの通ったものに変更。
 　　　　　　flvstreamerが実行できなかった場合にエラーメッセージを出して終了するように修正。
@@ -155,7 +147,7 @@ end
 # 何らかの問題でウィキからスクランブル文字列が取得できない場合には自分で設定してください
 #--------------------------------------------------------------------------------
 
-jputs( "語学講座ダウンローダ (2011/07/03)" )
+jputs( "語学講座ダウンローダ (2011/07/06)" )
 
 $scramble = ""
 
@@ -168,7 +160,7 @@ if $scramble == ""
 	end
 	monday = Date.today + offset
 	
-	xml_uri = "https://raw.github.com/jakago/RubyCaptureStream/master/scramble.xml"
+	xml_uri = "http://www47.atwiki.jp/jakago/pub/scramble.xml"
 	open( xml_uri ) { |f|
 		doc = REXML::Document.new( f )
 		$scramble = doc.elements["flv/scramble[@date=\"#{monday.strftime( '%Y%m%d' )}\"]/@code"].to_s
