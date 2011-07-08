@@ -20,6 +20,8 @@
 
 #include "mp3.h"
 
+#include <QFile>
+
 namespace MP3 {
 	struct id3v22_header {
 		char identifier[3];	// "ID3"
@@ -121,4 +123,89 @@ namespace MP3 {
 
 		return result;
 	}
+
+	//--------------------------------------------------------------------------------
+
+	struct FlvHeader {
+		unsigned char signature[3];
+		unsigned char version;
+		unsigned char flags;
+		unsigned char offset[4];
+	};
+
+	struct FlvTag {
+		unsigned char previousTagSize[4];
+		unsigned char type;
+		unsigned char bodyLength[3];
+		unsigned char timestamp[3];
+		unsigned char timestampExtended;
+		unsigned char streamId[3];
+		//このあとにbodyLengthのデータが続く
+	};
+
+	bool flv2mp3( const QString& flvPath, const QString& mp3Path, QString& error ) {
+		bool result = false;
+
+		try {
+			QFile flv( flvPath );
+			if ( !flv.open( QIODevice::ReadOnly ) ) {
+				throw QString::fromUtf8( "flvファイルのオープンに失敗しました。Code:" ) +
+						QString::number( flv.error() ) + " Description:" + flv.errorString();
+			}
+
+			QByteArray buffer = flv.readAll();
+			flv.close();
+			long bufferSize = buffer.length();
+
+			if ( bufferSize < (long)sizeof (FlvHeader) )
+				throw QString::fromUtf8( "flvファイルにヘッダが含まれていません。" );
+
+			FlvHeader& header = *(FlvHeader*)buffer.constData();
+			if ( strncmp( (const char*)header.signature, "FLV", sizeof header.signature ) )
+				throw QString::fromUtf8( "flvファイルではありません。" );
+
+			if ( (header.flags & 4) == 0 )
+				throw QString::fromUtf8( "音声データが含まれていません。" );
+
+			if ( header.offset[0] || header.offset[1] || header.offset[2] || header.offset[3] != sizeof header )
+				throw QString::fromUtf8( "flvファイルが対応できる形式ではありません。" );
+
+			long readSize = sizeof (FlvHeader);
+
+			QFile mp3( mp3Path );
+			if ( !mp3.open( QIODevice::WriteOnly ) ) {
+				throw QString::fromUtf8( "mp3ファイルのオープンに失敗しました。Code:" ) +
+						QString::number( mp3.error() ) + " Description:" + mp3.errorString();
+			}
+
+			const char* byte = buffer.constData();
+			while ( true ) {
+				if ( bufferSize - readSize == 4 )	//最後のPreviousTagSize
+					throw true;
+				if ( bufferSize - readSize < (long)sizeof (FlvTag) )
+					throw QString::fromUtf8( "flvファイルの内容が不正です。" );
+				FlvTag& tag = *(FlvTag*)(byte + readSize);
+				readSize += sizeof (FlvTag);
+				long bodyLength = (tag.bodyLength[0] << 16) + (tag.bodyLength[1] << 8) + tag.bodyLength[2];
+				if ( bufferSize - readSize < bodyLength )
+					throw QString::fromUtf8( "flvファイルの内容が不正です。" );
+				if ( tag.type == 0x08 ) {
+					if ( (byte[readSize] & 0x00f0) != 0x20 )
+						throw QString::fromUtf8( "音声データがmp3ではありません。" );
+					if ( mp3.write( byte + readSize + 1, bodyLength - 1 ) != bodyLength - 1 )
+						throw QString::fromUtf8( "mp3ファイルの書き込みに失敗しました。" );
+				}
+				readSize += bodyLength;
+			}
+			mp3.close();
+		} catch ( bool ) {
+			result = true;
+		} catch ( QString& message ) {
+			QFile::remove( mp3Path );
+			error = message;
+		}
+
+		return result;
+	}
+
 }

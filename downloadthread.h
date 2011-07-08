@@ -47,7 +47,6 @@ private:
 	bool checkFlvstreamer( QString& path );
 	bool checkOutputDir( QString dirPath );
 	void id3tag( QString fullPath, QString album, QString title, QString year, QString artist );
-	bool flv2mp3( const QString& flvPath, const QString& mp3Path );
 	void downloadCharo();
 	void downloadENews( bool re_read );
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount, bool guess = false );
