@@ -144,10 +144,10 @@ void DownloadThread::downloadCharo() {
 			if ( skip && QFile::exists( mp3_file ) )
 				emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 			else {
-				QString command1935 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmp://" + flv_host + "/" + flv_app +
-						flv_service_prefix + server_file + "\" -o " + "\"" + flv_file + "\" > " + null;
-				QString command80 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmpt://" + flv_host + ":80/" + flv_app +
-						flv_service_prefix + server_file + "\" -o " + "\"" + flv_file + "\" --resume > " + null;
+				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+				QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 				int exitCode = process.execute( command1935 );
@@ -236,31 +236,26 @@ void DownloadThread::downloadENews( bool re_read ) {
 		i.toBack();
 		while ( i.hasPrevious() ) {
 			QString flv = i.previous();
-		//foreach( QString flv, list ) {
 			if ( isCanceled )
 				break;
 			int year = flv.mid( 0, 4 ).toInt();
 			int month = flv.mid( 4, 2 ).toInt();
 			int day = flv.mid( 7, 2 ).toInt();
 			QDate theDay( year, month, day );
-			//QString flv_service_prefix = year > 2009 || ( year == 2009 && month >= 8 ) || ( year == 2009 && month == 7 && day >= 28 ) ?
-										 //flv_service_prefix_20090728 : flv_service_prefix_20090330;
 			QString flv_service_prefix = theDay >= QDate( 2009, 7, 28 ) ? flv_service_prefix_20090728 : flv_service_prefix_20090330;
-			//QString hdate = flv.mid( 4, 2 ) + QString::fromUtf8( "月" ) + flv.mid( 7, 2 ) + QString::fromUtf8( "日放送分" );
 			QString hdate = theDay.toString( "yyyy_MM_dd" );
 			int slashIndex = flv.lastIndexOf( '/' );
 			QString flv_file = outputDir + ( slashIndex == -1 ? flv : flv.mid( slashIndex + 1 ) ) + ".flv";
-			//QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
 			QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
 			QString movie_file = outputDir + kouza + "_" + hdate + ".flv";
 			bool mp3Exists = QFile::exists( mp3_file );
 			bool movieExists = QFile::exists( movie_file );
 
 			if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !movieExists ) ) {
-				QString command1935 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmp://" + flv_host + "/" + flv_app +
-						flv_service_prefix + flv + "\" -o " + "\"" + flv_file + "\" > " + null;
-				QString command80 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmpt://" + flv_host + ":80/" + flv_app +
-						flv_service_prefix + flv + "\" -o " + "\"" + flv_file + "\" --resume > " + null;
+				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
+				QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 				int exitCode = process.execute( command1935 );
@@ -362,12 +357,10 @@ void DownloadThread::downloadShower() {
 			static QStringList months = QStringList()
 					<< "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"
 					<< "Jul" << "Aug" << "Sep" << "Oct" << "Nov" << "Dec";
-			qDebug() << regexp.cap( 0 );
 			int year = regexp.cap( 3 ).toInt();
 			int month = months.indexOf( regexp.cap( 2 ) ) + 1;
 			int day = regexp.cap( 1 ).toInt();
 			QDate date( year, month, day );
-			qDebug() << date.toString( "yyyy_MM_dd" );
 			QString hdate = date.toString( "yyyy_MM_dd" );
 			QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
 			QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
@@ -376,13 +369,12 @@ void DownloadThread::downloadShower() {
 			bool mp3Exists = QFile::exists( mp3_file );
 
 			if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !flvExists ) ) {
-				QString command1935 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmp://" + flv_host + "/" + flv_app +
-						flv_service_prefix + server_file + "\" -o " + "\"" + flv_file + "\" > " + null;
-				QString command80 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmpt://" + flv_host + ":80/" + flv_app +
-						flv_service_prefix + server_file + "\" -o " + "\"" + flv_file + "\" --resume > " + null;
+				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+				QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-				qDebug() << command1935;
 				int exitCode = process.execute( command1935 );
 				if ( exitCode && !isCanceled )
 					exitCode = process.execute( command80 );
@@ -537,7 +529,7 @@ QString DownloadThread::flv_service_prefix = "flv:gogaku/streaming/flv/";
 QString DownloadThread::flvstreamer;
 QString DownloadThread::scramble;
 
-bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount, bool guess ) {
+bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
 		return false;
@@ -568,22 +560,17 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		QDate onair( year, month, day );
 		QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 		QString basename = file.left( file.size() - 4 );
-		//QString outBasename = kouza + "_" + yyyymmdd;
 		if ( ui->checkBox_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
 			emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 			return true;
 		}
 		QString flv_file = outputDir + outBasename + ".flv";
-		QString command1935 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmp://" + flv_host + "/" + flv_app +
-		flv_service_prefix + scramble + "/" + basename + "\" -o " + "\"" + flv_file + "\" > " + null;
-		QString command80 = "\"" + flvstreamer + "\"" + Timeout + " -r \"rtmpt://" + flv_host + ":80/" + flv_app +
-		flv_service_prefix + scramble + "/" + basename + "\" -o " + "\"" + flv_file + "\" --resume > " + null;
+		QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6/%7\" -o \"%8\" > %9" )
+				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
+		QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6/%7\" -o \"%8\" --resume > %9" )
+				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
 		QProcess process;
-		if ( guess ) {
-			//emit current( QString::fromUtf8( "別ファイル名でリトライ中．．．" ) );
-			//emit messageWithoutBreak( QString::fromUtf8( "．" ) );
-		} else
-			emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		int exitCode = process.execute( command1935 );
 		while ( exitCode && retryCount-- > 0 ) {
 			emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
