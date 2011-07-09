@@ -79,8 +79,7 @@ QString MessageWindow::text() {
 
 // 改行あり
 void MessageWindow::appendParagraph( const QString& text ) {
-	extern bool oneTime;
-	if ( !oneTime ) {
+	if ( !Utility::nogui() ) {
 		show();
 		textEdit->appendPlainText( text );
 	}
@@ -88,8 +87,7 @@ void MessageWindow::appendParagraph( const QString& text ) {
 
 // 改行なし
 void MessageWindow::append( const QString& text ) {
-	extern bool oneTime;
-	if ( !oneTime ) {
+	if ( !Utility::nogui() ) {
 		show();
 		//textEdit->setPlainText( textEdit->toPlainText().append( text ) );	// これはとても遅い
 		QTextCursor cursor = textEdit->textCursor();

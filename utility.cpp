@@ -164,3 +164,7 @@ QString Utility::wiki() {
 	}
 	return result;
 }
+
+bool Utility::nogui() {
+	return QCoreApplication::arguments().contains( "-nogui" );
+}

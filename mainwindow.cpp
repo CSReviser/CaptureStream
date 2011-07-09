@@ -115,8 +115,7 @@ MainWindow::~MainWindow() {
 		downloadThread->terminate();
 		delete downloadThread;
 	}
-	extern bool oneTime;
-	if ( !oneTime )
+	if ( !Utility::nogui() )
 		settings( WriteMode );
 	delete ui;
 }
@@ -283,7 +282,6 @@ void MainWindow::finished() {
 		ui->downloadButton->setEnabled( true );
 	}
 	//ui->label->setText( "" );
-	extern bool oneTime;
-	if ( oneTime )
+	if ( Utility::nogui() )
 		QCoreApplication::exit();
 }

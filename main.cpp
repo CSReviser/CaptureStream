@@ -18,12 +18,11 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QtGui/QApplication>
 #include "mainwindow.h"
-#include <stdio.h>
-#include <QDebug>
+#include "utility.h"
 
-bool oneTime = false;
+#include <QtGui/QApplication>
+#include <stdio.h>
 
 int main(int argc, char *argv[])
 {
@@ -38,8 +37,7 @@ int main(int argc, char *argv[])
 #endif
 
 	QApplication a(argc, argv);
-	oneTime = QCoreApplication::arguments().contains( "-nogui" );
 	MainWindow w;
-	oneTime ? w.download() : w.show();
+	Utility::nogui() ? w.download() : w.show();
 	return a.exec();
 }

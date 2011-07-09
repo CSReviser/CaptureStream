@@ -28,6 +28,7 @@ namespace Utility {
 	QString flare( QString& error );
 	QString gnash( QString& error );
 	QString wiki();
+	bool nogui();
 }
 
 #endif // UTILITY_H
