@@ -463,21 +463,9 @@ def tag_size( buffer )
 end
 
 def make_temp_name( original )
-	result = String.new()
-
-	i = 0
-	while i < 100
-		now = DateTime::now()
-		now = sprintf( "%4d%02d%02d%02d%02d%02d", now.year, now.month, now.day, now.hour, now.min, now.sec )
-		if !File.exist?(  original + now )
-			result = original + now
-			break
-		else
-			sleep( 1 )
-		end
-		i += 1
-	end
-
+	temp_file = Tempfile.open( File.basename( original ) )
+	result = temp_file.path
+	temp_file.close!
 	return result
 end
 
