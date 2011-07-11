@@ -8,6 +8,7 @@ require 'nkf'
 require 'date'
 require 'jcode'
 require "tempfile"
+require 'fileutils'
 
 =begin
 
@@ -472,15 +473,15 @@ end
 def id3tag( full_path, album, title, year )	# full_pathはto_nativeで変換されている
 	src_file = nil
 	dst_file = nil
-	src_file_renamed = false
+	original_file_moved = false
 
 	begin
 		tag_bytes = create_tag( album, title, year, "NHK" )
 		raise  "書き込むべきタグが見当たらないため、タグの書き込みを中止します。" if tag_bytes.size <= 0
 		temp_name = make_temp_name( full_path )
 		raise "作業用ファイル名が作成できないため、タグの書き込みを中止します。" if temp_name.size <= 0
-		File.rename( full_path, temp_name )
-		src_file_renamed = true
+		FileUtils.move( full_path, temp_name )
+		original_file_moved = true
 		src_file = File.open( temp_name, "r" )
 		src_file.binmode
 		dst_file = File.open( full_path, "w" )
@@ -499,7 +500,7 @@ def id3tag( full_path, album, title, year )	# full_pathはto_nativeで変換さ�
 		( src_file.close if src_file ) rescue false
 		( dst_file.close if dst_file ) rescue false
 		( File.unlink( full_path ) if dst_file ) rescue false
-		( File.rename( temp_name, full_path ) if src_file_renamed ) rescue false
+		( FileUtils.move( temp_name, full_path ) if original_file_moved ) rescue false
 	end
 end
 
