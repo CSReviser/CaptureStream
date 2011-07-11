@@ -17,13 +17,14 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2011/07/11　翌週公開分ダウンロードのコードを削除。作業ファイル名の生成方法を変更(make_temp_name)
 2011/07/06　xmlの取得元をwikiに再変更。
 2011/07/02　デフォルトの動作を基礎英語１のダウンロードから何もダウンロードしないように変更。
-　　　　　　flvstreamerの実行をカレントディレクトリからパスの通ったものに変更。
-　　　　　　flvstreamerが実行できなかった場合にエラーメッセージを出して終了するように修正。
+　　　　　　　flvstreamerの実行をカレントディレクトリからパスの通ったものに変更。
+　　　　　　　flvstreamerが実行できなかった場合にエラーメッセージを出して終了するように修正。
 2011/07/01　githubにリポジトリ作成。xmlの取得元をgithubに変更。
 2011/06/27　flare対応削除。wikiから日付指定でコードを取得するように修正。Windows版sdl-gnash
-　　　　　　に対応。独自ビルドのMac版sdl-gnashでの動作確認済み。
+　　　　　　　に対応。独自ビルドのMac版sdl-gnashでの動作確認済み。
 2011/05/02　streaming.swf内のActionScriptの変更に暫定対応。
 2011/04/18　flare対応。
 2011/04/18　gnash対応。
@@ -36,14 +37,14 @@ require 'fileutils'
 2010/04/21　「リトル・チャロ2」に対応。ffmpegへの依存をなくし、独自にflvからmp3を抽出。
 2010/04/20　実践ビジネス英語の10-ebj-4231-295vip.flvの形式に対応。複数講座ダウンロード対応。
 2010/04/11　翌週公開ファイルに対応。id3タグのアルバム名のデフォルトを「講座名_YYYY_MM_DD」に
-　　　　　　変更。
+　　　　　　　変更。
 2010/04/10　コードの整理。スクリプトが存在するディレクトリ以外の場所から相対パスで実行された
-　　　　　　場合に対応。
+　　　　　　　場合に対応。
 2010/04/05　プログラムが先祖返りしてrtmpdumpを使うようになっていたのをflvstreamerを使うよう
-　　　　　　に修正。新年度最初の３月中の放送分が翌年扱いになっていたのを修正。
-2010/04/04	放送年の扱いをすべて年度から歴年に変更。id3タグのアルバムとタイトルをカスタマイ
-　　　　　　ズ可能に。mp3のファイル名を「講座名_YYYY_MM_DD.mp3」の形式に変更。id3タグのアル
-　　　　　　バム名のデフォルトを「YYYY_MM_DD」に変更。
+　　　　　　　に修正。新年度最初の３月中の放送分が翌年扱いになっていたのを修正。
+2010/04/04　放送年の扱いをすべて年度から歴年に変更。id3タグのアルバムとタイトルをカスタマイ
+　　　　　　　ズ可能に。mp3のファイル名を「講座名_YYYY_MM_DD.mp3」の形式に変更。id3タグのアル
+　　　　　　　バム名のデフォルトを「YYYY_MM_DD」に変更。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【　準備　】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 このスクリプトを実行するためにはRubyとflvstreamerが必要です。flvstreamerはパスの通ったフォ
@@ -148,7 +149,7 @@ end
 # 何らかの問題でウィキからスクランブル文字列が取得できない場合には自分で設定してください
 #--------------------------------------------------------------------------------
 
-jputs( "語学講座ダウンローダ (2011/07/06)" )
+jputs( "語学講座ダウンローダ (2011/07/11)" )
 
 $scramble = ""
 
@@ -616,104 +617,6 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 end
 
 #--------------------------------------------------------------------------------
-# 公開中ファイルのダウンロード
-#--------------------------------------------------------------------------------
-
-def this_week( target, xml_uri )
-	open( xml_uri ) { |f|
-		doc = REXML::Document.new( f )
-		doc.elements.each( "musicdata/music" ) { |element|
-			kouza = element.attributes["kouza"]
-			hdate = element.attributes["hdate"]
-			file = element.attributes["file"]
-			capture_stream( target, kouza, hdate, file, 5 )
-		}
-	}
-end
-
-#--------------------------------------------------------------------------------
-# 翌週公開ファイルにトライ
-#--------------------------------------------------------------------------------
-
-RegFlv = /^(\d+-\w+-\d+-)(\d+)([a-zA-Z]*)(?:[^-_.]*)(?:[^.]*)(.flv)$/
-
-def next_week( target, xml_uri )
-	open( xml_uri ) { |f|
-		offset = { "training" => [7, 7, 7, 7, 7, 7, 7], "business1" => [2, 2], "business2" => [3, 3, 3], "chinese" => [3, 3, 3, 2, 2], "french" => [4, 4, 4, 4, 1], "italian" => [3, 3, 3, 2, 2], "hangeul" => [3, 3, 3, 2, 2], "german" => [4, 4, 4, 4, 1] }
-		offset.default = [5, 5, 5, 5, 5]
-		count = 0
-		kouza = ""
-		hdate_file = Array.new
-		doc = REXML::Document.new( f )
-		doc.elements.each( "musicdata/music" ) { |element|
-			kouza = element.attributes["kouza"]
-			hdate_file << [element.attributes["hdate"], element.attributes["file"]]
-		}
-		
-		# ゴールデンウィーク対応
-		if target == "basic2" || target == "basic3"
-			match = RegFlv =~ hdate_file[-1][1]
-			if match == 0 && $3 == "gw"
-				prefix = $1
-				number = $2
-				suffix = $4
-				last_hdate = hdate_file[-1][0]
-				last_file = hdate_file[-1][1]
-				date = make_date( last_hdate, last_file ) - hdate_file.size + 1
-				(0...hdate_file.size).each { |num|
-					hdate = hdate_file[num][0]
-					/^\d+(\D+)\d+(\D+)/ =~ hdate
-					hdate_file[num][0] = "#{date.month}#{$1}#{date.day}#{$2}"
-					date += 1
-					hdate_file[num][1] = "#{prefix}#{sprintf( "%03d", number.to_i - hdate_file.size + num + 1 )}#{suffix}"
-				}
-			end
-		end
-		
-		hdate_file.each { |pair|
-			hdate = pair[0]
-			file = pair[1]
-			date = make_date( hdate, file ) + 7
-			/^\d+(\D+)\d+(\D+)/ =~ hdate
-			hdate = "#{date.month}#{$1}#{date.day}#{$2}"
-			
-			# 10-et5-4249-365-re01.flv の形式に対応しなければならない
-			# 実践ビジネス英語の10-ebj-4231-295vip.flvにも対応
-			match = RegFlv =~ file
-			if match != 0
-				jputs( "flvファイル名の形式に対応できません：#{file}" )
-			elsif $3 == "gw"
-				jputs( "\nゴールデンウィーク仕様なので翌週公開ファイルのダウンロードをスキップします：#{file}" )
-				return
-			else
-				prefix = $1
-				number = $2
-				addition = $3
-				suffix = $4
-				
-				additions = Array[""]
-				["",2,3,4].each { |num|
-					additions << "#{addition}#{num}" if addition.length > 0
-					additions << "mm#{num}" unless addition == "mm"
-					additions << "vip#{num}" unless addition == "vip"
-				}
-				
-				begin
-					["", "-re01", "-re02", "_re01", "_re02", "-re"].each { |revision|
-						additions.each { |temp|
-							file = "#{prefix}#{sprintf( "%03d", number.to_i + offset[target][count] )}#{temp}#{revision}#{suffix}"
-							raise file if capture_stream( target, kouza, hdate, file, 1 )
-						}
-					}
-				rescue
-				end
-			end
-			count += 1
-		}
-	}
-end
-
-#--------------------------------------------------------------------------------
 # リトル・チャロ2
 #--------------------------------------------------------------------------------
 
@@ -864,8 +767,15 @@ targets.each { |target|
 	end
 	
 	print( "#{target}: " )
-	this_week( target, xml_uri )
-	#next_week( target, xml_uri )
+	open( xml_uri ) { |f|
+		doc = REXML::Document.new( f )
+		doc.elements.each( "musicdata/music" ) { |element|
+			kouza = element.attributes["kouza"]
+			hdate = element.attributes["hdate"]
+			file = element.attributes["file"]
+			capture_stream( target, kouza, hdate, file, 5 )
+		}
+	}
 	puts()
 }
 
