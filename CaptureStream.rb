@@ -17,6 +17,8 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2011/07/13　「ニュースで英会話」の公開中のファイルのダウンロードをenewsとし、過去分すべての
+　　　　　　　ダウンロードをenews-allに変更。
 2011/07/11　翌週公開分ダウンロードのコードを削除。作業ファイル名の生成方法を変更(make_temp_name)
 2011/07/06　xmlの取得元をwikiに再変更。
 2011/07/02　デフォルトの動作を基礎英語１のダウンロードから何もダウンロードしないように変更。
@@ -113,7 +115,7 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 $default_target = []
 $english = ["basic1", "basic2", "basic3", "training", "kaiwa", "business1", "business2"]
 $multilingual = ["chinese", "french", "italian", "hangeul", "german", "spanish"]
-$extra = ["charo", "enews", "shower"]
+$extra = ["charo", "enews", "shower", "enews-all"]
 
 #--------------------------------------------------------------------------------
 # 実行環境の検出とツールのパス設定
@@ -672,21 +674,41 @@ def get_enews_names( search, regexp )
 	return result.uniq
 end
 
-def download_enews
-	# Googleでの検索結果から2010/03/23以降のファイル名を取得
-	flvs_20100323 = get_enews_names( SEARCH_20100323, REGEXP )
-	
-	# NHKのHPで現在公開中のファイル名を取得
+# NHKのHPで現在公開中のファイル名を取得
+def current_list
+	result = Array.new
 	today = Date.today
 	i = today - 7
 	while i <= today
 		if i.wday >= 1 && i.wday <= 5	# 月曜から金曜まで
 			open( "#{ENEWS}#{i.strftime( '%Y%m%d' )}" ) { |file|
-				flvs_20100323 << $1 if REGEXP =~ file.read
+				result << $1 if REGEXP =~ file.read
 			}
 		end
 		i += 1
 	end
+	return result
+end
+
+# NHKのHPで現在公開中のファイルをダウンロード
+def download_enews
+	print( "enews: " )
+	flv_service_prefix = $flv_service_prefix
+	$flv_service_prefix = FLV_SERVICE_PREFIX_20090728
+	
+	current_list.each { |flv|
+		capture_stream( "enews", "ニュースで英会話", "#{flv[4,2].to_i}月#{flv[7,2].to_i}日放送分", "#{flv}.flv", 5 )
+	}
+	
+	$flv_service_prefix = flv_service_prefix
+	puts()
+end
+
+# 公開中のファイルとGoogle検索で見つかった過去分すべてをダウンロード
+def download_enews_all
+	# Googleでの検索結果から2010/03/23以降のファイル名を取得
+	flvs_20100323 = get_enews_names( SEARCH_20100323, REGEXP )
+	flvs_20100323 += current_list
 	
 	# Googleでの検索結果から2010/03/22以前のファイル名を取得
 	flvs = get_enews_names( SEARCH_20090330, REGEXP )
@@ -698,7 +720,7 @@ def download_enews
 		(flv[0, 6] + flv[7, 2]).to_i >= 20090728 ? (flvs_20090728 << flv) : (flvs_20090330 << flv)
 	}
 	
-	print( "enews: " )
+	print( "enews-all: " )
 	# 2009/07/28以降のflvをダウンロード
 	flv_service_prefix = $flv_service_prefix
 	$flv_service_prefix = FLV_SERVICE_PREFIX_20090728
@@ -780,5 +802,6 @@ targets.each { |target|
 }
 
 download_charo if targets.include?( "charo" )
-download_enews if targets.include?( "enews" )
 download_shower if targets.include?( "shower" )
+download_enews if targets.include?( "enews" )
+download_enews_all if targets.include?( "enews-all" )
