@@ -679,14 +679,14 @@ void DownloadThread::run() {
 	if ( !isCanceled && ui->checkBox_13->isChecked() )
 		downloadCharo();
 
+	if ( !isCanceled && ui->checkBox_shower->isChecked() )
+		downloadShower();
+
 	if ( !isCanceled && ui->checkBox_14->isChecked() )
 		downloadENews( false );
 
 	if ( !isCanceled && ui->checkBox_15->isChecked() )
 		downloadENews( true );
-
-	if ( !isCanceled && ui->checkBox_shower->isChecked() )
-		downloadShower();
 
 	emit current( "" );
 	//キャンセル時にはdisconnectされているのでemitしても何も起こらない
