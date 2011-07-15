@@ -34,7 +34,7 @@ class DownloadManager: public QObject {
 	Q_OBJECT
 
 public:
-	DownloadManager( bool _reread );
+	DownloadManager( bool _reread, bool _past );
 	void singleShot();
 
 	QStringList flvList;
@@ -45,6 +45,7 @@ private:
 
 	QEventLoop eventLoop;
 	bool reread;
+	bool past;
 	mutable QMutex mutex;
 	QNetworkAccessManager manager;
 	QList<QNetworkReply *> currentDownloads;

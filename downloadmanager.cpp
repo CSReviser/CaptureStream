@@ -34,7 +34,7 @@
 #define SEARCH_AT_ONCE 100
 #define VIDEO_PLAYER_WIDE "video_player_wide.swf"
 
-DownloadManager::DownloadManager( bool _reread ) : reread(_reread) {
+DownloadManager::DownloadManager( bool _reread, bool _past ) : reread(_reread), past(_past) {
 	connect( &manager, SIGNAL(finished(QNetworkReply*)), SLOT(downloadFinished(QNetworkReply*)) );
 }
 
@@ -57,8 +57,10 @@ void DownloadManager::execute() {
 
 	if ( !reread ) {
 		from = today.addDays( -7 );
-		doDownload( QUrl(SEARCH_20100323 ) );
-		doDownload( QUrl(SEARCH_20090330 ) );
+		if ( past ) {
+			doDownload( QUrl(SEARCH_20100323 ) );
+			doDownload( QUrl(SEARCH_20090330 ) );
+		}
 	}
 
 	for ( QDate i = today; i >= from; i = i.addDays( -1 ) ) {

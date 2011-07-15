@@ -194,7 +194,7 @@ void DownloadThread::downloadCharo() {
 
 void DownloadThread::downloadENews( bool re_read ) {
 	emit current( QString::fromUtf8( "ニュースで英会話のhtmlを分析中" ) );
-	DownloadManager manager( re_read );
+	DownloadManager manager( re_read, ui->checkBox_enews_past->isChecked() );
 	manager.singleShot();
 	qSort( manager.flvList.begin(), manager.flvList.end(), qGreater<QString>() );
 
