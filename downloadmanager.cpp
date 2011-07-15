@@ -55,19 +55,19 @@ void DownloadManager::execute() {
 	QDate today = QDate::currentDate();
 	QDate from( 2009, 3, 30 );	//ダウンロード可能な一番古い日付
 
-	if ( !reread ) {
+	if ( !reread || !past )
 		from = today.addDays( -7 );
-		if ( past ) {
-			doDownload( QUrl(SEARCH_20100323 ) );
-			doDownload( QUrl(SEARCH_20090330 ) );
-		}
-	}
 
 	for ( QDate i = today; i >= from; i = i.addDays( -1 ) ) {
 		if ( i.dayOfWeek() >= 1 && i.dayOfWeek() <= 5 ) {
 			QUrl url( "http://cgi2.nhk.or.jp/e-news/news/index.cgi?ymd=" + i.toString( "yyyyMMdd" ) );
 			doDownload( url );
 		}
+	}
+
+	if ( !reread && past ) {
+		doDownload( QUrl(SEARCH_20100323 ) );
+		doDownload( QUrl(SEARCH_20090330 ) );
 	}
 }
 
