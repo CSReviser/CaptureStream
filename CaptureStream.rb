@@ -17,6 +17,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2011/10/03　「攻略！英語リスニング」対応。
 2011/07/13　「ニュースで英会話」の公開中のファイルのダウンロードをenewsとし、過去分すべての
 　　　　　　　ダウンロードをenews-allに変更。
 2011/07/11　翌週公開分ダウンロードのコードを削除。作業ファイル名の生成方法を変更(make_temp_name)
@@ -113,7 +114,7 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = ["basic1", "basic2", "basic3", "training", "kaiwa", "business1", "business2"]
+$english = ["basic1", "basic2", "basic3", "training", "kaiwa", "business1", "business2", "kouryaku"]
 $multilingual = ["chinese", "french", "italian", "hangeul", "german", "spanish"]
 $extra = ["charo", "enews", "shower", "enews-all"]
 
@@ -234,19 +235,19 @@ $flv_service_prefix = "flv:gogaku/streaming/flv/#{$scramble}/"
 #--------------------------------------------------------------------------------
 
 # 保存フォルダ名
-$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "training"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "charo"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k"
+$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "training"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "kouryaku"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "charo"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k"
 }
 
 # 保存ファイル名
-$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "training"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "charo"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3"
+$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "training"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "kouryaku"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "charo"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3"
 }
 
 # id3タグのalbum
-$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "training"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "charo"=>"%k", "enews"=>"%k", "shower"=>"%k"
+$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "training"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "kouryaku"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "charo"=>"%k", "enews"=>"%k", "shower"=>"%k"
 }
 
 # id3タグのtitle
-$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "training"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "charo"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D"
+$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "training"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "kouryaku"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "charo"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D"
 }
 
 #--------------------------------------------------------------------------------
