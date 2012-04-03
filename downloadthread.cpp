@@ -670,8 +670,8 @@ void DownloadThread::run() {
 		}
 	}
 	
-	if ( !isCanceled && ui->checkBox_13->isChecked() )
-		downloadCharo();
+    //if ( !isCanceled && ui->checkBox_13->isChecked() )
+        //downloadCharo();
 
 	if ( !isCanceled && ui->checkBox_shower->isChecked() )
 		downloadShower();

@@ -44,7 +44,7 @@
       <x>9</x>
       <y>9</y>
       <width>531</width>
-      <height>359</height>
+      <height>351</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0">
@@ -301,13 +301,6 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
-      <widget class="QCheckBox" name="checkBox_13">
-       <property name="text">
-        <string>リトル・チャロ2</string>
-       </property>
-      </widget>
-     </item>
      <item row="7" column="0">
       <widget class="QCheckBox" name="checkBox_kouryaku">
        <property name="text">
@@ -416,6 +409,25 @@
     </property>
     <property name="checked">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_13">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>460</y>
+      <width>247</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>リトル・チャロ2</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
