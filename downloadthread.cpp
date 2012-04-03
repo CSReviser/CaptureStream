@@ -479,7 +479,7 @@ bool illegal( char c ) {
 QString DownloadThread::formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal ) {
 	int month = hdate.left( 2 ).toInt();
 	int year = 2000 + file.left( 2 ).toInt();
-    if ( /*month <= 3 &&*/ QDate::currentDate().year() > year )
+    if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
 	int day = hdate.mid( 3, 2 ).toInt();
 
@@ -566,7 +566,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	if ( file.endsWith( ".flv", Qt::CaseInsensitive ) ) {
 		int month = hdate.left( 2 ).toInt();
 		int year = 2000 + file.left( 2 ).toInt();
-        if ( /*month <= 3 &&*/ QDate::currentDate().year() > year )
+        if ( month <= 4 && QDate::currentDate().year() > year )
 			year += 1;
 		int day = hdate.mid( 3, 2 ).toInt();
 		QDate onair( year, month, day );
@@ -608,17 +608,6 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 
 	return result;
 }
-
-/*
-QDate onAirDate( QString hdate, QString file ) {
-	int month = hdate.left( 2 ).toInt();
-	int year = 2000 + file.left( 2 ).toInt();
-	if ( month <= 3 && QDate::currentDate().year() > year )
-		year += 1;
-	int day = hdate.mid( 3, 2 ).toInt();
-	return QDate( year, month, day );
-}
-*/
 
 void DownloadThread::run() {
 	QCheckBox* checkbox[] = {
