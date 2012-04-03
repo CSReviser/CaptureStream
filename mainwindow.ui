@@ -72,7 +72,7 @@
      <item row="3" column="0">
       <widget class="QCheckBox" name="checkBox_3">
        <property name="text">
-        <string>英語5分間トレーニング</string>
+        <string>英語5分間トレーニング（最終週）</string>
        </property>
       </widget>
      </item>
