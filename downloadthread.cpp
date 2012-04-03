@@ -340,8 +340,6 @@ void DownloadThread::downloadShower() {
 	if ( !checkOutputDir( outputDir ) )
 		return;
 	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
-	QString flv_host( "flv9.nhk.or.jp");
-	QString flv_app( "flv9/_definst_/" );
 	QString flv_service_prefix( "worldwave/common/movie/" );
 #ifdef Q_WS_WIN
 	QString null( "nul" );
@@ -352,21 +350,31 @@ void DownloadThread::downloadShower() {
 
 	// 日本語ロケールではQDate::fromStringでMMMは動作しないのでQRegExpを使う
 	// 日付の形式： Thu, 28 Apr 2011 00:00:00 +0900
-	QStringList elements = getElements( "http://www.nhk.or.jp/worldwave/xml/abc_news.xml", "/rss/channel/item/pubDate/string()" );
-	foreach (const QString &element, elements) {
-		static QRegExp regexp( "^(?:[a-zA-Z]{3}), (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4})" );
+    //QStringList elements = getElements( "http://www.nhk.or.jp/worldwave/xml/abc_news.xml", "/rss/channel/item/pubDate/string()" );
+    QStringList elements = getElements( "http://www.nhk.or.jp/worldwave/xml/abc_news.xml", "/rss/channel/item/movie/string()" );
+    foreach (const QString &element, elements) {
+        //static QRegExp regexp( "^(?:[a-zA-Z]{3}), (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4})" );
 		if ( isCanceled )
 			break;
-		if ( regexp.indexIn( element ) != -1 ) {
+        //if ( regexp.indexIn( element ) != -1 ) {
 			static QStringList months = QStringList()
 					<< "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"
 					<< "Jul" << "Aug" << "Sep" << "Oct" << "Nov" << "Dec";
-			int year = regexp.cap( 3 ).toInt();
-			int month = months.indexOf( regexp.cap( 2 ) ) + 1;
-			int day = regexp.cap( 1 ).toInt();
+            int year = 2000 + element.left( 2 ).toInt();//regexp.cap( 3 ).toInt();
+            int month = element.mid( 2, 2 ).toInt();//months.indexOf( regexp.cap( 2 ) ) + 1;
+            int day = element.right( 2 ).toInt();//regexp.cap( 1 ).toInt();
 			QDate date( year, month, day );
 			QString hdate = date.toString( "yyyy_MM_dd" );
-			QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
+            QString flv_host;
+            QString flv_app;
+            if ( year > 2012 || ( year == 2012 && month >= 4 ) ) {
+                flv_host = "flv.nhk.or.jp";
+                flv_app = "ondemand/flv/";
+            } else {
+                flv_host = "flv9.nhk.or.jp";
+                flv_app = "flv9/_definst_/";
+            }
+            QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
 			QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
 			QString server_file = "abc" + date.toString( "yyMMdd" ) + ".flv";
 			bool flvExists = QFile::exists( flv_file );
@@ -414,7 +422,7 @@ void DownloadThread::downloadShower() {
 					QFile::remove( flv_file );
 			} else
 				emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-		}
+        //}
 	}
 }
 

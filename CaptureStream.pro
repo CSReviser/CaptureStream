@@ -32,14 +32,14 @@ FORMS += mainwindow.ui \
     scrambledialog.ui
 
 macx {
-	#CONFIG += x86 #x86_64 ppc
+	CONFIG += x86 #ppc #x86_64
 	QMAKE_CFLAGS_RELEASE += -fvisibility=hidden
 	QMAKE_CXXFLAGS_RELEASE += -fvisibility=hidden
 
 	debug {
 	}
 
-	release_fw {
+	release {
 		QMAKE_POST_LINK += /usr/bin/install_name_tool \
 			-change \
 			QtCore.framework/Versions/4/QtCore \
