@@ -340,7 +340,9 @@ void DownloadThread::downloadShower() {
 	if ( !checkOutputDir( outputDir ) )
 		return;
 	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
-	QString flv_service_prefix( "worldwave/common/movie/" );
+    QString flv_host = "flv.nhk.or.jp";
+    QString flv_app = "ondemand/flv/";
+    QString flv_service_prefix( "worldwave/common/movie/" );
 #ifdef Q_WS_WIN
 	QString null( "nul" );
 #else
@@ -348,8 +350,13 @@ void DownloadThread::downloadShower() {
 #endif
 	bool skip = ui->checkBox_skip->isChecked();
 
-    // pubDateから取っていたが、2012からmovieに変更
-    QStringList elements = getElements( "http://www.nhk.or.jp/worldwave/xml/abc_news.xml", "/rss/channel/item/movie/string()" );
+    // 当月と前月のxmlから可能なものをダウンロードする
+    const char* prototype = "http://www.nhk.or.jp/worldwave/xml/abc_news_%1.xml";
+    QString this_month = QString( prototype ).arg( QDate::currentDate().toString( "yyyyMM" ) );
+    QString last_month = QString( prototype ).arg( QDate::currentDate().addMonths( -1 ).toString( "yyyyMM" ) );
+    QStringList elements = getElements( this_month, "/rss/channel/item/movie/string()" );
+    elements += getElements( last_month, "/rss/channel/item/movie/string()" );
+
     foreach (const QString &element, elements) {
 		if ( isCanceled )
 			break;
@@ -361,15 +368,6 @@ void DownloadThread::downloadShower() {
         int day = element.right( 2 ).toInt();
         QDate date( year, month, day );
         QString hdate = date.toString( "yyyy_MM_dd" );
-        QString flv_host;
-        QString flv_app;
-        if ( year > 2012 || ( year == 2012 && month >= 4 ) ) {
-            flv_host = "flv.nhk.or.jp";
-            flv_app = "ondemand/flv/";
-        } else {
-            flv_host = "flv9.nhk.or.jp";
-            flv_app = "flv9/_definst_/";
-        }
         QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
         QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
         QString server_file = "abc" + date.toString( "yyMMdd" ) + ".flv";
