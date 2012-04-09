@@ -518,12 +518,6 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
-QString DownloadThread::paths[] = {
-    "english/basic1", "english/basic2", "english/basic3", "english/timetrial",
-	"english/kaiwa", "english/business1", "english/business2",
-	"chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
-	"german/kouza", "spanish/kouza", "english/kouryaku"
-};
 QString DownloadThread::prefix = "http://www.nhk.or.jp/gogaku/";
 QString DownloadThread::suffix = "/listdataflv.xml";
 
@@ -602,11 +596,20 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	return result;
 }
 
+QString DownloadThread::paths[] = {
+    "english/basic1", "english/basic2", "english/basic3", "english/timetrial",
+    "english/kaiwa", "english/business1", "english/business2",
+    "chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
+    "german/kouza", "spanish/kouza", "english/kouryaku",
+    "chinese/levelup", "hangeul/levelup", "russian/kouza"
+};
+
 void DownloadThread::run() {
 	QCheckBox* checkbox[] = {
 		ui->checkBox_0, ui->checkBox_1, ui->checkBox_2, ui->checkBox_3, ui->checkBox_4,
 		ui->checkBox_5, ui->checkBox_6, ui->checkBox_7, ui->checkBox_8, ui->checkBox_9,
-		ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku, NULL
+        ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku,
+        ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
 	};
 
 	if ( !checkFlvstreamer( flvstreamer ) )

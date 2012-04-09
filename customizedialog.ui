@@ -99,7 +99,7 @@
     <item row="6" column="4">
      <widget class="QLineEdit" name="lineEdit_15">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
        <string>%k_%Y_%M_%D</string>
@@ -109,7 +109,7 @@
     <item row="7" column="4">
      <widget class="QLineEdit" name="lineEdit_16">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
        <string>%k_%Y_%M_%D</string>
@@ -179,10 +179,10 @@
     <item row="6" column="3">
      <widget class="QLabel" name="label_15">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
-       <string>ニュースで英会話:</string>
+       <string>レベルアップ中国語:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -192,10 +192,10 @@
     <item row="7" column="3">
      <widget class="QLabel" name="label_16">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
-       <string>読み直し音声:</string>
+       <string>レベルアップハングル:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -205,10 +205,10 @@
     <item row="7" column="0">
      <widget class="QLabel" name="label_8">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
-       <string>チャロ2:</string>
+       <string>ロシア語:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -218,7 +218,7 @@
     <item row="7" column="1">
      <widget class="QLineEdit" name="lineEdit_8">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="text">
        <string>%k_%Y_%M_%D</string>
@@ -279,7 +279,7 @@
     <item row="3" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>英会話タイムトライアル</string>
+       <string>タイムトライアル:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -376,7 +376,7 @@
     <item row="0" column="1">
      <widget class="QLabel" name="label_29">
       <property name="text">
-       <string>XMLの講座名　「基礎英語1」「リトル・チャロ2」</string>
+       <string>XMLの講座名　「基礎英語1」「ニュースで英会話」</string>
       </property>
      </widget>
     </item>

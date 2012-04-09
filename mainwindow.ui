@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
-    <height>400</height>
+    <width>570</width>
+    <height>424</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>548</width>
-    <height>400</height>
+    <width>570</width>
+    <height>424</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>548</width>
-    <height>400</height>
+    <width>570</width>
+    <height>424</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,60 +43,11 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>531</width>
-      <height>351</height>
+      <width>552</width>
+      <height>371</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0">
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkBox_0">
-       <property name="text">
-        <string>基礎英語1</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="checkBox_1">
-       <property name="text">
-        <string>基礎英語2</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="checkBox_2">
-       <property name="text">
-        <string>基礎英語3</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="checkBox_3">
-       <property name="text">
-        <string>英会話タイムトライアル</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="checkBox_4">
-       <property name="text">
-        <string>ラジオ英会話</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QCheckBox" name="checkBox_5">
-       <property name="text">
-        <string>入門ビジネス英語</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QCheckBox" name="checkBox_6">
-       <property name="text">
-        <string>実践ビジネス英語</string>
-       </property>
-      </widget>
-     </item>
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
      <item row="0" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -108,7 +59,31 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="1">
+     <item row="10" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="Line" name="line">
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="10" column="0">
+      <widget class="Line" name="line_2">
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QCheckBox" name="checkBox_14">
@@ -141,62 +116,7 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QCheckBox" name="checkBox_8">
-         <property name="text">
-          <string>まいにちフランス語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QCheckBox" name="checkBox_9">
-         <property name="text">
-          <string>まいにちイタリア語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QCheckBox" name="checkBox_10">
-         <property name="text">
-          <string>まいにちハングル講座</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="4" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <item>
-        <widget class="QCheckBox" name="checkBox_11">
-         <property name="text">
-          <string>まいにちドイツ語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="5" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
-       <item>
-        <widget class="QCheckBox" name="checkBox_12">
-         <property name="text">
-          <string>まいにちスペイン語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="7" column="1">
+     <item row="9" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="QCheckBox" name="checkBox_15">
@@ -208,20 +128,6 @@
       </layout>
      </item>
      <item row="9" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
-       <item>
-        <widget class="Line" name="line">
-         <property name="lineWidth">
-          <number>2</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="8" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
         <widget class="QCheckBox" name="checkBox_shower">
@@ -254,59 +160,234 @@
        </item>
       </layout>
      </item>
-     <item row="12" column="1">
-      <widget class="QPushButton" name="downloadButton">
-       <property name="text">
-        <string>ダウンロード</string>
-       </property>
-      </widget>
+     <item row="7" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="checkBox_12">
+         <property name="text">
+          <string>まいにちスペイン語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="10" column="1">
-      <widget class="QCheckBox" name="checkBox_enews_past">
-       <property name="text">
-        <string>「ニュースで英会話」過去分</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
+     <item row="6" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QCheckBox" name="checkBox_11">
+         <property name="text">
+          <string>まいにちドイツ語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="12" column="0">
-      <widget class="QCheckBox" name="checkBox_keep_on_error">
-       <property name="text">
-        <string>ダウンロード未完でも変換</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
+     <item row="4" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QCheckBox" name="checkBox_10">
+         <property name="text">
+          <string>まいにちハングル講座</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="10" column="0">
-      <widget class="QCheckBox" name="checkBox_skip">
-       <property name="text">
-        <string>既存のファイルはスキップ</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
+     <item row="3" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QCheckBox" name="checkBox_9">
+         <property name="text">
+          <string>まいにちイタリア語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="9" column="0">
-      <widget class="Line" name="line_2">
-       <property name="lineWidth">
-        <number>2</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QCheckBox" name="checkBox_8">
+         <property name="text">
+          <string>まいにちフランス語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QCheckBox" name="checkBox_16">
+         <property name="text">
+          <string>レベルアップ中国語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="5" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QCheckBox" name="checkBox_17">
+         <property name="text">
+          <string>レベルアップハングル講座</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="8" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_13">
+       <item>
+        <widget class="QCheckBox" name="checkBox_18">
+         <property name="text">
+          <string>まいにちロシア語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_14">
+       <item>
+        <widget class="QCheckBox" name="checkBox_0">
+         <property name="text">
+          <string>基礎英語1</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_15">
+       <item>
+        <widget class="QCheckBox" name="checkBox_1">
+         <property name="text">
+          <string>基礎英語2</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_16">
+       <item>
+        <widget class="QCheckBox" name="checkBox_2">
+         <property name="text">
+          <string>基礎英語3</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_17">
+       <item>
+        <widget class="QCheckBox" name="checkBox_3">
+         <property name="text">
+          <string>英会話タイムトライアル</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_18">
+       <item>
+        <widget class="QCheckBox" name="checkBox_4">
+         <property name="text">
+          <string>ラジオ英会話</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="5" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_19">
+       <item>
+        <widget class="QCheckBox" name="checkBox_5">
+         <property name="text">
+          <string>入門ビジネス英語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="6" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_20">
+       <item>
+        <widget class="QCheckBox" name="checkBox_6">
+         <property name="text">
+          <string>実践ビジネス英語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item row="7" column="0">
-      <widget class="QCheckBox" name="checkBox_kouryaku">
-       <property name="text">
-        <string>攻略英語リスニング</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_21">
+       <item>
+        <widget class="QCheckBox" name="checkBox_kouryaku">
+         <property name="text">
+          <string>攻略英語リスニング</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="11" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_22">
+       <item>
+        <widget class="QCheckBox" name="checkBox_skip">
+         <property name="text">
+          <string>既存のファイルはスキップ</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="13" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_23">
+       <item>
+        <widget class="QCheckBox" name="checkBox_keep_on_error">
+         <property name="text">
+          <string>ダウンロード未完でも変換</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="11" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_24">
+       <item>
+        <widget class="QCheckBox" name="checkBox_enews_past">
+         <property name="text">
+          <string>「ニュースで英会話」過去分</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="13" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_25">
+       <item>
+        <widget class="QPushButton" name="downloadButton">
+         <property name="text">
+          <string>ダウンロード</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -317,7 +398,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>490</y>
+      <y>610</y>
       <width>257</width>
       <height>20</height>
      </rect>
@@ -336,7 +417,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>520</y>
+      <y>640</y>
       <width>257</width>
       <height>20</height>
      </rect>
@@ -352,7 +433,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>550</y>
+      <y>670</y>
       <width>45</width>
       <height>16</height>
      </rect>
@@ -374,7 +455,7 @@
     <property name="geometry">
      <rect>
       <x>415</x>
-      <y>547</y>
+      <y>667</y>
       <width>45</width>
       <height>22</height>
      </rect>
@@ -399,7 +480,7 @@
     <property name="geometry">
      <rect>
       <x>259</x>
-      <y>548</y>
+      <y>668</y>
       <width>155</width>
       <height>20</height>
      </rect>
@@ -418,7 +499,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>460</y>
+      <y>580</y>
       <width>247</width>
       <height>20</height>
      </rect>
@@ -430,13 +511,22 @@
      <bool>true</bool>
     </property>
    </widget>
+   <zorder>gridLayoutWidget_3</zorder>
+   <zorder>checkBox_this_week</zorder>
+   <zorder>checkBox_next_week</zorder>
+   <zorder>label_2</zorder>
+   <zorder>past_days</zorder>
+   <zorder>checkBox_past_week</zorder>
+   <zorder>checkBox_13</zorder>
+   <zorder>checkBox_keep_on_error</zorder>
+   <zorder>checkBox_0</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>548</width>
+     <width>570</width>
      <height>22</height>
     </rect>
    </property>
@@ -449,13 +539,6 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>checkBox_0</tabstop>
-  <tabstop>checkBox_1</tabstop>
-  <tabstop>checkBox_2</tabstop>
-  <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_4</tabstop>
-  <tabstop>checkBox_5</tabstop>
-  <tabstop>checkBox_6</tabstop>
   <tabstop>checkBox_7</tabstop>
   <tabstop>checkBox_8</tabstop>
   <tabstop>checkBox_9</tabstop>
@@ -465,7 +548,6 @@
   <tabstop>checkBox_14</tabstop>
   <tabstop>comboBox_enews</tabstop>
   <tabstop>checkBox_15</tabstop>
-  <tabstop>downloadButton</tabstop>
   <tabstop>checkBox_this_week</tabstop>
   <tabstop>checkBox_next_week</tabstop>
   <tabstop>checkBox_past_week</tabstop>

@@ -39,24 +39,21 @@ QStringList CustomizeDialog::courses = QStringList()
 		<< QString::fromUtf8( "基礎英語1" ) << QString::fromUtf8( "基礎英語2" )
         << QString::fromUtf8( "基礎英語3" ) << QString::fromUtf8( "英会話タイムトライアル" )
 		<< QString::fromUtf8( "ラジオ英会話" ) << QString::fromUtf8( "入門ビジネス英語" )
-		<< QString::fromUtf8( "実践ビジネス英語" ) << QString::fromUtf8( "リトル・チャロ2" )
+        << QString::fromUtf8( "実践ビジネス英語" ) << QString::fromUtf8( "まいにちロシア語" )
 		<< QString::fromUtf8( "まいにち中国語" ) << QString::fromUtf8( "まいにちフランス語" )
 		<< QString::fromUtf8( "まいにちイタリア語" ) << QString::fromUtf8( "まいにちハングル講座" )
 		<< QString::fromUtf8( "まいにちドイツ語" ) << QString::fromUtf8( "まいにちスペイン語" )
-		<< QString::fromUtf8( "ニュースで英会話" ) << QString::fromUtf8( "ニュースで英会話（読み直し音声）" )
-		 << QString::fromUtf8( "攻略英語リスニング" );
+        << QString::fromUtf8( "レベルアップ中国語" ) << QString::fromUtf8( "レベルアップハングル講座" );
 QStringList CustomizeDialog::titleKeys = QStringList()
         << "basic1_title" << "basic2_title" << "basic3_title" << "timetrial_title"
-		<< "kaiwa_title" << "business1_title" << "business2_title"  << "charo_title"
+        << "kaiwa_title" << "business1_title" << "business2_title"  << "russian_title"
 		<< "chinese_title" << "french_title" << "italian_title" << "hangeul_title"
-		<< "german_title" << "spanish_title" << "e-news_title" << "e-news-reread_title"
-		<< "kouryaku_title";
+        << "german_title" << "spanish_title" << "levelup-chinese_title" << "levelup-hangeul_title";
 QStringList CustomizeDialog::fileNameKeys = QStringList()
         << "basic1_file_name" << "basic2_file_name" << "basic3_file_name" << "timetrial_file_name"
-		<< "kaiwa_file_name" << "business1_file_name" << "business2_file_name" << "charo_file_name"
+        << "kaiwa_file_name" << "business1_file_name" << "business2_file_name" << "russian_file_name"
 		<< "chinese_file_name" << "french_file_name" << "italian_file_name" << "hangeul_file_name"
-		<< "german_file_name" << "spanish_file_name" << "e-news_file_name" << "e-news-reread_file_name"
-		<< "kouryaku_file_name";
+        << "german_file_name" << "spanish_file_name" << "levelup-chinese_file_name" << "levelup-hangeul_file_name";
 
 void CustomizeDialog::formats( QString course, QString& titleFormat, QString& fileNameFormat ) {
 	int index = courses.indexOf( course );
