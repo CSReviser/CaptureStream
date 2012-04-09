@@ -146,7 +146,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_0, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
 		{ ui->checkBox_1, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
 		{ ui->checkBox_2, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
-		{ ui->checkBox_3, "training", false, "training_title", DefaultTitle, "training_file_name", DefaultFileName },
+        { ui->checkBox_3, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
 		{ ui->checkBox_4, "kaiwa", false, "kaiwa_title", DefaultTitle, "kaiwa_file_name", DefaultFileName },
 		{ ui->checkBox_5, "business1", false, "business1_title", DefaultTitle, "business1_file_name", DefaultFileName },
 		{ ui->checkBox_6, "business2", false, "business2_title", DefaultTitle, "business2_file_name", DefaultFileName },

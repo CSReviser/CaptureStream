@@ -519,7 +519,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 //--------------------------------------------------------------------------------
 
 QString DownloadThread::paths[] = {
-    "english/basic1", "english/basic2", "english/basic3", "2011/english/training",
+    "english/basic1", "english/basic2", "english/basic3", "english/timetrial",
 	"english/kaiwa", "english/business1", "english/business2",
 	"chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
 	"german/kouza", "spanish/kouza", "english/kouryaku"
