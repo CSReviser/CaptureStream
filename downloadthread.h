@@ -55,6 +55,7 @@ private:
 
 	Ui::MainWindowClass* ui;
 	bool isCanceled;
+    bool failed1935;
 
 	static QString paths[];
 	static QString prefix;

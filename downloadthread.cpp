@@ -54,7 +54,7 @@
 #endif
 #define ScrambleLength 14
 
-DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false) {
+DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
 }
 
@@ -150,13 +150,19 @@ void DownloadThread::downloadCharo() {
 			else {
 				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-				QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+                QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+                QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-				int exitCode = process.execute( command1935 );
-				if ( exitCode && !isCanceled )
-					exitCode = process.execute( command80 );
+                int exitCode = 0;
+                if ( !failed1935 && !isCanceled ) {
+                    if ( (exitCode = process.execute( command1935 )) != 0 )
+                        failed1935 = true;
+                }
+                if ( (failed1935 || exitCode) && !isCanceled )
+                    exitCode = process.execute( command80 );
 
 				bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
 				if ( exitCode && !isCanceled ) {
@@ -164,7 +170,7 @@ void DownloadThread::downloadCharo() {
 					if ( flv.size() > 0 ) {
 						for ( int count = 0; exitCode && count < 5 && !isCanceled; count++ ) {
 							emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-							exitCode = process.execute( command80 );
+							exitCode = process.execute( commandResume );
 						}
 					}
 					if ( exitCode && !isCanceled ) {
@@ -258,13 +264,19 @@ void DownloadThread::downloadENews( bool re_read ) {
 			if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !movieExists ) ) {
 				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
-				QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+                QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
+						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
+                QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-				int exitCode = process.execute( command1935 );
-				if ( exitCode && !isCanceled )
-					exitCode = process.execute( command80 );
+                int exitCode = 0;
+                if ( !failed1935 && !isCanceled ) {
+                    if ( (exitCode = process.execute( command1935 )) != 0 )
+                        failed1935 = true;
+                }
+                if ( (failed1935 || exitCode) && !isCanceled )
+                    exitCode = process.execute( command80 );
 
 				bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
 				if ( exitCode && !isCanceled ) {
@@ -272,7 +284,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 					if ( flv.size() > 0 ) {
 						for ( int count = 0; exitCode && count < 5 && !isCanceled; count++ ) {
 							emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-							exitCode = process.execute( command80 );
+							exitCode = process.execute( commandResume );
 						}
 					}
 					if ( exitCode && !isCanceled ) {
@@ -377,12 +389,18 @@ void DownloadThread::downloadShower() {
         if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !flvExists ) ) {
             QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
                     .arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-            QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+            QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
+                    .arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+            QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
                     .arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
             QProcess process;
             emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-            int exitCode = process.execute( command1935 );
-            if ( exitCode && !isCanceled )
+            int exitCode = 0;
+            if ( !failed1935 && !isCanceled ) {
+                if ( (exitCode = process.execute( command1935 )) != 0 )
+                    failed1935 = true;
+            }
+            if ( (failed1935 || exitCode) && !isCanceled )
                 exitCode = process.execute( command80 );
 
             bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
@@ -391,7 +409,7 @@ void DownloadThread::downloadShower() {
                 if ( flv.size() > 0 ) {
                     for ( int count = 0; exitCode && count < 5 && !isCanceled; count++ ) {
                         emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-                        exitCode = process.execute( command80 );
+                        exitCode = process.execute( commandResume );
                     }
                 }
                 if ( exitCode && !isCanceled ) {
@@ -566,14 +584,23 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		QString flv_file = outputDir + outBasename + ".flv";
 		QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6/%7\" -o \"%8\" > %9" )
 				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
-		QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6/%7\" -o \"%8\" --resume > %9" )
+        QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6/%7\" -o \"%8\" > %9" )
+				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
+        QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6/%7\" -o \"%8\" --resume > %9" )
 				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
 		QProcess process;
 		emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
-		int exitCode = process.execute( command1935 );
-		while ( exitCode && retryCount-- > 0 ) {
+        int exitCode = 0;
+        if ( !failed1935 && !isCanceled ) {
+            if ( (exitCode = process.execute( command1935 )) != 0 )
+                failed1935 = true;
+        }
+        if ( (failed1935 || exitCode) && !isCanceled )
+            exitCode = process.execute( command80 );
+        
+		while ( exitCode && retryCount-- > 0 && !isCanceled ) {
 			emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
-			exitCode = process.execute( command80 );
+			exitCode = process.execute( commandResume );
 		}
 		if ( exitCode ) {
 			emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
