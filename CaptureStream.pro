@@ -32,7 +32,7 @@ FORMS += mainwindow.ui \
     scrambledialog.ui
 
 macx {
-	#CONFIG += x86 #ppc #x86_64
+	CONFIG += x86 ppc #x86_64
 	QMAKE_CFLAGS_RELEASE += -fvisibility=hidden
 	QMAKE_CXXFLAGS_RELEASE += -fvisibility=hidden
 
