@@ -17,6 +17,8 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2012/04/09　「リトル・チャロ」削除。「英会話タイムトライアル」、「まいにちロシア語」、
+　　　　　　　「レベルアップ中国語」、「レベルアップハングル講座」に対応。
 2011/10/03　「攻略！英語リスニング」対応。
 2011/07/13　「ニュースで英会話」の公開中のファイルのダウンロードをenewsとし、過去分すべての
 　　　　　　　ダウンロードをenews-allに変更。
@@ -99,8 +101,8 @@ require 'fileutils'
 講座名のところには以下のものが複数指定可能です。allを指定するとすべての講座をダウンロードします。
 
 
-basic1 basic2 basic3 training kaiwa business1 business2 chinese french italian
-hangeul german spanish charo enews shower all
+basic1 basic2 basic3 timetrial kaiwa business1 business2 chinese french italian 
+hangeul german spanish russian levelup-chinese levelup-hangeul enews shower all
 
 $default_target（配列）に指定しておくことで引数指定なしでダウンロードさせることができます。
 入門ビジネス英語と実践ビジネス英語を指定するには以下のように設定します。
@@ -114,9 +116,9 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = ["basic1", "basic2", "basic3", "training", "kaiwa", "business1", "business2", "kouryaku"]
-$multilingual = ["chinese", "french", "italian", "hangeul", "german", "spanish"]
-$extra = ["charo", "enews", "shower", "enews-all"]
+$english = ["basic1", "basic2", "basic3", "timetrial", "kaiwa", "business1", "business2", "kouryaku"]
+$multilingual = ["chinese", "french", "italian", "hangeul", "german", "spanish", "russian", "levelup-chinese", "levelup-hangeul"]
+$extra = ["enews", "shower", "enews-all"]
 
 #--------------------------------------------------------------------------------
 # 実行環境の検出とツールのパス設定
@@ -152,7 +154,7 @@ end
 # 何らかの問題でウィキからスクランブル文字列が取得できない場合には自分で設定してください
 #--------------------------------------------------------------------------------
 
-jputs( "語学講座ダウンローダ (2011/10/03)" )
+jputs( "語学講座ダウンローダ (2012/04/09)" )
 
 $scramble = ""
 
@@ -235,19 +237,19 @@ $flv_service_prefix = "flv:gogaku/streaming/flv/#{$scramble}/"
 #--------------------------------------------------------------------------------
 
 # 保存フォルダ名
-$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "training"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "kouryaku"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "charo"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k"
+$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "timetrial"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "kouryaku"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "russian"=>"%r%p%k", "levelup-chinese"=>"%r%p%k", "levelup-hangeul"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k"
 }
 
 # 保存ファイル名
-$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "training"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "kouryaku"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "charo"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3"
+$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "timetrial"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "kouryaku"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "russian"=>"%k_%Y_%M_%D.mp3", "levelup-chinese"=>"%k_%Y_%M_%D.mp3", "levelup-hangeul"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3"
 }
 
 # id3タグのalbum
-$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "training"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "kouryaku"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "charo"=>"%k", "enews"=>"%k", "shower"=>"%k"
+$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "timetrial"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "kouryaku"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "russian"=>"%k", "levelup-chinese"=>"%k", "levelup-hangeul"=>"%k", "enews"=>"%k", "shower"=>"%k"
 }
 
 # id3タグのtitle
-$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "training"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "kouryaku"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "charo"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D"
+$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "timetrial"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "kouryaku"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "russian"=>"%k_%Y_%M_%D", "levelup-chinese"=>"%k_%Y_%M_%D", "levelup-hangeul"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D"
 }
 
 #--------------------------------------------------------------------------------
@@ -280,7 +282,7 @@ def format_name( format, target, kouza, hdate, file )
 	month = $1
 	day = $2
 	
-	if target == "charo" || target == "enews"
+	if target == "enews"
 		year = 2000 + file[2,2].to_i
 	elsif target == "shower"
 		year = 2000 + file[3,2].to_i
@@ -620,30 +622,6 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 end
 
 #--------------------------------------------------------------------------------
-# リトル・チャロ2
-#--------------------------------------------------------------------------------
-
-def download_charo
-	flv_service_prefix = $flv_service_prefix
-	$flv_service_prefix = 'flv:charo/streams/radio/'
-	
-	today = Date.today
-	offset = (7 - Date.today.wday) % 7 + 1	# 次の月曜までの日数
-	i = today + offset - 14	# 次の月曜の２週間前から
-	
-	print( "charo: " )
-	while i <= today
-		if i.wday >= 1 && i.wday <= 5	# 2010年度は月曜から金曜まで
-			capture_stream( "charo", "リトル・チャロ2", "#{i.month}月#{i.day}日放送分", "#{i.strftime( '%Y%m%d' )}.flv", 5 )
-		end
-		i += 1
-	end
-	puts()
-	
-	$flv_service_prefix = flv_service_prefix
-end
-
-#--------------------------------------------------------------------------------
 # ニュースで英会話
 #--------------------------------------------------------------------------------
 
@@ -784,7 +762,11 @@ targets.each { |target|
 	if $english.include?( target )
 		xml_uri = "http://www.nhk.or.jp/gogaku/english/#{target}/#{$scramble}/listdataflv.xml"
 	elsif $multilingual.include?( target )
-		xml_uri = "http://www.nhk.or.jp/gogaku/#{target}/kouza/#{$scramble}/listdataflv.xml"
+		if target =~ /^levelup-(.*)/
+			xml_uri = "http://www.nhk.or.jp/gogaku/#{$~[1]}/levelup/#{$scramble}/listdataflv.xml"
+		else
+			xml_uri = "http://www.nhk.or.jp/gogaku/#{target}/kouza/#{$scramble}/listdataflv.xml"
+		end
 	else
 		next
 	end
@@ -802,7 +784,6 @@ targets.each { |target|
 	puts()
 }
 
-download_charo if targets.include?( "charo" )
 download_shower if targets.include?( "shower" )
 download_enews if targets.include?( "enews" )
 download_enews_all if targets.include?( "enews-all" )
