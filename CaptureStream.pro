@@ -32,11 +32,11 @@ FORMS += mainwindow.ui \
     scrambledialog.ui
 
 macx {
-	CONFIG += x86 ppc #x86_64
+	#CONFIG += x86 ppc #x86_64
 	QMAKE_CFLAGS_RELEASE += -fvisibility=hidden
 	QMAKE_CXXFLAGS_RELEASE += -fvisibility=hidden
 
 	release {
-		QMAKE_POST_LINK += /usr/bin/macdeployqt CaptureStream.app
+		QMAKE_POST_LINK += macdeployqt CaptureStream.app
 	}
 }
