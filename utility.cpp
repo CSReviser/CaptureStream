@@ -125,8 +125,16 @@ QString Utility::gnash( QString& error ) {
 	QProcess process;
 	process.start( GNASH );
 	bool started = process.waitForStarted();
-	if ( !started ) {
+    if ( !started ) {
 		process.start( "sdl-" + GNASH );
+		started = process.waitForStarted();
+	}
+    if ( !started ) {
+		process.start( applicationBundlePath() + GNASH );
+		started = process.waitForStarted();
+	}
+    if ( !started ) {
+		process.start( applicationBundlePath() + "sdl-" + GNASH );
 		started = process.waitForStarted();
 	}
 	if ( started ) {
