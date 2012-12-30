@@ -51,7 +51,9 @@ public:
     ~MainWindow();
 
 	static QString outputDir;
-	static QString scramble;
+    static QString scramble;
+    static QString scrambleUrl1;
+    static QString scrambleUrl2;
 
 protected:
 	virtual void closeEvent( QCloseEvent *event );

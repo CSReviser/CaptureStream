@@ -20,6 +20,7 @@
 
 #include "utility.h"
 #include "urldownloader.h"
+#include "mainwindow.h"
 
 #include <QUrl>
 #include <QRegExp>
@@ -48,7 +49,8 @@ namespace {
 	const QRegExp SUFFIX( "CONNECT_DIRECTORY \\+ '(.*)/' \\+ INIT_URI" );
 
 	const QString LISTDATAFLV( "http://www.nhk.or.jp/gogaku/common/swf/(\\w+)/listdataflv.xml" );
-	const QString WIKIXML2( "doc('http://www47.atwiki.jp/jakago/pub/scramble.xml')/flv/scramble[@date=\"" );
+    const QString WIKIXML1( "doc('" );
+    const QString WIKIXML2( "')/flv/scramble[@date=\"" );
 	const QString WIKIXML3( "\"]/@code/string()" );
 }
 
@@ -156,12 +158,21 @@ QString Utility::wiki() {
 	QString result;
 	QStringList attributeList;
 	QXmlQuery query;
-	query.setQuery( WIKIXML2 + monday.toString( "yyyyMMdd" ) + WIKIXML3 );
+	query.setQuery( WIKIXML1 + MainWindow::scrambleUrl1 + WIKIXML2 + monday.toString( "yyyyMMdd" ) + WIKIXML3 );
 	if ( query.isValid() ) {
 		query.evaluateTo( &attributeList );
 		if ( attributeList.count() > 0 )
 			result = attributeList[0];
 	}
+    // urlが転送されるようになった問題に対応
+    if ( result.length() <= 0 ) {
+        query.setQuery( WIKIXML1 + MainWindow::scrambleUrl2 + WIKIXML2 + monday.toString( "yyyyMMdd" ) + WIKIXML3 );
+        if ( query.isValid() ) {
+            query.evaluateTo( &attributeList );
+            if ( attributeList.count() > 0 )
+                result = attributeList[0];
+        }
+    }
 	return result;
 }
 

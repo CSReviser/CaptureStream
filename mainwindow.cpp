@@ -45,6 +45,10 @@
 #define SETTING_GEOMETRY "geometry"
 #define SETTING_SAVE_FOLDER "save_folder"
 #define SETTING_SCRAMBLE "scramble"
+#define SETTING_SCRAMBLE_URL1 "scramble_url1"
+#define SETTING_SCRAMBLE_URL2 "scramble_url2"
+#define SCRAMBLE_URL1 "http://www47.atwiki.jp/jakago/pub/scramble.xml"
+#define SCRAMBLE_URL2 "http://cdn47.atwikiimg.com/jakago/pub/scramble.xml"
 
 namespace {
 	bool outputDirSpecified = false;
@@ -68,6 +72,8 @@ namespace {
 
 QString MainWindow::outputDir;
 QString MainWindow::scramble;
+QString MainWindow::scrambleUrl1;
+QString MainWindow::scrambleUrl2;
 
 MainWindow::MainWindow( QWidget *parent )
 		: QMainWindow( parent ), ui( new Ui::MainWindowClass ), downloadThread( NULL ) {
@@ -202,8 +208,13 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		saved = settings.value( SETTING_SAVE_FOLDER );
 		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationBundlePath() : saved.toString();
 
-		saved = settings.value( SETTING_SCRAMBLE );
+        saved = settings.value( SETTING_SCRAMBLE );
 		scramble = saved.type() == QVariant::Invalid ? "" : saved.toString();
+
+        saved = settings.value( SETTING_SCRAMBLE_URL1 );
+		scrambleUrl1 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL1 : saved.toString();
+        saved = settings.value( SETTING_SCRAMBLE_URL2 );
+		scrambleUrl2 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL2 : saved.toString();
 
 		for ( int i = 0; checkBoxes[i].checkBox != NULL; i++ ) {
 			checkBoxes[i].checkBox->setChecked( settings.value( checkBoxes[i].key, checkBoxes[i].defaultValue ).toBool() );
@@ -216,7 +227,9 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #endif
 		if ( outputDirSpecified )
 			settings.setValue( SETTING_SAVE_FOLDER, outputDir );
-		settings.setValue( SETTING_SCRAMBLE, scramble );
+        settings.setValue( SETTING_SCRAMBLE, scramble );
+        settings.setValue( SETTING_SCRAMBLE_URL1, scrambleUrl1 );
+        settings.setValue( SETTING_SCRAMBLE_URL2, scrambleUrl2 );
 		for ( int i = 0; checkBoxes[i].checkBox != NULL; i++ ) {
 			settings.setValue( checkBoxes[i].key, checkBoxes[i].checkBox->isChecked() );
 		}
