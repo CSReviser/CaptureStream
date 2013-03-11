@@ -537,7 +537,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 //--------------------------------------------------------------------------------
 
 QString DownloadThread::prefix = "http://www.nhk.or.jp/gogaku/";
-QString DownloadThread::suffix = "/listdataflv.xml";
+QString DownloadThread::suffix = "listdataflv.xml";
 
 QString DownloadThread::flv_host = "flv9.nhk.or.jp";
 QString DownloadThread::flv_app = "flv9/_definst_/";
@@ -582,12 +582,13 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			return true;
 		}
 		QString flv_file = outputDir + outBasename + ".flv";
-		QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6/%7\" -o \"%8\" > %9" )
-				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
-        QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6/%7\" -o \"%8\" > %9" )
-				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
-        QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6/%7\" -o \"%8\" --resume > %9" )
-				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, scramble, basename, flv_file, null );
+        QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");        
+		QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6%7\" -o \"%8\" > %9" )
+				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, _scramble, basename, flv_file, null );
+        QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6%7\" -o \"%8\" > %9" )
+				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, _scramble, basename, flv_file, null );
+        QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6%7\" -o \"%8\" --resume > %9" )
+				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, _scramble, basename, flv_file, null );
 		QProcess process;
 		emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
         int exitCode = 0;
@@ -644,7 +645,7 @@ void DownloadThread::run() {
 
 	scramble = MainWindow::scramble;
 
-	if ( scramble.length() )
+    if ( scramble.length() )
 		emit information( QString::fromUtf8( "ユーザ設定によるコード：" ) + scramble );
 
 	if ( !scramble.length() ) {
@@ -683,11 +684,13 @@ void DownloadThread::run() {
 		return;
 	}
 
+    QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");
+
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
 		if ( checkbox[i]->isChecked() ) {
-			QStringList fileList = getAttribute( prefix + paths[i] + "/" + scramble + suffix, "@file" );
-			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + scramble + suffix, "@kouza" );
-			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + scramble + suffix, "@hdate" ) );
+			QStringList fileList = getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@file" );
+			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@kouza" );
+			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@hdate" ) );
 
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
