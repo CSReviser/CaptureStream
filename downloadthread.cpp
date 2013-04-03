@@ -47,6 +47,7 @@
 #include <QDebug>
 
 #define FLVSTREAMER "flvstreamer"
+#define FFMPEG "ffmpeg"
 #ifdef Q_WS_WIN
 #define Timeout " -m 10000 "
 #else
@@ -68,13 +69,9 @@ QStringList DownloadThread::getAttribute( QString url, QString attribute ) {
 	return attributeList;
 }
 
-bool DownloadThread::checkFlvstreamer( QString& path ) {
-	path = Utility::applicationBundlePath() + FLVSTREAMER;
-#ifdef Q_WS_WIN
-	path += ".exe";
-#endif
-
+bool DownloadThread::checkExecutable( QString path ) {
 	QFileInfo fileInfo( path );
+	
 	if ( !fileInfo.exists() ) {
 		emit critical( path + QString::fromUtf8( "が見つかりません。" ) );
 		return false;
@@ -82,8 +79,24 @@ bool DownloadThread::checkFlvstreamer( QString& path ) {
 		emit critical( path + QString::fromUtf8( "は実行可能ではありません。" ) );
 		return false;
 	}
-
+	
 	return true;
+}
+
+bool DownloadThread::checkFlvstreamer( QString& path ) {
+	path = Utility::applicationBundlePath() + FLVSTREAMER;
+#ifdef Q_WS_WIN
+	path += ".exe";
+#endif
+	return checkExecutable( path );
+}
+
+bool DownloadThread::checkFfmpeg( QString& path ) {
+	path = Utility::applicationBundlePath() + FFMPEG;
+#ifdef Q_WS_WIN
+	path += ".exe";
+#endif
+	return checkExecutable( path );
 }
 
 //通常ファイルが存在する場合のチェックのために末尾にセパレータはついていないこと
@@ -150,19 +163,19 @@ void DownloadThread::downloadCharo() {
 			else {
 				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-                QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
+				QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-                QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+				QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-                int exitCode = 0;
-                if ( !failed1935 && !isCanceled ) {
-                    if ( (exitCode = process.execute( command1935 )) != 0 )
-                        failed1935 = true;
-                }
-                if ( (failed1935 || exitCode) && !isCanceled )
-                    exitCode = process.execute( command80 );
+				int exitCode = 0;
+				if ( !failed1935 && !isCanceled ) {
+					if ( (exitCode = process.execute( command1935 )) != 0 )
+						failed1935 = true;
+				}
+				if ( (failed1935 || exitCode) && !isCanceled )
+					exitCode = process.execute( command80 );
 
 				bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
 				if ( exitCode && !isCanceled ) {
@@ -264,19 +277,19 @@ void DownloadThread::downloadENews( bool re_read ) {
 			if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !movieExists ) ) {
 				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
-                QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
+			QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
-                QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+			QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
 						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-                int exitCode = 0;
-                if ( !failed1935 && !isCanceled ) {
-                    if ( (exitCode = process.execute( command1935 )) != 0 )
-                        failed1935 = true;
-                }
-                if ( (failed1935 || exitCode) && !isCanceled )
-                    exitCode = process.execute( command80 );
+			int exitCode = 0;
+			if ( !failed1935 && !isCanceled ) {
+				if ( (exitCode = process.execute( command1935 )) != 0 )
+					failed1935 = true;
+			}
+			if ( (failed1935 || exitCode) && !isCanceled )
+				exitCode = process.execute( command80 );
 
 				bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
 				if ( exitCode && !isCanceled ) {
@@ -352,9 +365,9 @@ void DownloadThread::downloadShower() {
 	if ( !checkOutputDir( outputDir ) )
 		return;
 	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
-    QString flv_host = "flv.nhk.or.jp";
-    QString flv_app = "ondemand/flv/";
-    QString flv_service_prefix( "worldwave/common/movie/" );
+	QString flv_host = "flv.nhk.or.jp";
+	QString flv_app = "ondemand/flv/";
+	QString flv_service_prefix( "worldwave/common/movie/" );
 #ifdef Q_WS_WIN
 	QString null( "nul" );
 #else
@@ -362,78 +375,78 @@ void DownloadThread::downloadShower() {
 #endif
 	bool skip = ui->checkBox_skip->isChecked();
 
-    // 当月と前月のxmlから可能なものをダウンロードする
-    const char* prototype = "http://www.nhk.or.jp/worldwave/xml/abc_news_%1.xml";
-    QString this_month = QString( prototype ).arg( QDate::currentDate().toString( "yyyyMM" ) );
-    QString last_month = QString( prototype ).arg( QDate::currentDate().addMonths( -1 ).toString( "yyyyMM" ) );
-    QStringList elements = getElements( this_month, "/rss/channel/item/movie/string()" );
-    elements += getElements( last_month, "/rss/channel/item/movie/string()" );
+	// 当月と前月のxmlから可能なものをダウンロードする
+	const char* prototype = "http://www.nhk.or.jp/worldwave/xml/abc_news_%1.xml";
+	QString this_month = QString( prototype ).arg( QDate::currentDate().toString( "yyyyMM" ) );
+	QString last_month = QString( prototype ).arg( QDate::currentDate().addMonths( -1 ).toString( "yyyyMM" ) );
+	QStringList elements = getElements( this_month, "/rss/channel/item/movie/string()" );
+	elements += getElements( last_month, "/rss/channel/item/movie/string()" );
 
-    foreach (const QString &element, elements) {
+	foreach (const QString &element, elements) {
 		if ( isCanceled )
 			break;
-        static QStringList months = QStringList()
-                << "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"
-                << "Jul" << "Aug" << "Sep" << "Oct" << "Nov" << "Dec";
-        int year = 2000 + element.left( 2 ).toInt();
-        int month = element.mid( 2, 2 ).toInt();
-        int day = element.right( 2 ).toInt();
-        QDate date( year, month, day );
-        QString hdate = date.toString( "yyyy_MM_dd" );
-        QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
-        QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
-        QString server_file = "abc" + date.toString( "yyMMdd" ) + ".flv";
-        bool flvExists = QFile::exists( flv_file );
-        bool mp3Exists = QFile::exists( mp3_file );
+		static QStringList months = QStringList()
+				<< "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"
+				<< "Jul" << "Aug" << "Sep" << "Oct" << "Nov" << "Dec";
+		int year = 2000 + element.left( 2 ).toInt();
+		int month = element.mid( 2, 2 ).toInt();
+		int day = element.right( 2 ).toInt();
+		QDate date( year, month, day );
+		QString hdate = date.toString( "yyyy_MM_dd" );
+		QString flv_file = outputDir + kouza + "_" + hdate + ".flv";
+		QString mp3_file = outputDir + kouza + "_" + hdate + ".mp3";
+		QString server_file = "abc" + date.toString( "yyMMdd" ) + ".flv";
+		bool flvExists = QFile::exists( flv_file );
+		bool mp3Exists = QFile::exists( mp3_file );
 
-        if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !flvExists ) ) {
-            QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
-                    .arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-            QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
-                    .arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-            QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
-                    .arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
-            QProcess process;
-            emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-            int exitCode = 0;
-            if ( !failed1935 && !isCanceled ) {
-                if ( (exitCode = process.execute( command1935 )) != 0 )
-                    failed1935 = true;
-            }
-            if ( (failed1935 || exitCode) && !isCanceled )
-                exitCode = process.execute( command80 );
+		if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !flvExists ) ) {
+			QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
+					.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+			QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
+					.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+			QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
+					.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+			QProcess process;
+			emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
+			int exitCode = 0;
+			if ( !failed1935 && !isCanceled ) {
+				if ( (exitCode = process.execute( command1935 )) != 0 )
+					failed1935 = true;
+			}
+			if ( (failed1935 || exitCode) && !isCanceled )
+				exitCode = process.execute( command80 );
 
-            bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
-            if ( exitCode && !isCanceled ) {
-                QFile flv( flv_file );
-                if ( flv.size() > 0 ) {
-                    for ( int count = 0; exitCode && count < 5 && !isCanceled; count++ ) {
-                        emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
-                        exitCode = process.execute( commandResume );
-                    }
-                }
-                if ( exitCode && !isCanceled ) {
-                    if ( !keep_on_error )
-                        flv.remove();
-                    emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
-                            kouza + QString::fromUtf8( "　" ) + hdate );
-                }
-            }
+			bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
+			if ( exitCode && !isCanceled ) {
+				QFile flv( flv_file );
+				if ( flv.size() > 0 ) {
+					for ( int count = 0; exitCode && count < 5 && !isCanceled; count++ ) {
+						emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
+						exitCode = process.execute( commandResume );
+					}
+				}
+				if ( exitCode && !isCanceled ) {
+					if ( !keep_on_error )
+						flv.remove();
+					emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
+							kouza + QString::fromUtf8( "　" ) + hdate );
+				}
+			}
 
-            if ( ( !exitCode || keep_on_error ) && !isCanceled ) {
-                if ( saveAudio && ( !skip || !mp3Exists ) ) {
-                    QString error;
-                    if ( MP3::flv2mp3( flv_file, mp3_file, error ) ) {
-                        if ( !MP3::id3tag( mp3_file, kouza, kouza + "_" + hdate, date.toString( "yyyy" ), "NHK", error ) )
-                            emit critical( error );
-                    } else
-                        emit critical( error );
-                }
-            }
-            if ( !saveMovie && QFile::exists( flv_file ) )
-                QFile::remove( flv_file );
-        } else
-            emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
+			if ( ( !exitCode || keep_on_error ) && !isCanceled ) {
+				if ( saveAudio && ( !skip || !mp3Exists ) ) {
+					QString error;
+					if ( MP3::flv2mp3( flv_file, mp3_file, error ) ) {
+						if ( !MP3::id3tag( mp3_file, kouza, kouza + "_" + hdate, date.toString( "yyyy" ), "NHK", error ) )
+							emit critical( error );
+					} else
+						emit critical( error );
+				}
+			}
+			if ( !saveMovie && QFile::exists( flv_file ) )
+				QFile::remove( flv_file );
+		} else
+			emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 	}
 }
 
@@ -490,7 +503,7 @@ bool illegal( char c ) {
 QString DownloadThread::formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal ) {
 	int month = hdate.left( 2 ).toInt();
 	int year = 2000 + file.left( 2 ).toInt();
-    if ( month <= 4 && QDate::currentDate().year() > year )
+	if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
 	int day = hdate.mid( 3, 2 ).toInt();
 
@@ -536,14 +549,15 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
-QString DownloadThread::prefix = "http://www.nhk.or.jp/gogaku/";
+QString DownloadThread::prefix = "https://cgi2.nhk.or.jp/gogaku/";
 QString DownloadThread::suffix = "listdataflv.xml";
 
-QString DownloadThread::flv_host = "flv9.nhk.or.jp";
-QString DownloadThread::flv_app = "flv9/_definst_/";
-QString DownloadThread::flv_service_prefix = "flv:gogaku/streaming/flv/";
+QString DownloadThread::flv_host = "flv.nhk.or.jp";
+QString DownloadThread::flv_app = "ondemand/";
+QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
 
 QString DownloadThread::flvstreamer;
+QString DownloadThread::ffmpeg;
 QString DownloadThread::scramble;
 
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
@@ -568,10 +582,10 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 
 	bool result = false;
 
-	if ( file.endsWith( ".flv", Qt::CaseInsensitive ) ) {
+    if ( file.endsWith( ".flv", Qt::CaseInsensitive ) || file.endsWith( ".mp4", Qt::CaseInsensitive ) ) {
 		int month = hdate.left( 2 ).toInt();
 		int year = 2000 + file.left( 2 ).toInt();
-        if ( month <= 4 && QDate::currentDate().year() > year )
+		if ( month <= 4 && QDate::currentDate().year() > year )
 			year += 1;
 		int day = hdate.mid( 3, 2 ).toInt();
 		QDate onair( year, month, day );
@@ -582,23 +596,23 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			return true;
 		}
 		QString flv_file = outputDir + outBasename + ".flv";
-        QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");        
+		QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");
 		QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6%7\" -o \"%8\" > %9" )
 				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, _scramble, basename, flv_file, null );
-        QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6%7\" -o \"%8\" > %9" )
+		QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6%7\" -o \"%8\" > %9" )
 				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, _scramble, basename, flv_file, null );
-        QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6%7\" -o \"%8\" --resume > %9" )
+		QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6%7\" -o \"%8\" --resume > %9" )
 				.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, _scramble, basename, flv_file, null );
 		QProcess process;
 		emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
-        int exitCode = 0;
-        if ( !failed1935 && !isCanceled ) {
-            if ( (exitCode = process.execute( command1935 )) != 0 )
-                failed1935 = true;
-        }
-        if ( (failed1935 || exitCode) && !isCanceled )
-            exitCode = process.execute( command80 );
-        
+		int exitCode = 0;
+		if ( !failed1935 && !isCanceled ) {
+			if ( (exitCode = process.execute( command1935 )) != 0 )
+				failed1935 = true;
+		}
+		if ( (failed1935 || exitCode) && !isCanceled )
+			exitCode = process.execute( command80 );
+		
 		while ( exitCode && retryCount-- > 0 && !isCanceled ) {
 			emit current( QString::fromUtf8( "リトライ中：　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 			exitCode = process.execute( commandResume );
@@ -608,7 +622,16 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 						  kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		}
 		QFileInfo fileInfo( flv_file );	// ストリーミングが存在しなかった場合は13バイト
-		if ( fileInfo.size() > 100 && ( !exitCode || ui->checkBox_keep_on_error->isChecked() ) ) {
+		if ( fileInfo.size() > 100 && ( !exitCode || ui->checkBox_keep_on_error->isChecked() ) && !isCanceled ) {
+			QString commandFfmpeg = QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ab 48k -y \"%3\"" )
+					.arg( ffmpeg, flv_file, outputDir + outFileName );
+			emit current( QString::fromUtf8( "mp3へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+			exitCode = process.execute( commandFfmpeg );
+			if ( exitCode ) {
+				emit critical( QString::fromUtf8( "mp3への変換を完了できませんでした：　" ) +
+						kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+			}
+			/*
 			QString error;
 			if ( MP3::flv2mp3( flv_file, outputDir + outFileName, error ) ) {
 				if ( !MP3::id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK", error ) )
@@ -616,6 +639,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 				result = true;
 			} else
 				emit critical( error );
+			*/
 		}
 		if ( QFile::exists( flv_file ) )
 			QFile::remove( flv_file );
@@ -625,27 +649,27 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 }
 
 QString DownloadThread::paths[] = {
-    "english/basic1", "english/basic2", "english/basic3", "english/timetrial",
-    "english/kaiwa", "english/business1", "english/business2",
-    "chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
-    "german/kouza", "spanish/kouza", "english/kouryaku",
-    "chinese/levelup", "hangeul/levelup", "russian/kouza"
+	"english/basic1", "english/basic2", "english/basic3", "english/timetrial",
+	"english/kaiwa", "english/business1", "english/business2",
+	"chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
+	"german/kouza", "spanish/kouza", "english/kouryaku",
+	"chinese/levelup", "hangeul/levelup", "russian/kouza"
 };
 
 void DownloadThread::run() {
 	QCheckBox* checkbox[] = {
 		ui->checkBox_0, ui->checkBox_1, ui->checkBox_2, ui->checkBox_3, ui->checkBox_4,
 		ui->checkBox_5, ui->checkBox_6, ui->checkBox_7, ui->checkBox_8, ui->checkBox_9,
-        ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku,
-        ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
+		ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku,
+		ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
 	};
 
-	if ( !checkFlvstreamer( flvstreamer ) )
+	if ( !checkFlvstreamer( flvstreamer ) || !checkFfmpeg( ffmpeg ) )
 		return;
 
 	scramble = MainWindow::scramble;
 
-    if ( scramble.length() )
+	if ( scramble.length() )
 		emit information( QString::fromUtf8( "ユーザ設定によるコード：" ) + scramble );
 
 	if ( !scramble.length() ) {
@@ -684,7 +708,7 @@ void DownloadThread::run() {
 		return;
 	}
 
-    QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");
+	QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");
 
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
 		if ( checkbox[i]->isChecked() ) {
@@ -701,8 +725,8 @@ void DownloadThread::run() {
 		}
 	}
 	
-    //if ( !isCanceled && ui->checkBox_13->isChecked() )
-        //downloadCharo();
+	//if ( !isCanceled && ui->checkBox_13->isChecked() )
+		//downloadCharo();
 
 	if ( !isCanceled && ui->checkBox_shower->isChecked() )
 		downloadShower();

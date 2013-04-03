@@ -44,7 +44,9 @@ signals:
 
 private:
 	QStringList getAttribute( QString url, QString attribute );
+	bool checkExecutable( QString path );
 	bool checkFlvstreamer( QString& path );
+	bool checkFfmpeg( QString& path );
 	bool checkOutputDir( QString dirPath );
 	void downloadCharo();
 	void downloadENews( bool re_read );
@@ -66,6 +68,7 @@ private:
 	static QString flv_service_prefix;
 
 	static QString flvstreamer;
+	static QString ffmpeg;
 	static QString scramble;
 
 };
