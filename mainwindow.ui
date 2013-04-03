@@ -44,7 +44,7 @@
       <x>9</x>
       <y>9</y>
       <width>552</width>
-      <height>371</height>
+      <height>361</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
@@ -87,6 +87,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QCheckBox" name="checkBox_14">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>ニュースで英会話　</string>
          </property>
@@ -94,6 +97,9 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBox_enews">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="frame">
           <bool>true</bool>
          </property>
@@ -120,6 +126,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="QCheckBox" name="checkBox_15">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>ニュースで英会話（読み直し音声）</string>
          </property>
@@ -511,15 +520,6 @@
      <bool>true</bool>
     </property>
    </widget>
-   <zorder>gridLayoutWidget_3</zorder>
-   <zorder>checkBox_this_week</zorder>
-   <zorder>checkBox_next_week</zorder>
-   <zorder>label_2</zorder>
-   <zorder>past_days</zorder>
-   <zorder>checkBox_past_week</zorder>
-   <zorder>checkBox_13</zorder>
-   <zorder>checkBox_keep_on_error</zorder>
-   <zorder>checkBox_0</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
