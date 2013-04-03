@@ -667,6 +667,10 @@ void DownloadThread::run() {
 	if ( !checkFlvstreamer( flvstreamer ) || !checkFfmpeg( ffmpeg ) )
 		return;
 
+	emit information( QString::fromUtf8( "2012年度最終週緊急対応版です。" ) );
+	emit information( QString::fromUtf8( "ニュースで英会話は未対応です。" ) );
+	emit information( QString::fromUtf8( "----------------------------------------" ) );
+
 	scramble = MainWindow::scramble;
 
 	if ( scramble.length() )
@@ -731,11 +735,11 @@ void DownloadThread::run() {
 	if ( !isCanceled && ui->checkBox_shower->isChecked() )
 		downloadShower();
 
-	if ( !isCanceled && ui->checkBox_14->isChecked() )
-		downloadENews( false );
+	//if ( !isCanceled && ui->checkBox_14->isChecked() )
+		//downloadENews( false );
 
-	if ( !isCanceled && ui->checkBox_15->isChecked() )
-		downloadENews( true );
+	//if ( !isCanceled && ui->checkBox_15->isChecked() )
+		//downloadENews( true );
 
 	emit current( "" );
 	//キャンセル時にはdisconnectされているのでemitしても何も起こらない
