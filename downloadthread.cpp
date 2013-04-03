@@ -60,8 +60,8 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 }
 
 QStringList DownloadThread::getAttribute( QString url, QString attribute ) {
-	const QString xmlUrl = "doc('" + url + "')/musicdata/music/" + attribute + "/string()";
-	QStringList attributeList;
+    const QString xmlUrl = "doc('" + url + "')/musicdata/music/" + attribute + "/string()";
+    QStringList attributeList;
 	QXmlQuery query;
 	query.setQuery( xmlUrl );
 	if ( query.isValid() )
@@ -549,7 +549,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
-QString DownloadThread::prefix = "https://cgi2.nhk.or.jp/gogaku/";
+QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
 QString DownloadThread::suffix = "listdataflv.xml";
 
 QString DownloadThread::flv_host = "flv.nhk.or.jp";
@@ -720,7 +720,7 @@ void DownloadThread::run() {
 			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@kouza" );
 			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@hdate" ) );
 
-			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
+            if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ )
 						captureStream( kouzaList[j], hdateList[j], fileList[j], 5 );
