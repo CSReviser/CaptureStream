@@ -60,8 +60,8 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 }
 
 QStringList DownloadThread::getAttribute( QString url, QString attribute ) {
-    const QString xmlUrl = "doc('" + url + "')/musicdata/music/" + attribute + "/string()";
-    QStringList attributeList;
+	const QString xmlUrl = "doc('" + url + "')/musicdata/music/" + attribute + "/string()";
+	QStringList attributeList;
 	QXmlQuery query;
 	query.setQuery( xmlUrl );
 	if ( query.isValid() )
@@ -582,7 +582,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 
 	bool result = false;
 
-    if ( file.endsWith( ".flv", Qt::CaseInsensitive ) || file.endsWith( ".mp4", Qt::CaseInsensitive ) ) {
+	if ( file.endsWith( ".flv", Qt::CaseInsensitive ) || file.endsWith( ".mp4", Qt::CaseInsensitive ) ) {
 		int month = hdate.left( 2 ).toInt();
 		int year = 2000 + file.left( 2 ).toInt();
 		if ( month <= 4 && QDate::currentDate().year() > year )
@@ -623,13 +623,17 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		}
 		QFileInfo fileInfo( flv_file );	// ストリーミングが存在しなかった場合は13バイト
 		if ( fileInfo.size() > 100 && ( !exitCode || ui->checkBox_keep_on_error->isChecked() ) && !isCanceled ) {
-			QString commandFfmpeg = QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ab 48k -y \"%3\"" )
+			QString commandFfmpeg = QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"%3\"" )
 					.arg( ffmpeg, flv_file, outputDir + outFileName );
 			emit current( QString::fromUtf8( "mp3へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
-			exitCode = process.execute( commandFfmpeg );
-			if ( exitCode ) {
+			if ( process.execute( commandFfmpeg ) ) {
 				emit critical( QString::fromUtf8( "mp3への変換を完了できませんでした：　" ) +
 						kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+			} else {
+				QString error;
+				if ( !MP3::id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK", error ) )
+					emit critical( error );
+				result = true;
 			}
 			/*
 			QString error;
@@ -720,7 +724,7 @@ void DownloadThread::run() {
 			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@kouza" );
 			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@hdate" ) );
 
-            if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
+			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ )
 						captureStream( kouzaList[j], hdateList[j], fileList[j], 5 );
