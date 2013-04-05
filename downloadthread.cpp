@@ -48,12 +48,15 @@
 
 #define FLVSTREAMER "flvstreamer"
 #define FFMPEG "ffmpeg"
+
 #ifdef Q_WS_WIN
 #define Timeout " -m 10000 "
 #else
 #define Timeout " -m 10 "
 #endif
+
 #define ScrambleLength 14
+#define FLV_MIN_SIZE 100	// ストリーミングが存在しなかった場合は13バイトだが少し大きめに設定
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
@@ -580,6 +583,10 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QFileInfo fileInfo( outFileName );
 	QString outBasename = fileInfo.completeBaseName();
 
+	// 2013/04/05 オーディオフォーマットの変更に伴って拡張子の指定に対応
+	QString extension = ui->comboBox_extension->currentText();
+	outFileName = outBasename + "." + extension;
+
 	bool result = false;
 
 	if ( file.endsWith( ".flv", Qt::CaseInsensitive ) || file.endsWith( ".mp4", Qt::CaseInsensitive ) ) {
@@ -621,15 +628,20 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
 						  kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		}
-		QFileInfo fileInfo( flv_file );	// ストリーミングが存在しなかった場合は13バイト
-		if ( fileInfo.size() > 100 && ( !exitCode || ui->checkBox_keep_on_error->isChecked() ) && !isCanceled ) {
-			QString commandFfmpeg = QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"%3\"" )
-					.arg( ffmpeg, flv_file, outputDir + outFileName );
-			emit current( QString::fromUtf8( "mp3へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+
+		QFileInfo fileInfo( flv_file );
+		if ( fileInfo.size() > FLV_MIN_SIZE && extension != "flv" &&
+				( !exitCode || ui->checkBox_keep_on_error->isChecked() ) && !isCanceled ) {
+			QString commandFfmpeg = extension == "mp3" ?
+					QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"%3\"" )
+							.arg( ffmpeg, flv_file, outputDir + outFileName ) :
+					QString( "\"%1\" -i \"%2\" -vn -acodec copy -y \"%3\"" )
+							.arg( ffmpeg, flv_file, outputDir + outFileName );
+			emit current( extension + QString::fromUtf8( "へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 			if ( process.execute( commandFfmpeg ) ) {
-				emit critical( QString::fromUtf8( "mp3への変換を完了できませんでした：　" ) +
+				emit critical( extension + QString::fromUtf8( "への変換を完了できませんでした：　" ) +
 						kouza + QString::fromUtf8( "　" ) + yyyymmdd );
-			} else {
+			} else if ( extension == "mp3" ) {
 				QString error;
 				if ( !MP3::id3tag( outputDir + outFileName, kouza, id3tagTitle, QString::number( year ), "NHK", error ) )
 					emit critical( error );
@@ -645,7 +657,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 				emit critical( error );
 			*/
 		}
-		if ( QFile::exists( flv_file ) )
+		if ( QFile::exists( flv_file ) && ( extension != "flv" || fileInfo.size() <= FLV_MIN_SIZE ) )
 			QFile::remove( flv_file );
 	}
 

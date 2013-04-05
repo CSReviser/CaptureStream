@@ -44,10 +44,21 @@
       <x>9</x>
       <y>9</y>
       <width>552</width>
-      <height>361</height>
+      <height>381</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_14">
+       <item>
+        <widget class="QCheckBox" name="checkBox_0">
+         <property name="text">
+          <string>基礎英語1</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
      <item row="0" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
@@ -257,17 +268,6 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_14">
-       <item>
-        <widget class="QCheckBox" name="checkBox_0">
-         <property name="text">
-          <string>基礎英語1</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
      <item row="1" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_15">
        <item>
@@ -377,6 +377,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_24">
        <item>
         <widget class="QCheckBox" name="checkBox_enews_past">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>「ニュースで英会話」過去分</string>
          </property>
@@ -387,13 +390,94 @@
        </item>
       </layout>
      </item>
-     <item row="13" column="1">
+     <item row="14" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_25">
        <item>
         <widget class="QPushButton" name="downloadButton">
          <property name="text">
           <string>ダウンロード</string>
          </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="13" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_26">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>拡張子(ABCニュース以外)：</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_extension">
+         <item>
+          <property name="text">
+           <string>3g2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3gp</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>aac</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>avi</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>flv</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>m2ts</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>m4a</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>mka</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>mkv</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>mov</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>mp3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>mp4</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>

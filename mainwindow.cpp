@@ -187,6 +187,10 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->comboBox_shower, "shower_index", ENewsSaveBoth },
 		{ NULL, NULL, false }
 	};
+	ComboBox textComboBoxes[] = {
+		{ ui->comboBox_extension, "audio_extension", "mp3" },
+		{ NULL, NULL, false }
+	};
 
 	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
@@ -221,6 +225,10 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		}
 		for ( int i = 0; comboBoxes[i].comboBox != NULL; i++ )
 			comboBoxes[i].comboBox->setCurrentIndex( settings.value( comboBoxes[i].key, comboBoxes[i].defaultValue ).toInt() );
+		for ( int i = 0; textComboBoxes[i].comboBox != NULL; i++ ) {
+			QString extension = settings.value( textComboBoxes[i].key, textComboBoxes[i].defaultValue ).toString();
+			textComboBoxes[i].comboBox->setCurrentIndex( textComboBoxes[i].comboBox->findText( extension ) );
+		}
 	} else {	// 設定書き出し
 #if defined( Q_WS_MAC ) || defined( Q_WS_WIN )
 		settings.setValue( SETTING_GEOMETRY, saveGeometry() );
@@ -235,6 +243,8 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		}
 		for ( int i = 0; comboBoxes[i].comboBox != NULL; i++ )
 			settings.setValue( comboBoxes[i].key, comboBoxes[i].comboBox->currentIndex() );
+		for ( int i = 0; textComboBoxes[i].comboBox != NULL; i++ )
+			settings.setValue( textComboBoxes[i].key, textComboBoxes[i].comboBox->currentText() );
 	}
 
 	settings.endGroup();
