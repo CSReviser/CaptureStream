@@ -17,6 +17,8 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2013/04/08　2013年度対応版。
+　　　　　　　gnash対応コード削除。scramble.xmlのuri変更。
 2012/04/09　「リトル・チャロ」削除。「英会話タイムトライアル」、「まいにちロシア語」、
 　　　　　　　「レベルアップ中国語」、「レベルアップハングル講座」に対応。
 2011/10/03　「攻略！英語リスニング」対応。
@@ -128,6 +130,7 @@ $is_windows = RUBY_PLATFORM.downcase =~ /mswin(?!ce)|mingw|cygwin|bccwin/
 $script_path = File.expand_path( __FILE__ )
 # -m 0はv1.5からのオプションでタイムアウトしない設定
 $flvstreamer = "flvstreamer -m 0"
+$ffmpeg = "ffmpeg"
 
 if $is_windows
 	$script_path = $script_path.kconv( Kconv::UTF8, Kconv::SJIS )
@@ -154,7 +157,7 @@ end
 # 何らかの問題でウィキからスクランブル文字列が取得できない場合には自分で設定してください
 #--------------------------------------------------------------------------------
 
-jputs( "語学講座ダウンローダ (2012/04/09)" )
+jputs( "語学講座ダウンローダ (2013/04/08)" )
 
 $scramble = ""
 
@@ -167,7 +170,7 @@ if $scramble == ""
 	end
 	monday = Date.today + offset
 	
-	xml_uri = "http://www47.atwiki.jp/jakago/pub/scramble.xml"
+	xml_uri = "http://cdn47.atwikiimg.com/jakago/pub/scramble.xml"
 	open( xml_uri ) { |f|
 		doc = REXML::Document.new( f )
 		$scramble = doc.elements["flv/scramble[@date=\"#{monday.strftime( '%Y%m%d' )}\"]/@code"].to_s
@@ -176,29 +179,6 @@ if $scramble == ""
 		jputs( "wikiから取得したコード：#$scramble" )
 	else
 		jputs( "wikiから取得したコード： 取得に失敗したか、まだwikiのxmlが更新されていません。" )
-	end
-end
-
-# gnashの出力からスクランブル文字列を抜き出す
-if $scramble == ""
-	save = STDERR.dup
-	STDERR.reopen( "#{$null}" )
-	#3秒以内に取得できない場合は終了
-	#Macでは1行毎に取得できるがWindowsではプログラム終了までブロックされる
-	gnash = $is_windows ? 'sdl-gnash' : 'gnash'
-	IO.popen( "#{gnash} -r0 -t3 -v http://www.nhk.or.jp/gogaku/common/swf/streaming.swf" ) { |io|
-		while log = io.gets
-			if log =~ %r!http://www.nhk.or.jp/gogaku/common/swf/(.*)/listdataflv.xml!
-				$scramble = $1
-				break
-			end
-		end
-	} rescue false
-	STDERR.reopen( save )
-	if $scramble != ""
-		jputs( "#{gnash}を利用して解析したコード：#$scramble" )
-	else
-		jputs( "#{gnash}を利用して解析したコード：実行できないか、解析に失敗しました。" )
 	end
 end
 
@@ -211,9 +191,9 @@ end
 # flvファイルのサーバとオプション
 #--------------------------------------------------------------------------------
 
-$flv_host = "flv9.nhk.or.jp"
-$flv_app = "flv9/_definst_/"
-$flv_service_prefix = "flv:gogaku/streaming/flv/#{$scramble}/"
+$flv_host = "flv.nhk.or.jp"
+$flv_app = "ondemand/"
+$flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/#{$scramble}/"
 
 #--------------------------------------------------------------------------------
 # 出力フォルダ名とmp3ファイル名の設定
@@ -253,10 +233,17 @@ $id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y
 }
 
 #--------------------------------------------------------------------------------
-# mp3ファルが存在する場合にダウンロードをスキップする場合はtrueを、しない場合はfalseを設定
+# 出力ファルが存在する場合にダウンロードをスキップする場合はtrueを、しない場合はfalseを設定
 #--------------------------------------------------------------------------------
 
 $skip_existing = true
+
+#--------------------------------------------------------------------------------
+# 音声ファイルの変換後の拡張子を設定（flvを指定するとダウンロードしたファイルそのもの）
+# 3g2, 3gp, aac, avi, flv, m2ts, m4a, mka, mkv, mov, mp3, mp4
+#--------------------------------------------------------------------------------
+
+$audio_extension = "aac"
 
 #--------------------------------------------------------------------------------
 # 出力フォルダ名とmp3ファイル名のフォーマット文字列の解釈
@@ -583,14 +570,16 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 	
 	out_folder = to_native( out_folder )
 	out_file = to_native( out_file )
+	out_file = File.basename( out_file, File.extname( out_file ) ) + "." + $audio_extension
 	
 	return true if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
 	
 	result = false
-	if file =~ /(.*)\.flv$/
+	if file =~ /(.*)\.flv$/ || file =~ /(.*)\.mp4$/
 		basename = File.basename( file )
-		command1935 = "#{$flvstreamer} -r \"rtmp://#{$flv_host}/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{basename}\" > #{$null} 2>&1"
-		command80 = "#{$flvstreamer} -r \"rtmpt://#{$flv_host}:80/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{basename}\" > #{$null} 2>&1"
+		wo_extname = File.basename( basename, File.extname( basename ) )
+		command1935 = "#{$flvstreamer} -r \"rtmp://#{$flv_host}/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{wo_extname}.flv\" > #{$null} 2>&1"
+		command80 = "#{$flvstreamer} -r \"rtmpt://#{$flv_host}:80/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{wo_extname}.flv\" > #{$null} 2>&1"
 		system( command1935 )
 		if $?.to_i == 0x7f00
 			jputs( "\nflvstreamerが実行できません。パスの通った実行可能な場所にflvstreamerを置いてください。" )
@@ -600,6 +589,30 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 			system( "#{command80} --resume" )
 			retry_count -= 1
 		end
+		
+		if $? == 0
+			if $audio_extension == "flv"
+				File.rename( "#{out_folder}#{wo_extname}.flv", out_folder + out_file )
+			else
+				if $audio_extension == "mp3"
+					system( "#{$ffmpeg} -i \"#{out_folder}#{wo_extname}.flv\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
+				else
+					system( "#{$ffmpeg} -i \"#{out_folder}#{wo_extname}.flv\" -vn -acodec copy -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
+				end
+				if $?.to_i == 0x7f00
+					jputs( "\nffmpegが実行できません。パスの通った実行可能な場所にflvstreamerを置いてください。" )
+					exit
+				end
+				if $? == 0
+					if $audio_extension == "mp3"
+						id3tag( out_folder + out_file, id3_album, id3_title, "20" + file[0..1] )
+					end
+				end
+			end
+			result = true
+			print( "*" )
+		end
+=begin
 		if $? == 0
 			if flv2mp3( out_folder + basename, out_folder + out_file )
 				id3tag( out_folder + out_file, id3_album, id3_title, "20" + file[0..1] )
@@ -607,8 +620,10 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 				print( "*" )
 			end
 		end
+=end
 	end
 	
+=begin
 	if File.exists?( out_folder + basename )
 		if !result || ( target != "enews" && target != "shower" )
 			File.unlink( out_folder + basename )
@@ -617,6 +632,7 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 			File.rename( out_folder + basename, out_folder + movie_name )
 		end
 	end
+=end
 	
 	return result
 end
@@ -760,12 +776,12 @@ targets.each { |target|
 
 targets.each { |target|
 	if $english.include?( target )
-		xml_uri = "http://www.nhk.or.jp/gogaku/english/#{target}/#{$scramble}/listdataflv.xml"
+		xml_uri = "http://cgi2.nhk.or.jp/gogaku/english/#{target}/#{$scramble}/listdataflv.xml"
 	elsif $multilingual.include?( target )
 		if target =~ /^levelup-(.*)/
-			xml_uri = "http://www.nhk.or.jp/gogaku/#{$~[1]}/levelup/#{$scramble}/listdataflv.xml"
+			xml_uri = "http://cgi2.nhk.or.jp/gogaku/#{$~[1]}/levelup/#{$scramble}/listdataflv.xml"
 		else
-			xml_uri = "http://www.nhk.or.jp/gogaku/#{target}/kouza/#{$scramble}/listdataflv.xml"
+			xml_uri = "http://cgi2.nhk.or.jp/gogaku/#{target}/kouza/#{$scramble}/listdataflv.xml"
 		end
 	else
 		next
@@ -785,5 +801,6 @@ targets.each { |target|
 }
 
 download_shower if targets.include?( "shower" )
-download_enews if targets.include?( "enews" )
-download_enews_all if targets.include?( "enews-all" )
+#download_enews if targets.include?( "enews" )
+#download_enews_all if targets.include?( "enews-all" )
+jputs( "現在、「ニュースで英会話」はサポート外です。" ) if targets.include?( "enews" ) || targets.include?( "enews-all" )
