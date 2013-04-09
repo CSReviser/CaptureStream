@@ -17,6 +17,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2013/04/09　「英語で読む村上春樹」対応。
 2013/04/08　2013年度対応版。
 　　　　　　　gnash対応コード削除。scramble.xmlのuri変更。
 2012/04/09　「リトル・チャロ」削除。「英会話タイムトライアル」、「まいにちロシア語」、
@@ -118,7 +119,7 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = ["basic1", "basic2", "basic3", "timetrial", "kaiwa", "business1", "business2", "kouryaku"]
+$english = ["basic1", "basic2", "basic3", "timetrial", "kaiwa", "business1", "business2", "kouryaku", "yomu"]
 $multilingual = ["chinese", "french", "italian", "hangeul", "german", "spanish", "russian", "levelup-chinese", "levelup-hangeul"]
 $extra = ["enews", "shower", "enews-all"]
 
@@ -157,7 +158,7 @@ end
 # 何らかの問題でウィキからスクランブル文字列が取得できない場合には自分で設定してください
 #--------------------------------------------------------------------------------
 
-jputs( "語学講座ダウンローダ (2013/04/08)" )
+jputs( "語学講座ダウンローダ (2013/04/09)" )
 
 $scramble = ""
 
@@ -217,19 +218,19 @@ $flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/#{$scramble}/"
 #--------------------------------------------------------------------------------
 
 # 保存フォルダ名
-$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "timetrial"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "kouryaku"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "russian"=>"%r%p%k", "levelup-chinese"=>"%r%p%k", "levelup-hangeul"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k"
+$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "timetrial"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "kouryaku"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "russian"=>"%r%p%k", "levelup-chinese"=>"%r%p%k", "levelup-hangeul"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k", "yomu"=>"%r%p%k"
 }
 
 # 保存ファイル名
-$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "timetrial"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "kouryaku"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "russian"=>"%k_%Y_%M_%D.mp3", "levelup-chinese"=>"%k_%Y_%M_%D.mp3", "levelup-hangeul"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3"
+$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "timetrial"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "kouryaku"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "russian"=>"%k_%Y_%M_%D.mp3", "levelup-chinese"=>"%k_%Y_%M_%D.mp3", "levelup-hangeul"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3", "yomu"=>"%k_%Y_%M_%D.mp3"
 }
 
 # id3タグのalbum
-$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "timetrial"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "kouryaku"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "russian"=>"%k", "levelup-chinese"=>"%k", "levelup-hangeul"=>"%k", "enews"=>"%k", "shower"=>"%k"
+$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "timetrial"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "kouryaku"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "russian"=>"%k", "levelup-chinese"=>"%k", "levelup-hangeul"=>"%k", "enews"=>"%k", "shower"=>"%k", "yomu"=>"%k"
 }
 
 # id3タグのtitle
-$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "timetrial"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "kouryaku"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "russian"=>"%k_%Y_%M_%D", "levelup-chinese"=>"%k_%Y_%M_%D", "levelup-hangeul"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D"
+$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "timetrial"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "kouryaku"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "russian"=>"%k_%Y_%M_%D", "levelup-chinese"=>"%k_%Y_%M_%D", "levelup-hangeul"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D", "yomu"=>"%k_%Y_%M_%D"
 }
 
 #--------------------------------------------------------------------------------
@@ -556,8 +557,8 @@ end
 #--------------------------------------------------------------------------------
 
 def capture_stream( target, kouza, hdate, file, retry_count )
-	out_folder = format_name( $out_folder_hash[target], target, kouza, hdate, file )
-	out_file = format_name( $out_file_hash[target], target, kouza, hdate, file )
+	out_folder = format_name( $out_folder_hash[target], target, kouza, hdate, file ) # 出力フォルダ
+	out_file = format_name( $out_file_hash[target], target, kouza, hdate, file ) # 変換後の音声ファイル
 	id3_album = format_name( $id3_album[target], target, kouza, hdate, file )
 	id3_title = format_name( $id3_title[target], target, kouza, hdate, file )
 	
@@ -570,16 +571,22 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 	
 	out_folder = to_native( out_folder )
 	out_file = to_native( out_file )
+	# 2012年度まではflvに含まれていた音声がmp3だったので、単純に抽出して拡張子をmp3としていたが、
+	# 2013年度からはaacに変更されたたため、抽出した音声用のコンテナを指定できるようにした。
+	# $audio_extensionにmp3を指定した場合は再エンコードされる。
 	out_file = File.basename( out_file, File.extname( out_file ) ) + "." + $audio_extension
+	flv_file = File.basename( out_file, File.extname( out_file ) ) + ".flv"
+	out_file = flv_file if target == "shower"
 	
-	return true if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
+	if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
+		print( "-" )
+		return true
+	end
 	
 	result = false
 	if file =~ /(.*)\.flv$/ || file =~ /(.*)\.mp4$/
-		basename = File.basename( file )
-		wo_extname = File.basename( basename, File.extname( basename ) )
-		command1935 = "#{$flvstreamer} -r \"rtmp://#{$flv_host}/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{wo_extname}.flv\" > #{$null} 2>&1"
-		command80 = "#{$flvstreamer} -r \"rtmpt://#{$flv_host}:80/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{wo_extname}.flv\" > #{$null} 2>&1"
+		command1935 = "#{$flvstreamer} -r \"rtmp://#{$flv_host}/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{flv_file}\" > #{$null} 2>&1"
+		command80 = "#{$flvstreamer} -r \"rtmpt://#{$flv_host}:80/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{flv_file}\" > #{$null} 2>&1"
 		system( command1935 )
 		if $?.to_i == 0x7f00
 			jputs( "\nflvstreamerが実行できません。パスの通った実行可能な場所にflvstreamerを置いてください。" )
@@ -591,13 +598,11 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 		end
 		
 		if $? == 0
-			if $audio_extension == "flv"
-				File.rename( "#{out_folder}#{wo_extname}.flv", out_folder + out_file )
-			else
+			if out_file != flv_file
 				if $audio_extension == "mp3"
-					system( "#{$ffmpeg} -i \"#{out_folder}#{wo_extname}.flv\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
+					system( "#{$ffmpeg} -i \"#{out_folder}#{flv_file}\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
 				else
-					system( "#{$ffmpeg} -i \"#{out_folder}#{wo_extname}.flv\" -vn -acodec copy -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
+					system( "#{$ffmpeg} -i \"#{out_folder}#{flv_file}\" -vn -acodec copy -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
 				end
 				if $?.to_i == 0x7f00
 					jputs( "\nffmpegが実行できません。パスの通った実行可能な場所にflvstreamerを置いてください。" )
@@ -608,31 +613,15 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 						id3tag( out_folder + out_file, id3_album, id3_title, "20" + file[0..1] )
 					end
 				end
+				File.unlink( out_folder + flv_file )
 			end
 			result = true
-			print( "*" )
-		end
-=begin
-		if $? == 0
-			if flv2mp3( out_folder + basename, out_folder + out_file )
-				id3tag( out_folder + out_file, id3_album, id3_title, "20" + file[0..1] )
-				result = true
-				print( "*" )
-			end
-		end
-=end
-	end
-	
-=begin
-	if File.exists?( out_folder + basename )
-		if !result || ( target != "enews" && target != "shower" )
-			File.unlink( out_folder + basename )
+			print( "O" )
 		else
-			movie_name = File.basename( out_file, File.extname( out_file ) ) + File.extname( basename )
-			File.rename( out_folder + basename, out_folder + movie_name )
+			print( "X" )
+			File.unlink( out_folder + flv_file )
 		end
 	end
-=end
 	
 	return result
 end
@@ -738,7 +727,7 @@ end
 
 def download_shower
 	flv_service_prefix = $flv_service_prefix
-	$flv_service_prefix = 'worldwave/common/movie/'
+	$flv_service_prefix = 'flv/worldwave/common/movie/'
 	
 	print( "ABC News Shower: " )
 	xml_uri = "http://www.nhk.or.jp/worldwave/xml/abc_news.xml"
