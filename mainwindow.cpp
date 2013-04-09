@@ -1,21 +1,21 @@
 /*
-   Copyright (C) 2009-2011 jakago
+	Copyright (C) 2009-2013 jakago
 
-   This file is part of CaptureStream, the flv downloader for NHK radio
-   language courses.
+	This file is part of CaptureStream, the flv downloader for NHK radio
+	language courses.
 
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 2 of the License, or
-   (at your option) any later version.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "mainwindow.h"
@@ -152,7 +152,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_0, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
 		{ ui->checkBox_1, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
 		{ ui->checkBox_2, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
-        { ui->checkBox_3, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
+		{ ui->checkBox_3, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
 		{ ui->checkBox_4, "kaiwa", false, "kaiwa_title", DefaultTitle, "kaiwa_file_name", DefaultFileName },
 		{ ui->checkBox_5, "business1", false, "business1_title", DefaultTitle, "business1_file_name", DefaultFileName },
 		{ ui->checkBox_6, "business2", false, "business2_title", DefaultTitle, "business2_file_name", DefaultFileName },
@@ -165,17 +165,17 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_13, "charo", false, "charo_title", DefaultTitle, "charo_file_name", DefaultFileName },
 		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
 		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
-        { ui->checkBox_16, "levelup-chinese", false, "levelup-chinese_title", DefaultTitle, "levelup-chinese_file_name", DefaultFileName },
-        { ui->checkBox_17, "levelup-hangeul", false, "levelup-hangeul_title", DefaultTitle, "levelup-hangeul_file_name", DefaultFileName },
-        { ui->checkBox_18, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
-        { ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
+		{ ui->checkBox_16, "levelup-chinese", false, "levelup-chinese_title", DefaultTitle, "levelup-chinese_file_name", DefaultFileName },
+		{ ui->checkBox_17, "levelup-hangeul", false, "levelup-hangeul_title", DefaultTitle, "levelup-hangeul_file_name", DefaultFileName },
+		{ ui->checkBox_18, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
+		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
 		{ ui->checkBox_kouryaku, "kouryaku", false, "kouryaku_title", DefaultTitle, "kouryaku_file_name", DefaultFileName },
 		{ ui->checkBox_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },
-        { ui->checkBox_next_week, "next_week", false, "", "", "", "" },
-        { ui->checkBox_past_week, "past_week", false, "", "", "", "" },
-        { NULL, NULL, false, "", "", "", "" }
+		{ ui->checkBox_next_week, "next_week", false, "", "", "", "" },
+		{ ui->checkBox_past_week, "past_week", false, "", "", "", "" },
+		{ NULL, NULL, false, "", "", "", "" }
 	};
 	typedef struct ComboBox {
 		QComboBox* comboBox;
@@ -212,12 +212,12 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		saved = settings.value( SETTING_SAVE_FOLDER );
 		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationBundlePath() : saved.toString();
 
-        saved = settings.value( SETTING_SCRAMBLE );
+		saved = settings.value( SETTING_SCRAMBLE );
 		scramble = saved.type() == QVariant::Invalid ? "" : saved.toString();
 
-        saved = settings.value( SETTING_SCRAMBLE_URL1 );
+		saved = settings.value( SETTING_SCRAMBLE_URL1 );
 		scrambleUrl1 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL1 : saved.toString();
-        saved = settings.value( SETTING_SCRAMBLE_URL2 );
+		saved = settings.value( SETTING_SCRAMBLE_URL2 );
 		scrambleUrl2 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL2 : saved.toString();
 
 		for ( int i = 0; checkBoxes[i].checkBox != NULL; i++ ) {
@@ -235,9 +235,9 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #endif
 		if ( outputDirSpecified )
 			settings.setValue( SETTING_SAVE_FOLDER, outputDir );
-        settings.setValue( SETTING_SCRAMBLE, scramble );
-        settings.setValue( SETTING_SCRAMBLE_URL1, scrambleUrl1 );
-        settings.setValue( SETTING_SCRAMBLE_URL2, scrambleUrl2 );
+		settings.setValue( SETTING_SCRAMBLE, scramble );
+		settings.setValue( SETTING_SCRAMBLE_URL1, scrambleUrl1 );
+		settings.setValue( SETTING_SCRAMBLE_URL2, scrambleUrl2 );
 		for ( int i = 0; checkBoxes[i].checkBox != NULL; i++ ) {
 			settings.setValue( checkBoxes[i].key, checkBoxes[i].checkBox->isChecked() );
 		}
