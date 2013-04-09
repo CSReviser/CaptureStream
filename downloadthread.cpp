@@ -668,7 +668,7 @@ QString DownloadThread::paths[] = {
 	"english/basic1", "english/basic2", "english/basic3", "english/timetrial",
 	"english/kaiwa", "english/business1", "english/business2",
 	"chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
-	"german/kouza", "spanish/kouza", "english/kouryaku",
+	"german/kouza", "spanish/kouza", "english/kouryaku", "english/yomu",
 	"chinese/levelup", "hangeul/levelup", "russian/kouza"
 };
 
@@ -676,14 +676,14 @@ void DownloadThread::run() {
 	QCheckBox* checkbox[] = {
 		ui->checkBox_0, ui->checkBox_1, ui->checkBox_2, ui->checkBox_3, ui->checkBox_4,
 		ui->checkBox_5, ui->checkBox_6, ui->checkBox_7, ui->checkBox_8, ui->checkBox_9,
-		ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku,
+		ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku, ui->checkBox_yomu,
 		ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
 	};
 
 	if ( !checkFlvstreamer( flvstreamer ) || !checkFfmpeg( ffmpeg ) )
 		return;
 
-	emit information( QString::fromUtf8( "2012年度最終週緊急対応版です。" ) );
+	emit information( QString::fromUtf8( "2013年度対応版です。" ) );
 	emit information( QString::fromUtf8( "ニュースで英会話は未対応です。" ) );
 	emit information( QString::fromUtf8( "----------------------------------------" ) );
 

@@ -170,6 +170,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_18, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
 		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
 		{ ui->checkBox_kouryaku, "kouryaku", false, "kouryaku_title", DefaultTitle, "kouryaku_file_name", DefaultFileName },
+		{ ui->checkBox_yomu, "yomu", false, "yomu_title", DefaultTitle, "yomu_file_name", DefaultFileName },
 		{ ui->checkBox_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },

@@ -36,11 +36,11 @@
 class DownloadThread;
 
 namespace Ui {
-    class MainWindowClass;
+	class MainWindowClass;
 }
 
 class MainWindow : public QMainWindow {
-    Q_OBJECT
+	Q_OBJECT
 
 	enum ReadWriteMode {
 		ReadMode, WriteMode
@@ -48,12 +48,12 @@ class MainWindow : public QMainWindow {
 
 public:
 	MainWindow( QWidget *parent = 0 );
-    ~MainWindow();
+	~MainWindow();
 
 	static QString outputDir;
-    static QString scramble;
-    static QString scrambleUrl1;
-    static QString scrambleUrl2;
+	static QString scramble;
+	static QString scrambleUrl1;
+	static QString scrambleUrl2;
 
 protected:
 	virtual void closeEvent( QCloseEvent *event );
@@ -69,7 +69,7 @@ private slots:
 	void customizeScramble();
 
 private:
-    Ui::MainWindowClass *ui;
+	Ui::MainWindowClass *ui;
 	DownloadThread* downloadThread;
 	QMenu* customizeMenu;
 	MessageWindow messagewindow;
