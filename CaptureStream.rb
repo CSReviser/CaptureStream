@@ -17,6 +17,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2013/04/10　flvstreamerのダウンロード場所を更新。ffmpegのダウンロードに関する記述を追加。
 2013/04/09　「英語で読む村上春樹」対応。
 2013/04/08　2013年度対応版。
 　　　　　　　gnash対応コード削除。scramble.xmlのuri変更。
@@ -69,8 +70,13 @@ require 'fileutils'
 	このドキュメントを記述している時の最新版のリンクです（動作確認したバージョンです）。
 	http://rubyforge.org/frs/download.php/74293/rubyinstaller-1.8.7-p334.exe
 ・flvstreamer
-	http://ftp.twaren.net/Unix/NonGNU/flvstreamer/win32/flvstreamer_win32_latest.exe
+	http://download-mirror.savannah.gnu.org/releases/flvstreamer/win32/flvstreamer_win32_latest.exe
 	上記のファイルをブラウザでダウンロードした後、ファイル名をflvstreamer.exeに変更し、
+	パスの通っているフォルダに置いてください。Windowsの場合は、CaptureStream.rbと同じフォ
+	ルダでもOKです。
+・ffmpeg
+	http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.7z
+	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpeg.exeに変更し、
 	パスの通っているフォルダに置いてください。Windowsの場合は、CaptureStream.rbと同じフォ
 	ルダでもOKです。
 
@@ -78,18 +84,27 @@ require 'fileutils'
 ・Ruby
 	標準でインストールされています。
 ・flvstreamer
-	http://ftp.twaren.net/Unix/NonGNU/flvstreamer/macosx/flvstreamer_macosx_unified_binary_latest
+	http://download-mirror.savannah.gnu.org/releases/flvstreamer/macosx/flvstreamer_macosx_unified_binary_latest
 	上記のファイルをブラウザでダウンロードした後、ファイル名をflvstreamerに変更し、ターミ
 	ナルで実行属性を付け、パスの通ったディレクトリに置いてください。
+・ffmpeg
+	http://www.evermeet.cx/ffmpeg/ffmpeg-1.2.7z
+	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpegに変更し、ターミ
+	ナルで実行属性を付け、パスの通ったディレクトリに置いてください。このバイナリはx86_64なので、
+	i386またはppcバイナリが必要な場合はソースコードからビルドするか、パッケージマネージャ(Homebrew、
+	MacPorts、Fink)でインストールしてください。
 
 【Linux環境】
 ・Ruby
 	パッケージでインストール可能だと思います。
 ・flvstreamer
-	http://ftp.twaren.net/Unix/NonGNU/flvstreamer/linux/
-	上記の場所からご自分のシステムに最適なものをダウンロードし、パスの通ったディレクトリに
-	置いてください。
-	もしくは、パッケージマネージャを使用してインストールしてください。
+	http://download-mirror.savannah.gnu.org/releases/flvstreamer/linux/
+	上記の場所からご自分のシステムに最適なものをダウンロードしてパスの通ったディレクトリに置くか、
+	パッケージマネージャを使用してインストールしてください。
+・ffmpeg
+	http://ffmpeg.org/download.html
+	上記のページの「FFmpeg Linux Builds」セクションからリンクをたどって最適なものをダウンロード
+	してパスの通ったディレクトリに置くか、パッケージマネージャを使用してインストールしてください。
 	
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【使用方法]＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 ・Windowsの場合
