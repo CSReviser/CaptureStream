@@ -551,7 +551,6 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 }
 
 //--------------------------------------------------------------------------------
-
 QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
 QString DownloadThread::suffix = "listdataflv.xml";
 
@@ -562,6 +561,24 @@ QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
 QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
 QString DownloadThread::scramble;
+
+QString DownloadThread::getIndexM3u8( QString master ) {
+	QRegExp regexp( "http[^\n]*" );
+	if ( regexp.indexIn( master, 0 ) != -1 ) {
+		QString indexUrl = regexp.cap( 0 );
+	}
+	return "";
+}
+
+QString DownloadThread::getMasterM3u8( QString file ) {
+	static QString master_m3u8_prefix = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
+	static QString master_m3u8_suffix = "/master.m3u8";
+	
+	UrlDownloader urldownloader;
+	QString temp = master_m3u8_prefix + file + master_m3u8_suffix;
+	urldownloader.doDownload( master_m3u8_prefix + file + master_m3u8_suffix );
+	return urldownloader.contents().length() ? QString::fromUtf8(  urldownloader.contents().constData() ) : "";
+}
 
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
 	QString outputDir = MainWindow::outputDir + kouza;
@@ -575,6 +592,12 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QString null( "/dev/null" );
 #endif
 
+	QString master = getMasterM3u8( file );
+	if ( master.length() > 0 ) {
+		QString index = getIndexM3u8( master );
+	}
+	return false;
+	
 	QString titleFormat;
 	QString fileNameFormat;
 	CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
@@ -683,58 +706,15 @@ void DownloadThread::run() {
 	if ( !checkFlvstreamer( flvstreamer ) || !checkFfmpeg( ffmpeg ) )
 		return;
 
-	emit information( QString::fromUtf8( "2013年度対応版です。" ) );
+	emit information( QString::fromUtf8( "2013年7月29日対応版です。" ) );
 	emit information( QString::fromUtf8( "ニュースで英会話は未対応です。" ) );
 	emit information( QString::fromUtf8( "----------------------------------------" ) );
 
-	scramble = MainWindow::scramble;
-
-	if ( scramble.length() )
-		emit information( QString::fromUtf8( "ユーザ設定によるコード：" ) + scramble );
-
-	if ( !scramble.length() ) {
-		scramble = Utility::wiki();
-		if ( scramble.length() )
-			emit information( QString::fromUtf8( "wikiから取得したコード：" ) + scramble );
-		else
-			emit information( QString::fromUtf8( "wikiから取得したコード：取得に失敗したか、wikiのxmlが更新されていません。" ) );
-	}
-
-	if ( !scramble.length() ) {
-		QString error;
-		scramble = Utility::gnash( error );
-		if ( error.length() )
-			emit information( QString::fromUtf8( "gnashを利用して解析したコード：" ) + error );
-		else if ( scramble.length() )
-			emit information( QString::fromUtf8( "gnashを利用して解析したコード：" ) + scramble );
-		else
-			emit information( QString::fromUtf8( "gnashを利用して解析したコード：取得に失敗しました" ) );
-	}
-
-	if ( !scramble.length() ) {
-		QString error;
-		scramble = Utility::flare( error );
-		if ( scramble.length() == ScrambleLength )
-			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + scramble );
-		else if ( scramble.length() > 0 ) {
-			emit information( QString::fromUtf8( "flareを利用して解析したコード：長さが間違っています：" ) + scramble );
-			scramble = "";
-		} else if ( error.length() > 0 )
-			emit information( QString::fromUtf8( "flareを利用して解析したコード：" ) + error );
-	}
-
-	if ( !scramble.length() ) {
-		emit information( QString::fromUtf8( "スクランブル文字列が取得できなかったので終了します。" ) );
-		return;
-	}
-
-	QString _scramble = scramble[0] == '-' ? "" : (scramble + "/");
-
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
 		if ( checkbox[i]->isChecked() ) {
-			QStringList fileList = getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@file" );
-			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@kouza" );
-			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + _scramble + suffix, "@hdate" ) );
+			QStringList fileList = getAttribute( prefix + paths[i] + "/" + suffix, "@file" );
+			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
+			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
 
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {

@@ -21,6 +21,7 @@
 #include "urldownloader.h"
 
 #include <QTimer>
+#include <QSslConfiguration>
 
 UrlDownloader::UrlDownloader() {
 	connect( &manager, SIGNAL(finished( QNetworkReply* )), SLOT(downloadFinished( QNetworkReply* )) );
@@ -34,7 +35,7 @@ void UrlDownloader::doDownload( const QUrl& url ) {
 
 void UrlDownloader::execute() {
 	QNetworkRequest request( url );
-	manager.get( request );
+	manager.get( request )->ignoreSslErrors();
 }
 
 void UrlDownloader::downloadFinished( QNetworkReply* reply ) {
