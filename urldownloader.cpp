@@ -35,12 +35,18 @@ void UrlDownloader::doDownload( const QUrl& url ) {
 
 void UrlDownloader::execute() {
 	QNetworkRequest request( url );
+	// QNetworkReply::SslHandshakeFailedError が起こるので無視する
 	manager.get( request )->ignoreSslErrors();
 }
 
 void UrlDownloader::downloadFinished( QNetworkReply* reply ) {
 	if ( !reply->error() )
 		byteArray = reply->readAll();
+	/*else {
+		qDebug() << reply->error();
+		qDebug() << url;
+		qDebug() << reply->readAll();
+	}*/
 
 	reply->deleteLater();
 	eventLoop.exit();

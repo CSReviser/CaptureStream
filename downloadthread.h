@@ -50,9 +50,12 @@ private:
 	bool checkOutputDir( QString dirPath );
 	void downloadCharo();
 	void downloadENews( bool re_read );
-	QString getIndexM3u8( QString master );
+	
 	QString getMasterM3u8( QString file );
+	QString getIndexM3u8( QString masterM3u8 );
+	QByteArray getCryptKey( QString indexM3u8 );
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount );
+	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
 	void downloadShower();

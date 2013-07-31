@@ -562,14 +562,6 @@ QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
 QString DownloadThread::scramble;
 
-QString DownloadThread::getIndexM3u8( QString master ) {
-	QRegExp regexp( "http[^\n]*" );
-	if ( regexp.indexIn( master, 0 ) != -1 ) {
-		QString indexUrl = regexp.cap( 0 );
-	}
-	return "";
-}
-
 QString DownloadThread::getMasterM3u8( QString file ) {
 	static QString master_m3u8_prefix = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
 	static QString master_m3u8_suffix = "/master.m3u8";
@@ -577,7 +569,36 @@ QString DownloadThread::getMasterM3u8( QString file ) {
 	UrlDownloader urldownloader;
 	QString temp = master_m3u8_prefix + file + master_m3u8_suffix;
 	urldownloader.doDownload( master_m3u8_prefix + file + master_m3u8_suffix );
-	return urldownloader.contents().length() ? QString::fromUtf8(  urldownloader.contents().constData() ) : "";
+	//qDebug() << urldownloader.contents().constData();
+	return urldownloader.contents().length() ? QString::fromAscii(  urldownloader.contents().constData() ) : "";
+}
+
+QString DownloadThread::getIndexM3u8( QString masterM3u8 ) {
+	QString result;
+	QRegExp regexp( "http[^\n]*" );
+	if ( regexp.indexIn( masterM3u8, 0 ) != -1 ) {
+		QString indexUrl = regexp.cap( 0 );
+		UrlDownloader urldownloader;
+		urldownloader.doDownload( indexUrl );
+		//qDebug() << QByteArray::fromPercentEncoding( urldownloader.contents() ).constData();
+		if ( urldownloader.contents().length() )
+			result = QString::fromAscii(  QByteArray::fromPercentEncoding( urldownloader.contents() ).constData() );
+	}
+	return result;
+}
+
+QByteArray DownloadThread::getCryptKey( QString indexM3u8 ) {
+	QByteArray result;
+	QRegExp regexp( "#EXT-X-KEY:METHOD=AES-128,URI=\"([^\"]*)\"" );
+	if ( regexp.indexIn( indexM3u8, 0 ) != -1 ) {
+		QString cryptKeyUri = QString::fromAscii( QByteArray::fromPercentEncoding( regexp.cap( 1 ).toAscii() ).constData() );
+		//qDebug() << cryptKeyUri;
+		UrlDownloader urldownloader;
+		urldownloader.doDownload( cryptKeyUri );
+		if ( urldownloader.contents().length() )
+			result = urldownloader.contents().toHex();
+	}
+	return result;
 }
 
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
@@ -592,10 +613,18 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QString null( "/dev/null" );
 #endif
 
-	QString master = getMasterM3u8( file );
-	if ( master.length() > 0 ) {
-		QString index = getIndexM3u8( master );
-	}
+	QString masterM3u8 = getMasterM3u8( file );
+	if ( !masterM3u8.length() )
+		return false;
+	//qDebug() << masterM3u8;
+	QString indexM3u8 = getIndexM3u8( masterM3u8 );
+	if ( !indexM3u8.length() )
+		return false;
+	//qDebug() << indexM3u8;
+	QByteArray cryptKey = getCryptKey( indexM3u8 );
+	if ( !cryptKey.length() )
+		return false;
+	//qDebug() << cryptKey;
 	return false;
 	
 	QString titleFormat;
