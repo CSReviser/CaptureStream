@@ -601,6 +601,17 @@ QByteArray DownloadThread::getCryptKey( QString indexM3u8 ) {
 	return result;
 }
 
+QStringList DownloadThread::getSegmentUrlList( QString indexM3u8 ) {
+	QStringList result;
+	QRegExp regexp( "http:[^\n]*" );
+	for ( int from = 0; ( from = regexp.indexIn( indexM3u8, from ) ) != -1; from++ ) {
+		QString segmentUrl = QString::fromAscii( QByteArray::fromPercentEncoding( regexp.cap( 0 ).toAscii() ).constData() );
+		//qDebug() << segmentUrl;
+		result << segmentUrl;
+	}
+	return result;
+}
+
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
@@ -614,18 +625,30 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 #endif
 
 	QString masterM3u8 = getMasterM3u8( file );
-	if ( !masterM3u8.length() )
+	if ( !masterM3u8.length() ) {
+		emit critical( QString::fromUtf8( "master.m3u8の取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
 		return false;
-	//qDebug() << masterM3u8;
+	}
 	QString indexM3u8 = getIndexM3u8( masterM3u8 );
-	if ( !indexM3u8.length() )
+	if ( !indexM3u8.length() ) {
+		emit critical( QString::fromUtf8( "index_0_a.m3u8の取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
 		return false;
-	//qDebug() << indexM3u8;
+	}
 	QByteArray cryptKey = getCryptKey( indexM3u8 );
-	if ( !cryptKey.length() )
+	if ( !cryptKey.length() ) {
+		emit critical( QString::fromUtf8( "crypt.keyの取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
 		return false;
-	//qDebug() << cryptKey;
-	return false;
+	}
+	QStringList segmentUrlList = getSegmentUrlList( indexM3u8 );
+	if ( segmentUrlList.isEmpty() ) {
+		emit critical( QString::fromUtf8( "音声ファイルセグメントのURLの取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
+		return false;
+	}
+	return true;
 	
 	QString titleFormat;
 	QString fileNameFormat;

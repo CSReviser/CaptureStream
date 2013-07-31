@@ -22,6 +22,7 @@
 #define DOWNLOADTHREAD_H
 
 #include <QThread>
+#include <QStringList>
 
 #include "mainwindow.h"
 
@@ -54,6 +55,7 @@ private:
 	QString getMasterM3u8( QString file );
 	QString getIndexM3u8( QString masterM3u8 );
 	QByteArray getCryptKey( QString indexM3u8 );
+	QStringList getSegmentUrlList( QString indexM3u8 );
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
