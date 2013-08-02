@@ -58,6 +58,7 @@
 
 #define ScrambleLength 14
 #define FLV_MIN_SIZE 100	// ストリーミングが存在しなかった場合は13バイトだが少し大きめに設定
+#define OriginalFormat "mp4"
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
@@ -99,6 +100,15 @@ bool DownloadThread::checkFfmpeg( QString& path ) {
 	path = Utility::applicationBundlePath() + FFMPEG;
 #ifdef Q_WS_WIN
 	path += ".exe";
+#endif
+	return checkExecutable( path );
+}
+
+bool DownloadThread::checkOpenssl( QString& path ) {
+#ifdef Q_WS_WIN
+	path = Utility::applicationBundlePath() + "openssl.exe";
+#else
+	path = "/usr/bin/openssl";
 #endif
 	return checkExecutable( path );
 }
@@ -561,6 +571,7 @@ QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
 
 QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
+QString DownloadThread::openssl;
 QString DownloadThread::scramble;
 
 QString DownloadThread::getMasterM3u8( QString file ) {
@@ -699,6 +710,48 @@ bool DownloadThread::mergeSegments( QString outputDir, QStringList segmentNames,
 	return result;
 }
 
+bool DownloadThread::convertFormat( QString outputDir, QString mp4Name, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file ) {
+	int month = hdate.left( 2 ).toInt();
+	int year = 2000 + file.left( 2 ).toInt();
+	if ( month <= 4 && QDate::currentDate().year() > year )
+		year += 1;
+	int day = hdate.mid( 3, 2 ).toInt();
+	QDate onair( year, month, day );
+	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
+	QString outFileName = outBasename + "." + extension;
+	QString srcPath = outputDir + mp4Name;
+	QString dstPath = outputDir + outFileName;
+	QFileInfo fileInfo( srcPath );
+	bool result = false;
+	
+	if ( !isCanceled ) {
+		QString commandFfmpeg = extension == "mp3" ?
+				QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"%3\"" )
+						.arg( ffmpeg, srcPath, dstPath ) :
+				QString( "\"%1\" -i \"%2\" -vn -acodec copy -y \"%3\"" )
+						.arg( ffmpeg, srcPath, dstPath );
+		//qDebug() << commandFfmpeg;
+		emit current( extension + QString::fromUtf8( "へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		QProcess process;
+		if ( process.execute( commandFfmpeg ) ) {
+			emit critical( extension + QString::fromUtf8( "への変換を完了できませんでした：　" ) +
+					kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		} else {
+			if ( extension == "mp3" ) {
+				QString error;
+				if ( !MP3::id3tag( dstPath, kouza, id3tagTitle, QString::number( year ), "NHK", error ) )
+					emit critical( error );
+				else
+					result = true;
+			} else
+				result = true;
+		}
+	}
+	if ( QFile::exists( srcPath ) && ( extension != OriginalFormat || fileInfo.size() <= FLV_MIN_SIZE ) )
+		QFile::remove( srcPath );
+	return result;
+}
+
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
@@ -723,6 +776,20 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QString null( "/dev/null" );
 #endif
 
+	int month = hdate.left( 2 ).toInt();
+	int year = 2000 + file.left( 2 ).toInt();
+	if ( month <= 4 && QDate::currentDate().year() > year )
+		year += 1;
+	int day = hdate.mid( 3, 2 ).toInt();
+	QDate onair( year, month, day );
+	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
+	
+	if ( ui->checkBox_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
+		emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		return true;
+	}
+	emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+	
 	QString masterM3u8 = getMasterM3u8( file );
 	if ( !masterM3u8.length() ) {
 		emit critical( QString::fromUtf8( "master.m3u8の取得に失敗しました：　" ) +
@@ -752,7 +819,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	int index = 1;
 	QStringList segmentNames;
 	for ( constIterator = segmentUrlList.constBegin(); constIterator != segmentUrlList.constEnd() && !isCanceled; constIterator++ ) {
-        qDebug() << *constIterator;
+        //qDebug() << *constIterator;
 		QString segmentName = downloadSegment( outputDir, *constIterator );
 		if ( !segmentName.length() )
 			break;
@@ -761,13 +828,17 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			break;
 		index++;
 	}
-	if ( constIterator == segmentUrlList.constEnd() )
-		mergeSegments( outputDir, segmentNames, outBasename + ".mp4" );
+	if ( constIterator == segmentUrlList.constEnd() ) {
+		mergeSegments( outputDir, segmentNames, outBasename + "." + OriginalFormat );
+		if ( extension != OriginalFormat )
+			convertFormat( outputDir, outBasename + "." + OriginalFormat, outBasename, extension, id3tagTitle, kouza, hdate, file );
+	}
 	for ( int i = 0; i < segmentNames.count(); i++ )
 		QFile::remove( outputDir + segmentNames[i] );
 	
 	return constIterator == segmentUrlList.constEnd();
 
+#if 0
 	bool result = false;
 
 	if ( file.endsWith( ".flv", Qt::CaseInsensitive ) || file.endsWith( ".mp4", Qt::CaseInsensitive ) ) {
@@ -843,6 +914,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	}
 
 	return result;
+#endif
 }
 
 QString DownloadThread::paths[] = {
@@ -861,7 +933,7 @@ void DownloadThread::run() {
 		ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
 	};
 
-	if ( !checkFlvstreamer( flvstreamer ) || !checkFfmpeg( ffmpeg ) )
+	if ( !checkOpenssl( openssl ) || !checkFfmpeg( ffmpeg ) )
 		return;
 
 	emit information( QString::fromUtf8( "2013年7月29日対応版です。" ) );

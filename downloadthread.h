@@ -47,6 +47,7 @@ private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkExecutable( QString path );
 	bool checkFlvstreamer( QString& path );
+	bool checkOpenssl( QString& path );
 	bool checkFfmpeg( QString& path );
 	bool checkOutputDir( QString dirPath );
 	void downloadCharo();
@@ -59,6 +60,7 @@ private:
 	QString downloadSegment( QString outputDir, QString segmentUrl );
 	bool decryptSegment( QString outputDir, QString segmentName, int index, QString cryptKey );
 	bool mergeSegments( QString outputDir, QStringList segmentNames, QString mp4Name );	
+	bool convertFormat( QString outputDir, QString mp4Name, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file );
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
@@ -79,6 +81,7 @@ private:
 
 	static QString flvstreamer;
 	static QString ffmpeg;
+	static QString openssl;
 	static QString scramble;
 
 };
