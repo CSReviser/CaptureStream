@@ -56,6 +56,9 @@ private:
 	QString getIndexM3u8( QString masterM3u8 );
 	QByteArray getCryptKey( QString indexM3u8 );
 	QStringList getSegmentUrlList( QString indexM3u8 );
+	QString downloadSegment( QString outputDir, QString segmentUrl );
+	bool decryptSegment( QString outputDir, QString segmentName, int index, QString cryptKey );
+	bool mergeSegments( QString outputDir, QStringList segmentNames, QString mp4Name );	
 	bool captureStream( QString kouza, QString hdate, QString file, int retryCount );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );

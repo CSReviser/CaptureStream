@@ -45,6 +45,7 @@
 #include <QDate>
 #include <QLocale>
 #include <QDebug>
+//#include <QtCrypto>
 
 #define FLVSTREAMER "flvstreamer"
 #define FFMPEG "ffmpeg"
@@ -574,8 +575,9 @@ QString DownloadThread::getMasterM3u8( QString file ) {
 }
 
 QString DownloadThread::getIndexM3u8( QString masterM3u8 ) {
+	static QRegExp regexp( "http[^\n]*" );
+	
 	QString result;
-	QRegExp regexp( "http[^\n]*" );
 	if ( regexp.indexIn( masterM3u8, 0 ) != -1 ) {
 		QString indexUrl = regexp.cap( 0 );
 		UrlDownloader urldownloader;
@@ -588,8 +590,9 @@ QString DownloadThread::getIndexM3u8( QString masterM3u8 ) {
 }
 
 QByteArray DownloadThread::getCryptKey( QString indexM3u8 ) {
+	static QRegExp regexp( "#EXT-X-KEY:METHOD=AES-128,URI=\"([^\"]*)\"" );
+	
 	QByteArray result;
-	QRegExp regexp( "#EXT-X-KEY:METHOD=AES-128,URI=\"([^\"]*)\"" );
 	if ( regexp.indexIn( indexM3u8, 0 ) != -1 ) {
 		QString cryptKeyUri = QString::fromAscii( QByteArray::fromPercentEncoding( regexp.cap( 1 ).toAscii() ).constData() );
 		//qDebug() << cryptKeyUri;
@@ -602,8 +605,9 @@ QByteArray DownloadThread::getCryptKey( QString indexM3u8 ) {
 }
 
 QStringList DownloadThread::getSegmentUrlList( QString indexM3u8 ) {
+	static QRegExp regexp( "http:[^\n]*" );
+	
 	QStringList result;
-	QRegExp regexp( "http:[^\n]*" );
 	for ( int from = 0; ( from = regexp.indexIn( indexM3u8, from ) ) != -1; from++ ) {
 		QString segmentUrl = QString::fromAscii( QByteArray::fromPercentEncoding( regexp.cap( 0 ).toAscii() ).constData() );
 		//qDebug() << segmentUrl;
@@ -612,11 +616,106 @@ QStringList DownloadThread::getSegmentUrlList( QString indexM3u8 ) {
 	return result;
 }
 
+QString DownloadThread::downloadSegment( QString outputDir, QString segmentUrl ) {
+	static QRegExp regexp( "http.*/mp4/(.*).mp4/([^\?]*)\?" );
+	QString result;
+	
+	if ( regexp.indexIn( segmentUrl, 0 ) == -1 ) {
+		emit critical( QString::fromUtf8( "セグメントファイルのURLが認識できません：　" ) + segmentUrl );
+		return result;
+	}
+	QString segmentName = regexp.cap( 1 ) + "-" + regexp.cap( 2 );
+	//qDebug() << segmentName;
+	
+	UrlDownloader urldownloader;
+	urldownloader.doDownload( segmentUrl );
+	int segmentLength = urldownloader.contents().length();
+	//qDebug() << segmentLength;
+	if ( !segmentLength ) {
+		emit critical( QString::fromUtf8( "セグメントのダウンロードに失敗しました：　" ) + segmentName );
+	} else {
+		QFile segmentFile( outputDir + segmentName );
+		if ( !segmentFile.open( QIODevice::WriteOnly ) ) {
+			emit critical( QString::fromUtf8( "セグメントファイルの作成に失敗しました：　" ) + segmentName );
+		} else {
+			if ( segmentFile.write( urldownloader.contents() ) != segmentLength )
+				emit critical( QString::fromUtf8( "セグメントファイルの書き込みに失敗しました：　" ) + segmentName );
+			else
+				result = segmentName;
+			segmentFile.close();
+		}
+	}
+	return result;
+}
+
+bool DownloadThread::decryptSegment( QString outputDir, QString segmentName, int index, QString cryptKey ) {
+	bool result = false;
+	QString encrypted = outputDir + segmentName;
+	QString derypted = outputDir + segmentName + "_d";
+	QString commandOpenssl = QString( "\"%1\" %2 -d -in \"%3\" -out \"%4\" -nosalt -iv %5 -K %6" )
+			.arg( "/usr/bin/openssl", "aes-128-cbc", encrypted, derypted,
+				  QString( "%1").arg( index, 32, 16, QLatin1Char( '0' ) ), cryptKey );
+	//qDebug() << commandOpenssl;
+	QProcess process;
+	if ( process.execute( commandOpenssl ) ) {
+		emit critical( QString::fromUtf8( "復号化に失敗しました：　" ) + encrypted );
+	} else {
+		if ( !QFile::remove( encrypted ) )
+			emit critical( QString::fromUtf8( "ファイルの削除に失敗しました：　" ) + encrypted );
+		else if ( !QFile::rename( derypted, encrypted ) )
+			emit critical( QString::fromUtf8( "ファイル名の変更に失敗しました：　" ) + derypted );
+		else
+			result = true;
+	}
+	return result;
+}
+
+bool DownloadThread::mergeSegments( QString outputDir, QStringList segmentNames, QString mp4Name ) {
+	bool result = false;
+	QFile mp4File( outputDir + mp4Name );
+	if ( !mp4File.open( QIODevice::WriteOnly ) )
+		emit critical( QString::fromUtf8( "mp4ファイルの作成に失敗しました：　" ) + mp4Name );
+	else {
+		int i;
+		for ( i = 0; i < segmentNames.count(); i++ ) {
+			QFile segmentFile( outputDir + segmentNames[i] );
+			if ( !segmentFile.open( QIODevice::ReadOnly ) ) {
+				emit critical( QString::fromUtf8( "セグメントファイルのオープンに失敗しました：　" ) + segmentNames[i] );
+				segmentFile.close();
+				break;
+			}
+			if ( mp4File.write( segmentFile.readAll() ) != segmentFile.size() ) {
+				emit critical( QString::fromUtf8( "mp4ファイルの書き込みに失敗しました：　" ) + mp4Name );
+				segmentFile.close();
+				break;
+			}
+		}
+		if ( i >= segmentNames.count() )
+			result = true;
+		mp4File.close();
+	}
+	if ( !result && mp4File.exists() )
+		mp4File.remove();
+	return result;
+}
+
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, int retryCount ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
 		return false;
 	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
+
+	QString titleFormat;
+	QString fileNameFormat;
+	CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
+	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, false );
+	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, true );
+	QFileInfo fileInfo( outFileName );
+	QString outBasename = fileInfo.completeBaseName();
+	
+	// 2013/04/05 オーディオフォーマットの変更に伴って拡張子の指定に対応
+	QString extension = ui->comboBox_extension->currentText();
+	outFileName = outBasename + "." + extension;
 
 #ifdef Q_WS_WIN
 	QString null( "nul" );
@@ -648,19 +747,26 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 				kouza + QString::fromUtf8( "　" ) + hdate );
 		return false;
 	}
-	return true;
 	
-	QString titleFormat;
-	QString fileNameFormat;
-	CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
-	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, false );
-	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, true );
-	QFileInfo fileInfo( outFileName );
-	QString outBasename = fileInfo.completeBaseName();
-
-	// 2013/04/05 オーディオフォーマットの変更に伴って拡張子の指定に対応
-	QString extension = ui->comboBox_extension->currentText();
-	outFileName = outBasename + "." + extension;
+	QStringList::const_iterator constIterator;
+	int index = 1;
+	QStringList segmentNames;
+	for ( constIterator = segmentUrlList.constBegin(); constIterator != segmentUrlList.constEnd() && !isCanceled; constIterator++ ) {
+        qDebug() << *constIterator;
+		QString segmentName = downloadSegment( outputDir, *constIterator );
+		if ( !segmentName.length() )
+			break;
+		segmentNames << segmentName;
+		if ( !decryptSegment( outputDir, segmentName, index, cryptKey ) )
+			break;
+		index++;
+	}
+	if ( constIterator == segmentUrlList.constEnd() )
+		mergeSegments( outputDir, segmentNames, outBasename + ".mp4" );
+	for ( int i = 0; i < segmentNames.count(); i++ )
+		QFile::remove( outputDir + segmentNames[i] );
+	
+	return constIterator == segmentUrlList.constEnd();
 
 	bool result = false;
 
