@@ -33,7 +33,7 @@ FORMS += mainwindow.ui \
 
 macx {
 	#CONFIG += x86 ppc #x86_64
-	INCLUDEPATH += /Library/Frameworks/qca.framework/Versions/2/Headers
+	#INCLUDEPATH += /Library/Frameworks/qca.framework/Versions/2/Headers
 	#LIBS += -L/Library/Frameworks -framework qca
 
 	QMAKE_CFLAGS_RELEASE += -fvisibility=hidden
