@@ -46,10 +46,9 @@ signals:
 private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkExecutable( QString path );
-	bool checkOpenssl( QString& path );
-	bool checkFfmpeg( QString& path );
+	bool isFfmpegAvailable( QString& path );
+	bool isOpensslAvailable( QString& path );
 	bool checkOutputDir( QString dirPath );
-	void downloadCharo();
 	void downloadENews( bool re_read );
 	
 	QString getMasterM3u8( QString file );
@@ -60,7 +59,7 @@ private:
 	bool decryptSegment( QString outputDir, QString segmentName, int index, QString cryptKey );
 	bool mergeSegments( QString outputDir, QStringList segmentNames, QString mp4Name );	
 	bool convertFormat( QString outputDir, QString mp4Name, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file );
-	bool captureStream( QString kouza, QString hdate, QString file, int retryCount );
+	bool captureStream( QString kouza, QString hdate, QString file );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
