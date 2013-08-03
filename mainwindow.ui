@@ -109,6 +109,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_12">
        <item>
         <widget class="QCheckBox" name="checkBox_shower">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>ABCニュースシャワー</string>
          </property>
@@ -116,6 +119,9 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBox_shower">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="frame">
           <bool>true</bool>
          </property>

@@ -935,7 +935,7 @@ void DownloadThread::run() {
 		return;
 
 	emit information( QString::fromUtf8( "2013年7月29日対応版です。" ) );
-	emit information( QString::fromUtf8( "ニュースで英会話は未対応です。" ) );
+	emit information( QString::fromUtf8( "ニュースで英会話とABCニュースシャワーは未対応です。" ) );
 	emit information( QString::fromUtf8( "----------------------------------------" ) );
 
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
