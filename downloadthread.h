@@ -46,7 +46,6 @@ signals:
 private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkExecutable( QString path );
-	bool checkFlvstreamer( QString& path );
 	bool checkOpenssl( QString& path );
 	bool checkFfmpeg( QString& path );
 	bool checkOutputDir( QString dirPath );

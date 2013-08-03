@@ -88,14 +88,6 @@ bool DownloadThread::checkExecutable( QString path ) {
 	return true;
 }
 
-bool DownloadThread::checkFlvstreamer( QString& path ) {
-	path = Utility::applicationBundlePath() + FLVSTREAMER;
-#ifdef Q_WS_WIN
-	path += ".exe";
-#endif
-	return checkExecutable( path );
-}
-
 bool DownloadThread::checkFfmpeg( QString& path ) {
 	path = Utility::applicationBundlePath() + FFMPEG;
 #ifdef Q_WS_WIN
@@ -138,6 +130,7 @@ bool DownloadThread::checkOutputDir( QString dirPath ) {
 
 //--------------------------------------------------------------------------------
 
+#if 0
 void DownloadThread::downloadCharo() {
 	QString flvstreamer;
 	if ( !checkFlvstreamer( flvstreamer ) )
@@ -222,9 +215,11 @@ void DownloadThread::downloadCharo() {
 		}
 	}
 }
+#endif
 
 //--------------------------------------------------------------------------------
 
+#if 0
 void DownloadThread::downloadENews( bool re_read ) {
 	emit current( QString::fromUtf8( "ニュースで英会話のhtmlを分析中" ) );
 	DownloadManager manager( re_read, ui->checkBox_enews_past->isChecked() );
@@ -352,6 +347,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 		}
 	}
 }
+#endif
 
 //--------------------------------------------------------------------------------
 
@@ -365,6 +361,7 @@ QStringList DownloadThread::getElements( QString url, QString path ) {
 	return elementList;
 }
 
+#if 0
 void DownloadThread::downloadShower() {
 	QString flvstreamer;
 	if ( !checkFlvstreamer( flvstreamer ) )
@@ -463,6 +460,7 @@ void DownloadThread::downloadShower() {
 			emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 	}
 }
+#endif
 
 //--------------------------------------------------------------------------------
 
@@ -958,8 +956,8 @@ void DownloadThread::run() {
 	//if ( !isCanceled && ui->checkBox_13->isChecked() )
 		//downloadCharo();
 
-	if ( !isCanceled && ui->checkBox_shower->isChecked() )
-		downloadShower();
+	//if ( !isCanceled && ui->checkBox_shower->isChecked() )
+		//downloadShower();
 
 	//if ( !isCanceled && ui->checkBox_14->isChecked() )
 		//downloadENews( false );
