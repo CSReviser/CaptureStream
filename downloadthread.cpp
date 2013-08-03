@@ -570,7 +570,7 @@ bool DownloadThread::decryptSegment( QString outputDir, QString segmentName, int
 	QString encrypted = outputDir + segmentName;
 	QString derypted = outputDir + segmentName + "_d";
 	QString commandOpenssl = QString( "\"%1\" %2 -d -in \"%3\" -out \"%4\" -nosalt -iv %5 -K %6" )
-			.arg( "/usr/bin/openssl", "aes-128-cbc", encrypted, derypted,
+			.arg( openssl, "aes-128-cbc", encrypted, derypted,
 				  QString( "%1").arg( index, 32, 16, QLatin1Char( '0' ) ), cryptKey );
 	//qDebug() << commandOpenssl;
 	QProcess process;
