@@ -81,6 +81,7 @@ private:
 	static QString ffmpeg;
 	static QString openssl;
 	static QString scramble;
+	static QStringList malformed;
 
 };
 

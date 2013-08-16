@@ -55,7 +55,8 @@
 
 #define ScrambleLength 14
 #define FLV_MIN_SIZE 100	// ストリーミングが存在しなかった場合は13バイトだが少し大きめに設定
-#define OriginalFormat "mp4"
+#define OriginalFormat "ts"
+#define FilterOption "-bsf:a aac_adtstoasc"
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
@@ -479,6 +480,7 @@ QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
 QString DownloadThread::openssl;
 QString DownloadThread::scramble;
+QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
 
 QString DownloadThread::getMasterM3u8( QString file ) {
 	static QString master_m3u8_prefix = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
@@ -587,11 +589,11 @@ bool DownloadThread::decryptSegment( QString outputDir, QString segmentName, int
 	return result;
 }
 
-bool DownloadThread::mergeSegments( QString outputDir, QStringList segmentNames, QString mp4Name ) {
+bool DownloadThread::mergeSegments( QString outputDir, QStringList segmentNames, QString tsName ) {
 	bool result = false;
-	QFile mp4File( outputDir + mp4Name );
-	if ( !mp4File.open( QIODevice::WriteOnly ) )
-		emit critical( QString::fromUtf8( "mp4ファイルの作成に失敗しました：　" ) + mp4Name );
+	QFile tsFile( outputDir + tsName );
+	if ( !tsFile.open( QIODevice::WriteOnly ) )
+		emit critical( OriginalFormat + QString::fromUtf8( "ファイルの作成に失敗しました：　" ) + tsName );
 	else {
 		int i;
 		for ( i = 0; i < segmentNames.count(); i++ ) {
@@ -601,22 +603,22 @@ bool DownloadThread::mergeSegments( QString outputDir, QStringList segmentNames,
 				segmentFile.close();
 				break;
 			}
-			if ( mp4File.write( segmentFile.readAll() ) != segmentFile.size() ) {
-				emit critical( QString::fromUtf8( "mp4ファイルの書き込みに失敗しました：　" ) + mp4Name );
+			if ( tsFile.write( segmentFile.readAll() ) != segmentFile.size() ) {
+				emit critical( OriginalFormat + QString::fromUtf8( "ファイルの書き込みに失敗しました：　" ) + tsName );
 				segmentFile.close();
 				break;
 			}
 		}
 		if ( i >= segmentNames.count() )
 			result = true;
-		mp4File.close();
+		tsFile.close();
 	}
-	if ( !result && mp4File.exists() )
-		mp4File.remove();
+	if ( !result && tsFile.exists() )
+		tsFile.remove();
 	return result;
 }
 
-bool DownloadThread::convertFormat( QString outputDir, QString mp4Name, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file ) {
+bool DownloadThread::convertFormat( QString outputDir, QString tsName, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file ) {
 	int month = hdate.left( 2 ).toInt();
 	int year = 2000 + file.left( 2 ).toInt();
 	if ( month <= 4 && QDate::currentDate().year() > year )
@@ -625,7 +627,7 @@ bool DownloadThread::convertFormat( QString outputDir, QString mp4Name, QString 
 	QDate onair( year, month, day );
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 	QString outFileName = outBasename + "." + extension;
-	QString srcPath = outputDir + mp4Name;
+	QString srcPath = outputDir + tsName;
 	QString dstPath = outputDir + outFileName;
 	QFileInfo fileInfo( srcPath );
 	bool result = false;
@@ -634,9 +636,9 @@ bool DownloadThread::convertFormat( QString outputDir, QString mp4Name, QString 
 		QString commandFfmpeg = extension == "mp3" ?
 				QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"%3\"" )
 						.arg( ffmpeg, srcPath, dstPath ) :
-				QString( "\"%1\" -i \"%2\" -vn -acodec copy -y \"%3\"" )
-						.arg( ffmpeg, srcPath, dstPath );
-		//qDebug() << commandFfmpeg;
+				QString( "\"%1\" -i \"%2\" %3 -vn -acodec copy -y \"%4\"" )
+					.arg( ffmpeg, srcPath, malformed.contains( extension ) ? FilterOption : "", dstPath );
+		qDebug() << commandFfmpeg;
 		emit current( extension + QString::fromUtf8( "へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		QProcess process;
 		if ( process.execute( commandFfmpeg ) ) {
