@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>570</width>
-    <height>505</height>
+    <width>448</width>
+    <height>414</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>570</width>
-    <height>505</height>
+    <width>448</width>
+    <height>414</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>570</width>
-    <height>505</height>
+    <width>448</width>
+    <height>414</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,11 +43,35 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>552</width>
-      <height>461</height>
+      <width>431</width>
+      <height>361</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+     <item row="9" column="0">
+      <widget class="Line" name="line_2">
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="Line" name="line">
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
      <item row="0" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_14">
        <item>
@@ -81,185 +105,40 @@
        </item>
       </layout>
      </item>
-     <item row="11" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item row="12" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_23">
        <item>
-        <widget class="Line" name="line">
-         <property name="lineWidth">
-          <number>2</number>
+        <widget class="QCheckBox" name="checkBox_keep_on_error">
+         <property name="text">
+          <string>ダウンロード未完でも変換</string>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+         <property name="checked">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="11" column="0">
-      <widget class="Line" name="line_2">
-       <property name="lineWidth">
-        <number>2</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_12">
+     <item row="10" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_22">
        <item>
-        <widget class="QCheckBox" name="checkBox_shower">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+        <widget class="QCheckBox" name="checkBox_skip">
          <property name="text">
-          <string>ABCニュースシャワー</string>
+          <string>既存のファイルはスキップ</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBox_shower">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="frame">
+         <property name="checked">
           <bool>true</bool>
          </property>
-         <item>
-          <property name="text">
-           <string>音声と動画</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>音声のみ</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>動画のみ</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="7" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item row="7" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_21">
        <item>
-        <widget class="QCheckBox" name="checkBox_12">
+        <widget class="QCheckBox" name="checkBox_kouryaku">
          <property name="text">
-          <string>まいにちスペイン語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="6" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <item>
-        <widget class="QCheckBox" name="checkBox_11">
-         <property name="text">
-          <string>まいにちドイツ語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="4" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QCheckBox" name="checkBox_10">
-         <property name="text">
-          <string>まいにちハングル講座</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QCheckBox" name="checkBox_9">
-         <property name="text">
-          <string>まいにちイタリア語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QCheckBox" name="checkBox_8">
-         <property name="text">
-          <string>まいにちフランス語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_9">
-       <item>
-        <widget class="QCheckBox" name="checkBox_16">
-         <property name="text">
-          <string>レベルアップ中国語</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="5" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_11">
-       <item>
-        <widget class="QCheckBox" name="checkBox_17">
-         <property name="text">
-          <string>レベルアップハングル講座</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_15">
-       <item>
-        <widget class="QCheckBox" name="checkBox_1">
-         <property name="text">
-          <string>基礎英語2</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_16">
-       <item>
-        <widget class="QCheckBox" name="checkBox_2">
-         <property name="text">
-          <string>基礎英語3</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="3" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_17">
-       <item>
-        <widget class="QCheckBox" name="checkBox_3">
-         <property name="text">
-          <string>英会話タイムトライアル</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="4" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_18">
-       <item>
-        <widget class="QCheckBox" name="checkBox_4">
-         <property name="text">
-          <string>ラジオ英会話</string>
+          <string>攻略英語リスニング</string>
          </property>
         </widget>
        </item>
@@ -287,82 +166,153 @@
        </item>
       </layout>
      </item>
-     <item row="7" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_21">
+     <item row="4" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_18">
        <item>
-        <widget class="QCheckBox" name="checkBox_kouryaku">
+        <widget class="QCheckBox" name="checkBox_4">
          <property name="text">
-          <string>攻略英語リスニング</string>
+          <string>ラジオ英会話</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="12" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_22">
+     <item row="3" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_17">
        <item>
-        <widget class="QCheckBox" name="checkBox_skip">
+        <widget class="QCheckBox" name="checkBox_3">
          <property name="text">
-          <string>既存のファイルはスキップ</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
+          <string>英会話タイムトライアル</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="14" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_23">
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_15">
        <item>
-        <widget class="QCheckBox" name="checkBox_keep_on_error">
+        <widget class="QCheckBox" name="checkBox_1">
          <property name="text">
-          <string>ダウンロード未完でも変換</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
+          <string>基礎英語2</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="12" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_24">
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_16">
        <item>
-        <widget class="QCheckBox" name="checkBox_enews_past">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+        <widget class="QCheckBox" name="checkBox_2">
          <property name="text">
-          <string>「ニュースで英会話」過去分</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
+          <string>基礎英語3</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="15" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_25">
+     <item row="5" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
-        <widget class="QPushButton" name="downloadButton">
+        <widget class="QCheckBox" name="checkBox_17">
          <property name="text">
-          <string>ダウンロード</string>
+          <string>レベルアップハングル講座</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="14" column="1">
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QCheckBox" name="checkBox_16">
+         <property name="text">
+          <string>レベルアップ中国語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QCheckBox" name="checkBox_9">
+         <property name="text">
+          <string>まいにちイタリア語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QCheckBox" name="checkBox_8">
+         <property name="text">
+          <string>まいにちフランス語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QCheckBox" name="checkBox_10">
+         <property name="text">
+          <string>まいにちハングル講座</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="7" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="checkBox_12">
+         <property name="text">
+          <string>まいにちスペイン語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="6" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QCheckBox" name="checkBox_11">
+         <property name="text">
+          <string>まいにちドイツ語</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="8" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_27">
+       <item>
+        <widget class="QCheckBox" name="checkBox_yomu">
+         <property name="text">
+          <string>英語で読む村上春樹</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="10" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_26">
        <item>
         <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="text">
-          <string>拡張子(ABCニュース以外)：</string>
+          <string>　　　　　拡張子：</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -371,6 +321,12 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBox_extension">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <item>
           <property name="text">
            <string>3g2</string>
@@ -425,65 +381,12 @@
        </item>
       </layout>
      </item>
-     <item row="10" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item row="12" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_25">
        <item>
-        <widget class="QCheckBox" name="checkBox_15">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+        <widget class="QPushButton" name="downloadButton">
          <property name="text">
-          <string>ニュースで英会話（読み直し音声）</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="9" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QCheckBox" name="checkBox_14">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>ニュースで英会話　</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBox_enews">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <item>
-          <property name="text">
-           <string>音声と動画</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>音声のみ</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>動画のみ</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="8" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_27">
-       <item>
-        <widget class="QCheckBox" name="checkBox_yomu">
-         <property name="text">
-          <string>英語で読む村上春樹</string>
+          <string>ダウンロード</string>
          </property>
         </widget>
        </item>
@@ -497,8 +400,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>610</y>
+      <x>10</x>
+      <y>720</y>
       <width>257</width>
       <height>20</height>
      </rect>
@@ -516,8 +419,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>640</y>
+      <x>281</x>
+      <y>712</y>
       <width>257</width>
       <height>20</height>
      </rect>
@@ -532,8 +435,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>670</y>
+      <x>491</x>
+      <y>742</y>
       <width>45</width>
       <height>16</height>
      </rect>
@@ -554,8 +457,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>415</x>
-      <y>667</y>
+      <x>436</x>
+      <y>739</y>
       <width>45</width>
       <height>22</height>
      </rect>
@@ -579,8 +482,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>259</x>
-      <y>668</y>
+      <x>280</x>
+      <y>740</y>
       <width>155</width>
       <height>20</height>
      </rect>
@@ -598,8 +501,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>580</y>
+      <x>10</x>
+      <y>690</y>
       <width>247</width>
       <height>20</height>
      </rect>
@@ -611,13 +514,194 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>610</y>
+      <width>268</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="checkBox_14">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>ニュースで英会話　</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_enews">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>音声と動画</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>音声のみ</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>動画のみ</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>650</y>
+      <width>268</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QCheckBox" name="checkBox_15">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>ニュースで英会話（読み直し音声）</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>610</y>
+      <width>270</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_12">
+     <item>
+      <widget class="QCheckBox" name="checkBox_shower">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>ABCニュースシャワー</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_shower">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>音声と動画</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>音声のみ</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>動画のみ</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>690</y>
+      <width>162</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>拡張子(ABCニュース以外)：</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>650</y>
+      <width>269</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_24">
+     <item>
+      <widget class="QCheckBox" name="checkBox_enews_past">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>「ニュースで英会話」過去分</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>gridLayoutWidget_3</zorder>
+   <zorder>checkBox_this_week</zorder>
+   <zorder>checkBox_next_week</zorder>
+   <zorder>label_2</zorder>
+   <zorder>past_days</zorder>
+   <zorder>checkBox_past_week</zorder>
+   <zorder>checkBox_13</zorder>
+   <zorder>comboBox_enews</zorder>
+   <zorder>checkBox_14</zorder>
+   <zorder>checkBox_15</zorder>
+   <zorder>checkBox_shower</zorder>
+   <zorder>comboBox_shower</zorder>
+   <zorder></zorder>
+   <zorder></zorder>
+   <zorder></zorder>
+   <zorder></zorder>
+   <zorder>label_3</zorder>
+   <zorder></zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>570</width>
+     <width>448</width>
      <height>22</height>
     </rect>
    </property>

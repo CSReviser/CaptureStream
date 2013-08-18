@@ -49,6 +49,7 @@
 #define SETTING_SCRAMBLE_URL2 "scramble_url2"
 #define SCRAMBLE_URL1 "http://www47.atwiki.jp/jakago/pub/scramble.xml"
 #define SCRAMBLE_URL2 "http://cdn47.atwikiimg.com/jakago/pub/scramble.xml"
+#define X11_WINDOW_VERTICAL_INCREMENT 5
 
 namespace {
 	bool outputDirSpecified = false;
@@ -87,6 +88,13 @@ MainWindow::MainWindow( QWidget *parent )
 	QRect rect = geometry();
 	rect.setHeight( rect.height() - menuBar()->height() );
 	rect.moveTop( rect.top() + menuBar()->height() );	// 4.6.3だとこれがないとウィンドウタイトルがメニューバーに隠れる
+	setGeometry( rect );
+#endif
+#ifdef Q_WS_X11		// Linuxでは高さが足りなくなるので縦方向に伸ばしておく
+	setMaximumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
+	setMinimumHeight( minimumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
+	QRect rect = geometry();
+	rect.setHeight( rect.height() + X11_WINDOW_VERTICAL_INCREMENT );
 	setGeometry( rect );
 #endif
 
