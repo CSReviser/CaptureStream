@@ -84,7 +84,7 @@ MainWindow::MainWindow( QWidget *parent )
 
 #ifdef Q_WS_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
 	setMaximumHeight( maximumHeight() - menuBar()->height() );
-	setMinimumHeight( minimumHeight() - menuBar()->height() );
+	setMinimumHeight( maximumHeight() - menuBar()->height() );
 	QRect rect = geometry();
 	rect.setHeight( rect.height() - menuBar()->height() );
 	rect.moveTop( rect.top() + menuBar()->height() );	// 4.6.3だとこれがないとウィンドウタイトルがメニューバーに隠れる
@@ -92,7 +92,7 @@ MainWindow::MainWindow( QWidget *parent )
 #endif
 #ifdef Q_WS_X11		// Linuxでは高さが足りなくなるので縦方向に伸ばしておく
 	setMaximumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
-	setMinimumHeight( minimumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
+	setMinimumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
 	QRect rect = geometry();
 	rect.setHeight( rect.height() + X11_WINDOW_VERTICAL_INCREMENT );
 	setGeometry( rect );
