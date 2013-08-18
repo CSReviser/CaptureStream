@@ -119,9 +119,9 @@ MainWindow::MainWindow( QWidget *parent )
 	connect( action, SIGNAL( triggered() ), this, SLOT( customizeSaveFolder() ) );
 	customizeMenu->addAction( action );
 
-	action = new QAction( QString::fromUtf8( "スクランブル文字列..." ), this );
-	connect( action, SIGNAL( triggered() ), this, SLOT( customizeScramble() ) );
-	customizeMenu->addAction( action );
+	//action = new QAction( QString::fromUtf8( "スクランブル文字列..." ), this );
+	//connect( action, SIGNAL( triggered() ), this, SLOT( customizeScramble() ) );
+	//customizeMenu->addAction( action );
  }
 
 MainWindow::~MainWindow() {
