@@ -50,7 +50,9 @@ private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkExecutable( QString path );
 	bool isFfmpegAvailable( QString& path );
+#if !USE_FFMPEG_HLS
 	bool isOpensslAvailable( QString& path );
+#endif
 	bool checkOutputDir( QString dirPath );
 	void downloadENews( bool re_read );
 	
@@ -84,7 +86,9 @@ private:
 
 	static QString flvstreamer;
 	static QString ffmpeg;
+#if !USE_FFMPEG_HLS
 	static QString openssl;
+#endif
 	static QString scramble;
 	static QStringList malformed;
 #if USE_FFMPEG_HLS

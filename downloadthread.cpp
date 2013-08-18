@@ -68,7 +68,9 @@ QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
 
 QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
+#if !USE_FFMPEG_HLS
 QString DownloadThread::openssl;
+#endif
 QString DownloadThread::scramble;
 QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
 
@@ -127,6 +129,7 @@ bool DownloadThread::isFfmpegAvailable( QString& path ) {
 	return checkExecutable( path );
 }
 
+#if !USE_FFMPEG_HLS
 bool DownloadThread::isOpensslAvailable( QString& path ) {
 #ifdef Q_WS_WIN
 	path = Utility::applicationBundlePath() + "openssl.exe";
@@ -135,6 +138,7 @@ bool DownloadThread::isOpensslAvailable( QString& path ) {
 #endif
 	return checkExecutable( path );
 }
+#endif
 
 //通常ファイルが存在する場合のチェックのために末尾にセパレータはついていないこと
 bool DownloadThread::checkOutputDir( QString dirPath ) {
@@ -799,8 +803,13 @@ void DownloadThread::run() {
 		ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
 	};
 
+#if !USE_FFMPEG_HLS
 	if ( !isOpensslAvailable( openssl ) || !isFfmpegAvailable( ffmpeg ) )
 		return;
+#else
+	if ( !isFfmpegAvailable( ffmpeg ) )
+		return;
+#endif
 
 	//emit information( QString::fromUtf8( "2013年7月29日対応版です。" ) );
 	//emit information( QString::fromUtf8( "ニュースで英会話とABCニュースシャワーは未対応です。" ) );
