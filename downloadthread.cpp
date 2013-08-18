@@ -84,12 +84,12 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 		ffmpeg_hash["3g2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
 		ffmpeg_hash["3gp"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
 		ffmpeg_hash["aac"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
-		ffmpeg_hash["avi"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
-		ffmpeg_hash["m4a"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
-		ffmpeg_hash["mka"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
-		ffmpeg_hash["mkv"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
-		ffmpeg_hash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
-		ffmpeg_hash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec libmp3lame %3";
+		ffmpeg_hash["avi"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy %3";
+		ffmpeg_hash["m4a"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy %3";
+		ffmpeg_hash["mka"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy %3";
+		ffmpeg_hash["mkv"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy %3";
+		ffmpeg_hash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy %3";
+		ffmpeg_hash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame %3";
 		ffmpeg_hash["ts"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
 	}
 #endif
@@ -723,7 +723,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	
 #if USE_FFMPEG_HLS
 	Q_ASSERT( ffmpeg_hash.contains( extension ) );
-	QString commandFfmpeg = ffmpeg_hash[extension].arg( ffmpeg, file, outputDir + outFileName );
+	QString commandFfmpeg = ffmpeg_hash[extension].arg( ffmpeg, file, outputDir + outFileName, id3tagTitle, kouza, QString::number( year ) );
 	qDebug() << commandFfmpeg;
 	QProcess process;
 	if ( process.execute( commandFfmpeg ) ) {
