@@ -58,8 +58,41 @@
 #define OriginalFormat "ts"
 #define FilterOption "-bsf:a aac_adtstoasc"
 
+//--------------------------------------------------------------------------------
+QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
+QString DownloadThread::suffix = "listdataflv.xml";
+
+QString DownloadThread::flv_host = "flv.nhk.or.jp";
+QString DownloadThread::flv_app = "ondemand/";
+QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
+
+QString DownloadThread::flvstreamer;
+QString DownloadThread::ffmpeg;
+QString DownloadThread::openssl;
+QString DownloadThread::scramble;
+QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
+
+#if USE_FFMPEG_HLS
+QHash<QString, QString> DownloadThread::ffmpeg_hash;
+#endif
+//--------------------------------------------------------------------------------
+
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
+#if USE_FFMPEG_HLS
+	if ( ffmpeg_hash.empty() ) {
+		ffmpeg_hash["3g2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
+		ffmpeg_hash["3gp"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
+		ffmpeg_hash["aac"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
+		ffmpeg_hash["avi"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
+		ffmpeg_hash["m4a"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
+		ffmpeg_hash["mka"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
+		ffmpeg_hash["mkv"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
+		ffmpeg_hash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy %3";
+		ffmpeg_hash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec libmp3lame %3";
+		ffmpeg_hash["ts"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy %3";
+	}
+#endif
 }
 
 QStringList DownloadThread::getAttribute( QString url, QString attribute ) {
@@ -469,19 +502,8 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 }
 
 //--------------------------------------------------------------------------------
-QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
-QString DownloadThread::suffix = "listdataflv.xml";
 
-QString DownloadThread::flv_host = "flv.nhk.or.jp";
-QString DownloadThread::flv_app = "ondemand/";
-QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
-
-QString DownloadThread::flvstreamer;
-QString DownloadThread::ffmpeg;
-QString DownloadThread::openssl;
-QString DownloadThread::scramble;
-QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
-
+#if !USE_FFMPEG_HLS
 QString DownloadThread::getMasterM3u8( QString file ) {
 	static QString master_m3u8_prefix = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
 	static QString master_m3u8_suffix = "/master.m3u8";
@@ -638,7 +660,7 @@ bool DownloadThread::convertFormat( QString outputDir, QString tsName, QString o
 						.arg( ffmpeg, srcPath, dstPath ) :
 				QString( "\"%1\" -i \"%2\" %3 -vn -acodec copy -y \"%4\"" )
 					.arg( ffmpeg, srcPath, malformed.contains( extension ) ? FilterOption : "", dstPath );
-		qDebug() << commandFfmpeg;
+		//qDebug() << commandFfmpeg;
 		emit current( extension + QString::fromUtf8( "へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		QProcess process;
 		if ( process.execute( commandFfmpeg ) ) {
@@ -659,6 +681,7 @@ bool DownloadThread::convertFormat( QString outputDir, QString tsName, QString o
 		QFile::remove( srcPath );
 	return result;
 }
+#endif
 
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file ) {
 	QString outputDir = MainWindow::outputDir + kouza;
@@ -693,11 +716,23 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 	
 	if ( ui->checkBox_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
-		emit current( QString::fromUtf8( "スキップ：　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		emit current( QString::fromUtf8( "スキップ：　　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		return true;
 	}
-	emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+	emit current( QString::fromUtf8( "ダウンロード中：　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 	
+#if USE_FFMPEG_HLS
+	Q_ASSERT( ffmpeg_hash.contains( extension ) );
+	QString commandFfmpeg = ffmpeg_hash[extension].arg( ffmpeg, file, outputDir + outFileName );
+	qDebug() << commandFfmpeg;
+	QProcess process;
+	if ( process.execute( commandFfmpeg ) ) {
+		emit critical( QString::fromUtf8( "ダウンロード失敗：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		QFile::remove( outputDir + outFileName );
+		return false;
+	} else
+		return true;
+#else
 	QString masterM3u8 = getMasterM3u8( file );
 	if ( !masterM3u8.length() ) {
 		emit critical( QString::fromUtf8( "master.m3u8の取得に失敗しました：　" ) +
@@ -745,6 +780,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 		QFile::remove( outputDir + segmentNames[i] );
 	
 	return constIterator == segmentUrlList.constEnd();
+#endif
 }
 
 QString DownloadThread::paths[] = {
@@ -768,7 +804,7 @@ void DownloadThread::run() {
 
 	//emit information( QString::fromUtf8( "2013年7月29日対応版です。" ) );
 	//emit information( QString::fromUtf8( "ニュースで英会話とABCニュースシャワーは未対応です。" ) );
-	emit information( QString::fromUtf8( "----------------------------------------" ) );
+	//emit information( QString::fromUtf8( "----------------------------------------" ) );
 
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
 		if ( checkbox[i]->isChecked() ) {
