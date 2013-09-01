@@ -21,8 +21,6 @@
 #ifndef DOWNLOADTHREAD_H
 #define DOWNLOADTHREAD_H
 
-#define USE_FFMPEG_HLS 1
-
 #include <QThread>
 #include <QStringList>
 #include <QHash>
@@ -51,22 +49,9 @@ private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkExecutable( QString path );
 	bool isFfmpegAvailable( QString& path );
-#if !USE_FFMPEG_HLS
-	bool isOpensslAvailable( QString& path );
-#endif
 	bool checkOutputDir( QString dirPath );
 	void downloadENews( bool re_read );
 	
-#if !USE_FFMPEG_HLS
-	QString getMasterM3u8( QString file );
-	QString getIndexM3u8( QString masterM3u8 );
-	QByteArray getCryptKey( QString indexM3u8 );
-	QStringList getSegmentUrlList( QString indexM3u8 );
-	QString downloadSegment( QString outputDir, QString segmentUrl );
-	bool decryptSegment( QString outputDir, QString segmentName, int index, QString cryptKey );
-	bool mergeSegments( QString outputDir, QStringList segmentNames, QString mp4Name );	
-	bool convertFormat( QString outputDir, QString mp4Name, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file );
-#endif
 	bool captureStream( QString kouza, QString hdate, QString file );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
@@ -87,15 +72,11 @@ private:
 
 	static QString flvstreamer;
 	static QString ffmpeg;
-#if !USE_FFMPEG_HLS
-	static QString openssl;
-#endif
 	static QString scramble;
 	static QStringList malformed;
-#if USE_FFMPEG_HLS
+
 	static QHash<QString, QString> ffmpegHash;
 	static QHash<QProcess::ProcessError, QString>processError;
-#endif
 
 };
 
