@@ -26,6 +26,7 @@
 #include <QThread>
 #include <QStringList>
 #include <QHash>
+#include <QProcess>
 
 #include "mainwindow.h"
 
@@ -92,7 +93,8 @@ private:
 	static QString scramble;
 	static QStringList malformed;
 #if USE_FFMPEG_HLS
-	static QHash<QString, QString> ffmpeg_hash;
+	static QHash<QString, QString> ffmpegHash;
+	static QHash<QProcess::ProcessError, QString>processError;
 #endif
 
 };

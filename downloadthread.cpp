@@ -34,7 +34,6 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QXmlQuery>
-#include <QProcess>
 #include <QTextCodec>
 #include <QTemporaryFile>
 #include <QDateTime>
@@ -49,15 +48,16 @@
 #include <QTemporaryFile>
 
 #ifdef Q_WS_WIN
-#define Timeout " -m 10000 "
+#define TimeOut " -m 10000 "
 #else
-#define Timeout " -m 10 "
+#define TimeOut " -m 10 "
 #endif
 
 #define ScrambleLength 14
-#define FLV_MIN_SIZE 100	// ストリーミングが存在しなかった場合は13バイトだが少し大きめに設定
+#define FlvMinSize 100	// ストリーミングが存在しなかった場合は13バイトだが少し大きめに設定
 #define OriginalFormat "ts"
 #define FilterOption "-bsf:a aac_adtstoasc"
+#define CancelCheckTimeOut 500	// msec
 
 //--------------------------------------------------------------------------------
 QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
@@ -76,24 +76,33 @@ QString DownloadThread::scramble;
 QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
 
 #if USE_FFMPEG_HLS
-QHash<QString, QString> DownloadThread::ffmpeg_hash;
+QHash<QString, QString> DownloadThread::ffmpegHash;
+QHash<QProcess::ProcessError, QString> DownloadThread::processError;
 #endif
 //--------------------------------------------------------------------------------
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
 #if USE_FFMPEG_HLS
-	if ( ffmpeg_hash.empty() ) {
-		ffmpeg_hash["3g2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpeg_hash["3gp"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpeg_hash["aac"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
-		ffmpeg_hash["avi"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpeg_hash["m4a"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpeg_hash["mka"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpeg_hash["mkv"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpeg_hash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpeg_hash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
-		ffmpeg_hash["ts"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
+	if ( ffmpegHash.empty() ) {
+		ffmpegHash["3g2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["3gp"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["aac"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
+		ffmpegHash["avi"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["m4a"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["mka"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["mkv"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
+		ffmpegHash["ts"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
+	}
+	if ( processError.empty() ) {
+		processError[QProcess::FailedToStart] = "FailedToStart";
+		processError[QProcess::Crashed] = "Crashed";
+		processError[QProcess::Timedout] = "Timedout";
+		processError[QProcess::ReadError] = "ReadError";
+		processError[QProcess::WriteError] = "WriteError";
+		processError[QProcess::UnknownError] = "UnknownError";
 	}
 #endif
 }
@@ -232,11 +241,11 @@ void DownloadThread::downloadENews( bool re_read ) {
 
 			if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !movieExists ) ) {
 				QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
-						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
+						.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 			QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
-						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
+						.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 			QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
-						.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
+						.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 				QProcess process;
 				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 			int exitCode = 0;
@@ -359,11 +368,11 @@ void DownloadThread::downloadShower() {
 
 		if ( !skip || ( saveAudio && !mp3Exists ) || ( saveMovie && !flvExists ) ) {
 			QString command1935 = QString( "\"%1\"%2 -r \"rtmp://%3/%4%5%6\" -o \"%7\" > %8" )
-					.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+					.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 			QString command80 = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" > %8" )
-					.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+					.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 			QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
-					.arg( flvstreamer, Timeout, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
+					.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 			QProcess process;
 			emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 			int exitCode = 0;
@@ -682,7 +691,7 @@ bool DownloadThread::convertFormat( QString outputDir, QString tsName, QString o
 				result = true;
 		}
 	}
-	if ( QFile::exists( srcPath ) && ( extension != OriginalFormat || fileInfo.size() <= FLV_MIN_SIZE ) )
+	if ( QFile::exists( srcPath ) && ( extension != OriginalFormat || fileInfo.size() <= FlvMinSize ) )
 		QFile::remove( srcPath );
 	return result;
 }
@@ -727,7 +736,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	emit current( QString::fromUtf8( "ダウンロード中：　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 	
 #if USE_FFMPEG_HLS
-	Q_ASSERT( ffmpeg_hash.contains( extension ) );
+	Q_ASSERT( ffmpegHash.contains( extension ) );
 	QString dstPath;
 #ifdef Q_WS_WIN
 	if ( true ) {
@@ -743,11 +752,39 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 #else
 	dstPath = outputDir + outFileName;
 #endif
-	QString commandFfmpeg = ffmpeg_hash[extension].arg( ffmpeg, file, dstPath, id3tagTitle, kouza, QString::number( year ) );
-	qDebug() << commandFfmpeg;
+	QString commandFfmpeg = ffmpegHash[extension]
+			.arg( ffmpeg, file, dstPath, id3tagTitle, kouza, QString::number( year ) );
+	//qDebug() << commandFfmpeg;
 	QProcess process;
-	if ( process.execute( commandFfmpeg ) ) {
-		emit critical( QString::fromUtf8( "ダウンロード失敗：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+	process.start( commandFfmpeg );
+	if ( !process.waitForStarted( -1 ) ) {
+		emit critical( QString::fromUtf8( "ffmpeg起動エラー(%3)：　%1　　%2" )
+				.arg( kouza, yyyymmdd,  processError[process.error()] ) );
+		QFile::remove( dstPath );
+		return false;
+	}
+
+	// ユーザのキャンセルを確認しながらffmpegの終了を待つ
+	while ( !process.waitForFinished( CancelCheckTimeOut ) ) {
+		// キャンセルボタンが押されていたらffmpegをkillし、ファイルを削除してリターン
+		if ( isCanceled ) {
+			process.kill();
+			QFile::remove( dstPath );
+			return false;
+		}
+		// 単なるタイムアウトは継続
+		if ( process.error() == QProcess::Timedout )
+			continue;
+		// エラー発生時はメッセージを表示し、出力ファイルを削除してリターン
+		emit critical( QString::fromUtf8( "ffmpeg実行エラー(%3)：　%1　　%2" )
+				.arg( kouza, yyyymmdd,  processError[process.error()] ) );
+		QFile::remove( dstPath );
+		return false;
+	}
+
+	// ffmpeg終了ステータスに応じた処理をしてリターン
+	if ( process.exitCode() ) {
+		emit critical( QString::fromUtf8( "ダウンロード失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
 		QFile::remove( dstPath );
 		return false;
 	} else {
