@@ -60,7 +60,7 @@
 #define CancelCheckTimeOut 500	// msec
 
 //--------------------------------------------------------------------------------
-QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/st/xml/";
+QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
 QString DownloadThread::suffix = "listdataflv.xml";
 
 QString DownloadThread::flv_host = "flv.nhk.or.jp";
@@ -69,16 +69,21 @@ QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
 
 QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
+#if !USE_FFMPEG_HLS
+QString DownloadThread::openssl;
+#endif
 QString DownloadThread::scramble;
 QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
 
+#if USE_FFMPEG_HLS
 QHash<QString, QString> DownloadThread::ffmpegHash;
 QHash<QProcess::ProcessError, QString> DownloadThread::processError;
-
+#endif
 //--------------------------------------------------------------------------------
 
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
+#if USE_FFMPEG_HLS
 	if ( ffmpegHash.empty() ) {
 		ffmpegHash["3g2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
 		ffmpegHash["3gp"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
@@ -99,6 +104,7 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 		processError[QProcess::WriteError] = "WriteError";
 		processError[QProcess::UnknownError] = "UnknownError";
 	}
+#endif
 }
 
 QStringList DownloadThread::getAttribute( QString url, QString attribute ) {
@@ -132,6 +138,17 @@ bool DownloadThread::isFfmpegAvailable( QString& path ) {
 #endif
 	return checkExecutable( path );
 }
+
+#if !USE_FFMPEG_HLS
+bool DownloadThread::isOpensslAvailable( QString& path ) {
+#ifdef Q_WS_WIN
+	path = Utility::applicationBundlePath() + "openssl.exe";
+#else
+	path = "/usr/bin/openssl";
+#endif
+	return checkExecutable( path );
+}
+#endif
 
 //通常ファイルが存在する場合のチェックのために末尾にセパレータはついていないこと
 bool DownloadThread::checkOutputDir( QString dirPath ) {
@@ -500,6 +517,186 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
+#if !USE_FFMPEG_HLS
+QString DownloadThread::getMasterM3u8( QString file ) {
+	static QString master_m3u8_prefix = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
+	static QString master_m3u8_suffix = "/master.m3u8";
+	
+	UrlDownloader urldownloader;
+	QString temp = master_m3u8_prefix + file + master_m3u8_suffix;
+	urldownloader.doDownload( master_m3u8_prefix + file + master_m3u8_suffix );
+	//qDebug() << urldownloader.contents().constData();
+	return urldownloader.contents().length() ? QString::fromAscii(  urldownloader.contents().constData() ) : "";
+}
+
+QString DownloadThread::getIndexM3u8( QString masterM3u8 ) {
+	static QRegExp regexp( "http[^\n]*" );
+	
+	QString result;
+	if ( regexp.indexIn( masterM3u8, 0 ) != -1 ) {
+		QString indexUrl = regexp.cap( 0 );
+		UrlDownloader urldownloader;
+		urldownloader.doDownload( indexUrl );
+		//qDebug() << QByteArray::fromPercentEncoding( urldownloader.contents() ).constData();
+		if ( urldownloader.contents().length() )
+			result = QString::fromAscii(  QByteArray::fromPercentEncoding( urldownloader.contents() ).constData() );
+	}
+	return result;
+}
+
+QByteArray DownloadThread::getCryptKey( QString indexM3u8 ) {
+	static QRegExp regexp( "#EXT-X-KEY:METHOD=AES-128,URI=\"([^\"]*)\"" );
+	
+	QByteArray result;
+	if ( regexp.indexIn( indexM3u8, 0 ) != -1 ) {
+		QString cryptKeyUri = QString::fromAscii( QByteArray::fromPercentEncoding( regexp.cap( 1 ).toAscii() ).constData() );
+		//qDebug() << cryptKeyUri;
+		UrlDownloader urldownloader;
+		urldownloader.doDownload( cryptKeyUri );
+		if ( urldownloader.contents().length() )
+			result = urldownloader.contents().toHex();
+	}
+	return result;
+}
+
+QStringList DownloadThread::getSegmentUrlList( QString indexM3u8 ) {
+	static QRegExp regexp( "http:[^\n]*" );
+	
+	QStringList result;
+	for ( int from = 0; ( from = regexp.indexIn( indexM3u8, from ) ) != -1; from++ ) {
+		QString segmentUrl = QString::fromAscii( QByteArray::fromPercentEncoding( regexp.cap( 0 ).toAscii() ).constData() );
+		//qDebug() << segmentUrl;
+		result << segmentUrl;
+	}
+	return result;
+}
+
+QString DownloadThread::downloadSegment( QString outputDir, QString segmentUrl ) {
+	static QRegExp regexp( "http.*/mp4/(.*).mp4/([^\?]*)\?" );
+	QString result;
+	
+	if ( regexp.indexIn( segmentUrl, 0 ) == -1 ) {
+		emit critical( QString::fromUtf8( "セグメントファイルのURLが認識できません：　" ) + segmentUrl );
+		return result;
+	}
+	QString segmentName = regexp.cap( 1 ) + "-" + regexp.cap( 2 );
+	//qDebug() << segmentName;
+	
+	UrlDownloader urldownloader;
+	urldownloader.doDownload( segmentUrl );
+	int segmentLength = urldownloader.contents().length();
+	//qDebug() << segmentLength;
+	if ( !segmentLength ) {
+		emit critical( QString::fromUtf8( "セグメントのダウンロードに失敗しました：　" ) + segmentName );
+	} else {
+		QFile segmentFile( outputDir + segmentName );
+		if ( !segmentFile.open( QIODevice::WriteOnly ) ) {
+			emit critical( QString::fromUtf8( "セグメントファイルの作成に失敗しました：　" ) + segmentName );
+		} else {
+			if ( segmentFile.write( urldownloader.contents() ) != segmentLength )
+				emit critical( QString::fromUtf8( "セグメントファイルの書き込みに失敗しました：　" ) + segmentName );
+			else
+				result = segmentName;
+			segmentFile.close();
+		}
+	}
+	return result;
+}
+
+bool DownloadThread::decryptSegment( QString outputDir, QString segmentName, int index, QString cryptKey ) {
+	bool result = false;
+	QString encrypted = outputDir + segmentName;
+	QString derypted = outputDir + segmentName + "_d";
+	QString commandOpenssl = QString( "\"%1\" %2 -d -in \"%3\" -out \"%4\" -nosalt -iv %5 -K %6" )
+			.arg( openssl, "aes-128-cbc", encrypted, derypted,
+				  QString( "%1").arg( index, 32, 16, QLatin1Char( '0' ) ), cryptKey );
+	//qDebug() << commandOpenssl;
+	QProcess process;
+	if ( process.execute( commandOpenssl ) ) {
+		emit critical( QString::fromUtf8( "復号化に失敗しました：　" ) + encrypted );
+	} else {
+		if ( !QFile::remove( encrypted ) )
+			emit critical( QString::fromUtf8( "ファイルの削除に失敗しました：　" ) + encrypted );
+		else if ( !QFile::rename( derypted, encrypted ) )
+			emit critical( QString::fromUtf8( "ファイル名の変更に失敗しました：　" ) + derypted );
+		else
+			result = true;
+	}
+	return result;
+}
+
+bool DownloadThread::mergeSegments( QString outputDir, QStringList segmentNames, QString tsName ) {
+	bool result = false;
+	QFile tsFile( outputDir + tsName );
+	if ( !tsFile.open( QIODevice::WriteOnly ) )
+		emit critical( OriginalFormat + QString::fromUtf8( "ファイルの作成に失敗しました：　" ) + tsName );
+	else {
+		int i;
+		for ( i = 0; i < segmentNames.count(); i++ ) {
+			QFile segmentFile( outputDir + segmentNames[i] );
+			if ( !segmentFile.open( QIODevice::ReadOnly ) ) {
+				emit critical( QString::fromUtf8( "セグメントファイルのオープンに失敗しました：　" ) + segmentNames[i] );
+				segmentFile.close();
+				break;
+			}
+			if ( tsFile.write( segmentFile.readAll() ) != segmentFile.size() ) {
+				emit critical( OriginalFormat + QString::fromUtf8( "ファイルの書き込みに失敗しました：　" ) + tsName );
+				segmentFile.close();
+				break;
+			}
+		}
+		if ( i >= segmentNames.count() )
+			result = true;
+		tsFile.close();
+	}
+	if ( !result && tsFile.exists() )
+		tsFile.remove();
+	return result;
+}
+
+bool DownloadThread::convertFormat( QString outputDir, QString tsName, QString outBasename, QString extension, QString id3tagTitle, QString kouza, QString hdate, QString file ) {
+	int month = hdate.left( 2 ).toInt();
+	int year = 2000 + file.left( 2 ).toInt();
+	if ( month <= 4 && QDate::currentDate().year() > year )
+		year += 1;
+	int day = hdate.mid( 3, 2 ).toInt();
+	QDate onair( year, month, day );
+	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
+	QString outFileName = outBasename + "." + extension;
+	QString srcPath = outputDir + tsName;
+	QString dstPath = outputDir + outFileName;
+	QFileInfo fileInfo( srcPath );
+	bool result = false;
+	
+	if ( !isCanceled ) {
+		QString commandFfmpeg = extension == "mp3" ?
+				QString( "\"%1\" -i \"%2\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"%3\"" )
+						.arg( ffmpeg, srcPath, dstPath ) :
+				QString( "\"%1\" -i \"%2\" %3 -vn -acodec copy -y \"%4\"" )
+					.arg( ffmpeg, srcPath, malformed.contains( extension ) ? FilterOption : "", dstPath );
+		//qDebug() << commandFfmpeg;
+		emit current( extension + QString::fromUtf8( "へ変換中：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		QProcess process;
+		if ( process.execute( commandFfmpeg ) ) {
+			emit critical( extension + QString::fromUtf8( "への変換を完了できませんでした：　" ) +
+					kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+		} else {
+			if ( extension == "mp3" ) {
+				QString error;
+				if ( !MP3::id3tag( dstPath, kouza, id3tagTitle, QString::number( year ), "NHK", error ) )
+					emit critical( error );
+				else
+					result = true;
+			} else
+				result = true;
+		}
+	}
+	if ( QFile::exists( srcPath ) && ( extension != OriginalFormat || fileInfo.size() <= FlvMinSize ) )
+		QFile::remove( srcPath );
+	return result;
+}
+#endif
+
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
@@ -538,6 +735,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	}
 	emit current( QString::fromUtf8( "ダウンロード中：　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 	
+#if USE_FFMPEG_HLS
 	Q_ASSERT( ffmpegHash.contains( extension ) );
 	QString dstPath;
 #ifdef Q_WS_WIN
@@ -595,6 +793,55 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 #endif
 		return true;
 	}
+#else
+	QString masterM3u8 = getMasterM3u8( file );
+	if ( !masterM3u8.length() ) {
+		emit critical( QString::fromUtf8( "master.m3u8の取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
+		return false;
+	}
+	QString indexM3u8 = getIndexM3u8( masterM3u8 );
+	if ( !indexM3u8.length() ) {
+		emit critical( QString::fromUtf8( "index_0_a.m3u8の取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
+		return false;
+	}
+	QByteArray cryptKey = getCryptKey( indexM3u8 );
+	if ( !cryptKey.length() ) {
+		emit critical( QString::fromUtf8( "crypt.keyの取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
+		return false;
+	}
+	QStringList segmentUrlList = getSegmentUrlList( indexM3u8 );
+	if ( segmentUrlList.isEmpty() ) {
+		emit critical( QString::fromUtf8( "音声ファイルセグメントのURLの取得に失敗しました：　" ) +
+				kouza + QString::fromUtf8( "　" ) + hdate );
+		return false;
+	}
+	
+	QStringList::const_iterator constIterator;
+	int index = 1;
+	QStringList segmentNames;
+	for ( constIterator = segmentUrlList.constBegin(); constIterator != segmentUrlList.constEnd() && !isCanceled; constIterator++ ) {
+        //qDebug() << *constIterator;
+		QString segmentName = downloadSegment( outputDir, *constIterator );
+		if ( !segmentName.length() )
+			break;
+		segmentNames << segmentName;
+		if ( !decryptSegment( outputDir, segmentName, index, cryptKey ) )
+			break;
+		index++;
+	}
+	if ( constIterator == segmentUrlList.constEnd() ) {
+		mergeSegments( outputDir, segmentNames, outBasename + "." + OriginalFormat );
+		if ( extension != OriginalFormat )
+			convertFormat( outputDir, outBasename + "." + OriginalFormat, outBasename, extension, id3tagTitle, kouza, hdate, file );
+	}
+	for ( int i = 0; i < segmentNames.count(); i++ )
+		QFile::remove( outputDir + segmentNames[i] );
+	
+	return constIterator == segmentUrlList.constEnd();
+#endif
 }
 
 QString DownloadThread::paths[] = {
@@ -613,8 +860,13 @@ void DownloadThread::run() {
 		ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
 	};
 
+#if !USE_FFMPEG_HLS
+	if ( !isOpensslAvailable( openssl ) || !isFfmpegAvailable( ffmpeg ) )
+		return;
+#else
 	if ( !isFfmpegAvailable( ffmpeg ) )
 		return;
+#endif
 
 	//emit information( QString::fromUtf8( "2013年7月29日対応版です。" ) );
 	//emit information( QString::fromUtf8( "ニュースで英会話とABCニュースシャワーは未対応です。" ) );
