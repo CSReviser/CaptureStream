@@ -22,7 +22,7 @@
 #include "utility.h"
 #include "qt4qt5.h"
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <stdio.h>
 
 int main(int argc, char *argv[])
