@@ -20,6 +20,7 @@
 
 #include "mainwindow.h"
 #include "utility.h"
+#include "qt4qt5.h"
 
 #include <QtGui/QApplication>
 #include <stdio.h>
@@ -27,7 +28,7 @@
 int main(int argc, char *argv[])
 {
 #if defined(QT_NO_DEBUG)
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	const char* null = "nul";
 #else
 	const char* null = "/dev/null";

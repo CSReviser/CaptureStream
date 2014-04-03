@@ -24,6 +24,7 @@
 #include "customizedialog.h"
 #include "scrambledialog.h"
 #include "utility.h"
+#include "qt4qt5.h"
 
 #include <QMessageBox>
 #include <QByteArray>
@@ -82,7 +83,7 @@ MainWindow::MainWindow( QWidget *parent )
 	settings( ReadMode );
 	this->setWindowTitle( this->windowTitle() + version() );
 
-#ifdef Q_WS_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
+#ifdef QT4_QT5_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
 	setMaximumHeight( maximumHeight() - menuBar()->height() );
 	setMinimumHeight( maximumHeight() - menuBar()->height() );
 	QRect rect = geometry();
@@ -90,7 +91,7 @@ MainWindow::MainWindow( QWidget *parent )
 	rect.moveTop( rect.top() + menuBar()->height() );	// 4.6.3だとこれがないとウィンドウタイトルがメニューバーに隠れる
 	setGeometry( rect );
 #endif
-#ifdef Q_WS_X11		// Linuxでは高さが足りなくなるので縦方向に伸ばしておく
+#ifdef Q_OS_LINUX		// Linuxでは高さが足りなくなるので縦方向に伸ばしておく
 	setMaximumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
 	setMinimumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
 	QRect rect = geometry();
@@ -98,7 +99,7 @@ MainWindow::MainWindow( QWidget *parent )
 	setGeometry( rect );
 #endif
 
-#if !defined( Q_WS_MAC ) && !defined( Q_WS_WIN )
+#if !defined( QT4_QT5_MAC ) && !defined( QT4_QT5_WIN )
 	QPoint bottomLeft = geometry().bottomLeft();
 	bottomLeft += QPoint( 0, menuBar()->height() + statusBar()->height() + 3 );
 	messagewindow.move( bottomLeft );
@@ -206,7 +207,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 
 	if ( mode == ReadMode ) {	// 設定読み込み
 		QVariant saved;
-#if defined( Q_WS_MAC ) || defined( Q_WS_WIN )	// X11では正しく憶えられないので位置をリストアしない
+#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )	// X11では正しく憶えられないので位置をリストアしない
 		saved = settings.value( SETTING_GEOMETRY );
 		if ( saved.type() == QVariant::Invalid )
 			move( 70, 22 );
@@ -239,7 +240,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 			textComboBoxes[i].comboBox->setCurrentIndex( textComboBoxes[i].comboBox->findText( extension ) );
 		}
 	} else {	// 設定書き出し
-#if defined( Q_WS_MAC ) || defined( Q_WS_WIN )
+#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )
 		settings.setValue( SETTING_GEOMETRY, saveGeometry() );
 #endif
 		if ( outputDirSpecified )

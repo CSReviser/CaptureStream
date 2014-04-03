@@ -25,7 +25,8 @@ HEADERS += mainwindow.h \
     scrambledialog.h \
     utility.h \
     mp3.h \
-    urldownloader.h
+	urldownloader.h \
+	qt4qt5.h
 FORMS += mainwindow.ui \
     customizedialog.ui \
     messagewindow.ui \

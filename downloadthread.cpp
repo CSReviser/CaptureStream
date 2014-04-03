@@ -28,6 +28,7 @@
 #include "urldownloader.h"
 #include "utility.h"
 #include "mp3.h"
+#include "qt4qt5.h"
 
 #include <QCheckBox>
 #include <QDir>
@@ -47,7 +48,7 @@
 //#include <QtCrypto>
 #include <QTemporaryFile>
 
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 #define TimeOut " -m 10000 "
 #else
 #define TimeOut " -m 10 "
@@ -127,7 +128,7 @@ bool DownloadThread::checkExecutable( QString path ) {
 
 bool DownloadThread::isFfmpegAvailable( QString& path ) {
 	path = Utility::applicationBundlePath() + "ffmpeg";
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	path += ".exe";
 #endif
 	return checkExecutable( path );
@@ -182,7 +183,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 	QString flv_app( "flv9/_definst_/" );
 	QString flv_service_prefix_20090330( re_read ? "mp3:e-news-flv/" : "e-news-flv/" );
 	QString flv_service_prefix_20090728( re_read ? "mp3:e-news-flv/" : "e-news/data/" );
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	QString null( "nul" );
 #else
 	QString null( "/dev/null" );
@@ -318,7 +319,7 @@ void DownloadThread::downloadShower() {
 	QString flv_host = "flv.nhk.or.jp";
 	QString flv_app = "ondemand/flv/";
 	QString flv_service_prefix( "worldwave/common/movie/" );
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	QString null( "nul" );
 #else
 	QString null( "/dev/null" );
@@ -518,7 +519,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	QString extension = ui->comboBox_extension->currentText();
 	outFileName = outBasename + "." + extension;
 
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	QString null( "nul" );
 #else
 	QString null( "/dev/null" );
@@ -540,7 +541,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	
 	Q_ASSERT( ffmpegHash.contains( extension ) );
 	QString dstPath;
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	if ( true ) {
 		QTemporaryFile file;
 		if ( file.open() ) {
@@ -590,7 +591,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 		QFile::remove( dstPath );
 		return false;
 	} else {
-#ifdef Q_WS_WIN
+#ifdef QT4_QT5_WIN
 	QFile::rename( dstPath, outputDir + outFileName );
 #endif
 		return true;

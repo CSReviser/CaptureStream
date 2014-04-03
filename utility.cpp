@@ -21,6 +21,7 @@
 #include "utility.h"
 #include "urldownloader.h"
 #include "mainwindow.h"
+#include "qt4qt5.h"
 
 #include <QUrl>
 #include <QRegExp>
@@ -57,7 +58,7 @@ namespace {
 // Macの場合はアプリケーションバンドル、それ以外はアプリケーションが含まれるディレクトリを返す
 QString Utility::applicationBundlePath() {
 	QString result = QCoreApplication::applicationDirPath();
-#ifdef Q_WS_MAC
+#ifdef QT4_QT5_MAC
 	result = QDir::cleanPath( result + UPUPUP );
 #endif
 	result += QDir::separator();

@@ -22,6 +22,7 @@
 #include "ui_messagewindow.h"
 #include "mainwindow.h"
 #include "utility.h"
+#include "qt4qt5.h"
 
 #include <QtGui>
 #include <QTextCursor>
@@ -102,7 +103,7 @@ void MessageWindow::clearText() {
 }
 
 void MessageWindow::settings( bool write ) {
-#if defined( Q_WS_MAC ) || defined( Q_WS_WIN )
+#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )
 	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
 
