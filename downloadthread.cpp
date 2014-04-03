@@ -60,7 +60,7 @@
 #define CancelCheckTimeOut 500	// msec
 
 //--------------------------------------------------------------------------------
-QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/";
+QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/st/xml/";
 QString DownloadThread::suffix = "listdataflv.xml";
 
 QString DownloadThread::flv_host = "flv.nhk.or.jp";
