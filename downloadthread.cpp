@@ -469,7 +469,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 		QChar qchar = format[i];
 		if ( percent ) {
 			percent = false;
-			char ascii = qchar.toAscii();
+			char ascii = qchar.toLatin1();
 			if ( checkIllegal && illegal( ascii ) )
 				continue;
 			switch ( ascii ) {
@@ -489,7 +489,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 		} else {
 			if ( qchar == QChar( '%' ) )
 				percent = true;
-			else if ( checkIllegal && illegal( qchar.toAscii() ) )
+			else if ( checkIllegal && illegal( qchar.toLatin1() ) )
 				continue;
 			else
 				result += qchar;

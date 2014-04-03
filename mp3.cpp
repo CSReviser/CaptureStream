@@ -50,7 +50,7 @@ namespace MP3 {
 
 	void asciiFrame( QByteArray& frames, id3v22_frame_header& frameHeader, QString string ) {
 		static const char asciiMark = '\0';
-		QByteArray asciiBytes = string.toAscii();
+		QByteArray asciiBytes = string.toLatin1();
 		long length = asciiBytes.size() + 2;	// 末尾の１バイトの'\0'と文字コードの指定に１バイト
 		if ( length > 2 && length < 0x01000000 ) {
 			frameHeader.size[0] = (length & 0x00ff0000) >> 16;
