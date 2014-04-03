@@ -4,7 +4,8 @@
 QT += network \
     xml \
 	xmlpatterns \
-	script
+	script \
+	widgets
 TARGET = CaptureStream
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -34,11 +35,17 @@ FORMS += mainwindow.ui \
 
 macx {
 	#CONFIG += x86 ppc #x86_64
+
 	#INCLUDEPATH += /Library/Frameworks/qca.framework/Versions/2/Headers
 	#LIBS += -L/Library/Frameworks -framework qca
 
+	#ツールチェインでgcc-4.0を選ぶこと
+	#QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.4u.sdk
+
 	QMAKE_CFLAGS_RELEASE += -fvisibility=hidden
 	QMAKE_CXXFLAGS_RELEASE += -fvisibility=hidden
+	#QMAKE_CFLAGS_RELEASE += -fvisibility=hidden -mmacosx-version-min=10.4
+	#QMAKE_CXXFLAGS_RELEASE += -fvisibility=hidden -mmacosx-version-min=10.4
 
 	release {
 		QMAKE_POST_LINK += macdeployqt CaptureStream.app
