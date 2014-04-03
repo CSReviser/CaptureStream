@@ -21,7 +21,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QMutex>
 #include <QCloseEvent>
 #include "messagewindow.h"
