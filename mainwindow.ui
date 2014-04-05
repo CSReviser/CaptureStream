@@ -663,7 +663,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -707,19 +707,39 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>checkBox_0</tabstop>
+  <tabstop>checkBox_1</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>checkBox_3</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>checkBox_6</tabstop>
+  <tabstop>checkBox_kouryaku</tabstop>
+  <tabstop>checkBox_yomu</tabstop>
   <tabstop>checkBox_7</tabstop>
+  <tabstop>checkBox_16</tabstop>
   <tabstop>checkBox_8</tabstop>
   <tabstop>checkBox_9</tabstop>
   <tabstop>checkBox_10</tabstop>
+  <tabstop>checkBox_17</tabstop>
   <tabstop>checkBox_11</tabstop>
   <tabstop>checkBox_12</tabstop>
-  <tabstop>checkBox_14</tabstop>
-  <tabstop>comboBox_enews</tabstop>
-  <tabstop>checkBox_15</tabstop>
-  <tabstop>checkBox_this_week</tabstop>
-  <tabstop>checkBox_next_week</tabstop>
+  <tabstop>checkBox_18</tabstop>
+  <tabstop>checkBox_skip</tabstop>
+  <tabstop>comboBox_extension</tabstop>
+  <tabstop>downloadButton</tabstop>
   <tabstop>checkBox_past_week</tabstop>
   <tabstop>past_days</tabstop>
+  <tabstop>comboBox_enews</tabstop>
+  <tabstop>checkBox_next_week</tabstop>
+  <tabstop>checkBox_15</tabstop>
+  <tabstop>checkBox_14</tabstop>
+  <tabstop>checkBox_this_week</tabstop>
+  <tabstop>checkBox_13</tabstop>
+  <tabstop>checkBox_shower</tabstop>
+  <tabstop>comboBox_shower</tabstop>
+  <tabstop>checkBox_enews_past</tabstop>
+  <tabstop>checkBox_keep_on_error</tabstop>
  </tabstops>
  <resources/>
  <connections>
