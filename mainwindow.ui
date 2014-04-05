@@ -378,6 +378,20 @@
        </item>
       </layout>
      </item>
+     <item row="12" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_28">
+       <item>
+        <widget class="QCheckBox" name="checkBox_detailed_message">
+         <property name="text">
+          <string>詳細なメッセージ</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
     </layout>
    </widget>
    <widget class="QCheckBox" name="checkBox_this_week">
@@ -726,9 +740,9 @@
   <tabstop>checkBox_12</tabstop>
   <tabstop>checkBox_18</tabstop>
   <tabstop>checkBox_skip</tabstop>
+  <tabstop>checkBox_detailed_message</tabstop>
   <tabstop>comboBox_extension</tabstop>
   <tabstop>downloadButton</tabstop>
-  <tabstop>checkBox_past_week</tabstop>
   <tabstop>past_days</tabstop>
   <tabstop>comboBox_enews</tabstop>
   <tabstop>checkBox_next_week</tabstop>
@@ -740,6 +754,7 @@
   <tabstop>comboBox_shower</tabstop>
   <tabstop>checkBox_enews_past</tabstop>
   <tabstop>checkBox_keep_on_error</tabstop>
+  <tabstop>checkBox_past_week</tabstop>
  </tabstops>
  <resources/>
  <connections>

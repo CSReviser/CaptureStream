@@ -185,6 +185,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },
 		{ ui->checkBox_next_week, "next_week", false, "", "", "", "" },
 		{ ui->checkBox_past_week, "past_week", false, "", "", "", "" },
+		{ ui->checkBox_detailed_message, "detailed_message", false, "", "", "", "" },
 		{ NULL, NULL, false, "", "", "", "" }
 	};
 	typedef struct ComboBox {
