@@ -59,6 +59,7 @@
 #define OriginalFormat "ts"
 #define FilterOption "-bsf:a aac_adtstoasc"
 #define CancelCheckTimeOut 500	// msec
+#define DebugLog(s) if ( ui->checkBox_detailed_message->isChecked() ) {emit information((s));}
 
 //--------------------------------------------------------------------------------
 QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/st/xml/";
@@ -558,6 +559,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	QString commandFfmpeg = ffmpegHash[extension]
 			.arg( ffmpeg, file, dstPath, id3tagTitle, kouza, QString::number( year ) );
 	//qDebug() << commandFfmpeg;
+	//DebugLog( commandFfmpeg );
 	QProcess process;
 	process.start( commandFfmpeg );
 	if ( !process.waitForStarted( -1 ) ) {
