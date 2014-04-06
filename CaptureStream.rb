@@ -173,7 +173,7 @@ $flv_service_prefix = 'mp4:flv/gogaku/streaming/mp4'
 # 出力フォルダ名とmp3ファイル名の設定
 # 以下は基礎英語1を例にして書いてありますが、他の講座は適宜読み替えてください。
 # %H %K %F は以下のURLにあるXMLに含まれる属性の指定方法です。
-# http://www.nhk.or.jp/gogaku/english/basic1/listdataflv.xml
+# http://cgi2.nhk.or.jp/gogaku/st/xml/english/basic1/listdataflv.xml
 # %k  XMLの講座名属性「基礎英語1」
 # %h  XMLの放送日属性「4月XX日放送分」
 # %f  XMLのflvファイル名属性から拡張子を除いたもの「09-ek1-4252-086」
@@ -187,7 +187,8 @@ $flv_service_prefix = 'mp4:flv/gogaku/streaming/mp4'
 # %d  放送日(1~31)
 # 上記以外の文字に%がついていた場合はその文字そのものとみなします。それ以外の文字はもちろんそのままです。
 # フォルダ名の例： '%r%p英語%y%M' -> （このスクリプトがあるフォルダ内の）英語0905
-# ファイル名の例： 'DE%Y%M%D.mp3' -> DE20090420.mp3
+# ファイル名の例： 'DE%Y%M%D' -> DE20090420
+# 拡張子は$audio_extensionで指定します。
 #--------------------------------------------------------------------------------
 
 # 保存フォルダ名
@@ -554,6 +555,8 @@ def capture_stream( target, kouza, hdate, file )
 	
 	out_folder = to_native( out_folder )
 	out_file = to_native( out_file )
+	id3_album = to_native( id3_album )
+	id3_title = to_native( id3_title )
 	
 	if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
 		print( '-' )
