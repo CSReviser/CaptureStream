@@ -1,13 +1,12 @@
-#!/usr/bin/env ruby -Ku
-$KCODE = 'UTF8'
+#!/usr/bin/env ruby
+# encoding: UTF-8
 
 require 'open-uri'
 require 'rexml/document'
 require 'kconv'
 require 'nkf'
 require 'date'
-require 'jcode'
-require "tempfile"
+require 'tempfile'
 require 'fileutils'
 
 =begin
@@ -17,6 +16,8 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2014/04/06　Rubyの対応バージョンを2.0.0以降に変更。2014/03/31の仕様変更に対応。
+			「ニュースで英会話」と「ABCニュースシャワー」を削除。
 2013/04/10　flvstreamerのダウンロード場所を更新。ffmpegのダウンロードに関する記述を追加。
 2013/04/09　「英語で読む村上春樹」対応。
 2013/04/08　2013年度対応版。
@@ -41,7 +42,7 @@ require 'fileutils'
 2011/04/13　「ABCニュースシャワー」に対応。スクランブル文字列をウィキから自動取得するように修正。
 　　　　　　　翌週公開分のダウンロードをコメントアウト。
 2011/04/05　ストリーミングのURLに追加された文字列への緊急対応。
-2010/05/12　ゴールデンウィーク対応。flvファイル名に追加される"mm"と"vip"に対応。
+2010/05/12　ゴールデンウィーク対応。flvファイル名に追加される'mm'と'vip'に対応。
 2010/04/22　「ニュースで英会話」に対応。指定可能な引数にallを追加。
 2010/04/21　「リトル・チャロ2」に対応。ffmpegへの依存をなくし、独自にflvからmp3を抽出。
 2010/04/20　実践ビジネス英語の10-ebj-4231-295vip.flvの形式に対応。複数講座ダウンロード対応。
@@ -56,8 +57,8 @@ require 'fileutils'
 　　　　　　　バム名のデフォルトを「YYYY_MM_DD」に変更。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【　準備　】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-このスクリプトを実行するためにはRubyとflvstreamerが必要です。flvstreamerはパスの通ったフォ
-ルダに存在する必要があります。
+このスクリプトを実行するためにはRubyとffmpegが必要です。ffmpegはパスの通ったフォルダに存在
+する必要があります。
 
 以下のURLまたは適当な場所からダウンロードするか、ご自分でビルド／インストールしてください。
 以下のURLはあくまで参考のために載せているだけで、リンク先のバイナリの内容については責任を持
@@ -65,42 +66,38 @@ require 'fileutils'
 
 【Windows環境】
 ・Ruby
-	下記のRubyInstaller for Windowsのサイトから1.8.7の最新版をインストールしてください。
-	http://rubyinstaller.org/downloads/
-	このドキュメントを記述している時の最新版のリンクです（動作確認したバージョンです）。
-	http://rubyforge.org/frs/download.php/74293/rubyinstaller-1.8.7-p334.exe
-・flvstreamer
-	http://download-mirror.savannah.gnu.org/releases/flvstreamer/win32/flvstreamer_win32_latest.exe
-	上記のファイルをブラウザでダウンロードした後、ファイル名をflvstreamer.exeに変更し、
-	パスの通っているフォルダに置いてください。Windowsの場合は、CaptureStream.rbと同じフォ
-	ルダでもOKです。
+	下記のRubyInstaller for Windowsのサイトから2.0.0以降の最新版をインストールしてください。
+		http://rubyinstaller.org/downloads/
+	このドキュメントを記述している時の最新版のリンクです。
+		http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.0.0-p451.exe?direct
 ・ffmpeg
 	http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.7z
 	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpeg.exeに変更し、
 	パスの通っているフォルダに置いてください。Windowsの場合は、CaptureStream.rbと同じフォ
 	ルダでもOKです。
+	拡張子の7z(7-Zip)については以下のurlを参照してください。
+		http://www.7-zip.org/				英語
+		http://sevenzip.sourceforge.jp/		日本語
 
 【Macintosh環境】
 ・Ruby
-	標準でインストールされています。
-・flvstreamer
-	http://download-mirror.savannah.gnu.org/releases/flvstreamer/macosx/flvstreamer_macosx_unified_binary_latest
-	上記のファイルをブラウザでダウンロードした後、ファイル名をflvstreamerに変更し、ターミ
-	ナルで実行属性を付け、パスの通ったディレクトリに置いてください。
+	標準でインストールRubyのバージョンが1.8.7の場合、自分で2.0.0以降をインストールする必要
+	があります。パッケージ管理システムのHomebrewでrbenvとruby-buildをインストールし、rbenv
+	でrubyをインストールするのがお勧めです。
+	以下のurlが参考になります。10.8以下のシステムでも手順はそのままで大丈夫でしょう。
+		Mac OS X 10.9にrbenvを使って複数バージョンのRubyをインストールする - Qiita
+		http://qiita.com/ryam/items/33803f9a442399b60232
 ・ffmpeg
-	http://www.evermeet.cx/ffmpeg/ffmpeg-1.2.7z
-	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpegに変更し、ターミ
-	ナルで実行属性を付け、パスの通ったディレクトリに置いてください。このバイナリはx86_64なので、
-	i386またはppcバイナリが必要な場合はソースコードからビルドするか、パッケージマネージャ(Homebrew、
-	MacPorts、Fink)でインストールしてください。
+	http://www.evermeet.cx/ffmpeg/ffmpeg-2.2.7z
+	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpegに変更し、ター
+	ミナルで実行属性を付け、パスの通ったディレクトリに置いてください。このバイナリはx86_64
+	のため、i386またはppcバイナリが必要な場合はソースコードからビルドするか、パッケージマ
+	ネージャ(Homebrew、MacPorts、Fink)でインストールしてください。CaptureStreamの最新版
+	に含まれているものを利用することも可能です。
 
 【Linux環境】
 ・Ruby
-	パッケージでインストール可能だと思います。
-・flvstreamer
-	http://download-mirror.savannah.gnu.org/releases/flvstreamer/linux/
-	上記の場所からご自分のシステムに最適なものをダウンロードしてパスの通ったディレクトリに置くか、
-	パッケージマネージャを使用してインストールしてください。
+	パッケージでrbenvをインストールし、rbenvでrubyをインストールするのがお勧めです。
 ・ffmpeg
 	http://ffmpeg.org/download.html
 	上記のページの「FFmpeg Linux Builds」セクションからリンクをたどって最適なものをダウンロード
@@ -118,14 +115,14 @@ require 'fileutils'
 
 講座名のところには以下のものが複数指定可能です。allを指定するとすべての講座をダウンロードします。
 
-
-basic1 basic2 basic3 timetrial kaiwa business1 business2 chinese french italian 
-hangeul german spanish russian levelup-chinese levelup-hangeul enews shower all
+basic1 basic2 basic3 timetrial kaiwa business1 business2 kouryaku yomu 
+chinese levelup_chinese french italian hangeul levelup_hangeul german spanish russian
+all
 
 $default_target（配列）に指定しておくことで引数指定なしでダウンロードさせることができます。
 入門ビジネス英語と実践ビジネス英語を指定するには以下のように設定します。
 
-	$default_target = ["business1", "business2"]
+	$default_target = ['business1', 'business2']
 
 =end
 
@@ -134,9 +131,8 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = ["basic1", "basic2", "basic3", "timetrial", "kaiwa", "business1", "business2", "kouryaku", "yomu"]
-$multilingual = ["chinese", "french", "italian", "hangeul", "german", "spanish", "russian", "levelup-chinese", "levelup-hangeul"]
-$extra = ["enews", "shower", "enews-all"]
+$english = %w!basic1 basic2 basic3 timetrial kaiwa business1 business2 kouryaku yomu!
+$multilingual = %w!chinese levelup_chinese french italian hangeul levelup_hangeul german spanish russian!
 
 #--------------------------------------------------------------------------------
 # 実行環境の検出とツールのパス設定
@@ -144,15 +140,13 @@ $extra = ["enews", "shower", "enews-all"]
 
 $is_windows = RUBY_PLATFORM.downcase =~ /mswin(?!ce)|mingw|cygwin|bccwin/
 $script_path = File.expand_path( __FILE__ )
-# -m 0はv1.5からのオプションでタイムアウトしない設定
-$flvstreamer = "flvstreamer -m 0"
-$ffmpeg = "ffmpeg"
+$ffmpeg = 'ffmpeg'
 
 if $is_windows
 	$script_path = $script_path.kconv( Kconv::UTF8, Kconv::SJIS )
-	$null = "nul"
+	$null = 'nul'
 else
-	$null = "/dev/null"
+	$null = '/dev/null'
 end
 
 #--------------------------------------------------------------------------------
@@ -168,48 +162,12 @@ def jputs( string )
 end
 
 #--------------------------------------------------------------------------------
-# 2011年度のストリーミングのURLに追加されたダウンロード妨害用文字列対応
-# 優先順位は、マニュアル設定→ウィキから日付指定で取得→gnashでの自動検出
-# 何らかの問題でウィキからスクランブル文字列が取得できない場合には自分で設定してください
-#--------------------------------------------------------------------------------
-
-jputs( "語学講座ダウンローダ (2013/04/09)" )
-
-$scramble = ""
-
-# ウィキから日付を指定してスクランブル文字列を取得する
-if $scramble == ""
-	now = DateTime.now
-	offset = 1 - now.cwday	#直前の月曜までのオフセット
-	if offset == 0 && now.hour <= 9	#月曜日で10時より前なら1週間前の月曜日に
-		offset = -7
-	end
-	monday = Date.today + offset
-	
-	xml_uri = "http://cdn47.atwikiimg.com/jakago/pub/scramble.xml"
-	open( xml_uri ) { |f|
-		doc = REXML::Document.new( f )
-		$scramble = doc.elements["flv/scramble[@date=\"#{monday.strftime( '%Y%m%d' )}\"]/@code"].to_s
-	}
-	if $scramble != ""
-		jputs( "wikiから取得したコード：#$scramble" )
-	else
-		jputs( "wikiから取得したコード： 取得に失敗したか、まだwikiのxmlが更新されていません。" )
-	end
-end
-
-if $scramble == ""
-	jputs( "スクランブル文字列が取得できません。" )
-	exit
-end
-
-#--------------------------------------------------------------------------------
 # flvファイルのサーバとオプション
 #--------------------------------------------------------------------------------
 
-$flv_host = "flv.nhk.or.jp"
-$flv_app = "ondemand/"
-$flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/#{$scramble}/"
+$flv_host = 'flv.nhk.or.jp'
+$flv_app = 'ondemand/'
+$flv_service_prefix = 'mp4:flv/gogaku/streaming/mp4'
 
 #--------------------------------------------------------------------------------
 # 出力フォルダ名とmp3ファイル名の設定
@@ -228,25 +186,21 @@ $flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/#{$scramble}/"
 # %D  ２桁の放送日(01~31)
 # %d  放送日(1~31)
 # 上記以外の文字に%がついていた場合はその文字そのものとみなします。それ以外の文字はもちろんそのままです。
-# フォルダ名の例： "%r%p英語%y%M" -> （このスクリプトがあるフォルダ内の）英語0905
-# ファイル名の例： "DE%Y%M%D.mp3" -> DE20090420.mp3
+# フォルダ名の例： '%r%p英語%y%M' -> （このスクリプトがあるフォルダ内の）英語0905
+# ファイル名の例： 'DE%Y%M%D.mp3' -> DE20090420.mp3
 #--------------------------------------------------------------------------------
 
 # 保存フォルダ名
-$out_folder_hash = {"basic1"=>"%r%p%k", "basic2"=>"%r%p%k", "basic3"=>"%r%p%k", "timetrial"=>"%r%p%k", "kaiwa"=>"%r%p%k", "business1"=>"%r%p%k", "business2"=>"%r%p%k", "kouryaku"=>"%r%p%k", "chinese"=>"%r%p%k", "french"=>"%r%p%k", "italian"=>"%r%p%k", "hangeul"=>"%r%p%k", "german"=>"%r%p%k", "spanish"=>"%r%p%k", "russian"=>"%r%p%k", "levelup-chinese"=>"%r%p%k", "levelup-hangeul"=>"%r%p%k", "enews"=>"%r%p%k", "shower"=>"%r%p%k", "yomu"=>"%r%p%k"
-}
+$out_folder_hash = Hash.new( '%r%p%k' )
 
 # 保存ファイル名
-$out_file_hash = {"basic1"=>"%k_%Y_%M_%D.mp3", "basic2"=>"%k_%Y_%M_%D.mp3", "basic3"=>"%k_%Y_%M_%D.mp3", "timetrial"=>"%k_%Y_%M_%D.mp3", "kaiwa"=>"%k_%Y_%M_%D.mp3", "business1"=>"%k_%Y_%M_%D.mp3", "business2"=>"%k_%Y_%M_%D.mp3", "kouryaku"=>"%k_%Y_%M_%D.mp3", "chinese"=>"%k_%Y_%M_%D.mp3", "french"=>"%k_%Y_%M_%D.mp3", "italian"=>"%k_%Y_%M_%D.mp3", "hangeul"=>"%k_%Y_%M_%D.mp3", "german"=>"%k_%Y_%M_%D.mp3", "spanish"=>"%k_%Y_%M_%D.mp3", "russian"=>"%k_%Y_%M_%D.mp3", "levelup-chinese"=>"%k_%Y_%M_%D.mp3", "levelup-hangeul"=>"%k_%Y_%M_%D.mp3", "enews"=>"%k_%Y_%M_%D.mp3", "shower"=>"%k_%Y_%M_%D.mp3", "yomu"=>"%k_%Y_%M_%D.mp3"
-}
+$out_file_hash = Hash.new( '%k_%Y_%M_%D' )
 
 # id3タグのalbum
-$id3_album = {"basic1"=>"%k", "basic2"=>"%k", "basic3"=>"%k", "timetrial"=>"%k", "kaiwa"=>"%k", "business1"=>"%k", "business2"=>"%k", "kouryaku"=>"%k", "chinese"=>"%k", "french"=>"%k", "italian"=>"%k", "hangeul"=>"%k", "german"=>"%k", "spanish"=>"%k", "russian"=>"%k", "levelup-chinese"=>"%k", "levelup-hangeul"=>"%k", "enews"=>"%k", "shower"=>"%k", "yomu"=>"%k"
-}
+$id3_album = Hash.new( '%k' )
 
 # id3タグのtitle
-$id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y_%M_%D", "timetrial"=>"%k_%Y_%M_%D", "kaiwa"=>"%k_%Y_%M_%D", "business1"=>"%k_%Y_%M_%D", "business2"=>"%k_%Y_%M_%D", "kouryaku"=>"%k_%Y_%M_%D", "chinese"=>"%k_%Y_%M_%D", "french"=>"%k_%Y_%M_%D", "italian"=>"%k_%Y_%M_%D", "hangeul"=>"%k_%Y_%M_%D", "german"=>"%k_%Y_%M_%D", "spanish"=>"%k_%Y_%M_%D", "russian"=>"%k_%Y_%M_%D", "levelup-chinese"=>"%k_%Y_%M_%D", "levelup-hangeul"=>"%k_%Y_%M_%D", "enews"=>"%k_%Y_%M_%D", "shower"=>"%k_%Y_%M_%D", "yomu"=>"%k_%Y_%M_%D"
-}
+$id3_title = Hash.new( '%k_%Y_%M_%D' )
 
 #--------------------------------------------------------------------------------
 # 出力ファルが存在する場合にダウンロードをスキップする場合はtrueを、しない場合はfalseを設定
@@ -255,11 +209,29 @@ $id3_title = {"basic1"=>"%k_%Y_%M_%D", "basic2"=>"%k_%Y_%M_%D", "basic3"=>"%k_%Y
 $skip_existing = true
 
 #--------------------------------------------------------------------------------
-# 音声ファイルの変換後の拡張子を設定（flvを指定するとダウンロードしたファイルそのもの）
-# 3g2, 3gp, aac, avi, flv, m2ts, m4a, mka, mkv, mov, mp3, mp4
+# 音声ファイルの変換後の拡張子を設定（aacを指定するとダウンロードしたファイルそのもの）
+# 3g2, 3gp, aac, avi, m4a, mka, mkv, mov, mp3, ts
 #--------------------------------------------------------------------------------
 
-$audio_extension = "aac"
+$audio_extension = 'aac'
+
+#--------------------------------------------------------------------------------
+# 音声ファイルの拡張子に対応したffmpegの実行コマンド
+# 3g2, 3gp, aac, avi, m4a, mka, mkv, mov, mp3, ts
+#--------------------------------------------------------------------------------
+$akamai = 'https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/'
+$ffmpegHash = {
+	:'3g2' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc",
+	:'3gp' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc",
+	aac:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\"",
+	avi:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
+	m4a:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
+	mka:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
+	mkv:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
+	mov:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
+	mp3:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec libmp3lame \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
+	ts:       "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\""
+}
 
 #--------------------------------------------------------------------------------
 # 出力フォルダ名とmp3ファイル名のフォーマット文字列の解釈
@@ -268,7 +240,7 @@ $audio_extension = "aac"
 # 引数はxmlのhdateとfileアトリビュート
 def make_date( hdate, file )
 	hdate =~ /^(\d+)\D+(\d+)/
-	raise "XMLに含まれている放送日の形式が違います。" if !$1 || $1.length < 1 || $1.length > 2 || !$2 || $2.length < 1 || $2.length > 2
+	raise 'XMLに含まれている放送日の形式が違います。' if !$1 || $1.length < 1 || $1.length > 2 || !$2 || $2.length < 1 || $2.length > 2
 	month = $1
 	day = $2
 	
@@ -281,60 +253,54 @@ def format_name( format, target, kouza, hdate, file )
 	result = String.new()
 	
 	hdate =~ /^(\d+)\D+(\d+)/
-	raise "XMLに含まれている放送日の形式が違います。" if !$1 || $1.length < 1 || $1.length > 2 || !$2 || $2.length < 1 || $2.length > 2
+	raise 'XMLに含まれている放送日の形式が違います。' if !$1 || $1.length < 1 || $1.length > 2 || !$2 || $2.length < 1 || $2.length > 2
 	month = $1
 	day = $2
 	
-	if target == "enews"
-		year = 2000 + file[2,2].to_i
-	elsif target == "shower"
-		year = 2000 + file[3,2].to_i
-	else
-		year = 2000 + file[0,2].to_i
-	end
+	year = 2000 + file[0,2].to_i
 	year += 1 if month =~ /^[123]$/ && Date.today.year > year
-	file = File.basename( file )	# ニュースで英会話が"201004/23_Fri/el/video/20100423_PULITZER"の形式のため
+	file = File.basename( file )	# ニュースで英会話が'201004/23_Fri/el/video/20100423_PULITZER'の形式のため
 	
-	chars = format.each_char
+	chars = format.each_char.to_a
 	percent = false
 	i = 0
-	while i < chars.length
+	while i < chars.size
 		if percent
 			percent = false
 			case chars[i]
-			when "k"
+			when 'k'
 				result << kouza
-			when "h"
+			when 'h'
 				result << hdate
-			when "f"
+			when 'f'
 				if file =~ /(.*)\.flv$/
 					result << $1
 				else
 					result << file
 				end
-			when "r"
+			when 'r'
 				result << File.dirname( $script_path )
-			when "p"
+			when 'p'
 				result << File::Separator
-			when "Y"
+			when 'Y'
 				result << year.to_s
-			when "y"
+			when 'y'
 				result << (year % 100).to_s
-			when "M"
-				result << "0" if month.length < 2
+			when 'M'
+				result << '0' if month.length < 2
 				result << month
-			when "m"
+			when 'm'
 				result << month
-			when "D"
-				result << "0" if day.length < 2
+			when 'D'
+				result << '0' if day.length < 2
 				result << day
-			when "d"
+			when 'd'
 				result = day
 			else
 				result << chars[i]
 			end
 		else
-			if chars[i] == "%"
+			if chars[i] == '%'
 				percent = true
 			else
 				result << chars[i]
@@ -393,7 +359,7 @@ def ascii_frame( identifier, string )
 	result = String.new()
 
 	if identifier.size == 3 && string.size > 0
-		frame_data = NKF.nkf( "-l -W", string )
+		frame_data = NKF.nkf( '-l -W', string )
 		if frame_data.size > 0
 			frame_data = ascii_mark + frame_data + "\x00"
 			result << identifier
@@ -413,7 +379,7 @@ def unicode_frame( identifier, string )
 	result = String.new()
 
 	if identifier.size == 3 && string.size > 0
-		frame_data = NKF.nkf( "-w16L -W", string )
+		frame_data = NKF.nkf( '-w16L -W', string )
 		if frame_data.size > 0
 			frame_data = unicode_mark + frame_data + "\x00\x00"
 			result << identifier
@@ -431,11 +397,11 @@ def create_tag( album, title, year, artist )
 	tag_bytes = String.new()
 	frames = String.new()
 
-	frames << unicode_frame( "TAL", album );
-	frames << unicode_frame( "TT2", title );
-	frames << ascii_frame( "TYE", year );
-	frames << unicode_frame( "TP1", artist );
-	frames << ascii_frame( "TCO", "(101)" );
+	frames << unicode_frame( 'TAL', album );
+	frames << unicode_frame( 'TT2', title );
+	frames << ascii_frame( 'TYE', year );
+	frames << unicode_frame( 'TP1', artist );
+	frames << ascii_frame( 'TCO', '(101)' );
 
 	if frames.size > 0
 		tag_bytes << "ID3\x02\x00\x00"
@@ -458,13 +424,13 @@ def tag_size( buffer )
 	#offset_flags = 5
 	offset_size = 6
 	offset_data = 10
-	identifier = "ID3"
+	identifier = 'ID3'
 
 	result = 0
 
 	if buffer.size > offset_data && buffer[0,3] == identifier
 		# ID3v2.2.0 と ID3v2.3.0、ID3v2.4.0 のみサポート
-		if buffer[offset_version] >= "2"[0] && buffer[offset_version] <= "4"[0] && buffer[offset_version + 1] == "0"[0]
+		if buffer[offset_version] >= '2'[0] && buffer[offset_version] <= '4'[0] && buffer[offset_version + 1] == '0'[0]
 			result = decode_size( buffer[offset_size,4] ) + offset_data
 		end
 	end
@@ -485,20 +451,20 @@ def id3tag( full_path, album, title, year )	# full_pathはto_nativeで変換さ�
 	original_file_moved = false
 
 	begin
-		tag_bytes = create_tag( album, title, year, "NHK" )
-		raise  "書き込むべきタグが見当たらないため、タグの書き込みを中止します。" if tag_bytes.size <= 0
+		tag_bytes = create_tag( album, title, year, 'NHK' )
+		raise  '書き込むべきタグが見当たらないため、タグの書き込みを中止します。' if tag_bytes.size <= 0
 		temp_name = make_temp_name( full_path )
-		raise "作業用ファイル名が作成できないため、タグの書き込みを中止します。" if temp_name.size <= 0
+		raise '作業用ファイル名が作成できないため、タグの書き込みを中止します。' if temp_name.size <= 0
 		FileUtils.move( full_path, temp_name )
 		original_file_moved = true
-		src_file = File.open( temp_name, "r" )
+		src_file = File.open( temp_name, 'r' )
 		src_file.binmode
-		dst_file = File.open( full_path, "w" )
+		dst_file = File.open( full_path, 'w' )
 		dst_file.binmode
-		raise "作業用ファイルへの書き込みに失敗しました。" if dst_file.write( tag_bytes ) != tag_bytes.size
+		raise '作業用ファイルへの書き込みに失敗しました。' if dst_file.write( tag_bytes ) != tag_bytes.size
 		buffer = src_file.read
 		skip = tag_size( buffer )
-		raise "作業用ファイルへの書き込みに失敗しました。" if dst_file.write( buffer[skip..-1] ) != buffer.size - skip
+		raise '作業用ファイルへの書き込みに失敗しました。' if dst_file.write( buffer[skip..-1] ) != buffer.size - skip
 		dst_file.close
 		dst_file = nil
 		src_file.close
@@ -527,7 +493,7 @@ def flv2mp3( flv_path, mp3_path )	# flv_pathとmp3_pathはto_nativeで変換さ�
 
 	begin
 		# Windowsのためにバイナリモードを指定しなければならない
-		port = open( flv_path, "rb" )
+		port = open( flv_path, 'rb' )
 		begin
 			flv = port.read
 		ensure
@@ -535,32 +501,32 @@ def flv2mp3( flv_path, mp3_path )	# flv_pathとmp3_pathはto_nativeで変換さ�
 		end
 		header = FLV_HEADER.new( flv[0,3], flv[3], flv[4], flv[5, 4] )
 		
-		raise "flvファイルにヘッダが含まれていません。" if flv.length < FLV_HEADER_SIZE
-		raise "flvファイルではありません。" unless header.signature == "FLV"
-		raise "音声データが含まれていません。" if (header.flags & 4) == 0
-		raise "flvファイルが対応できる形式ではありません。" unless header.offset == "\x00\x00\x00#{FLV_HEADER_SIZE.chr}"
+		raise 'flvファイルにヘッダが含まれていません。' if flv.length < FLV_HEADER_SIZE
+		raise 'flvファイルではありません。' unless header.signature == 'FLV'
+		raise '音声データが含まれていません。' if (header.flags & 4) == 0
+		raise 'flvファイルが対応できる形式ではありません。' unless header.offset == "\x00\x00\x00#{FLV_HEADER_SIZE.chr}"
 		
 		read_size = FLV_HEADER_SIZE
 		
-		open( mp3_path, "wb" ) { |mp3|
+		open( mp3_path, 'wb' ) { |mp3|
 			while true
 				remaining = flv.length - read_size
 				break if remaining == 4 # 最後のPreviousTagSize => 完了
-				raise "flvファイルの内容が不正です。" if remaining < FLV_TAG_SIZE
+				raise 'flvファイルの内容が不正です。' if remaining < FLV_TAG_SIZE
 				tag = FLV_TAG.new( flv[read_size, 4], flv[read_size + 4], flv[read_size + 5, 3], flv[read_size + 8, 3], flv[read_size + 11], flv[read_size + 12, 3] )
 				read_size += FLV_TAG_SIZE
 				body_length = (tag.bodyLength[0] << 16) + (tag.bodyLength[1] << 8) + tag.bodyLength[2];
-				raise "flvファイルの内容が不正です。" if remaining < body_length
+				raise 'flvファイルの内容が不正です。' if remaining < body_length
 				if tag.type == 8
-					raise "音声データがmp3ではありません。" if (flv[read_size] & 0x00f0) != 0x20
-					raise "mp3ファイルの書き込みに失敗しました。" if mp3.write( flv[read_size + 1, body_length - 1] ) != body_length - 1
+					raise '音声データがmp3ではありません。' if (flv[read_size] & 0x00f0) != 0x20
+					raise 'mp3ファイルの書き込みに失敗しました。' if mp3.write( flv[read_size + 1, body_length - 1] ) != body_length - 1
 				end
 				read_size += body_length
 			end
 		}
 		result = true
 	rescue
-		puts( to_native( $!.to_s + "：" ) + flv_path )
+		puts( to_native( $!.to_s + '：' ) + flv_path )
 		File.delete( mp3_path ) if File.exist?( mp3_path )
 	end
 
@@ -573,7 +539,7 @@ end
 
 def capture_stream( target, kouza, hdate, file, retry_count )
 	out_folder = format_name( $out_folder_hash[target], target, kouza, hdate, file ) # 出力フォルダ
-	out_file = format_name( $out_file_hash[target], target, kouza, hdate, file ) # 変換後の音声ファイル
+	out_file = format_name( $out_file_hash[target], target, kouza, hdate, file ) # 音声ファイル（拡張子なし）
 	id3_album = format_name( $id3_album[target], target, kouza, hdate, file )
 	id3_title = format_name( $id3_title[target], target, kouza, hdate, file )
 	
@@ -583,18 +549,18 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 	
 	exit unless check_output_dir( out_folder )
 	out_folder += File::Separator
+	p out_file;exit
 	
 	out_folder = to_native( out_folder )
 	out_file = to_native( out_file )
 	# 2012年度まではflvに含まれていた音声がmp3だったので、単純に抽出して拡張子をmp3としていたが、
 	# 2013年度からはaacに変更されたたため、抽出した音声用のコンテナを指定できるようにした。
 	# $audio_extensionにmp3を指定した場合は再エンコードされる。
-	out_file = File.basename( out_file, File.extname( out_file ) ) + "." + $audio_extension
-	flv_file = File.basename( out_file, File.extname( out_file ) ) + ".flv"
-	out_file = flv_file if target == "shower"
+	out_file = File.basename( out_file, File.extname( out_file ) ) + '.' + $audio_extension
+	flv_file = File.basename( out_file, File.extname( out_file ) ) + '.flv'
 	
 	if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
-		print( "-" )
+		print( '-' )
 		return true
 	end
 	
@@ -614,7 +580,7 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 		
 		if $? == 0
 			if out_file != flv_file
-				if $audio_extension == "mp3"
+				if $audio_extension == 'mp3'
 					system( "#{$ffmpeg} -i \"#{out_folder}#{flv_file}\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
 				else
 					system( "#{$ffmpeg} -i \"#{out_folder}#{flv_file}\" -vn -acodec copy -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
@@ -624,16 +590,16 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 					exit
 				end
 				if $? == 0
-					if $audio_extension == "mp3"
-						id3tag( out_folder + out_file, id3_album, id3_title, "20" + file[0..1] )
+					if $audio_extension == 'mp3'
+						id3tag( out_folder + out_file, id3_album, id3_title, '20' + file[0..1] )
 					end
 				end
 				File.unlink( out_folder + flv_file )
 			end
 			result = true
-			print( "O" )
+			print( 'O' )
 		else
-			print( "X" )
+			print( 'X' )
 			File.unlink( out_folder + flv_file )
 		end
 	end
@@ -642,150 +608,31 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 end
 
 #--------------------------------------------------------------------------------
-# ニュースで英会話
-#--------------------------------------------------------------------------------
-
-SEARCH_20100323 = 'http://www.google.co.jp/search?q=video_player_wide.swf+site:cgi2.nhk.or.jp&hl=ja&lr=lang_ja&num=100&filter=0&start='
-SEARCH_20090330 = 'http://www.google.co.jp/search?q=video_player.swf+site:cgi2.nhk.or.jp&hl=ja&lr=lang_ja&num=100&filter=0&start='
-REGEXP = %r|video_player(?:_wide)?\.swf\?type=real&(?:amp;)?m_name=([^"]*)|
-ENEWS = 'http://cgi2.nhk.or.jp/e-news/news/index.cgi?ymd='
-FLV_SERVICE_PREFIX_20090728 = 'e-news/data/'
-FLV_SERVICE_PREFIX_20090330 = 'e-news-flv/'
-
-def get_enews_names( search, regexp )
-	result = Array.new
-	for j in (0..3)	# 一度では取りこぼしがあるので
-		i = 0
-		temp = Array.new
-		while true
-			open( search + i.to_s ) { |file|
-				search_result = file.read
-				while regexp =~ search_result
-					temp << $1
-					search_result = $~.post_match
-				end
-			}
-			i += 100
-			break if temp.size < i
-		end
-		result += temp
-	end
-	return result.uniq
-end
-
-# NHKのHPで現在公開中のファイル名を取得
-def current_list
-	result = Array.new
-	today = Date.today
-	i = today - 7
-	while i <= today
-		if i.wday >= 1 && i.wday <= 5	# 月曜から金曜まで
-			open( "#{ENEWS}#{i.strftime( '%Y%m%d' )}" ) { |file|
-				result << $1 if REGEXP =~ file.read
-			}
-		end
-		i += 1
-	end
-	return result
-end
-
-# NHKのHPで現在公開中のファイルをダウンロード
-def download_enews
-	print( "enews: " )
-	flv_service_prefix = $flv_service_prefix
-	$flv_service_prefix = FLV_SERVICE_PREFIX_20090728
-	
-	current_list.each { |flv|
-		capture_stream( "enews", "ニュースで英会話", "#{flv[4,2].to_i}月#{flv[7,2].to_i}日放送分", "#{flv}.flv", 5 )
-	}
-	
-	$flv_service_prefix = flv_service_prefix
-	puts()
-end
-
-# 公開中のファイルとGoogle検索で見つかった過去分すべてをダウンロード
-def download_enews_all
-	# Googleでの検索結果から2010/03/23以降のファイル名を取得
-	flvs_20100323 = get_enews_names( SEARCH_20100323, REGEXP )
-	flvs_20100323 += current_list
-	
-	# Googleでの検索結果から2010/03/22以前のファイル名を取得
-	flvs = get_enews_names( SEARCH_20090330, REGEXP )
-	
-	# 2010/03/22以前のファイルを2009/07/28で振り分ける
-	flvs_20090330 = Array.new
-	flvs_20090728 = Array.new
-	flvs.each { |flv|
-		(flv[0, 6] + flv[7, 2]).to_i >= 20090728 ? (flvs_20090728 << flv) : (flvs_20090330 << flv)
-	}
-	
-	print( "enews-all: " )
-	# 2009/07/28以降のflvをダウンロード
-	flv_service_prefix = $flv_service_prefix
-	$flv_service_prefix = FLV_SERVICE_PREFIX_20090728
-	(flvs_20100323 + flvs_20090728).sort.reverse.uniq.each { |flv|	# 同じ日付で更新されたもの(_newが付いている)があるので逆順にソートしておく
-		capture_stream( "enews", "ニュースで英会話", "#{flv[4,2].to_i}月#{flv[7,2].to_i}日放送分", "#{flv}.flv", 5 )
-	}
-	
-	# 2009/07/27以前のflvをダウンロード
-	$flv_service_prefix = FLV_SERVICE_PREFIX_20090330
-	flvs_20090330.sort.reverse.uniq.each { |flv|	# 念のため逆順にソートしておく
-		capture_stream( "enews", "ニュースで英会話", "#{flv[4,2].to_i}月#{flv[7,2].to_i}日放送分", "#{flv}.flv", 5 )
-	}
-	puts()
-	$flv_service_prefix = flv_service_prefix
-end
-
-#--------------------------------------------------------------------------------
-# ABCニュースシャワー
-#--------------------------------------------------------------------------------
-
-def download_shower
-	flv_service_prefix = $flv_service_prefix
-	$flv_service_prefix = 'flv/worldwave/common/movie/'
-	
-	print( "ABC News Shower: " )
-	xml_uri = "http://www.nhk.or.jp/worldwave/xml/abc_news.xml"
-	
-	open( xml_uri ) { |f|
-		doc = REXML::Document.new( f )
-		doc.elements.each( "rss/channel/item/pubDate" ) { |element|
-			date = Date.parse( element.text )
-			kouza = "ABCニュースシャワー"
-			hdate = "#{date.month}月#{date.day}日放送分"
-			file = "abc" + date.strftime( '%y%m%d' ) + ".flv"
-			capture_stream( "shower", kouza, hdate, file, 5 )
-		}
-	}
-	puts()
-	
-	$flv_service_prefix = flv_service_prefix
-end
-
-#--------------------------------------------------------------------------------
 # メインプログラム
 #--------------------------------------------------------------------------------
 
+jputs( '語学講座ダウンローダ (2014/04/06)' )
+
 Dir.chdir( to_native( File.dirname( $script_path ) ) )
 targets = ARGV.length > 0 ? ARGV : $default_target
-targets = $english + $multilingual + $extra if targets.include?( "all" )
+targets = $english + $multilingual if targets.include?( 'all' )
 
 targets.each { |target|
-	if !$english.include?( target ) && !$multilingual.include?( target ) && !$extra.include?( target )
+	if !$english.include?( target ) && !$multilingual.include?( target )
 		jputs( "サポートされていない講座名です：#{target}" )
-		jputs( "使用方法: ruby #$PROGRAM_NAME [#{$english.join('|')}|#{$multilingual.join('|')}|#{$extra.join('|')}|all]" )
+		jputs( "使用方法: ruby #$PROGRAM_NAME [#{$english.join('|')}|#{$multilingual.join('|')}|all]" )
 		exit
 	end
 }
 
 targets.each { |target|
 	if $english.include?( target )
-		xml_uri = "http://cgi2.nhk.or.jp/gogaku/english/#{target}/#{$scramble}/listdataflv.xml"
+		xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/english/#{target}/listdataflv.xml"
 	elsif $multilingual.include?( target )
-		if target =~ /^levelup-(.*)/
-			xml_uri = "http://cgi2.nhk.or.jp/gogaku/#{$~[1]}/levelup/#{$scramble}/listdataflv.xml"
+		if target =~ /^levelup_(.*)/
+			xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/#{$~[1]}/levelup/listdataflv.xml"
 		else
-			xml_uri = "http://cgi2.nhk.or.jp/gogaku/#{target}/kouza/#{$scramble}/listdataflv.xml"
+			xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/#{target}/kouza/listdataflv.xml"
 		end
 	else
 		next
@@ -794,17 +641,12 @@ targets.each { |target|
 	print( "#{target}: " )
 	open( xml_uri ) { |f|
 		doc = REXML::Document.new( f )
-		doc.elements.each( "musicdata/music" ) { |element|
-			kouza = element.attributes["kouza"]
-			hdate = element.attributes["hdate"]
-			file = element.attributes["file"]
+		doc.elements.each( 'musicdata/music' ) { |element|
+			kouza = element.attributes['kouza']
+			hdate = element.attributes['hdate']
+			file = element.attributes['file']
 			capture_stream( target, kouza, hdate, file, 5 )
 		}
 	}
 	puts()
 }
-
-download_shower if targets.include?( "shower" )
-#download_enews if targets.include?( "enews" )
-#download_enews_all if targets.include?( "enews-all" )
-jputs( "現在、「ニュースで英会話」はサポート外です。" ) if targets.include?( "enews" ) || targets.include?( "enews-all" )
