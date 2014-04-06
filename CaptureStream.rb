@@ -213,24 +213,26 @@ $skip_existing = true
 # 3g2, 3gp, aac, avi, m4a, mka, mkv, mov, mp3, ts
 #--------------------------------------------------------------------------------
 
-$audio_extension = 'aac'
+$audio_extension = 'mp3'
 
 #--------------------------------------------------------------------------------
 # 音声ファイルの拡張子に対応したffmpegの実行コマンド
 # 3g2, 3gp, aac, avi, m4a, mka, mkv, mov, mp3, ts
 #--------------------------------------------------------------------------------
+#$malformed = %w!3g2 3gp m4a mov!
+$has3args = %w!3g2 3gp aac ts!
 $akamai = 'https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/'
-$ffmpegHash = {
-	:'3g2' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc",
-	:'3gp' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc",
-	aac:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\"",
-	avi:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
-	m4a:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
-	mka:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
-	mkv:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
-	mov:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\" -bsf aac_adtstoasc -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
-	mp3:      "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec libmp3lame \"%s\" -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\"",
-	ts:       "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\""
+$ffmpeg_hash = {
+	'3g2' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%s\"",
+	'3gp' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%s\"",
+	'aac' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\"",
+	'avi' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\" -vn -acodec copy \"%s\"",
+	'm4a' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%s\"",
+	'mka' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\" -vn -acodec copy \"%s\"",
+	'mkv' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\" -vn -acodec copy \"%s\"",
+	'mov' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%s\"",
+	'mp3' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -id3v2_version 3 -metadata title=\"%s\" -metadata artist=\"NHK\" -metadata album=\"%s\" -metadata date=\"%s\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%s\"",
+	'ts'  => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -acodec copy \"%s\""
 }
 
 #--------------------------------------------------------------------------------
@@ -537,9 +539,9 @@ end
 # flvのダウンロードとmp3への変換
 #--------------------------------------------------------------------------------
 
-def capture_stream( target, kouza, hdate, file, retry_count )
+def capture_stream( target, kouza, hdate, file )
 	out_folder = format_name( $out_folder_hash[target], target, kouza, hdate, file ) # 出力フォルダ
-	out_file = format_name( $out_file_hash[target], target, kouza, hdate, file ) # 音声ファイル（拡張子なし）
+	out_file = format_name( $out_file_hash[target] + '.' + $audio_extension, target, kouza, hdate, file ) # 音声ファイル（拡張子なし）
 	id3_album = format_name( $id3_album[target], target, kouza, hdate, file )
 	id3_title = format_name( $id3_title[target], target, kouza, hdate, file )
 	
@@ -549,15 +551,9 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 	
 	exit unless check_output_dir( out_folder )
 	out_folder += File::Separator
-	p out_file;exit
 	
 	out_folder = to_native( out_folder )
 	out_file = to_native( out_file )
-	# 2012年度まではflvに含まれていた音声がmp3だったので、単純に抽出して拡張子をmp3としていたが、
-	# 2013年度からはaacに変更されたたため、抽出した音声用のコンテナを指定できるようにした。
-	# $audio_extensionにmp3を指定した場合は再エンコードされる。
-	out_file = File.basename( out_file, File.extname( out_file ) ) + '.' + $audio_extension
-	flv_file = File.basename( out_file, File.extname( out_file ) ) + '.flv'
 	
 	if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
 		print( '-' )
@@ -565,42 +561,25 @@ def capture_stream( target, kouza, hdate, file, retry_count )
 	end
 	
 	result = false
-	if file =~ /(.*)\.flv$/ || file =~ /(.*)\.mp4$/
-		command1935 = "#{$flvstreamer} -r \"rtmp://#{$flv_host}/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{flv_file}\" > #{$null} 2>&1"
-		command80 = "#{$flvstreamer} -r \"rtmpt://#{$flv_host}:80/#{$flv_app}#{$flv_service_prefix}#$1\" -o \"#{out_folder}#{flv_file}\" > #{$null} 2>&1"
-		system( command1935 )
-		if $?.to_i == 0x7f00
-			jputs( "\nflvstreamerが実行できません。パスの通った実行可能な場所にflvstreamerを置いてください。" )
-			exit
+	if file =~ /(.*)\.mp4$/ || file =~ /(.*)\.flv$/
+		command = $ffmpeg_hash[$audio_extension]
+		if $has3args.include?( $audio_extension )
+			command = command % [$ffmpeg, file, out_folder + out_file]
+		else
+			command = command % [$ffmpeg, file, id3_title, id3_album, '20' + file[0..1], out_folder + out_file]
 		end
-		while $? != 0 && retry_count > 0
-			system( "#{command80} --resume" )
-			retry_count -= 1
+		system( command + " > #{$null} 2>&1" )
+		if $?.to_i == 0x7f00
+			jputs( "\nffmpegが実行できません。パスの通った実行可能な場所にffmpegを置いてください。" )
+			exit
 		end
 		
 		if $? == 0
-			if out_file != flv_file
-				if $audio_extension == 'mp3'
-					system( "#{$ffmpeg} -i \"#{out_folder}#{flv_file}\" -vn -acodec libmp3lame -ar 22050 -ac 1 -ab 48k -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
-				else
-					system( "#{$ffmpeg} -i \"#{out_folder}#{flv_file}\" -vn -acodec copy -y \"#{out_folder}#{out_file}\" > #{$null} 2>&1" )
-				end
-				if $?.to_i == 0x7f00
-					jputs( "\nffmpegが実行できません。パスの通った実行可能な場所にflvstreamerを置いてください。" )
-					exit
-				end
-				if $? == 0
-					if $audio_extension == 'mp3'
-						id3tag( out_folder + out_file, id3_album, id3_title, '20' + file[0..1] )
-					end
-				end
-				File.unlink( out_folder + flv_file )
-			end
 			result = true
 			print( 'O' )
 		else
 			print( 'X' )
-			File.unlink( out_folder + flv_file )
+			File.unlink( out_folder + out_file )
 		end
 	end
 	
@@ -645,7 +624,7 @@ targets.each { |target|
 			kouza = element.attributes['kouza']
 			hdate = element.attributes['hdate']
 			file = element.attributes['file']
-			capture_stream( target, kouza, hdate, file, 5 )
+			capture_stream( target, kouza, hdate, file )
 		}
 	}
 	puts()
