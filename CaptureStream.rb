@@ -572,17 +572,14 @@ def capture_stream( target, kouza, hdate, file )
 			command = command % [$ffmpeg, file, id3_title, id3_album, '20' + file[0..1], out_folder + out_file]
 		end
 		system( command + " > #{$null} 2>&1" )
-		if $?.to_i == 0x7f00
-			jputs( "\nffmpegが実行できません。パスの通った実行可能な場所にffmpegを置いてください。" )
-			exit
-		end
-		
 		if $? == 0
 			result = true
 			print( 'O' )
 		else
 			print( 'X' )
-			File.unlink( out_folder + out_file )
+			jputs( "\nffmpegの実行でエラーが起こりました。パスの通った実行可能な場所にHTTP Live Streaming(HLS)に対応したffmpegがあることを確認してください。" )
+			File.unlink( out_folder + out_file ) rescue false
+			exit
 		end
 	end
 	
