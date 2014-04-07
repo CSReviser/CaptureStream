@@ -132,7 +132,7 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = %w!basic1 basic2 basic3 timetrial kaiwa business1 business2 kouryaku yomu!
+$english = %w!basic1 basic2 basic3 timetrial kaiwa business1 business2 kouryaku yomu enjoy!
 $multilingual = %w!chinese levelup_chinese french italian hangeul levelup_hangeul german spanish russian!
 
 #--------------------------------------------------------------------------------
@@ -215,7 +215,7 @@ $skip_existing = true
 # 3g2, 3gp, aac, avi, m4a, mka, mkv, mov, mp3, ts
 #--------------------------------------------------------------------------------
 
-$audio_extension = 'mp3'
+$audio_extension = 'avi'
 
 #--------------------------------------------------------------------------------
 # 音声ファイルの拡張子に対応したffmpegの実行コマンド
