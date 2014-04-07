@@ -72,10 +72,11 @@ require 'fileutils'
 	このドキュメントを記述している時の最新版のリンクです。
 		http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.0.0-p451.exe?direct
 ・ffmpeg
-	http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-latest-win32-static.7z
+	http://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20140403-git-fd2bcfc-win32-static.7z
 	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpeg.exeに変更し、
 	パスの通っているフォルダに置いてください。Windowsの場合は、CaptureStream.rbと同じフォ
-	ルダでもOKです。
+	ルダでもOKです。ffmpeg-20140407-git-a7a82f2-win32-staticではHLSのダウンロードに失
+	敗しますので、必ずしも最新のffmpegがよいとは限りません。
 	拡張子の7z(7-Zip)については以下のurlを参照してください。
 		http://www.7-zip.org/				英語
 		http://sevenzip.sourceforge.jp/		日本語
