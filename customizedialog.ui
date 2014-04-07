@@ -10,19 +10,19 @@
     <x>0</x>
     <y>0</y>
     <width>552</width>
-    <height>578</height>
+    <height>608</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>552</width>
-    <height>578</height>
+    <height>608</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>552</width>
-    <height>578</height>
+    <height>608</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>540</y>
+     <y>570</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -50,7 +50,7 @@
      <x>10</x>
      <y>253</y>
      <width>527</width>
-     <height>281</height>
+     <height>311</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -158,6 +158,16 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>基礎英語1:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="lineEdit_4">
       <property name="text">
@@ -175,18 +185,18 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="4">
-     <widget class="QLineEdit" name="lineEdit_9">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QLineEdit" name="lineEdit">
       <property name="toolTip">
        <string/>
       </property>
+      <property name="text">
+       <string>%k_%Y_%M_%D</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QLineEdit" name="lineEdit_9">
       <property name="text">
        <string>%k_%Y_%M_%D</string>
       </property>
@@ -233,20 +243,6 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_5">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="4">
-     <widget class="QLineEdit" name="lineEdit_12">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
     <item row="4" column="4">
      <widget class="QLineEdit" name="lineEdit_13">
       <property name="text">
@@ -254,8 +250,22 @@
       </property>
      </widget>
     </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="lineEdit_5">
+      <property name="text">
+       <string>%k_%Y_%M_%D</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="1">
      <widget class="QLineEdit" name="lineEdit_2">
+      <property name="text">
+       <string>%k_%Y_%M_%D</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="4">
+     <widget class="QLineEdit" name="lineEdit_12">
       <property name="text">
        <string>%k_%Y_%M_%D</string>
       </property>
@@ -288,16 +298,6 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>中国語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="3">
      <widget class="QLabel" name="label_10">
       <property name="text">
@@ -308,10 +308,20 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
+    <item row="0" column="3">
+     <widget class="QLabel" name="label_9">
       <property name="text">
-       <string>基礎英語1:</string>
+       <string>中国語:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="3">
+     <widget class="QLabel" name="label_13">
+      <property name="text">
+       <string>ドイツ語:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -325,16 +335,6 @@
       </property>
       <property name="text">
        <string>ロシア語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="3">
-     <widget class="QLabel" name="label_13">
-      <property name="text">
-       <string>ドイツ語:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -367,16 +367,6 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
-     <widget class="QLineEdit" name="lineEdit_17">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
     <item row="8" column="3">
      <widget class="QLabel" name="label_22">
       <property name="enabled">
@@ -390,8 +380,41 @@
       </property>
      </widget>
     </item>
+    <item row="8" column="1">
+     <widget class="QLineEdit" name="lineEdit_17">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>%k_%Y_%M_%D</string>
+      </property>
+     </widget>
+    </item>
     <item row="8" column="4">
      <widget class="QLineEdit" name="lineEdit_18">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>%k_%Y_%M_%D</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QLabel" name="label_32">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>エンジョイ</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLineEdit" name="lineEdit_19">
       <property name="enabled">
        <bool>true</bool>
       </property>

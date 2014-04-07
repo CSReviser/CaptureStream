@@ -32,7 +32,7 @@
 namespace {
 	const QString SETTING_GROUP( "MessageWindow" );
 	const QString SETTING_GEOMETRY( "geometry" );
-	const int DEFAULT_WIDTH = 448;
+	const int DEFAULT_WIDTH = 500;
 	const int DEFAULT_HEIGHT = 300;
 }
 

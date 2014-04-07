@@ -27,7 +27,7 @@
 
 #define SETTING_GROUP "CustomizeDialog"
 #define DefaultTitle "%k_%Y_%M_%D"
-#define DefaultFileName "%k_%Y_%M_%D.mp3"
+#define DefaultFileName "%k_%Y_%M_%D"
 
 typedef struct LineEdit {
 	QLineEdit* lineEdit;
@@ -40,7 +40,7 @@ QStringList CustomizeDialog::courses = QStringList()
 		<< QString::fromUtf8( "基礎英語3" ) << QString::fromUtf8( "英会話タイムトライアル" )
 		<< QString::fromUtf8( "ラジオ英会話" ) << QString::fromUtf8( "入門ビジネス英語" )
 		<< QString::fromUtf8( "実践ビジネス英語" ) << QString::fromUtf8( "まいにちロシア語" )
-		<< QString::fromUtf8( "英語で読む村上春樹" )
+		<< QString::fromUtf8( "英語で読む村上春樹" ) << QString::fromUtf8( "エンジョイ・シンプル・イングリッシュ" )
 		<< QString::fromUtf8( "まいにち中国語" ) << QString::fromUtf8( "まいにちフランス語" )
 		<< QString::fromUtf8( "まいにちイタリア語" ) << QString::fromUtf8( "まいにちハングル講座" )
 		<< QString::fromUtf8( "まいにちドイツ語" ) << QString::fromUtf8( "まいにちスペイン語" )
@@ -49,14 +49,14 @@ QStringList CustomizeDialog::courses = QStringList()
 QStringList CustomizeDialog::titleKeys = QStringList()
 		<< "basic1_title" << "basic2_title" << "basic3_title" << "timetrial_title"
 		<< "kaiwa_title" << "business1_title" << "business2_title" << "russian_title"
-		<< "yomu_title"
+		<< "yomu_title" << "enjoy_title"
 		<< "chinese_title" << "french_title" << "italian_title" << "hangeul_title"
 		<< "german_title" << "spanish_title" << "levelup-chinese_title" << "levelup-hangeul_title"
 		<< "kouryaku_title";
 QStringList CustomizeDialog::fileNameKeys = QStringList()
 		<< "basic1_file_name" << "basic2_file_name" << "basic3_file_name" << "timetrial_file_name"
 		<< "kaiwa_file_name" << "business1_file_name" << "business2_file_name" << "russian_file_name"
-		<< "yomu_file_name"
+		<< "yomu_file_name" << "enjoy_file_name"
 		<< "chinese_file_name" << "french_file_name" << "italian_file_name" << "hangeul_file_name"
 		<< "german_file_name" << "spanish_file_name" << "levelup-chinese_file_name" << "levelup-hangeul_file_name"
 		<< "kouryaku_file_name";
@@ -90,7 +90,7 @@ void CustomizeDialog::settings( bool write ) {
 	QLineEdit* lineEdits[] = {
 		ui.lineEdit, ui.lineEdit_2, ui.lineEdit_3, ui.lineEdit_4,
 		ui.lineEdit_5, ui.lineEdit_6, ui.lineEdit_7, ui.lineEdit_8,
-		ui.lineEdit_17,
+		ui.lineEdit_17, ui.lineEdit_19,
 		ui.lineEdit_9, ui.lineEdit_10, ui.lineEdit_11, ui.lineEdit_12,
 		ui.lineEdit_13, ui.lineEdit_14, ui.lineEdit_15, ui.lineEdit_16,
 		ui.lineEdit_18,

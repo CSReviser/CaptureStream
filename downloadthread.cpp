@@ -601,19 +601,25 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 }
 
 QString DownloadThread::paths[] = {
-	"english/basic1", "english/basic2", "english/basic3", "english/timetrial",
-	"english/kaiwa", "english/business1", "english/business2",
-	"chinese/kouza", "french/kouza", "italian/kouza", "hangeul/kouza",
-	"german/kouza", "spanish/kouza", "english/kouryaku", "english/yomu",
-	"chinese/levelup", "hangeul/levelup", "russian/kouza"
+	"english/basic1", "english/basic2", "english/basic3",
+	"english/timetrial", "english/kaiwa", "english/business1",
+	"english/business2", "english/kouryaku", "english/yomu",
+	"english/enjoy",
+	"chinese/kouza", "chinese/levelup", "french/kouza",
+	"italian/kouza", "hangeul/kouza","hangeul/levelup",
+	"german/kouza", "spanish/kouza","russian/kouza"
 };
 
 void DownloadThread::run() {
 	QCheckBox* checkbox[] = {
-		ui->checkBox_0, ui->checkBox_1, ui->checkBox_2, ui->checkBox_3, ui->checkBox_4,
-		ui->checkBox_5, ui->checkBox_6, ui->checkBox_7, ui->checkBox_8, ui->checkBox_9,
-		ui->checkBox_10, ui->checkBox_11, ui->checkBox_12, ui->checkBox_kouryaku, ui->checkBox_yomu,
-		ui->checkBox_16, ui->checkBox_17, ui->checkBox_18, NULL
+		ui->checkBox_basic1, ui->checkBox_basic2, ui->checkBox_basic3,
+		ui->checkBox_timetrial, ui->checkBox_kaiwa, ui->checkBox_business1,
+		ui->checkBox_business2, ui->checkBox_kouryaku, ui->checkBox_yomu,
+		ui->checkBox_enjoy,
+		ui->checkBox_chinese, ui->checkBox_levelup_chinese, ui->checkBox_french,
+		ui->checkBox_italian, ui->checkBox_hangeul, ui->checkBox_levelup_hangeul,
+		ui->checkBox_german, ui->checkBox_spanish, ui->checkBox_russian,
+		NULL
 	};
 
 	if ( !isFfmpegAvailable( ffmpeg ) )
