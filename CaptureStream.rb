@@ -16,6 +16,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2014/04/07　不要なコードを削除。
 2014/04/06　Rubyの対応バージョンを2.0.0以降に変更。2014/03/31の仕様変更に対応。
 			「ニュースで英会話」と「ABCニュースシャワー」を削除。
 2013/04/10　flvstreamerのダウンロード場所を更新。ffmpegのダウンロードに関する記述を追加。
@@ -88,12 +89,12 @@ require 'fileutils'
 		Mac OS X 10.9にrbenvを使って複数バージョンのRubyをインストールする - Qiita
 		http://qiita.com/ryam/items/33803f9a442399b60232
 ・ffmpeg
-	http://www.evermeet.cx/ffmpeg/ffmpeg-2.2.7z
+	http://www.evermeet.cx/ffmpeg/ffmpeg-2.2.7z		（もしくは最新版）
 	上記のファイルをブラウザでダウンロードして解凍した後、ファイル名をffmpegに変更し、ター
 	ミナルで実行属性を付け、パスの通ったディレクトリに置いてください。このバイナリはx86_64
 	のため、i386またはppcバイナリが必要な場合はソースコードからビルドするか、パッケージマ
-	ネージャ(Homebrew、MacPorts、Fink)でインストールしてください。CaptureStreamの最新版
-	に含まれているものを利用することも可能です。
+	ネージャ(Homebrew、MacPorts、Fink)でインストールしてください。Mac版のCaptureStream
+	最新版に含まれているものを利用することも可能です。
 
 【Linux環境】
 ・Ruby
@@ -237,7 +238,7 @@ $ffmpeg_hash = {
 }
 
 #--------------------------------------------------------------------------------
-# 出力フォルダ名とmp3ファイル名のフォーマット文字列の解釈
+# 出力フォルダ名と出力ファイル名のフォーマット文字列の解釈
 #--------------------------------------------------------------------------------
 
 # 引数はxmlのhdateとfileアトリビュート
@@ -344,200 +345,7 @@ def check_output_dir( dir_path )
 end
 
 #--------------------------------------------------------------------------------
-# タグの書き込み
-#--------------------------------------------------------------------------------
-
-def encode_size( int32 )
-	result = String.new()
-	result << ((int32 & (0x0000007f << 21)) >> 21).chr
-	result << ((int32 & (0x0000007f << 14)) >> 14).chr
-	result << ((int32 & (0x0000007f << 7)) >> 7).chr
-	result << (int32 & 0x0000007f).chr
-	return result
-end
-
-# identifier and string must be UTF-8
-def ascii_frame( identifier, string )
-	ascii_mark = "\x00"
-	result = String.new()
-
-	if identifier.size == 3 && string.size > 0
-		frame_data = NKF.nkf( '-l -W', string )
-		if frame_data.size > 0
-			frame_data = ascii_mark + frame_data + "\x00"
-			result << identifier
-			result << ((frame_data.size & 0x00ff0000) >> 16).chr
-			result << ((frame_data.size & 0x0000ff00) >> 8).chr
-			result << (frame_data.size & 0x000000ff).chr
-			result << frame_data
-		end
-	end
-
-	return result
-end
-
-# identifier and string must be UTF-8
-def unicode_frame( identifier, string )
-	unicode_mark = "\x01"
-	result = String.new()
-
-	if identifier.size == 3 && string.size > 0
-		frame_data = NKF.nkf( '-w16L -W', string )
-		if frame_data.size > 0
-			frame_data = unicode_mark + frame_data + "\x00\x00"
-			result << identifier
-			result << ((frame_data.size & 0x00ff0000) >> 16).chr
-			result << ((frame_data.size & 0x0000ff00) >> 8).chr
-			result << (frame_data.size & 0x000000ff).chr
-			result << frame_data
-		end
-	end
-
-	return result
-end
-
-def create_tag( album, title, year, artist )
-	tag_bytes = String.new()
-	frames = String.new()
-
-	frames << unicode_frame( 'TAL', album );
-	frames << unicode_frame( 'TT2', title );
-	frames << ascii_frame( 'TYE', year );
-	frames << unicode_frame( 'TP1', artist );
-	frames << ascii_frame( 'TCO', '(101)' );
-
-	if frames.size > 0
-		tag_bytes << "ID3\x02\x00\x00"
-		tag_bytes << encode_size( frames.size )
-		tag_bytes << frames
-	end
-
-	return tag_bytes
-end
-
-def decode_size( byte4 )
-	return ((byte4[0] & 0x7f) << 21) + ((byte4[1] & 0x7f) << 14) +
-			((byte4[2] & 0x7f) << 7) + (byte4[3] & 0x7f)
-end
-
-# 2.2.0~2.4.0のタグのサイズを計算する
-def tag_size( buffer )
-	#offset_identifier = 0
-	offset_version = 3
-	#offset_flags = 5
-	offset_size = 6
-	offset_data = 10
-	identifier = 'ID3'
-
-	result = 0
-
-	if buffer.size > offset_data && buffer[0,3] == identifier
-		# ID3v2.2.0 と ID3v2.3.0、ID3v2.4.0 のみサポート
-		if buffer[offset_version] >= '2'[0] && buffer[offset_version] <= '4'[0] && buffer[offset_version + 1] == '0'[0]
-			result = decode_size( buffer[offset_size,4] ) + offset_data
-		end
-	end
-
-	return result;
-end
-
-def make_temp_name( original )
-	temp_file = Tempfile.open( File.basename( original ) )
-	result = temp_file.path
-	temp_file.close!
-	return result
-end
-
-def id3tag( full_path, album, title, year )	# full_pathはto_nativeで変換されている
-	src_file = nil
-	dst_file = nil
-	original_file_moved = false
-
-	begin
-		tag_bytes = create_tag( album, title, year, 'NHK' )
-		raise  '書き込むべきタグが見当たらないため、タグの書き込みを中止します。' if tag_bytes.size <= 0
-		temp_name = make_temp_name( full_path )
-		raise '作業用ファイル名が作成できないため、タグの書き込みを中止します。' if temp_name.size <= 0
-		FileUtils.move( full_path, temp_name )
-		original_file_moved = true
-		src_file = File.open( temp_name, 'r' )
-		src_file.binmode
-		dst_file = File.open( full_path, 'w' )
-		dst_file.binmode
-		raise '作業用ファイルへの書き込みに失敗しました。' if dst_file.write( tag_bytes ) != tag_bytes.size
-		buffer = src_file.read
-		skip = tag_size( buffer )
-		raise '作業用ファイルへの書き込みに失敗しました。' if dst_file.write( buffer[skip..-1] ) != buffer.size - skip
-		dst_file.close
-		dst_file = nil
-		src_file.close
-		File.unlink( temp_name )
-		src_file = nil
-	rescue
-		jputs( $! )
-		( src_file.close if src_file ) rescue false
-		( dst_file.close if dst_file ) rescue false
-		( File.unlink( full_path ) if dst_file ) rescue false
-		( FileUtils.move( temp_name, full_path ) if original_file_moved ) rescue false
-	end
-end
-
-#--------------------------------------------------------------------------------
-# flvからmp3への変換
-#--------------------------------------------------------------------------------
-
-FLV_HEADER_SIZE = 9
-FLV_TAG_SIZE = 15
-FLV_HEADER = Struct.new( :signature, :version, :flags, :offset )
-FLV_TAG = Struct.new( :previousTagSize, :type, :bodyLength, :timestamp, :timestampExtended, :streamId )
-
-def flv2mp3( flv_path, mp3_path )	# flv_pathとmp3_pathはto_nativeで変換されている
-	result = false
-
-	begin
-		# Windowsのためにバイナリモードを指定しなければならない
-		port = open( flv_path, 'rb' )
-		begin
-			flv = port.read
-		ensure
-			port.close
-		end
-		header = FLV_HEADER.new( flv[0,3], flv[3], flv[4], flv[5, 4] )
-		
-		raise 'flvファイルにヘッダが含まれていません。' if flv.length < FLV_HEADER_SIZE
-		raise 'flvファイルではありません。' unless header.signature == 'FLV'
-		raise '音声データが含まれていません。' if (header.flags & 4) == 0
-		raise 'flvファイルが対応できる形式ではありません。' unless header.offset == "\x00\x00\x00#{FLV_HEADER_SIZE.chr}"
-		
-		read_size = FLV_HEADER_SIZE
-		
-		open( mp3_path, 'wb' ) { |mp3|
-			while true
-				remaining = flv.length - read_size
-				break if remaining == 4 # 最後のPreviousTagSize => 完了
-				raise 'flvファイルの内容が不正です。' if remaining < FLV_TAG_SIZE
-				tag = FLV_TAG.new( flv[read_size, 4], flv[read_size + 4], flv[read_size + 5, 3], flv[read_size + 8, 3], flv[read_size + 11], flv[read_size + 12, 3] )
-				read_size += FLV_TAG_SIZE
-				body_length = (tag.bodyLength[0] << 16) + (tag.bodyLength[1] << 8) + tag.bodyLength[2];
-				raise 'flvファイルの内容が不正です。' if remaining < body_length
-				if tag.type == 8
-					raise '音声データがmp3ではありません。' if (flv[read_size] & 0x00f0) != 0x20
-					raise 'mp3ファイルの書き込みに失敗しました。' if mp3.write( flv[read_size + 1, body_length - 1] ) != body_length - 1
-				end
-				read_size += body_length
-			end
-		}
-		result = true
-	rescue
-		puts( to_native( $!.to_s + '：' ) + flv_path )
-		File.delete( mp3_path ) if File.exist?( mp3_path )
-	end
-
-	return result
-end
-
-#--------------------------------------------------------------------------------
-# flvのダウンロードとmp3への変換
+# 音声ファイルのダウンロード
 #--------------------------------------------------------------------------------
 
 def capture_stream( target, kouza, hdate, file )
@@ -590,7 +398,7 @@ end
 # メインプログラム
 #--------------------------------------------------------------------------------
 
-jputs( '語学講座ダウンローダ (2014/04/06)' )
+jputs( '語学講座ダウンローダ (2014/04/07)' )
 
 Dir.chdir( to_native( File.dirname( $script_path ) ) )
 targets = ARGV.length > 0 ? ARGV : $default_target
