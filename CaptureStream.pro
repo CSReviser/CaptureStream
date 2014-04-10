@@ -52,3 +52,9 @@ macx {
 		QMAKE_POST_LINK += macdeployqt CaptureStream.app
 	}
 }
+
+OTHER_FILES += \
+    default.qss
+
+RESOURCES += \
+    stylesheet.qrc

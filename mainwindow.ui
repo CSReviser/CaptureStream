@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>498</width>
-    <height>442</height>
+    <height>470</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>498</width>
-    <height>442</height>
+    <height>470</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>498</width>
-    <height>442</height>
+    <height>470</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -44,7 +44,7 @@
       <x>9</x>
       <y>9</y>
       <width>481</width>
-      <height>387</height>
+      <height>401</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
@@ -75,9 +75,23 @@
      <item row="0" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_14">
        <item>
-        <widget class="QCheckBox" name="checkBox_basic1">
+        <widget class="QToolButton" name="toolButton_basic1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>基礎英語1</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -86,9 +100,23 @@
      <item row="0" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QCheckBox" name="checkBox_chinese">
+        <widget class="QToolButton" name="toolButton_chinese">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにち中国語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -97,9 +125,23 @@
      <item row="8" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
-        <widget class="QCheckBox" name="checkBox_russian">
+        <widget class="QToolButton" name="toolButton_russian">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにちロシア語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -108,9 +150,23 @@
      <item row="7" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
-        <widget class="QCheckBox" name="checkBox_spanish">
+        <widget class="QToolButton" name="toolButton_spanish">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにちスペイン語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -119,9 +175,23 @@
      <item row="6" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QCheckBox" name="checkBox_german">
+        <widget class="QToolButton" name="toolButton_german">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにちドイツ語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -130,9 +200,23 @@
      <item row="8" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_27">
        <item>
-        <widget class="QCheckBox" name="checkBox_yomu">
+        <widget class="QToolButton" name="toolButton_yomu">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>英語で読む村上春樹</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -148,11 +232,16 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="text">
-          <string>　　　　　拡張子：</string>
+          <string>　　　　        拡張子：</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -166,6 +255,11 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <item>
           <property name="text">
@@ -225,6 +319,17 @@
       <layout class="QHBoxLayout" name="horizontalLayout_25">
        <item>
         <widget class="QPushButton" name="downloadButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>ダウンロード</string>
          </property>
@@ -235,12 +340,26 @@
      <item row="13" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_28">
        <item>
-        <widget class="QCheckBox" name="checkBox_detailed_message">
+        <widget class="QToolButton" name="toolButton_detailed_message">
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>詳細なメッセージ</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -252,12 +371,26 @@
      <item row="11" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_22">
        <item>
-        <widget class="QCheckBox" name="checkBox_skip">
+        <widget class="QToolButton" name="toolButton_skip">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>既存のファイルはスキップ</string>
          </property>
-         <property name="checked">
+         <property name="checkable">
           <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -266,9 +399,23 @@
      <item row="7" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_21">
        <item>
-        <widget class="QCheckBox" name="checkBox_kouryaku">
+        <widget class="QToolButton" name="toolButton_kouryaku">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>攻略英語リスニング</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -277,9 +424,23 @@
      <item row="5" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_19">
        <item>
-        <widget class="QCheckBox" name="checkBox_business1">
+        <widget class="QToolButton" name="toolButton_business1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>入門ビジネス英語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -288,9 +449,23 @@
      <item row="6" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_20">
        <item>
-        <widget class="QCheckBox" name="checkBox_business2">
+        <widget class="QToolButton" name="toolButton_business2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>実践ビジネス英語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -299,9 +474,23 @@
      <item row="4" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_18">
        <item>
-        <widget class="QCheckBox" name="checkBox_kaiwa">
+        <widget class="QToolButton" name="toolButton_kaiwa">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>ラジオ英会話</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -310,9 +499,23 @@
      <item row="3" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_17">
        <item>
-        <widget class="QCheckBox" name="checkBox_timetrial">
+        <widget class="QToolButton" name="toolButton_timetrial">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>英会話タイムトライアル</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -321,9 +524,23 @@
      <item row="1" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_15">
        <item>
-        <widget class="QCheckBox" name="checkBox_basic2">
+        <widget class="QToolButton" name="toolButton_basic2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>基礎英語2</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -332,9 +549,23 @@
      <item row="2" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_16">
        <item>
-        <widget class="QCheckBox" name="checkBox_basic3">
+        <widget class="QToolButton" name="toolButton_basic3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>基礎英語3</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -343,9 +574,23 @@
      <item row="5" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
-        <widget class="QCheckBox" name="checkBox_levelup_hangeul">
+        <widget class="QToolButton" name="toolButton_levelup_hangeul">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>レベルアップハングル講座</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -354,9 +599,23 @@
      <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_9">
        <item>
-        <widget class="QCheckBox" name="checkBox_levelup_chinese">
+        <widget class="QToolButton" name="toolButton_levelup_chinese">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>レベルアップ中国語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -365,9 +624,23 @@
      <item row="3" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QCheckBox" name="checkBox_italian">
+        <widget class="QToolButton" name="toolButton_italian">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにちイタリア語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -376,9 +649,23 @@
      <item row="2" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QCheckBox" name="checkBox_french">
+        <widget class="QToolButton" name="toolButton_french">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにちフランス語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -387,9 +674,23 @@
      <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QCheckBox" name="checkBox_hangeul">
+        <widget class="QToolButton" name="toolButton_hangeul">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>まいにちハングル講座</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -398,9 +699,23 @@
      <item row="9" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_29">
        <item>
-        <widget class="QCheckBox" name="checkBox_enjoy">
+        <widget class="QToolButton" name="toolButton_enjoy">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>エンジョイ・シンプル・イングリッシュ</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -735,26 +1050,26 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>checkBox_basic1</tabstop>
-  <tabstop>checkBox_basic2</tabstop>
-  <tabstop>checkBox_basic3</tabstop>
-  <tabstop>checkBox_timetrial</tabstop>
-  <tabstop>checkBox_kaiwa</tabstop>
-  <tabstop>checkBox_business1</tabstop>
-  <tabstop>checkBox_business2</tabstop>
-  <tabstop>checkBox_kouryaku</tabstop>
-  <tabstop>checkBox_yomu</tabstop>
-  <tabstop>checkBox_enjoy</tabstop>
-  <tabstop>checkBox_chinese</tabstop>
-  <tabstop>checkBox_levelup_chinese</tabstop>
-  <tabstop>checkBox_french</tabstop>
-  <tabstop>checkBox_italian</tabstop>
-  <tabstop>checkBox_hangeul</tabstop>
-  <tabstop>checkBox_levelup_hangeul</tabstop>
-  <tabstop>checkBox_german</tabstop>
-  <tabstop>checkBox_spanish</tabstop>
-  <tabstop>checkBox_russian</tabstop>
-  <tabstop>checkBox_skip</tabstop>
+  <tabstop>toolButton_basic1</tabstop>
+  <tabstop>toolButton_basic2</tabstop>
+  <tabstop>toolButton_basic3</tabstop>
+  <tabstop>toolButton_timetrial</tabstop>
+  <tabstop>toolButton_kaiwa</tabstop>
+  <tabstop>toolButton_business1</tabstop>
+  <tabstop>toolButton_business2</tabstop>
+  <tabstop>toolButton_kouryaku</tabstop>
+  <tabstop>toolButton_yomu</tabstop>
+  <tabstop>toolButton_enjoy</tabstop>
+  <tabstop>toolButton_chinese</tabstop>
+  <tabstop>toolButton_levelup_chinese</tabstop>
+  <tabstop>toolButton_french</tabstop>
+  <tabstop>toolButton_italian</tabstop>
+  <tabstop>toolButton_hangeul</tabstop>
+  <tabstop>toolButton_levelup_hangeul</tabstop>
+  <tabstop>toolButton_german</tabstop>
+  <tabstop>toolButton_spanish</tabstop>
+  <tabstop>toolButton_russian</tabstop>
+  <tabstop>toolButton_skip</tabstop>
   <tabstop>comboBox_extension</tabstop>
   <tabstop>downloadButton</tabstop>
   <tabstop>past_days</tabstop>
@@ -769,7 +1084,7 @@
   <tabstop>checkBox_enews_past</tabstop>
   <tabstop>checkBox_keep_on_error</tabstop>
   <tabstop>checkBox_past_week</tabstop>
-  <tabstop>checkBox_detailed_message</tabstop>
+  <tabstop>toolButton_detailed_message</tabstop>
  </tabstops>
  <resources/>
  <connections>

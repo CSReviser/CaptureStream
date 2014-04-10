@@ -59,7 +59,7 @@
 #define OriginalFormat "ts"
 #define FilterOption "-bsf:a aac_adtstoasc"
 #define CancelCheckTimeOut 500	// msec
-#define DebugLog(s) if ( ui->checkBox_detailed_message->isChecked() ) {emit information((s));}
+#define DebugLog(s) if ( ui->toolButton_detailed_message->isChecked() ) {emit information((s));}
 
 //--------------------------------------------------------------------------------
 QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/st/xml/";
@@ -163,7 +163,7 @@ bool DownloadThread::checkOutputDir( QString dirPath ) {
 #if 0
 void DownloadThread::downloadENews( bool re_read ) {
 	emit current( QString::fromUtf8( "ニュースで英会話のhtmlを分析中" ) );
-	DownloadManager manager( re_read, ui->checkBox_enews_past->isChecked() );
+	DownloadManager manager( re_read, ui->toolButton_enews_past->isChecked() );
 	manager.singleShot();
 	qSort( manager.flvList.begin(), manager.flvList.end(), qGreater<QString>() );
 
@@ -189,7 +189,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 #else
 	QString null( "/dev/null" );
 #endif
-	bool skip = ui->checkBox_skip->isChecked();
+	bool skip = ui->toolButton_skip->isChecked();
 
 	QStringList flvListBefore20100323;
 	QStringList flvListBefore20090728;
@@ -241,7 +241,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 			if ( (failed1935 || exitCode) && !isCanceled )
 				exitCode = process.execute( command80 );
 
-				bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
+				bool keep_on_error = ui->toolButton_keep_on_error->isChecked();
 				if ( exitCode && !isCanceled ) {
 					QFile flv( flv_file );
 					if ( flv.size() > 0 ) {
@@ -325,7 +325,7 @@ void DownloadThread::downloadShower() {
 #else
 	QString null( "/dev/null" );
 #endif
-	bool skip = ui->checkBox_skip->isChecked();
+	bool skip = ui->toolButton_skip->isChecked();
 
 	// 当月と前月のxmlから可能なものをダウンロードする
 	const char* prototype = "http://www.nhk.or.jp/worldwave/xml/abc_news_%1.xml";
@@ -368,7 +368,7 @@ void DownloadThread::downloadShower() {
 			if ( (failed1935 || exitCode) && !isCanceled )
 				exitCode = process.execute( command80 );
 
-			bool keep_on_error = ui->checkBox_keep_on_error->isChecked();
+			bool keep_on_error = ui->toolButton_keep_on_error->isChecked();
 			if ( exitCode && !isCanceled ) {
 				QFile flv( flv_file );
 				if ( flv.size() > 0 ) {
@@ -534,7 +534,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	QDate onair( year, month, day );
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 	
-	if ( ui->checkBox_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
+	if ( ui->toolButton_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
 		emit current( QString::fromUtf8( "スキップ：　　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		return true;
 	}
@@ -611,14 +611,14 @@ QString DownloadThread::paths[] = {
 };
 
 void DownloadThread::run() {
-	QCheckBox* checkbox[] = {
-		ui->checkBox_basic1, ui->checkBox_basic2, ui->checkBox_basic3,
-		ui->checkBox_timetrial, ui->checkBox_kaiwa, ui->checkBox_business1,
-		ui->checkBox_business2, ui->checkBox_kouryaku, ui->checkBox_yomu,
-		ui->checkBox_enjoy,
-		ui->checkBox_chinese, ui->checkBox_levelup_chinese, ui->checkBox_french,
-		ui->checkBox_italian, ui->checkBox_hangeul, ui->checkBox_levelup_hangeul,
-		ui->checkBox_german, ui->checkBox_spanish, ui->checkBox_russian,
+	QAbstractButton* checkbox[] = {
+		ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
+		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
+		ui->toolButton_business2, ui->toolButton_kouryaku, ui->toolButton_yomu,
+		ui->toolButton_enjoy,
+		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_french,
+		ui->toolButton_italian, ui->toolButton_hangeul, ui->toolButton_levelup_hangeul,
+		ui->toolButton_german, ui->toolButton_spanish, ui->toolButton_russian,
 		NULL
 	};
 

@@ -123,7 +123,12 @@ MainWindow::MainWindow( QWidget *parent )
 	//action = new QAction( QString::fromUtf8( "スクランブル文字列..." ), this );
 	//connect( action, SIGNAL( triggered() ), this, SLOT( customizeScramble() ) );
 	//customizeMenu->addAction( action );
- }
+
+	QFile file(":/default.qss");
+	file.open(QFile::ReadOnly);
+	QString styleSheet = QLatin1String(file.readAll());
+	qApp->setStyleSheet( styleSheet );
+}
 
 MainWindow::~MainWindow() {
 	if ( downloadThread ) {
@@ -147,7 +152,7 @@ void MainWindow::closeEvent( QCloseEvent *event ) {
 
 void MainWindow::settings( enum ReadWriteMode mode ) {
 	typedef struct CheckBox {
-		QCheckBox* checkBox;
+		QAbstractButton* checkBox;
 		QString key;
 		QVariant defaultValue;
 		QString titleKey;
@@ -158,35 +163,35 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #define DefaultTitle "%k_%Y_%M_%D"
 #define DefaultFileName "%k_%Y_%M_%D.mp3"
 	CheckBox checkBoxes[] = {
-		{ ui->checkBox_basic1, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
-		{ ui->checkBox_basic2, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
-		{ ui->checkBox_basic3, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
-		{ ui->checkBox_timetrial, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
-		{ ui->checkBox_kaiwa, "kaiwa", false, "kaiwa_title", DefaultTitle, "kaiwa_file_name", DefaultFileName },
-		{ ui->checkBox_business1, "business1", false, "business1_title", DefaultTitle, "business1_file_name", DefaultFileName },
-		{ ui->checkBox_business2, "business2", false, "business2_title", DefaultTitle, "business2_file_name", DefaultFileName },
-		{ ui->checkBox_chinese, "chinese", false, "chinese_title", DefaultTitle, "chinese_file_name", DefaultFileName },
-		{ ui->checkBox_french, "french", false, "french_title", DefaultTitle, "french_file_name", DefaultFileName },
-		{ ui->checkBox_italian, "italian", false, "italian_title", DefaultTitle, "italian_file_name", DefaultFileName },
-		{ ui->checkBox_hangeul, "hangeul", false, "hangeul_title", DefaultTitle, "hangeul_file_name", DefaultFileName },
-		{ ui->checkBox_german, "german", false, "german_title", DefaultTitle, "german_file_name", DefaultFileName },
-		{ ui->checkBox_spanish, "spanish", false, "spanish_title", DefaultTitle, "spanish_file_name", DefaultFileName },
+		{ ui->toolButton_basic1, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
+		{ ui->toolButton_basic2, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
+		{ ui->toolButton_basic3, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
+		{ ui->toolButton_timetrial, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
+		{ ui->toolButton_kaiwa, "kaiwa", false, "kaiwa_title", DefaultTitle, "kaiwa_file_name", DefaultFileName },
+		{ ui->toolButton_business1, "business1", false, "business1_title", DefaultTitle, "business1_file_name", DefaultFileName },
+		{ ui->toolButton_business2, "business2", false, "business2_title", DefaultTitle, "business2_file_name", DefaultFileName },
+		{ ui->toolButton_chinese, "chinese", false, "chinese_title", DefaultTitle, "chinese_file_name", DefaultFileName },
+		{ ui->toolButton_french, "french", false, "french_title", DefaultTitle, "french_file_name", DefaultFileName },
+		{ ui->toolButton_italian, "italian", false, "italian_title", DefaultTitle, "italian_file_name", DefaultFileName },
+		{ ui->toolButton_hangeul, "hangeul", false, "hangeul_title", DefaultTitle, "hangeul_file_name", DefaultFileName },
+		{ ui->toolButton_german, "german", false, "german_title", DefaultTitle, "german_file_name", DefaultFileName },
+		{ ui->toolButton_spanish, "spanish", false, "spanish_title", DefaultTitle, "spanish_file_name", DefaultFileName },
 		{ ui->checkBox_13, "charo", false, "charo_title", DefaultTitle, "charo_file_name", DefaultFileName },
 		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
 		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
-		{ ui->checkBox_levelup_chinese, "levelup-chinese", false, "levelup-chinese_title", DefaultTitle, "levelup-chinese_file_name", DefaultFileName },
-		{ ui->checkBox_levelup_hangeul, "levelup-hangeul", false, "levelup-hangeul_title", DefaultTitle, "levelup-hangeul_file_name", DefaultFileName },
-		{ ui->checkBox_russian, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
+		{ ui->toolButton_levelup_chinese, "levelup-chinese", false, "levelup-chinese_title", DefaultTitle, "levelup-chinese_file_name", DefaultFileName },
+		{ ui->toolButton_levelup_hangeul, "levelup-hangeul", false, "levelup-hangeul_title", DefaultTitle, "levelup-hangeul_file_name", DefaultFileName },
+		{ ui->toolButton_russian, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
 		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
-		{ ui->checkBox_kouryaku, "kouryaku", false, "kouryaku_title", DefaultTitle, "kouryaku_file_name", DefaultFileName },
-		{ ui->checkBox_yomu, "yomu", false, "yomu_title", DefaultTitle, "yomu_file_name", DefaultFileName },
-		{ ui->checkBox_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
-		{ ui->checkBox_skip, "skip", true, "", "", "", "" },
+		{ ui->toolButton_kouryaku, "kouryaku", false, "kouryaku_title", DefaultTitle, "kouryaku_file_name", DefaultFileName },
+		{ ui->toolButton_yomu, "yomu", false, "yomu_title", DefaultTitle, "yomu_file_name", DefaultFileName },
+		{ ui->toolButton_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
+		{ ui->toolButton_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },
 		{ ui->checkBox_next_week, "next_week", false, "", "", "", "" },
 		{ ui->checkBox_past_week, "past_week", false, "", "", "", "" },
-		{ ui->checkBox_detailed_message, "detailed_message", false, "", "", "", "" },
+		{ ui->toolButton_detailed_message, "detailed_message", false, "", "", "", "" },
 		{ NULL, NULL, false, "", "", "", "" }
 	};
 	typedef struct ComboBox {
