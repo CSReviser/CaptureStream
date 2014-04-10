@@ -60,6 +60,7 @@ protected:
 
 public slots:
 	void download();
+	void toggled( bool checked );
 
 private slots:
 	void finished();

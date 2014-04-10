@@ -312,6 +312,19 @@ void MainWindow::download() {	//「ダウンロード」または「キャンセ
 	}
 }
 
+void MainWindow::toggled( bool checked ) {
+	QObject* sender = this->sender();
+	if ( sender ) {
+		QToolButton* button = (QToolButton*)sender;
+		QString text = button->text();
+		if ( checked )
+			text.insert( 0, QString::fromUtf8( "✓ " ) );
+		else
+			text.remove( 0, 2 );
+		button->setText( text );
+	}
+}
+
 void MainWindow::finished() {
 	if ( downloadThread ) {
 		ui->downloadButton->setEnabled( false );

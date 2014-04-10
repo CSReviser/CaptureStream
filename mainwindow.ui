@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>470</height>
+    <width>541</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>498</width>
-    <height>470</height>
+    <width>541</width>
+    <height>453</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>498</width>
-    <height>470</height>
+    <width>541</width>
+    <height>453</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,39 +43,15 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>481</width>
+      <width>521</width>
       <height>401</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
-     <item row="10" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item row="4" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_18">
        <item>
-        <widget class="Line" name="line">
-         <property name="lineWidth">
-          <number>2</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="10" column="0">
-      <widget class="Line" name="line_2">
-       <property name="lineWidth">
-        <number>2</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_14">
-       <item>
-        <widget class="QToolButton" name="toolButton_basic1">
+        <widget class="QToolButton" name="toolButton_kaiwa">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -88,32 +64,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語1</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="0" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QToolButton" name="toolButton_chinese">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>まいにち中国語</string>
+          <string>ラジオ英会話</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -147,6 +98,41 @@
        </item>
       </layout>
      </item>
+     <item row="5" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_19">
+       <item>
+        <widget class="QToolButton" name="toolButton_business1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>入門ビジネス英語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="10" column="0">
+      <widget class="Line" name="line_2">
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
      <item row="7" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
@@ -172,10 +158,10 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item row="11" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_22">
        <item>
-        <widget class="QToolButton" name="toolButton_german">
+        <widget class="QToolButton" name="toolButton_skip">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -188,7 +174,35 @@
           </font>
          </property>
          <property name="text">
-          <string>まいにちドイツ語</string>
+          <string>既存のファイルはスキップ</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="7" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_21">
+       <item>
+        <widget class="QToolButton" name="toolButton_kouryaku">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>攻略英語リスニング</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -197,10 +211,13 @@
        </item>
       </layout>
      </item>
-     <item row="8" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_27">
+     <item row="13" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_28"/>
+     </item>
+     <item row="13" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_25">
        <item>
-        <widget class="QToolButton" name="toolButton_yomu">
+        <widget class="QPushButton" name="downloadButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -213,10 +230,7 @@
           </font>
          </property>
          <property name="text">
-          <string>英語で読む村上春樹</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
+          <string>ダウンロード</string>
          </property>
         </widget>
        </item>
@@ -315,10 +329,10 @@
        </item>
       </layout>
      </item>
-     <item row="13" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_25">
+     <item row="8" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_27">
        <item>
-        <widget class="QPushButton" name="downloadButton">
+        <widget class="QToolButton" name="toolButton_yomu">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -331,88 +345,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ダウンロード</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="13" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_28">
-       <item>
-        <widget class="QToolButton" name="toolButton_detailed_message">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>詳細なメッセージ</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="11" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_22">
-       <item>
-        <widget class="QToolButton" name="toolButton_skip">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>既存のファイルはスキップ</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="7" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_21">
-       <item>
-        <widget class="QToolButton" name="toolButton_kouryaku">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>攻略英語リスニング</string>
+          <string>英語で読む村上春樹</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -421,10 +354,10 @@
        </item>
       </layout>
      </item>
-     <item row="5" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_19">
+     <item row="6" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QToolButton" name="toolButton_business1">
+        <widget class="QToolButton" name="toolButton_german">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -437,7 +370,7 @@
           </font>
          </property>
          <property name="text">
-          <string>入門ビジネス英語</string>
+          <string>まいにちドイツ語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -446,10 +379,10 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_20">
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QToolButton" name="toolButton_business2">
+        <widget class="QToolButton" name="toolButton_chinese">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -462,7 +395,7 @@
           </font>
          </property>
          <property name="text">
-          <string>実践ビジネス英語</string>
+          <string>まいにち中国語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -471,10 +404,10 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_18">
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_14">
        <item>
-        <widget class="QToolButton" name="toolButton_kaiwa">
+        <widget class="QToolButton" name="toolButton_basic1">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -487,10 +420,24 @@
           </font>
          </property>
          <property name="text">
-          <string>ラジオ英会話</string>
+          <string>基礎英語1</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="10" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="Line" name="line">
+         <property name="lineWidth">
+          <number>2</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -713,6 +660,31 @@
          </property>
          <property name="text">
           <string>エンジョイ・シンプル・イングリッシュ</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="6" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_20">
+       <item>
+        <widget class="QToolButton" name="toolButton_business2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>実践ビジネス英語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -1031,13 +1003,46 @@
      </item>
     </layout>
    </widget>
+   <widget class="QToolButton" name="toolButton_detailed_message">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>570</y>
+      <width>252</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>詳細なメッセージ</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>498</width>
+     <width>541</width>
      <height>22</height>
     </rect>
    </property>
@@ -1084,7 +1089,6 @@
   <tabstop>checkBox_enews_past</tabstop>
   <tabstop>checkBox_keep_on_error</tabstop>
   <tabstop>checkBox_past_week</tabstop>
-  <tabstop>toolButton_detailed_message</tabstop>
  </tabstops>
  <resources/>
  <connections>
@@ -1095,17 +1099,354 @@
    <slot>download()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>539</x>
-     <y>352</y>
+     <x>488</x>
+     <y>487</y>
     </hint>
     <hint type="destinationlabel">
-     <x>125</x>
-     <y>310</y>
+     <x>468</x>
+     <y>552</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_basic1</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>92</x>
+     <y>503</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_basic2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>93</x>
+     <y>556</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_basic3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>95</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_timetrial</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>92</x>
+     <y>586</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_kaiwa</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>127</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>615</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_business1</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>504</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_business2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>270</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>543</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_kouryaku</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>206</x>
+     <y>311</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_yomu</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>219</x>
+     <y>343</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>571</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_enjoy</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>232</x>
+     <y>378</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>211</x>
+     <y>602</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_skip</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_detailed_message</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>113</x>
+     <y>469</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>617</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_chinese</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>317</x>
+     <y>508</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_levelup_chinese</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>533</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_french</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>350</x>
+     <y>551</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_italian</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>371</x>
+     <y>569</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_hangeul</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>314</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>587</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_levelup_hangeul</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>616</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_german</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>612</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_spanish</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>357</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>435</x>
+     <y>507</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_russian</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>339</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>520</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>download()</slot>
+  <slot>toggled(bool)</slot>
  </slots>
 </ui>
