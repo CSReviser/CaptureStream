@@ -54,7 +54,7 @@ macx {
 }
 
 OTHER_FILES += \
-    default.qss
+    stylesheet.qss
 
 RESOURCES += \
     stylesheet.qrc
