@@ -51,6 +51,7 @@
 #define SCRAMBLE_URL1 "http://www47.atwiki.jp/jakago/pub/scramble.xml"
 #define SCRAMBLE_URL2 "http://cdn47.atwikiimg.com/jakago/pub/scramble.xml"
 #define X11_WINDOW_VERTICAL_INCREMENT 5
+#define STYLE_SHEET "stylesheet.qss"
 
 namespace {
 	bool outputDirSpecified = false;
@@ -124,9 +125,16 @@ MainWindow::MainWindow( QWidget *parent )
 	//connect( action, SIGNAL( triggered() ), this, SLOT( customizeScramble() ) );
 	//customizeMenu->addAction( action );
 
-	QFile file(":/default.qss");
-	file.open(QFile::ReadOnly);
-	QString styleSheet = QLatin1String(file.readAll());
+	QString styleSheet;
+	QFile real( Utility::applicationBundlePath() + STYLE_SHEET );
+	if ( real.exists() ) {
+		real.open( QFile::ReadOnly );
+		styleSheet = QLatin1String( real.readAll() );
+	} else {
+		QFile res( QString( ":/" ) + STYLE_SHEET );
+		res.open( QFile::ReadOnly );
+		styleSheet = QLatin1String( res.readAll() );
+	}
 	qApp->setStyleSheet( styleSheet );
 }
 

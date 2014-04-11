@@ -1,7 +1,11 @@
 QWidget {
 	background-color: gainsboro;
-	/*background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);*/
-	/*color: #e7e7eb;*/
+	/*
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 whitesmoke, stop: 1 silver);
+	*/
+	/*
+	color: #e7e7eb;
+	*/
 }
 
 QMenuBar {
@@ -20,25 +24,18 @@ QMenuBar::item:pressed {
 	background: #888888;
 }
 
-/*
-QPlainTextEdit {
-	background-color: lightsteelblue;
-}
-*/
-
 QPushButton {
-	/*background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);*/
 	background-color: gainsboro;
+	/*
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 whitesmoke, stop: 1 silver);
+	*/
 	border-top: 1px solid white;
 	border-left: 1px solid white;
 	border-right: 2px solid dimgray;
 	border-bottom: 2px solid dimgray;
 	border-radius: 10px;
-	/*
-	padding: 3px;
-	min-width: 9ex;
-	min-height: 2.5ex;
-	*/
+	min-width: 12ex;
+	min-height: 3ex;
 }
 
 /*
