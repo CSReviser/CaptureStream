@@ -1,6 +1,23 @@
 QWidget {
-   background-color: #698aab;
-   color: #e7e7eb;
+	background-color: gainsboro;
+	/*background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);*/
+	/*color: #e7e7eb;*/
+}
+
+QMenuBar {
+	background-color: gainsboro;
+}
+
+QMenuBar::item {
+	background: transparent;
+}
+
+QMenuBar::item:selected {
+	background: #a8a8a8;
+}
+
+QMenuBar::item:pressed {
+	background: #888888;
 }
 
 /*
@@ -9,25 +26,34 @@ QPlainTextEdit {
 }
 */
 
-/* We provide a min-width and min-height for push buttons
-   so that they look elegant regardless of the width of the text. */
-/*QPushButton {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);
-	border: 1px solid #8f8f91;
-	border-radius: 6px;
+QPushButton {
+	/*background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);*/
+	background-color: gainsboro;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-right: 2px solid dimgray;
+	border-bottom: 2px solid dimgray;
+	border-radius: 10px;
+	/*
 	padding: 3px;
 	min-width: 9ex;
 	min-height: 2.5ex;
-}*/
+	*/
+}
 
-/*QPushButton:hover {
+/*
+QPushButton:hover {
    background-color: steelblue;
-}*/
+}
+*/
 
-/* Increase the padding, so the text is shifted when the button is
-   pressed. */
-/*QPushButton:pressed {
+QPushButton:pressed {
+	border-top: 2px solid dimgray;
+	border-left: 2px solid dimgray;
+	border-right: 1px solid white;
+	border-bottom: 1px solid white;
+	/*
 	padding-left: 5px;
 	padding-top: 5px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
-}*/
+	*/
+}
