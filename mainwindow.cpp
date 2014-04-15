@@ -51,7 +51,16 @@
 #define SCRAMBLE_URL1 "http://www47.atwiki.jp/jakago/pub/scramble.xml"
 #define SCRAMBLE_URL2 "http://cdn47.atwikiimg.com/jakago/pub/scramble.xml"
 #define X11_WINDOW_VERTICAL_INCREMENT 5
-#define STYLE_SHEET "stylesheet.qss"
+
+#ifdef QT4_QT5_WIN
+#define STYLE_SHEET "stylesheet-win.qss"
+#else
+#ifdef QT4_QT5_MAC
+#define STYLE_SHEET "stylesheet-mac.qss"
+#else
+#define STYLE_SHEET "stylesheet-ubu.qss"
+#endif
+#endif
 
 namespace {
 	bool outputDirSpecified = false;

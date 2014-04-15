@@ -1,8 +1,8 @@
 QWidget {
-	/*
-	font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
-	*/
-	font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "メイリオ", Meiryo, serif;
+	font-family: "Times New Roman", serif;
+	font-size: 12pt;
+	font-weight: bold;
+	font-style: normal;
 	background-color: gainsboro;
 	/*
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 whitesmoke, stop: 1 silver);

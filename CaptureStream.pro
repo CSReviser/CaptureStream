@@ -54,7 +54,9 @@ macx {
 }
 
 OTHER_FILES += \
-    stylesheet.qss
+	stylesheet-mac.qss \
+	stylesheet-win.qss \
+	stylesheet-ubu.qss
 
 RESOURCES += \
     stylesheet.qrc
