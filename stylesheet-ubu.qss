@@ -13,6 +13,7 @@ QWidget {
 }
 
 QMenuBar {
+	color: black;
 	background-color: gainsboro;
 }
 
