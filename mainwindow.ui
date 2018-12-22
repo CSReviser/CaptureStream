@@ -207,7 +207,7 @@
           </font>
          </property>
          <property name="text">
-          <string>攻略英語リスニング</string>
+          <string>遠山顕の英会話楽習</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -350,7 +350,7 @@
           </font>
          </property>
          <property name="text">
-          <string>英語で読む村上春樹</string>
+          <string>高校生からはじめる「現代英語」</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -425,7 +425,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語1</string>
+          <string>基礎英語0/基礎英語1</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -539,7 +539,7 @@
           </font>
          </property>
          <property name="text">
-          <string>レベルアップハングル講座</string>
+          <string>レベルアップハングル講座+おもてなし</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -564,7 +564,7 @@
           </font>
          </property>
          <property name="text">
-          <string>レベルアップ中国語</string>
+          <string>レベルアップ中国語+おもてなし</string>
          </property>
          <property name="checkable">
           <bool>true</bool>

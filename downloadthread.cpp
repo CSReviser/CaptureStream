@@ -601,24 +601,26 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 }
 
 QString DownloadThread::paths[] = {
-	"english/basic1", "english/basic2", "english/basic3",
+	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
-	"english/business2", "english/kouryaku", "english/yomu",
+	"english/business2", "english/gakusyu", "english/gendai",
 	"english/enjoy",
-	"chinese/kouza", "chinese/levelup", "french/kouza",
-	"italian/kouza", "hangeul/kouza","hangeul/levelup",
-	"german/kouza", "spanish/kouza","russian/kouza"
+	"chinese/kouza", "chinese/levelup", "chinese/omotenashi", "french/kouza", "french/kouza2",
+	"italian/kouza", "italian/kouza2", "hangeul/kouza","hangeul/levelup", "hangeul/omotenashi",
+	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2"
 };
 
 void DownloadThread::run() {
 	QAbstractButton* checkbox[] = {
-		ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
+		ui->toolButton_basic1, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
 		ui->toolButton_business2, ui->toolButton_kouryaku, ui->toolButton_yomu,
 		ui->toolButton_enjoy,
-		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_french,
-		ui->toolButton_italian, ui->toolButton_hangeul, ui->toolButton_levelup_hangeul,
-		ui->toolButton_german, ui->toolButton_spanish, ui->toolButton_russian,
+		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_levelup_chinese, 
+		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
+		ui->toolButton_hangeul, ui->toolButton_levelup_hangeul, ui->toolButton_levelup_hangeul,
+		ui->toolButton_german, ui->toolButton_german, ui->toolButton_spanish,  ui->toolButton_spanish, 
+		ui->toolButton_russian, ui->toolButton_russian,
 		NULL
 	};
 
