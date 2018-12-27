@@ -180,6 +180,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #define DefaultTitle "%k_%Y_%M_%D"
 #define DefaultFileName "%k_%Y_%M_%D.mp3"
 	CheckBox checkBoxes[] = {
+		{ ui->toolButton_basic0, "basic0", false, "basic0_title", DefaultTitle, "basic0_file_name", DefaultFileName },
 		{ ui->toolButton_basic1, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
 		{ ui->toolButton_basic2, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
 		{ ui->toolButton_basic3, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
@@ -197,11 +198,13 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
 		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
 		{ ui->toolButton_levelup_chinese, "levelup-chinese", false, "levelup-chinese_title", DefaultTitle, "levelup-chinese_file_name", DefaultFileName },
+		{ ui->toolButton_omotenashi_chinese, "omotenashi-chinese", false, "omotenashi-chinese_title", DefaultTitle, "omotenashi-chinese_file_name", DefaultFileName },
 		{ ui->toolButton_levelup_hangeul, "levelup-hangeul", false, "levelup-hangeul_title", DefaultTitle, "levelup-hangeul_file_name", DefaultFileName },
+		{ ui->toolButton_omotenashi_hangeul, "omotenashi-hangeul", false, "omotenashi-hangeul_title", DefaultTitle, "omotenashi-hangeul_file_name", DefaultFileName },
 		{ ui->toolButton_russian, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
 		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
-		{ ui->toolButton_kouryaku, "kouryaku", false, "kouryaku_title", DefaultTitle, "kouryaku_file_name", DefaultFileName },
-		{ ui->toolButton_yomu, "yomu", false, "yomu_title", DefaultTitle, "yomu_file_name", DefaultFileName },
+		{ ui->toolButton_gakusyu, "gakusyu", false, "gakusyu_title", DefaultTitle, "kgakusyu_file_name", DefaultFileName },
+		{ ui->toolButton_gendai, "gendai", false, "gendai_title", DefaultTitle, "gendai_file_name", DefaultFileName },
 		{ ui->toolButton_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
 		{ ui->toolButton_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },

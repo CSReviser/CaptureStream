@@ -612,13 +612,13 @@ QString DownloadThread::paths[] = {
 
 void DownloadThread::run() {
 	QAbstractButton* checkbox[] = {
-		ui->toolButton_basic1, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
+		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
-		ui->toolButton_business2, ui->toolButton_kouryaku, ui->toolButton_yomu,
+		ui->toolButton_business2, ui->toolButton_gakusyu, ui->toolButton_gendai,
 		ui->toolButton_enjoy,
-		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_levelup_chinese, 
+		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_omotenashi_chinese, 
 		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
-		ui->toolButton_hangeul, ui->toolButton_levelup_hangeul, ui->toolButton_levelup_hangeul,
+		ui->toolButton_hangeul, ui->toolButton_levelup_hangeul, ui->toolButton_omotenashi_hangeul,
 		ui->toolButton_german, ui->toolButton_german, ui->toolButton_spanish,  ui->toolButton_spanish, 
 		ui->toolButton_russian, ui->toolButton_russian,
 		NULL

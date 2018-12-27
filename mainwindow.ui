@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>540</width>
-    <height>500</height>
+    <height>520</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>540</width>
-    <height>500</height>
+    <height>520</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>540</width>
-    <height>500</height>
+    <height>520</height>
    </size>
   </property>
   <property name="font">
@@ -49,11 +49,11 @@
       <x>10</x>
       <y>10</y>
       <width>521</width>
-      <height>437</height>
+      <height>457</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
-     <item row="4" column="0">
+     <item row="5" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_18">
        <item>
         <widget class="QToolButton" name="toolButton_kaiwa">
@@ -78,7 +78,7 @@
        </item>
       </layout>
      </item>
-     <item row="8" column="1">
+     <item row="10" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
         <widget class="QToolButton" name="toolButton_russian">
@@ -103,7 +103,7 @@
        </item>
       </layout>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_19">
        <item>
         <widget class="QToolButton" name="toolButton_business1">
@@ -128,7 +128,7 @@
        </item>
       </layout>
      </item>
-     <item row="10" column="0">
+     <item row="11" column="0">
       <widget class="Line" name="line_2">
        <property name="lineWidth">
         <number>2</number>
@@ -138,7 +138,7 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
+     <item row="9" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
         <widget class="QToolButton" name="toolButton_spanish">
@@ -163,7 +163,7 @@
        </item>
       </layout>
      </item>
-     <item row="11" column="0">
+     <item row="12" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_22">
        <item>
         <widget class="QToolButton" name="toolButton_skip">
@@ -191,10 +191,10 @@
        </item>
       </layout>
      </item>
-     <item row="7" column="0">
+     <item row="8" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_21">
        <item>
-        <widget class="QToolButton" name="toolButton_kouryaku">
+        <widget class="QToolButton" name="toolButton_gakusyu">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -216,10 +216,10 @@
        </item>
       </layout>
      </item>
-     <item row="13" column="0">
+     <item row="14" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_28"/>
      </item>
-     <item row="13" column="1">
+     <item row="14" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_25">
        <item>
         <widget class="QPushButton" name="downloadButton">
@@ -241,10 +241,10 @@
        </item>
       </layout>
      </item>
-     <item row="11" column="1">
+     <item row="12" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_26">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_ext">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -334,10 +334,10 @@
        </item>
       </layout>
      </item>
-     <item row="8" column="0">
+     <item row="9" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_27">
        <item>
-        <widget class="QToolButton" name="toolButton_yomu">
+        <widget class="QToolButton" name="toolButton_gendai">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -359,7 +359,7 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="1">
+     <item row="8" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
         <widget class="QToolButton" name="toolButton_german">
@@ -410,6 +410,31 @@
       </layout>
      </item>
      <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_14_0">
+       <item>
+        <widget class="QToolButton" name="toolButton_basic0">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>基礎英語0</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_14">
        <item>
         <widget class="QToolButton" name="toolButton_basic1">
@@ -425,7 +450,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語0/基礎英語1</string>
+          <string>基礎英語1</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -434,7 +459,7 @@
        </item>
       </layout>
      </item>
-     <item row="10" column="1">
+     <item row="11" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_10">
        <item>
         <widget class="Line" name="line">
@@ -448,7 +473,7 @@
        </item>
       </layout>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_17">
        <item>
         <widget class="QToolButton" name="toolButton_timetrial">
@@ -473,7 +498,7 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_15">
        <item>
         <widget class="QToolButton" name="toolButton_basic2">
@@ -498,7 +523,7 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_16">
        <item>
         <widget class="QToolButton" name="toolButton_basic3">
@@ -523,7 +548,7 @@
        </item>
       </layout>
      </item>
-     <item row="5" column="1">
+     <item row="6" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
         <widget class="QToolButton" name="toolButton_levelup_hangeul">
@@ -539,7 +564,32 @@
           </font>
          </property>
          <property name="text">
-          <string>レベルアップハングル講座+おもてなし</string>
+          <string>レベルアップハングル講座</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="7" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_11_1">
+       <item>
+        <widget class="QToolButton" name="toolButton_omotenashi_hangeul">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>おもてなしのハングル講座</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -564,7 +614,7 @@
           </font>
          </property>
          <property name="text">
-          <string>レベルアップ中国語+おもてなし</string>
+          <string>レベルアップ中国語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -573,7 +623,32 @@
        </item>
       </layout>
      </item>
-     <item row="3" column="1">
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_9_1">
+       <item>
+        <widget class="QToolButton" name="toolButton_omotenashi_chinese">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>おもてなしの中国語</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QToolButton" name="toolButton_italian">
@@ -598,7 +673,7 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QToolButton" name="toolButton_french">
@@ -623,7 +698,7 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="1">
+     <item row="5" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QToolButton" name="toolButton_hangeul">
@@ -648,7 +723,7 @@
        </item>
       </layout>
      </item>
-     <item row="9" column="0">
+     <item row="10" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_29">
        <item>
         <widget class="QToolButton" name="toolButton_enjoy">
@@ -673,7 +748,7 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="0">
+     <item row="7" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_20">
        <item>
         <widget class="QToolButton" name="toolButton_business2">
@@ -867,7 +942,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="layoutWidget_5">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -889,7 +964,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -958,7 +1033,7 @@
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="layoutWidget_4">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -983,7 +1058,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="layoutWidget_1">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1060,6 +1135,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>toolButton_basic0</tabstop>
   <tabstop>toolButton_basic1</tabstop>
   <tabstop>toolButton_basic2</tabstop>
   <tabstop>toolButton_basic3</tabstop>
@@ -1067,15 +1143,17 @@
   <tabstop>toolButton_kaiwa</tabstop>
   <tabstop>toolButton_business1</tabstop>
   <tabstop>toolButton_business2</tabstop>
-  <tabstop>toolButton_kouryaku</tabstop>
-  <tabstop>toolButton_yomu</tabstop>
+  <tabstop>toolButton_gakusyu</tabstop>
+  <tabstop>toolButton_gendai</tabstop>
   <tabstop>toolButton_enjoy</tabstop>
   <tabstop>toolButton_chinese</tabstop>
   <tabstop>toolButton_levelup_chinese</tabstop>
+  <tabstop>toolButton_omotenashi_chinese</tabstop>
   <tabstop>toolButton_french</tabstop>
   <tabstop>toolButton_italian</tabstop>
   <tabstop>toolButton_hangeul</tabstop>
   <tabstop>toolButton_levelup_hangeul</tabstop>
+  <tabstop>toolButton_omotenashi_hangeul</tabstop>
   <tabstop>toolButton_german</tabstop>
   <tabstop>toolButton_spanish</tabstop>
   <tabstop>toolButton_russian</tabstop>
@@ -1110,6 +1188,22 @@
     <hint type="destinationlabel">
      <x>468</x>
      <y>552</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_basic0</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>92</x>
+     <y>503</y>
     </hint>
    </hints>
   </connection>
@@ -1226,7 +1320,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_kouryaku</sender>
+   <sender>toolButton_gakusyu</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
    <slot>toggled(bool)</slot>
@@ -1242,7 +1336,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_yomu</sender>
+   <sender>toolButton_gendai</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
    <slot>toggled(bool)</slot>
@@ -1338,6 +1432,22 @@
    </hints>
   </connection>
   <connection>
+   <sender>toolButton_omotenashi_chinese</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>533</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>toolButton_french</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
@@ -1387,6 +1497,22 @@
   </connection>
   <connection>
    <sender>toolButton_levelup_hangeul</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>616</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_omotenashi_hangeul</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
    <slot>toggled(bool)</slot>
