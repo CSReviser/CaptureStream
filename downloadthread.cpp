@@ -528,6 +528,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 
 	int month = hdate.left( 2 ).toInt();
 	int year = 2000 + file.left( 2 ).toInt();
+	if ( 2018 > year ) return false;
 	if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
 	int day = hdate.mid( 3, 2 ).toInt();
@@ -604,7 +605,7 @@ QString DownloadThread::paths[] = {
 	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
 	"english/business2", "english/gakusyu", "english/gendai",
-	"english/enjoy",
+	"english/enjoy", "english/vr-radio",
 	"chinese/kouza", "chinese/levelup", "chinese/omotenashi", "french/kouza", "french/kouza2",
 	"italian/kouza", "italian/kouza2", "hangeul/kouza","hangeul/levelup", "hangeul/omotenashi",
 	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2"
@@ -615,7 +616,7 @@ void DownloadThread::run() {
 		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
 		ui->toolButton_business2, ui->toolButton_gakusyu, ui->toolButton_gendai,
-		ui->toolButton_enjoy,
+		ui->toolButton_enjoy, ui->toolButton_vrradio,
 		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_omotenashi_chinese, 
 		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
 		ui->toolButton_hangeul, ui->toolButton_levelup_hangeul, ui->toolButton_omotenashi_hangeul,
