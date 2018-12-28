@@ -206,6 +206,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->toolButton_gakusyu, "gakusyu", false, "gakusyu_title", DefaultTitle, "kgakusyu_file_name", DefaultFileName },
 		{ ui->toolButton_gendai, "gendai", false, "gendai_title", DefaultTitle, "gendai_file_name", DefaultFileName },
 		{ ui->toolButton_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
+		{ ui->toolButton_vrradio, "vrradio", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
 		{ ui->toolButton_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },
