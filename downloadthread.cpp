@@ -534,6 +534,13 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	int day = hdate.mid( 3, 2 ).toInt();
 	QDate onair( year, month, day );
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
+
+	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
+		QDate today;
+		today.setDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day());
+		int day2 = onair.daysTo(QDate::currentDate())-today.dayOfWeek();
+		if ( day2 > 7 || day2 < 0 ) return false;
+	}
 	
 	if ( ui->toolButton_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
 		emit current( QString::fromUtf8( "スキップ：　　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
