@@ -16,6 +16,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2019/01/03　2018年度の講座に合わせて、追加、削除。デフォルト拡張子を”mp3”に変更。
 2014/04/07　不要なコードを削除。「エンジョイ・シンプル・イングリッシュ」対応。
 2014/04/06　Rubyの対応バージョンを2.0.0以降に変更。2014/03/31の仕様変更に対応。
 			「ニュースで英会話」と「ABCニュースシャワー」を削除。
@@ -133,8 +134,8 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = %w!basic1 basic2 basic3 timetrial kaiwa business1 business2 kouryaku yomu enjoy!
-$multilingual = %w!chinese levelup_chinese french italian hangeul levelup_hangeul german spanish russian!
+$english = %w!basic0 basic1 basic2 basic3 timetrial kaiwa business1 business2 gendai gakusyu enjoy vr-radio!
+$multilingual = %w!chinese levelup_chinese omotenashi_chinese french french2 italian italian2 hangeul levelup_hangeul omotenashi_hangeul german german2 spanish spanish2 russian russian2!
 
 #--------------------------------------------------------------------------------
 # 実行環境の検出とツールのパス設定
@@ -216,7 +217,7 @@ $skip_existing = true
 # 3g2, 3gp, aac, avi, m4a, mka, mkv, mov, mp3, ts
 #--------------------------------------------------------------------------------
 
-$audio_extension = 'avi'
+$audio_extension = 'mp3'
 
 #--------------------------------------------------------------------------------
 # 音声ファイルの拡張子に対応したffmpegの実行コマンド
@@ -399,7 +400,7 @@ end
 # メインプログラム
 #--------------------------------------------------------------------------------
 
-jputs( '語学講座ダウンローダ (2014/04/07)' )
+jputs( '語学講座ダウンローダ (2019/01/03)' )
 
 Dir.chdir( to_native( File.dirname( $script_path ) ) )
 targets = ARGV.length > 0 ? ARGV : $default_target
@@ -421,6 +422,12 @@ targets.each { |target|
 			xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/#{$~[1]}/levelup/listdataflv.xml"
 		else
 			xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/#{target}/kouza/listdataflv.xml"
+		end
+		if target[-1] == "2"
+			xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/#{target[0..-2]}/kouza2/listdataflv.xml"
+		end
+		if target =~ /^omotenashi_(.*)/
+			xml_uri = "http://cgi2.nhk.or.jp/gogaku/st/xml/#{$~[1]}/omotenashi/listdataflv.xml"
 		end
 	else
 		next
