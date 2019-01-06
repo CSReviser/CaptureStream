@@ -55,6 +55,7 @@ CaptureStream-Ubuntu-20181227.zip
 [制限事項](https://github.com/CSReviser/CaptureStream/wiki/%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85)   
 [FAQ](https://github.com/CSReviser/CaptureStream/wiki/FAQ)   
 [Screenshot](https://github.com/CSReviser/CaptureStream/wiki/Screenshot)   
+[Author](https://github.com/CSReviser/CaptureStream/wiki/Author)   
 [Links](https://github.com/CSReviser/CaptureStream/wiki/Links)   
 
 
