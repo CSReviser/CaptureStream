@@ -40,5 +40,20 @@ CaptureStream-Ubuntu-20181227.zip
 ### 作者  
 [jakago](https://github.com/jakago) 2014年度版以前  
 ### 改版者  
-[CSReviser](https://github.com/CSReviser) 2018年度版改版  
+[CSReviser](https://github.com/CSReviser) 2018年度版改版    
+    
+    
+    
+### Wikiメニュー
+[Home](https://github.com/CSReviser/CaptureStream/wiki)   
+[概要](https://github.com/CSReviser/CaptureStream/wiki/%E6%A6%82%E8%A6%81)   
+[使い方](https://github.com/CSReviser/CaptureStream/wiki/%E4%BD%BF%E3%81%84%E6%96%B9)   
+[システム要件](https://github.com/CSReviser/CaptureStream/wiki/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E8%A6%81%E4%BB%B6)   
+[最新リリース](https://github.com/CSReviser/CaptureStream/wiki/%E6%9C%80%E6%96%B0%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9)   
+[ダウンロード](https://github.com/CSReviser/CaptureStream/wiki/%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89)   
+[制限事項](https://github.com/CSReviser/CaptureStream/wiki/%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85)   
+[FAQ](https://github.com/CSReviser/CaptureStream/wiki/FAQ)   
+[Screenshot](https://github.com/CSReviser/CaptureStream/wiki/Screenshot)   
+[Links](https://github.com/CSReviser/CaptureStream/wiki/Links)   
+
 
