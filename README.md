@@ -2,11 +2,11 @@
 ストリーミングで公開されているNHKラジオ語学講座のダウンロードを自動化するためのツールです。 開発が中断しているhttps://osdn.net/projects/capturestream/  のForkです。 正式に開発を引き継いでいない非公式版です。ファイル自体のダウンロードにはffmpegを利用します。 
 
 ### 安定版(master)最新リリース  
-QT版(GUI版)  [2018/12/27版](https://github.com/CSReviser/CaptureStream/releases/tag/20181227)   
+QT版(GUI版)  [2019/03/04版](https://github.com/CSReviser/CaptureStream/releases/tag/20190304)   
 Windows版:32ビット   
-[CaptureStream-Windows-20181227.zip](https://github.com/CSReviser/CaptureStream/releases/download/20181227/CaptureStream-Windows-20181227.zip)   
+[CaptureStream-Windows-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Windows-20190304.zip)   
 Ubuntu版:64ビット  
-[CaptureStream-Ubuntu-20181227.zip](https://github.com/CSReviser/CaptureStream/releases/download/20181227/CaptureStream-Ubuntu-20181227.zip)  
+[CaptureStream-Ubuntu-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Ubuntu-20190304.zip)  
 
 
 ### 2018年度版の対応講座  
@@ -20,7 +20,8 @@ Ubuntu版:64ビット
 実践ビジネス英語  
 遠山顕の英会話楽習  
 高校生からはじめる「現代英語」  
-エンジョイシンプルイングリッシュ  
+エンジョイシンプルイングリッシュ 
+ボキャブライダー　　※３
 まいにち中国語  
 レベルアップ中国語  
 おもてなしの中国語  
@@ -31,11 +32,11 @@ Ubuntu版:64ビット
 おもてなしのハングル講座  
 まいにちドイツ語　　※１     
 まいにちスペイン語　　※１     
-まいにちロシア語　　※１     
+まいにちロシア語　　※１ 
 
 ※１：１つのボタンに入門（初級）と応用（中級）を割り当てています。  
-※２：カスタマイズメニューは更新されていず、2014年度のままです。    
-※３：ボキャブライダーは非対応です。 
+※２：カスタマイズメニューは一部の講座のみ2018年度対応で更新しています。    
+※３：ボキャブライダーは試験対応です。 
 
 
 ### 作者  
@@ -57,5 +58,5 @@ Ubuntu版:64ビット
 [Screenshot](https://github.com/CSReviser/CaptureStream/wiki/Screenshot)   
 [Author](https://github.com/CSReviser/CaptureStream/wiki/Author)   
 [Links](https://github.com/CSReviser/CaptureStream/wiki/Links)   
-
+[高解像度ディスプレイ対応](https://github.com/CSReviser/CaptureStream/wiki/Hi---DPI-Solution)
 
