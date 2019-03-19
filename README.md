@@ -58,6 +58,6 @@ Ubuntu版:64ビット
 [FAQ](https://github.com/CSReviser/CaptureStream/wiki/FAQ)   
 [Screenshot](https://github.com/CSReviser/CaptureStream/wiki/Screenshot)   
 [Author](https://github.com/CSReviser/CaptureStream/wiki/Author)   
-[Links](https://github.com/CSReviser/CaptureStream/wiki/Links)   
-[高解像度ディスプレイ対応](https://github.com/CSReviser/CaptureStream/wiki/Hi---DPI-Solution)
+[Links](https://github.com/CSReviser/CaptureStream/wiki/)   
+[高解像度ディスプレイ対応](https://github.com/CSReviser/CaptureStream/wiki/高解像度DPI対応)
 
