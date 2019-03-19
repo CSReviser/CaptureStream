@@ -9,11 +9,11 @@ Ubuntu版:
 
 ### [詳細はこちら　CaptureStream Wiki](https://github.com/CSReviser/CaptureStream/wiki)   
 
+   
+   
 
 
-
-
-## Wikiメニュー
+## Wikiメニュー    
 [Home](https://github.com/CSReviser/CaptureStream/wiki)   
 [概要](https://github.com/CSReviser/CaptureStream/wiki/%E6%A6%82%E8%A6%81)   
 [対応講座](https://github.com/CSReviser/CaptureStream/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)    
