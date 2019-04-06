@@ -1,11 +1,10 @@
 ### 語学講座ダウンローダ (2018年度版)   
 ### 最新リリース  QT版(GUI版)  [2019/03/04版](https://github.com/CSReviser/CaptureStream/releases/tag/20190304)   
-Windows版:   
+### Windows版:   
 ### [CaptureStream-Windows-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Windows-20190304.zip)      
-Ubuntu版:   
+### Ubuntu版:   
 ### [CaptureStream-Ubuntu-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Ubuntu-20190304.zip)  
-### 　　　　   
-Ruby版:   
+### Ruby版:   
 ### [CaptureStream-Ruby-20190406.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190406/CaptureStream-ruby-20190406.zip)    
 
 
