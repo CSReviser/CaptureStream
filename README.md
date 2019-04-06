@@ -9,7 +9,7 @@ Ubuntu版:64ビット
 [CaptureStream-Ubuntu-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Ubuntu-20190304.zip)  
 
 
-### 2018年度版の対応講座  
+### 2018年度の対応講座  
 基礎英語0  
 基礎英語1  
 基礎英語2  
