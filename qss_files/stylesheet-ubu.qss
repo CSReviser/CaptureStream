@@ -38,7 +38,7 @@ QToolButton:hover {
 */
 /* 基礎英語1, 基礎英語2, 基礎英語3 */
 /*
-#button_basic1, #button_basic2, #button_basic3 {
+#toolButton_basic0, #toolButton_basic1, #toolButton_basic2, #toolButton_basic3 {
 	background-color: coral;
 	color: black;
 }
@@ -48,9 +48,9 @@ QToolButton:hover {
    入門ビジネス英語, 実践ビジネス英語
    攻略英語リスニング, 英語で読む村上春樹 */
 /*
-#button_timetrial, #button_kaiwa,
-#button_business1, #button_business2,
-#button_kouryaku, #button_yomu {
+#toolButton_timetrial, #toolButton_kaiwa,
+#toolButton_business1, #toolButton_business2,
+#toolButton_gendai, #toolButton_gakusyu {
 	background-color: crimson;
 	color: silver;
 }
@@ -62,7 +62,7 @@ QToolButton:hover {
 */
 /* エンジョイ・シンプル・イングリッシュ */
 /*
-#button_enjoy {
+#toolButton_enjoy {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 whitesmoke, stop: 1 deeppink);
 }
 */
@@ -73,9 +73,9 @@ QToolButton:hover {
    まいにちドイツ語, まいにちスペイン語, まいにちロシア語
 */
 /*
-#button_chinese, #button_levelup_chinese, #button_french,
-#button_italian, #button_hangeul, #button_levelup_hangeul,
-#button_german, #button_spanish, #button_russian {
+#toolButton_chinese, toolButton_levelup_chinese, #toolButton_french,
+#toolButton_italian, #toolButton_hangeul, #toolButton_levelup_hangeul,
+#toolButton_german, #toolButton_spanish, #toolButton_russian {
 	background-color: darkslategray;
 }
 */
@@ -117,7 +117,7 @@ QToolButton:hover {
 }
 
 /* ダウンロードボタン */
-#button_download {
+#downloadButton {
 	background-color: darkslategray;
 	color: white;
 	border-top: 1px solid white;
@@ -130,12 +130,12 @@ QToolButton:hover {
 }
 
 /* ダウンロードボタンにマウスが乗った時 */
-#button_download:hover {
+#downloadButton:hover {
    background-color: slategray;
 }
 
 /* ダウンロードボタンが押された時 */
-#button_download:pressed {
+#downloadButton:pressed {
 	border-top: 2px solid dimgray;
 	border-left: 2px solid dimgray;
 	border-right: 1px solid white;
