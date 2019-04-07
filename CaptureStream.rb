@@ -16,6 +16,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2019/04/06 ボキャブライダーのみ今年度を指定する機能追加。
 2019/01/03　2018年度の講座に合わせて、追加、削除。デフォルト拡張子を”mp3”に変更。
 2014/04/07　不要なコードを削除。「エンジョイ・シンプル・イングリッシュ」対応。
 2014/04/06　Rubyの対応バージョンを2.0.0以降に変更。2014/03/31の仕様変更に対応。
@@ -136,6 +137,11 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 $default_target = []
 $english = %w!basic0 basic1 basic2 basic3 timetrial kaiwa business1 business2 gendai gakusyu enjoy vr-radio!
 $multilingual = %w!chinese levelup_chinese omotenashi_chinese french french2 italian italian2 hangeul levelup_hangeul omotenashi_hangeul german german2 spanish spanish2 russian russian2!
+
+#--------------------------------------------------------------------------------
+# 今年度：ボキャブライダーのDL対象年度指定。ボキャブライダーのみ機能します。
+#--------------------------------------------------------------------------------
+$kon_nendo = '2019'
 
 #--------------------------------------------------------------------------------
 # 実行環境の検出とツールのパス設定
@@ -350,7 +356,7 @@ end
 # 音声ファイルのダウンロード
 #--------------------------------------------------------------------------------
 
-def capture_stream( target, kouza, hdate, file )
+def capture_stream( target, kouza, hdate, file, nendo )
 	out_folder = format_name( $out_folder_hash[target], target, kouza, hdate, file ) # 出力フォルダ
 	out_file = format_name( $out_file_hash[target] + '.' + $audio_extension, target, kouza, hdate, file ) # 音声ファイル（拡張子なし）
 	id3_album = format_name( $id3_album[target], target, kouza, hdate, file )
@@ -367,6 +373,12 @@ def capture_stream( target, kouza, hdate, file )
 	out_file = to_native( out_file )
 	id3_album = to_native( id3_album )
 	id3_title = to_native( id3_title )
+
+	if kouza == 'ボキャブライダー' 
+		if !(nendo == $kon_nendo) 
+				return true
+		end
+	end
 	
 	if $skip_existing && File.exists?( "#{out_folder}#{out_file}" )
 		print( '-' )
@@ -400,7 +412,7 @@ end
 # メインプログラム
 #--------------------------------------------------------------------------------
 
-jputs( '語学講座ダウンローダ (2019/01/03)' )
+jputs( '語学講座ダウンローダ (2019/04/06)' )
 
 Dir.chdir( to_native( File.dirname( $script_path ) ) )
 targets = ARGV.length > 0 ? ARGV : $default_target
@@ -440,7 +452,8 @@ targets.each { |target|
 			kouza = element.attributes['kouza']
 			hdate = element.attributes['hdate']
 			file = element.attributes['file']
-			capture_stream( target, kouza, hdate, file )
+			nendo = element.attributes['nendo']
+			capture_stream( target, kouza, hdate, file, nendo )
 		}
 	}
 	puts()
