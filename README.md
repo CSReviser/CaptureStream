@@ -42,7 +42,7 @@ Ubuntu版:64ビット
 ### 作者  
 [jakago](https://github.com/jakago) 2014年度版以前  
 ### 改版者  
-[CSReviser](https://github.com/CSReviser) 2018年度版改版    
+[CSReviser](https://github.com/CSReviser) 2018年度以降改版    
     
     
     
