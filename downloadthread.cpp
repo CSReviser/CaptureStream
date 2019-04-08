@@ -528,7 +528,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 
 	int month = hdate.left( 2 ).toInt();
 	int year = 2000 + file.left( 2 ).toInt();
-	if ( 2018 > year ) return false;
+	if ( 2019 > year ) return false;
 	if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
 	int day = hdate.mid( 3, 2 ).toInt();
