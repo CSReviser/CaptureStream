@@ -13,6 +13,13 @@
 
 
 ## 　　　
+### テスト(試験的)リリース  QT版(GUI版)  [2019/04/13版](https://github.com/CSReviser/CaptureStream/releases/tag/20190413)   
+### Windows版:         
+### [CaptureStream-Windows-20190413.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190413/CaptureStream-Windows-20190413.zip)      
+### Ubuntu版:          
+### [CaptureStream-Ubuntu-20190413.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190413/CaptureStream-Ubuntu-20190413.zip)  
+##
+
 ### [詳細はこちら CaptureStream Wiki](https://github.com/CSReviser/CaptureStream/wiki)   
 
    
