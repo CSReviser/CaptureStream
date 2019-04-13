@@ -92,6 +92,10 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 		ffmpegHash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
 		ffmpegHash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
 		ffmpegHash["ts"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
+		ffmpegHash["op1"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
+		ffmpegHash["op2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k \"%3\"";
+		ffmpegHash["op3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 40k \"%3\"";
+		ffmpegHash["op4"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 32k \"%3\"";
 	}
 	if ( processError.empty() ) {
 		processError[QProcess::FailedToStart] = "FailedToStart";
@@ -518,7 +522,9 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	
 	// 2013/04/05 オーディオフォーマットの変更に伴って拡張子の指定に対応
 	QString extension = ui->comboBox_extension->currentText();
-	outFileName = outBasename + "." + extension;
+	QString extension1 = extension;
+	if ( extension.left( 2 ) == "op" ) extension1 = "mp3";
+	outFileName = outBasename + "." + extension1;
 
 #ifdef QT4_QT5_WIN
 	QString null( "nul" );
@@ -539,7 +545,15 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 		QDate today;
 		today.setDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day());
 		int day2 = onair.daysTo(QDate::currentDate())-today.dayOfWeek();
-		if ( day2 > 7 || day2 < 0 ) return false;
+		if ( ui->toolButton_vrradio->isChecked() && !ui->toolButton_vrradio1->isChecked() ) {
+			if ( day2 > 7 || day2 < 0 ) return false;
+		}
+		if ( !ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
+			if ( day2 > 0 || day2 < -7 ) return false;
+		}
+		if ( ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
+			if ( 2019 > year ) return false;
+		}
 	}
 	
 	if ( ui->toolButton_skip->isChecked() && QFile::exists( outputDir + outFileName ) ) {
@@ -554,7 +568,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file )
 	if ( true ) {
 		QTemporaryFile file;
 		if ( file.open() ) {
-			dstPath = file.fileName() + "." + extension;
+			dstPath = file.fileName() + "." + extension1;
 			file.close();
 		} else {
 			emit critical( QString::fromUtf8( "一時ファイルの作成に失敗しました：　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
@@ -612,7 +626,7 @@ QString DownloadThread::paths[] = {
 	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
 	"english/business2", "english/gakusyu", "english/gendai",
-	"english/enjoy", "english/vr-radio",
+	"english/enjoy", "english/vr-radio", "english/vr-radio",
 	"chinese/kouza", "chinese/levelup", "chinese/omotenashi", "french/kouza", "french/kouza2",
 	"italian/kouza", "italian/kouza2", "hangeul/kouza","hangeul/levelup", "hangeul/omotenashi",
 	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2"
@@ -623,7 +637,7 @@ void DownloadThread::run() {
 		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
 		ui->toolButton_business2, ui->toolButton_gakusyu, ui->toolButton_gendai,
-		ui->toolButton_enjoy, ui->toolButton_vrradio,
+		ui->toolButton_enjoy, ui->toolButton_vrradio, ui->toolButton_vrradio1,
 		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_omotenashi_chinese, 
 		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
 		ui->toolButton_hangeul, ui->toolButton_levelup_hangeul, ui->toolButton_omotenashi_hangeul,

@@ -201,6 +201,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->toolButton_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
 		{ ui->toolButton_russian, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
 		{ ui->toolButton_vrradio, "vrradio", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
+		{ ui->toolButton_vrradio1, "vrradio1", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
 		{ ui->toolButton_omotenashi_chinese, "omotenashi-chinese", false, "omotenashi-chinese_title", DefaultTitle, "omotenashi-chinese_file_name", DefaultFileName },
 		{ ui->toolButton_omotenashi_hangeul, "omotenashi-hangeul", false, "omotenashi-hangeul_title", DefaultTitle, "omotenashi-hangeul_file_name", DefaultFileName },
 		{ ui->checkBox_13, "charo", false, "charo_title", DefaultTitle, "charo_file_name", DefaultFileName },
