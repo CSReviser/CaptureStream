@@ -33,6 +33,7 @@
 [ダウンロード](https://github.com/CSReviser/CaptureStream/wiki/%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89)   
 [制限事項](https://github.com/CSReviser/CaptureStream/wiki/%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85)   
 [FAQ](https://github.com/CSReviser/CaptureStream/wiki/FAQ)   
+[音声形式mp3](https://github.com/CSReviser/CaptureStream/wiki/%E9%9F%B3%E5%A3%B0%E5%BD%A2%E5%BC%8Fmp3)           
 [スクリーンショット](https://github.com/CSReviser/CaptureStream/wiki/スクリーンショット)   
 [作者・改版者](https://github.com/CSReviser/CaptureStream/wiki/作者・改版者)   
 [リンク](https://github.com/CSReviser/CaptureStream/wiki/リンク)   
