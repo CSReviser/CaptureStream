@@ -37,6 +37,6 @@
 [スクリーンショット](https://github.com/CSReviser/CaptureStream/wiki/スクリーンショット)   
 [作者・改版者](https://github.com/CSReviser/CaptureStream/wiki/作者・改版者)   
 [リンク](https://github.com/CSReviser/CaptureStream/wiki/リンク)   
-[高解像度ディスプレイ対応](https://github.com/CSReviser/CaptureStream/wiki/高解像度DPI対応)
+
 
 
