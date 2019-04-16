@@ -2,11 +2,11 @@
 ストリーミングで公開されているNHKラジオ語学講座のダウンロードを自動化するためのツールです。 開発が中断しているhttps://osdn.net/projects/capturestream/  のForkです。 正式に開発を引き継いでいない非公式版です。ファイル自体のダウンロードにはffmpegを利用します。 
 
 ### 安定版(master)最新リリース  
-QT版(GUI版)  [2019/03/04版](https://github.com/CSReviser/CaptureStream/releases/tag/20190304)   
+QT版(GUI版)  [2019/03/16版](https://github.com/CSReviser/CaptureStream/releases/tag/20190316)   
 Windows版:32ビット   
-[CaptureStream-Windows-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Windows-20190304.zip)   
+[CaptureStream-Windows-20190316.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190416/CaptureStream-Windows-20190416.zip)   
 Ubuntu版:64ビット  
-[CaptureStream-Ubuntu-20190304.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190304/CaptureStream-Ubuntu-20190304.zip)  
+[CaptureStream-Ubuntu-20190316.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190416/CaptureStream-Ubuntu-20190416.zip)  
 
 
 ### 2019年度の対応講座  
