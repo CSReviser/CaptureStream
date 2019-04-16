@@ -1,9 +1,9 @@
 ### 語学講座ダウンローダ (2019年)   
-### 最新リリース  QT版(GUI版)  [2019/04/08版](https://github.com/CSReviser/CaptureStream/releases/tag/20190408)     
+### 最新リリース  QT版(GUI版)  [2019/04/16版](https://github.com/CSReviser/CaptureStream/releases/tag/20190416)     
 ### Windows版:      
-### [CaptureStream-Windows-20190408.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190408/CaptureStream-Windows-20190408.zip)       
+### [CaptureStream-Windows-20190416.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190416/CaptureStream-Windows-20190416.zip)       
 ### Ubuntu版:       
-### [CaptureStream-Ubuntu-20190408.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190408/CaptureStream-Ubuntu-20190408.zip)      
+### [CaptureStream-Ubuntu-20190416.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190416/CaptureStream-Ubuntu-20190416.zip)      
 ## 　　　
 ### Ruby版(CUI版):[2019/04/06版](https://github.com/CSReviser/CaptureStream/releases/tag/20190406)        
 ### [CaptureStream-Ruby-20190406.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190406/CaptureStream-ruby-20190406.zip)    
@@ -12,11 +12,7 @@
 ※ファイル名をクリックするとzipファイルがダウンロードされます。
 
 
-## 　　　
-### 試験リリース  QT版 [2019/04/13版](https://github.com/CSReviser/CaptureStream/releases/tag/20190413) 　　     
-### Windows版:[CaptureStream-Windows-20190413.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190413/CaptureStream-Windows-20190413.zip)      
-### Ubuntu版:[CaptureStream-Ubuntu-20190413.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190413/CaptureStream-Ubuntu-20190413.zip)  
-##
+
 
 ### [詳細はこちら CaptureStream Wiki](https://github.com/CSReviser/CaptureStream/wiki)   
 
