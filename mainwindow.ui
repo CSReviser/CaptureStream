@@ -327,7 +327,7 @@
          </item>
          <item>
           <property name="text">
-           <string>ts</string>
+           <string>op0</string>
           </property>
          </item>
          <item>
@@ -348,6 +348,11 @@
          <item>
           <property name="text">
            <string>op4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ts</string>
           </property>
          </item>
         </widget>
