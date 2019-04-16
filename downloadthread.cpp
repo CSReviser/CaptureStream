@@ -542,7 +542,10 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QDate onair( year, month, day );
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 
-
+	int year1 = QDate::currentDate().year();
+	if ( month < 4 )
+		year1 += 1;
+	QString kon_nendo = QString::number(year1);
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
 		QDate today;
@@ -554,11 +557,8 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		if ( !ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
 			if ( day2 > 0 || day2 < -7 ) return false;
 		}
-//		if ( ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
-//			if ( 2019 > year ) return false;
-//		}
 		if ( ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
-			if ( "2019" != nendo ) return false;
+			if ( kon_nendo != nendo ) return false;
 		}
 	}
 	
