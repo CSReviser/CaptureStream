@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>540</height>
+    <width>590</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>540</width>
-    <height>540</height>
+    <width>590</width>
+    <height>550</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>540</width>
-    <height>540</height>
+    <width>590</width>
+    <height>550</height>
    </size>
   </property>
   <property name="font">
@@ -48,11 +48,11 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>521</width>
+      <width>571</width>
       <height>477</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
      <item row="5" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_18">
        <item>
@@ -163,7 +163,7 @@
        </item>
       </layout>
      </item>
-     <item row="13" column="0">
+     <item row="14" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_22">
        <item>
         <widget class="QToolButton" name="toolButton_skip">
@@ -219,7 +219,7 @@
      <item row="15" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_28"/>
      </item>
-     <item row="15" column="1">
+     <item row="14" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_25">
        <item>
         <widget class="QPushButton" name="downloadButton">
@@ -348,6 +348,10 @@
          <item>
           <property name="text">
            <string>op4</string>
+          </property>
+         </item>         <item>
+          <property name="text">
+           <string>op5</string>
           </property>
          </item>
          <item>

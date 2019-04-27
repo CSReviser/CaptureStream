@@ -145,6 +145,9 @@ MainWindow::MainWindow( QWidget *parent )
 		styleSheet = QLatin1String( res.readAll() );
 	}
 	qApp->setStyleSheet( styleSheet );
+
+	adjustSize();
+	setFixedSize(size());
 }
 
 MainWindow::~MainWindow() {
