@@ -14,8 +14,8 @@
 
 
 
-### 
-### [詳細はこちら CaptureStream Wiki](https://github.com/CSReviser/CaptureStream/wiki/ホーム)  
+ 
+### [詳細はこちら CaptureStream Wiki](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)  
 
    
    
@@ -34,5 +34,4 @@
 [スクリーンショット](https://github.com/CSReviser/CaptureStream/wiki/スクリーンショット)   
 [作者・改版者](https://github.com/CSReviser/CaptureStream/wiki/作者・改版者)   
 [リンク](https://github.com/CSReviser/CaptureStream/wiki/リンク)   
-
 
