@@ -47,7 +47,7 @@ Ubuntu版:64ビット
     
     
 ### Wikiメニュー
-[Home](https://github.com/CSReviser/CaptureStream/wiki)   
+[ホーム](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)   
 [概要](https://github.com/CSReviser/CaptureStream/wiki/%E6%A6%82%E8%A6%81)   
 [対応講座](https://github.com/CSReviser/CaptureStream/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)    
 [使い方](https://github.com/CSReviser/CaptureStream/wiki/%E4%BD%BF%E3%81%84%E6%96%B9)   
