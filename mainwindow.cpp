@@ -146,8 +146,13 @@ MainWindow::MainWindow( QWidget *parent )
 	}
 	qApp->setStyleSheet( styleSheet );
 
-	adjustSize();
+	adjustSize();                             //高DPIディスプレイ対応
 	setFixedSize(size());
+        int dpiX = qApp->desktop()->logicalDpiX();
+	QFont f;
+	int defaultFontSize = f.pointSize() * ( 96.0 / dpiX );
+	f.setPointSize( defaultFontSize );
+	qApp->setFont(f);
 }
 
 MainWindow::~MainWindow() {

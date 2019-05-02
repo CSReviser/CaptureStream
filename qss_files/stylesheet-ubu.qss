@@ -4,7 +4,7 @@
 */
 QWidget {
 	font-family: "Times New Roman", serif;
-	font-size: 10pt;
+/*	font-size: 10pt; */
 	font-weight: normal;
 	font-style: normal;
 }

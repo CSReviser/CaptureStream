@@ -163,7 +163,7 @@
        </item>
       </layout>
      </item>
-     <item row="14" column="0">
+     <item row="13" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_22">
        <item>
         <widget class="QToolButton" name="toolButton_skip">
