@@ -5,7 +5,7 @@
 ### Ubuntu版:       
 ### [CaptureStream-Ubuntu-20190502.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190502/CaptureStream-Ubuntu-20190502.zip)      
 ## 　　　
-### Ruby版(CUI版):[2019/04/06版](https://github.com/CSReviser/CaptureStream/releases/tag/20190406)        
+### Ruby版(CLI版):[2019/04/06版](https://github.com/CSReviser/CaptureStream/releases/tag/20190406)        
 ### [CaptureStream-Ruby-20190406.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190406/CaptureStream-ruby-20190406.zip)    
 
 
