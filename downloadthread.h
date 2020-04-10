@@ -49,10 +49,12 @@ private:
 	QStringList getAttribute( QString url, QString attribute );
 	bool checkExecutable( QString path );
 	bool isFfmpegAvailable( QString& path );
+	bool istestAvailable( QString& path );
 	bool checkOutputDir( QString dirPath );
 	void downloadENews( bool re_read );
 	
-	bool captureStream( QString kouza, QString hdate, QString file, QString nendo );
+	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a );
+	bool captureStream2( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
@@ -63,6 +65,8 @@ private:
     bool failed1935;
 
 	static QString paths[];
+	static QString paths2[];
+	static QString paths3[];
 	static QString prefix;
 	static QString suffix;
 
@@ -72,6 +76,7 @@ private:
 
 	static QString flvstreamer;
 	static QString ffmpeg;
+	static QString test;
 	static QString scramble;
 	static QStringList malformed;
 

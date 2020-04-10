@@ -78,7 +78,7 @@
        </item>
       </layout>
      </item>
-     <item row="10" column="1">
+     <item row="8" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_13">
        <item>
         <widget class="QToolButton" name="toolButton_russian">
@@ -138,7 +138,7 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="1">
+     <item row="7" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
         <widget class="QToolButton" name="toolButton_spanish">
@@ -388,7 +388,7 @@
        </item>
       </layout>
      </item>
-     <item row="8" column="1">
+     <item row="6" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
         <widget class="QToolButton" name="toolButton_german">
@@ -577,7 +577,7 @@
        </item>
       </layout>
      </item>
-     <item row="6" column="1">
+     <item row="10" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_11">
        <item>
         <widget class="QToolButton" name="toolButton_levelup_hangeul">
@@ -593,7 +593,7 @@
           </font>
          </property>
          <property name="text">
-          <string>レベルアップハングル講座</string>
+          <string>R:ポルトガル語入門</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -602,7 +602,7 @@
        </item>
       </layout>
      </item>
-     <item row="7" column="1">
+     <item row="5" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_11_1">
        <item>
         <widget class="QToolButton" name="toolButton_omotenashi_hangeul">
@@ -627,7 +627,7 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="1">
+     <item row="9" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_9">
        <item>
         <widget class="QToolButton" name="toolButton_levelup_chinese">
@@ -643,7 +643,7 @@
           </font>
          </property>
          <property name="text">
-          <string>レベルアップ中国語</string>
+          <string>R:アラビア語講座</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -652,7 +652,7 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="1">
+     <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_9_1">
        <item>
         <widget class="QToolButton" name="toolButton_omotenashi_chinese">
@@ -677,7 +677,7 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="1">
+     <item row="3" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QToolButton" name="toolButton_italian">
@@ -702,7 +702,7 @@
        </item>
       </layout>
      </item>
-     <item row="3" column="1">
+     <item row="2" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QToolButton" name="toolButton_french">
@@ -727,7 +727,7 @@
        </item>
       </layout>
      </item>
-     <item row="5" column="1">
+     <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QToolButton" name="toolButton_hangeul">
@@ -793,7 +793,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ボキャブライダー(先週分)</string>
+          <string>R:ボキャブライダー</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -818,7 +818,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ボキャブライダー(今週分)</string>
+          <string>R:世界へ発信！ニュースで英語術</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -1227,16 +1227,16 @@
   <tabstop>toolButton_enjoy</tabstop>
   <tabstop>toolButton_vrradio</tabstop>
   <tabstop>toolButton_chinese</tabstop>
-  <tabstop>toolButton_levelup_chinese</tabstop>
   <tabstop>toolButton_omotenashi_chinese</tabstop>
   <tabstop>toolButton_french</tabstop>
   <tabstop>toolButton_italian</tabstop>
   <tabstop>toolButton_hangeul</tabstop>
-  <tabstop>toolButton_levelup_hangeul</tabstop>
   <tabstop>toolButton_omotenashi_hangeul</tabstop>
   <tabstop>toolButton_german</tabstop>
   <tabstop>toolButton_spanish</tabstop>
   <tabstop>toolButton_russian</tabstop>
+  <tabstop>toolButton_levelup_chinese</tabstop>
+  <tabstop>toolButton_levelup_hangeul</tabstop>
   <tabstop>toolButton_vrradio1</tabstop>
   <tabstop>toolButton_skip</tabstop>
   <tabstop>comboBox_extension</tabstop>

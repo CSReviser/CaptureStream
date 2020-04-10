@@ -47,6 +47,10 @@
 #include <QDebug>
 //#include <QtCrypto>
 #include <QTemporaryFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QByteArray>
+#include <QJsonValue>
 
 #ifdef QT4_QT5_WIN
 #define TimeOut " -m 10000 "
@@ -71,6 +75,7 @@ QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
 
 QString DownloadThread::flvstreamer;
 QString DownloadThread::ffmpeg;
+QString DownloadThread::test;
 QString DownloadThread::scramble;
 QStringList DownloadThread::malformed = (QStringList() << "3g2" << "3gp" << "m4a" << "mov");
 
@@ -82,22 +87,22 @@ QHash<QProcess::ProcessError, QString> DownloadThread::processError;
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
 	if ( ffmpegHash.empty() ) {
-		ffmpegHash["3g2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["3gp"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["aac"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
-		ffmpegHash["avi"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["m4a"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mka"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["mkv"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["mov"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mp3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
-		ffmpegHash["ts"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -vn -acodec copy \"%3\"";
-		ffmpegHash["op0"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k \"%3\"";
-		ffmpegHash["op1"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
-		ffmpegHash["op2"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k \"%3\"";
-		ffmpegHash["op3"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 40k \"%3\"";
-		ffmpegHash["op4"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 32k \"%3\"";
-		ffmpegHash["op5"] = "\"%1\" -y -i https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/%2/master.m3u8 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 24k -ar 22050 -ac 1 \"%3\"";
+		ffmpegHash["3g2"] = "\"%1\" -y -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["3gp"] = "\"%1\" -y -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["aac"] = "\"%1\" -y -i %2 -vn -acodec copy \"%3\"";
+		ffmpegHash["avi"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["m4a"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["mka"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["mkv"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["mov"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["mp3"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
+		ffmpegHash["ts"] = "\"%1\" -y -i %2 -vn -acodec copy \"%3\"";
+		ffmpegHash["op0"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k -ac 1 \"%3\"";
+		ffmpegHash["op1"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
+		ffmpegHash["op2"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 40k -ac 1 \"%3\"";
+		ffmpegHash["op3"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 32k -ac 1 \"%3\"";
+		ffmpegHash["op4"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 24k -ar 22050 -ac 1 \"%3\"";
+		ffmpegHash["op5"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 16k -ar 22050 -ac 1 \"%3\"";
 	}
 	if ( processError.empty() ) {
 		processError[QProcess::FailedToStart] = "FailedToStart";
@@ -137,6 +142,15 @@ bool DownloadThread::isFfmpegAvailable( QString& path ) {
 	path = Utility::applicationBundlePath() + "ffmpeg";
 #ifdef QT4_QT5_WIN
 	path += ".exe";
+#endif
+	return checkExecutable( path );
+}
+
+bool DownloadThread::istestAvailable( QString& path ) {
+#ifdef QT4_QT5_WIN
+	path = Utility::applicationBundlePath() + "test.bat";
+#else
+	path = Utility::applicationBundlePath() + "test.sh";
 #endif
 	return checkExecutable( path );
 }
@@ -508,7 +522,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
-bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo ) {
+bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( !checkOutputDir( outputDir ) )
 		return false;
@@ -536,7 +550,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 
 	int month = hdate.left( 2 ).toInt();
 	int year = 2000 + file.left( 2 ).toInt();
-	if ( 2019 > year ) return false;
+	if ( 2020 > year ) return false;
 	if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
 	int day = hdate.mid( 3, 2 ).toInt();
@@ -586,7 +600,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	dstPath = outputDir + outFileName;
 #endif
 	QString commandFfmpeg = ffmpegHash[extension]
-			.arg( ffmpeg, file, dstPath, id3tagTitle, kouza, QString::number( year ) );
+			.arg( ffmpeg, filem3u8a, dstPath, id3tagTitle, kouza, QString::number( year ) );
 	//qDebug() << commandFfmpeg;
 	//DebugLog( commandFfmpeg );
 	QProcess process;
@@ -629,27 +643,116 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	}
 }
 
+bool DownloadThread::captureStream2( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a ) {
+	QString outputDir = MainWindow::outputDir + kouza;
+	if ( !checkOutputDir( outputDir ) )
+		return false;
+	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
+
+	QString titleFormat;
+	QString fileNameFormat;
+	CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
+	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, false );
+	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, true );
+	QFileInfo fileInfo( outFileName );
+	QString outBasename = fileInfo.completeBaseName();
+
+#ifdef QT4_QT5_WIN
+	QString null( "nul" );
+#else
+	QString null( "/dev/null" );
+#endif
+
+	emit current( QString::fromUtf8( "ダウンロード中：　　" ) + kouza + nendo );
+	
+	QString dstPath;
+#ifdef QT4_QT5_WIN
+#else
+	dstPath = outputDir + outFileName;
+#endif
+#ifdef QT4_QT5_WIN
+	QString commandFfmpeg2 = "test.bat " + filem3u8a;
+#else
+	QString commandFfmpeg2 = "./test.sh " + filem3u8a;
+#endif
+	//qDebug() << commandFfmpeg;
+	//DebugLog( commandFfmpeg );
+	QProcess process;
+	process.start( commandFfmpeg2 );
+	if ( !process.waitForStarted( -1 ) ) {
+		QFile::remove( dstPath );
+		return false;
+	}
+
+	// ユーザのキャンセルを確認しながらffmpegの終了を待つ
+	while ( !process.waitForFinished( CancelCheckTimeOut ) ) {
+		// キャンセルボタンが押されていたらffmpegをkillし、ファイルを削除してリターン
+		if ( isCanceled ) {
+			process.kill();
+			QFile::remove( dstPath );
+			return false;
+		}
+		// 単なるタイムアウトは継続
+		if ( process.error() == QProcess::Timedout )
+			continue;
+		// エラー発生時はメッセージを表示し、出力ファイルを削除してリターン
+		QFile::remove( dstPath );
+		return false;
+	}
+
+	// ffmpeg終了ステータスに応じた処理をしてリターン
+	if ( process.exitCode() ) {
+		QFile::remove( dstPath );
+		return false;
+	} else {
+#ifdef QT4_QT5_WIN
+	QFile::rename( dstPath, outputDir + outFileName );
+#endif
+		return true;
+	}
+}
+
 QString DownloadThread::paths[] = {
 	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
-	"english/business2", "english/gakusyu", "english/gendai",
-	"english/enjoy", "english/vr-radio",
-	"chinese/kouza", "chinese/levelup", "chinese/omotenashi", "french/kouza", "french/kouza2",
-	"italian/kouza", "italian/kouza2", "hangeul/kouza","hangeul/levelup", "hangeul/omotenashi",
-	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2",  "english/vr-radio"
+	"english/business2", "english/gakusyu", "english/gendai", "english/enjoy", 
+	"chinese/kouza", "chinese/omotenashi", "french/kouza", "french/kouza2",
+	"italian/kouza", "italian/kouza2", "hangeul/kouza", "hangeul/omotenashi",
+	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2", 
+	"chinese/levelup", "hangeul/levelup", "english/vr-radio", "english/vr-radio"
+};
+
+QString DownloadThread::paths2[] = {
+	"english/basic0", "0677_01", "0694_01", "0959_01",
+	"2331_01", "0916_01", "0914_01",
+	"0917_01", "4794_01", "4407_01", "3064_01", 
+	"0915_01", "4393_01", "0953_01", "4412_01",
+	"0946_01", "4411_01", "0951_01", "4795_01",
+	"0943_01", "4410_01", "0948_01", "4413_01", "0956_01", "4414_01", 
+	"0937_01", "1893_01", "4121_01", "4812_01"
+};
+
+QString DownloadThread::paths3[] = {
+	"G", "G", "G", "G",
+	"G", "G", "G",
+	"G", "G", "G", "G", 
+	"G", "G", "G", "G",
+	"G", "G", "G", "G",
+	"G", "G", "G", "G", "G", "G", 
+	"R", "R", "R", "R"
 };
 
 void DownloadThread::run() {
 	QAbstractButton* checkbox[] = {
 		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
-		ui->toolButton_business2, ui->toolButton_gakusyu, ui->toolButton_gendai,
-		ui->toolButton_enjoy, ui->toolButton_vrradio,
-		ui->toolButton_chinese, ui->toolButton_levelup_chinese, ui->toolButton_omotenashi_chinese, 
+		ui->toolButton_business2, ui->toolButton_gakusyu, ui->toolButton_gendai, ui->toolButton_enjoy,
+		ui->toolButton_chinese, ui->toolButton_omotenashi_chinese, 
 		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
-		ui->toolButton_hangeul, ui->toolButton_levelup_hangeul, ui->toolButton_omotenashi_hangeul,
+		ui->toolButton_hangeul, ui->toolButton_omotenashi_hangeul,
 		ui->toolButton_german, ui->toolButton_german, ui->toolButton_spanish,  ui->toolButton_spanish, 
-		ui->toolButton_russian, ui->toolButton_russian, ui->toolButton_vrradio1,
+		ui->toolButton_russian, ui->toolButton_russian, 
+		ui->toolButton_levelup_chinese, ui->toolButton_levelup_hangeul, ui->toolButton_vrradio, ui->toolButton_vrradio1,
 		NULL
 	};
 
@@ -667,17 +770,33 @@ void DownloadThread::run() {
 			QStringList nendoList = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
 			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
 
+	     if ( paths3[i].contains ("R") ) {
+	     if ( !istestAvailable( test ) ){
+		emit critical( QString::fromUtf8( "らじる★らじる　配信講座は非対応です" ));
+	     }else {
+		QString master_m3u8 = "/usr/bin/ruby radirudegogaku0.rb " + paths2[i];
+		QString kouza_R = "世界へ発信！ニュースで英語術";
+		if ( paths2[i] == "4121_01" ) kouza_R = "ボキャブライダー";
+		if ( paths2[i] == "0937_01" ) kouza_R = "アラビア語講座";
+		if ( paths2[i] == "1893_01" ) kouza_R = "ポルトガル語入門";
+		captureStream2( kouza_R, kouza_R, paths2[i], "2020", paths2[i] );
+	     }}
+	     if ( paths3[i].contains ("G") ) {
+
 		if ( !(ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() && paths[i] == "english/vr-radio" && i > 20) ) {
 
 
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
-					for ( int j = 0; j < fileList.count() && !isCanceled; j++ )
-						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j] );
+					for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
+						QString filem3u8 = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/" + fileList[j] + "/master.m3u8";
+						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j], filem3u8 );
+					}
 				}
 			}
 		}
 		}
+	     }
 	}
 	
 	//if ( !isCanceled && ui->checkBox_shower->isChecked() )
