@@ -1,6 +1,7 @@
 ### CaptureStream
 ストリーミングで公開されているNHKラジオ語学講座のダウンロードを自動化するためのツールです。 開発が中断しているhttps://osdn.net/projects/capturestream/  のForkです。 開発を引き継いだものではありません。ファイル自体のダウンロードにはffmpegを利用します。 
-
+※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。       
+   
 ### 安定版(master)最新リリース  
 QT版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)   
 Windows版:32ビット   
