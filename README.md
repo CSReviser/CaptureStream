@@ -8,7 +8,9 @@ QT5版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/relea
 Windows版:32ビット   
 [CaptureStream-Windows-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Windows-20200410.zip)   
 Ubuntu版:64ビット  
-[CaptureStream-Ubuntu-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Ubuntu-20200410.zip)  
+[CaptureStream-Ubuntu-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Ubuntu-20200410.zip)             
+[ubuntu qt5インストール手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntu-qt5-インストール手順)
+
 
 
 ### 2020年度の対応講座  
