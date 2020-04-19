@@ -2,7 +2,7 @@
 (暫定版：らじる★らじる配信講座には対応してません)        
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。          
 ### [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
-### 最新リリース  QT版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)     
+### 最新リリース  QT5版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)     
 ### Windows版:      
 ### [CaptureStream-Windows-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Windows-20200410.zip)       
 ### Ubuntu版:       
