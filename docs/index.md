@@ -7,7 +7,7 @@
 ### [CaptureStream-Windows-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Windows-20200410.zip)       
 ### Ubuntu版:       
 ### [CaptureStream-Ubuntu-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Ubuntu-20200410.zip)      
-
+##
 ### Ubuntu版:QT4版(GUI版) [2019/05/02版](https://github.com/CSReviser/CaptureStream/releases/tag/20190502)       
 ### [CaptureStream-Ubuntu-20190502.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190502/CaptureStream-Ubuntu-20190502.zip)      
 ## 　　　
