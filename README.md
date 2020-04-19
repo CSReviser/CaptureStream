@@ -9,7 +9,7 @@ Windows版:32ビット
 [CaptureStream-Windows-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Windows-20200410.zip)   
 Ubuntu版:64ビット  
 [CaptureStream-Ubuntu-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Ubuntu-20200410.zip)             
-Ubuntu版は今回qt5でビルドしています。qt4環境では動作しないかもしれません。                       
+Ubuntu版は2020年度からqt5でビルドしています。qt4環境では動作しないかもしれません。                       
 [ubuntu qt5インストール手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntu-qt5-インストール手順)
 
 
