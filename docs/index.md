@@ -1,6 +1,7 @@
 ### 語学講座ダウンローダ (2020年度)      
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。[類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)       
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。          
+※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
 ### [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 最新リリース  QT5版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)     
 ### Windows版:      
