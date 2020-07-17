@@ -14,7 +14,7 @@
 ## 　　　
 ### Ruby版(CLI版):[2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)        
 ### [CaptureStream-Ruby-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-ruby-20200410.zip)    
-##
+##      
 ### ffmpeg最新版入手サイト
 ### [ffmpeg Download](https://www.ffmpeg.org/download.html)        
 
