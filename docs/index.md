@@ -4,7 +4,8 @@
 ※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
 ### ffmpeg最新版入手サイト
 ### [ffmpeg Download](https://www.ffmpeg.org/download.html)        
-　    
+### [For Windows](https://ffmpeg.zeranoe.com/builds/)        　    
+
 ### [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 最新リリース  QT5版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)     
 ### Windows版:      
