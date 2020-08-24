@@ -10,6 +10,7 @@
 ### [CaptureStream-Ubuntu-20200824.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200824/CaptureStream-Ubuntu-20200824.zip)            
 ## 　　　            
 ※ファイル名をクリックするとzipファイルがダウンロードされます。
+
 ※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
 ### ffmpeg最新版入手サイト
 ### [For Windows](https://ffmpeg.zeranoe.com/builds/)               [【ffmpeg Download】](https://www.ffmpeg.org/download.html)        　                
