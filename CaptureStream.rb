@@ -16,6 +16,7 @@ require 'fileutils'
 善意を持って作成しておりますが、すべて使用される方の自己責任でお願いいたします。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝【更新履歴】＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2020/08/21 2020年度の講座に合わせてURLを変更。
 2020/04/10 2020年度の講座に合わせて、レベルアップ中国語／ハングルを削除。
 2019/04/06 ボキャブライダーのみ今年度を指定する機能追加。
 2019/01/03　2018年度の講座に合わせて、追加、削除。デフォルト拡張子を”mp3”に変更。
@@ -232,7 +233,7 @@ $audio_extension = 'mp3'
 #--------------------------------------------------------------------------------
 #$malformed = %w!3g2 3gp m4a mov!
 $has3args = %w!3g2 3gp aac ts!
-$akamai = 'https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/'
+$akamai = 'https://nhks-vh.akamaihd.net/i/gogaku-stream/mp4/'
 $ffmpeg_hash = {
 	'3g2' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%s\"",
 	'3gp' => "\"%s\" -y -i #{$akamai}%s/master.m3u8 -vn -bsf aac_adtstoasc -acodec copy \"%s\"",

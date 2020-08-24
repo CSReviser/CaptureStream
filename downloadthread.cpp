@@ -47,10 +47,10 @@
 #include <QDebug>
 //#include <QtCrypto>
 #include <QTemporaryFile>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QByteArray>
-#include <QJsonValue>
+//#include <QJsonDocument>
+//#include <QJsonObject>
+//#include <QByteArray>
+//#include <QJsonValue>
 
 #ifdef QT4_QT5_WIN
 #define TimeOut " -m 10000 "
@@ -789,7 +789,7 @@ void DownloadThread::run() {
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
-						QString filem3u8 = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/" + fileList[j] + "/master.m3u8";
+						QString filem3u8 = "https://nhks-vh.akamaihd.net/i/gogaku-stream/mp4/" + fileList[j] + "/master.m3u8";
 						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j], filem3u8 );
 					}
 				}
