@@ -1,23 +1,18 @@
 ### 語学講座ダウンローダ (2020年度)      
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。[類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)       
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。          
+## 　　　                                
+### [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
+### 最新リリース  GUI版  [2020/08/24版](https://github.com/CSReviser/CaptureStream/releases/tag/20200824)     
+### Windows版:      
+### [CaptureStream-Windows-20200824.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200824/CaptureStream-Windows-20200824.zip)       
+### Ubuntu版:       
+### [CaptureStream-Ubuntu-20200824.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200824/CaptureStream-Ubuntu-20200824.zip)            
+## 　　　            
+※ファイル名をクリックするとzipファイルがダウンロードされます。
 ※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
 ### ffmpeg最新版入手サイト
 ### [For Windows](https://ffmpeg.zeranoe.com/builds/)               [【ffmpeg Download】](https://www.ffmpeg.org/download.html)        　                
-## 　　　                                
-### [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
-### 最新リリース  QT5版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)     
-### Windows版:      
-### [CaptureStream-Windows-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Windows-20200410.zip)       
-### Ubuntu版:       
-### [CaptureStream-Ubuntu-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Ubuntu-20200410.zip)            
-## 　　　            
-### Ubuntu版:QT4版(GUI版) [2019/05/02版](https://github.com/CSReviser/CaptureStream/releases/tag/20190502)       
-### [CaptureStream-Ubuntu-20190502.zip](https://github.com/CSReviser/CaptureStream/releases/download/20190502/CaptureStream-Ubuntu-20190502.zip)      
-## 　　　
-### Ruby版(CLI版):[2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)        
-### [CaptureStream-Ruby-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-ruby-20200410.zip)    
-※ファイル名をクリックするとzipファイルがダウンロードされます。
 
         
 
