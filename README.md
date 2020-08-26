@@ -4,7 +4,7 @@
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。       
    
 ### 安定版(master)最新リリース  
-GUI版  [2020/08/24版](https://github.com/CSReviser/CaptureStream/releases/tag/20200824)   
+GUI版  [2020/08/26版](https://github.com/CSReviser/CaptureStream/releases/tag/20200826)   
 Windows版:32ビット   
 [CaptureStream-Windows-20200826.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200826/CaptureStream-Windows-20200826.zip)   
 Ubuntu版:64ビット  
