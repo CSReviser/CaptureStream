@@ -4,14 +4,11 @@
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。       
    
 ### 安定版(master)最新リリース  
-QT5版(GUI版)  [2020/04/10版](https://github.com/CSReviser/CaptureStream/releases/tag/20200410)   
+GUI版  [2020/08/24版](https://github.com/CSReviser/CaptureStream/releases/tag/20200824)   
 Windows版:32ビット   
-[CaptureStream-Windows-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Windows-20200410.zip)   
+[CaptureStream-Windows-20200824.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200824/CaptureStream-Windows-20200824.zip)   
 Ubuntu版:64ビット  
-[CaptureStream-Ubuntu-20200410.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200410/CaptureStream-Ubuntu-20200410.zip)             
-Ubuntu版は2020年度からqt5でビルドしています。qt4環境では動作しないかもしれません。                       
-[ubuntu qt5インストール手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntu-qt5-インストール手順)
-
+[CaptureStream-Ubuntu-20200824.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200824/CaptureStream-Ubuntu-20200824.zip)             
 
 
 ### 2020年度の対応講座  
