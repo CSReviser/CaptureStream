@@ -468,9 +468,9 @@ bool illegal( char c ) {
 	return result;
 }
 
-QString DownloadThread::formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal ) {
+QString DownloadThread::formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, bool checkIllegal ) {
 	int month = hdate.left( 2 ).toInt();
-	int year = 2000 + file.left( 2 ).toInt();
+	int year = 2000 + nendo.right( 2 ).toInt();
 	if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
 	int day = hdate.mid( 3, 2 ).toInt();
@@ -526,8 +526,8 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QString titleFormat;
 	QString fileNameFormat;
 	CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
-	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, false );
-	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, true );
+	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, nendo, false );
+	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, nendo, true );
 	QFileInfo fileInfo( outFileName );
 	QString outBasename = fileInfo.completeBaseName();
 	
@@ -654,8 +654,8 @@ bool DownloadThread::captureStream2( QString kouza, QString hdate, QString file,
 	QString titleFormat;
 	QString fileNameFormat;
 	CustomizeDialog::formats( kouza, titleFormat, fileNameFormat );
-	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, false );
-	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, true );
+	QString id3tagTitle = formatName( titleFormat, kouza, hdate, file, nendo, false );
+	QString outFileName = formatName( fileNameFormat, kouza, hdate, file, nendo, true );
 	QFileInfo fileInfo( outFileName );
 	QString outBasename = fileInfo.completeBaseName();
 

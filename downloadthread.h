@@ -56,7 +56,7 @@ private:
 	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a );
 	bool captureStream2( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a );
 	
-	QString formatName( QString format, QString kouza, QString hdate, QString file, bool checkIllegal );
+	QString formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
 	void downloadShower();
 
