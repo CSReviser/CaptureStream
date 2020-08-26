@@ -68,6 +68,8 @@ private:
 	static QString paths2[];
 	static QString paths3[];
 	static QString prefix;
+	static QString prefix1;
+	static QString prefix2;
 	static QString suffix;
 
 	static QString flv_host;

@@ -69,6 +69,9 @@
 QString DownloadThread::prefix = "http://cgi2.nhk.or.jp/gogaku/st/xml/";
 QString DownloadThread::suffix = "listdataflv.xml";
 
+QString DownloadThread::prefix1 = "https://nhks-vh.akamaihd.net/i/gogaku-stream/mp4/";
+QString DownloadThread::prefix2 = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
+
 QString DownloadThread::flv_host = "flv.nhk.or.jp";
 QString DownloadThread::flv_app = "ondemand/";
 QString DownloadThread::flv_service_prefix = "mp4:flv/gogaku/streaming/mp4/";
@@ -146,14 +149,6 @@ bool DownloadThread::isFfmpegAvailable( QString& path ) {
 	return checkExecutable( path );
 }
 
-bool DownloadThread::istestAvailable( QString& path ) {
-#ifdef QT4_QT5_WIN
-	path = Utility::applicationBundlePath() + "test.bat";
-#else
-	path = Utility::applicationBundlePath() + "test.sh";
-#endif
-	return checkExecutable( path );
-}
 
 //通常ファイルが存在する場合のチェックのために末尾にセパレータはついていないこと
 bool DownloadThread::checkOutputDir( QString dirPath ) {
@@ -549,7 +544,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 #endif
 
 	int month = hdate.left( 2 ).toInt();
-	int year = 2000 + file.left( 2 ).toInt();
+	int year = 2000 + nendo.right( 2 ).toInt();
 	if ( 2020 > year ) return false;
 	if ( month <= 4 && QDate::currentDate().year() > year )
 		year += 1;
@@ -560,7 +555,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	int year1 = QDate::currentDate().year();
 	if ( month < 4 )
 		year1 += 1;
-	QString kon_nendo = QString::number(year1);
+	QString kon_nendo = "2020"; //QString::number(year1);
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
 		QDate today;
@@ -573,7 +568,14 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			if ( day2 > 0 || day2 < -7 ) return false;
 		}
 		if ( ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
-			if ( kon_nendo != nendo ) return false;
+			if ( QString::compare( kon_nendo , nendo )) return false;
+			int year = 2000 + nendo.right( 2 ).toInt();
+			QDate onair1( year, month, day );
+			yyyymmdd = onair1.toString( "yyyy_MM_dd" );
+			if ( !(!QString::compare( yyyymmdd , "2020_03_30" ) ||!QString::compare( yyyymmdd , "2020_03_31" ))&& month <= 3)
+				 year += 1;
+			QDate onair2( year, month, day );
+			yyyymmdd = onair2.toString( "yyyy_MM_dd" );
 		}
 	}
 	
@@ -719,28 +721,9 @@ QString DownloadThread::paths[] = {
 	"chinese/kouza", "chinese/omotenashi", "french/kouza", "french/kouza2",
 	"italian/kouza", "italian/kouza2", "hangeul/kouza", "hangeul/omotenashi",
 	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2", 
-	"chinese/levelup", "hangeul/levelup", "english/vr-radio", "english/vr-radio"
+	"english/vr-radio", "english/vr-radio"
 };
 
-QString DownloadThread::paths2[] = {
-	"english/basic0", "0677_01", "0694_01", "0959_01",
-	"2331_01", "0916_01", "0914_01",
-	"0917_01", "4794_01", "4407_01", "3064_01", 
-	"0915_01", "4393_01", "0953_01", "4412_01",
-	"0946_01", "4411_01", "0951_01", "4795_01",
-	"0943_01", "4410_01", "0948_01", "4413_01", "0956_01", "4414_01", 
-	"0937_01", "1893_01", "4121_01", "4812_01"
-};
-
-QString DownloadThread::paths3[] = {
-	"G", "G", "G", "G",
-	"G", "G", "G",
-	"G", "G", "G", "G", 
-	"G", "G", "G", "G",
-	"G", "G", "G", "G",
-	"G", "G", "G", "G", "G", "G", 
-	"R", "R", "R", "R"
-};
 
 void DownloadThread::run() {
 	QAbstractButton* checkbox[] = {
@@ -752,7 +735,7 @@ void DownloadThread::run() {
 		ui->toolButton_hangeul, ui->toolButton_omotenashi_hangeul,
 		ui->toolButton_german, ui->toolButton_german, ui->toolButton_spanish,  ui->toolButton_spanish, 
 		ui->toolButton_russian, ui->toolButton_russian, 
-		ui->toolButton_levelup_chinese, ui->toolButton_levelup_hangeul, ui->toolButton_vrradio, ui->toolButton_vrradio1,
+		ui->toolButton_vrradio, ui->toolButton_vrradio1,
 		NULL
 	};
 
@@ -764,40 +747,23 @@ void DownloadThread::run() {
 	//emit information( QString::fromUtf8( "----------------------------------------" ) );
 
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
+
 		if ( checkbox[i]->isChecked() ) {
 			QStringList fileList = getAttribute( prefix + paths[i] + "/" + suffix, "@file" );
 			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
-			QStringList nendoList = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
 			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
-
-	     if ( paths3[i].contains ("R") ) {
-	     if ( !istestAvailable( test ) ){
-		emit critical( QString::fromUtf8( "らじる★らじる　配信講座は非対応です" ));
-	     }else {
-		QString master_m3u8 = "/usr/bin/ruby radirudegogaku0.rb " + paths2[i];
-		QString kouza_R = "世界へ発信！ニュースで英語術";
-		if ( paths2[i] == "4121_01" ) kouza_R = "ボキャブライダー";
-		if ( paths2[i] == "0937_01" ) kouza_R = "アラビア語講座";
-		if ( paths2[i] == "1893_01" ) kouza_R = "ポルトガル語入門";
-		captureStream2( kouza_R, kouza_R, paths2[i], "2020", paths2[i] );
-	     }}
-	     if ( paths3[i].contains ("G") ) {
-
-		if ( !(ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() && paths[i] == "english/vr-radio" && i > 20) ) {
-
+			QStringList nendoList = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
 
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
-						QString filem3u8 = "https://nhks-vh.akamaihd.net/i/gogaku-stream/mp4/" + fileList[j] + "/master.m3u8";
+						QString filem3u8 = prefix1 + fileList[j] + "/master.m3u8";
 						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j], filem3u8 );
 					}
 				}
 			}
 		}
-		}
 	     }
-	}
 	
 	//if ( !isCanceled && ui->checkBox_shower->isChecked() )
 		//downloadShower();
