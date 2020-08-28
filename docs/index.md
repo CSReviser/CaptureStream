@@ -3,8 +3,7 @@
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。          
 ### [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### [類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)への移行をご検討ください。      
-
-※2020/08/26版は英語以外の語学講座で動作しないバグを修正しています。
+※2020/08/26版は一部の語学講座で動作しないバグを修正しています。
 ### 最新リリース GUI版  [2020/08/26版](https://github.com/CSReviser/CaptureStream/releases/tag/20200826)     
 ### Windows版:      
 ### [CaptureStream-Windows-20200826.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200826/CaptureStream-Windows-20200826.zip)       
