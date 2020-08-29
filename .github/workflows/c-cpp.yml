@@ -22,7 +22,8 @@ jobs:
       run: qmake -makefile -Wall -before
     - name: make
       run: make
-   - uses: actions/download-artifact@v2
+- name: Display structure of downloaded files
+   uses: actions/download-artifact@v2
     with:
       name: my-artifact
       path: ~/download/path
