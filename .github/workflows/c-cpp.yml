@@ -22,9 +22,7 @@ jobs:
       run: qmake -makefile -Wall -before
     - name: make
       run: make
-    - uses: actions/upload-artifact@v1
-      with:
-      name: CapturStream
-      path: test
+    - name: Download all workflow run artifacts
+      uses: actions/upload-artifact@v2
       
 
