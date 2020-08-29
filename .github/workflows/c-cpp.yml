@@ -22,6 +22,8 @@ jobs:
       run: qmake -makefile -Wall -before
     - name: make
       run: make
+      
+      
 - name: Display structure of downloaded files
    uses: actions/download-artifact@v2
     with:
