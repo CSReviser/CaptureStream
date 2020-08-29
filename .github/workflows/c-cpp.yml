@@ -15,7 +15,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
     - name: qmake
-      run: qmake -makefile
+      run: qmake -makefile CaptureStream
     - name: make
       run: make
     - name: make check
