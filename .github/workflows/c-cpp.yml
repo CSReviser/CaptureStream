@@ -25,5 +25,5 @@ jobs:
    - users: actions/upload-artifact@v2
      with:
      name: CaptureStream
-     path: Users/runner/work/CaptureStream/
+     path: CaptureStream
 
