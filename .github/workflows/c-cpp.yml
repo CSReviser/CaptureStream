@@ -16,7 +16,7 @@ jobs:
       uses: jurplel/install-qt-action@v2
     - uses: actions/checkout@v2
     - name: qmake
-      run: qmake
+      run: qmake CaptureStream.pro
     - name: make
       run: make
     - name: make check
