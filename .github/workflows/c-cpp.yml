@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Install Qt
@@ -22,4 +22,9 @@ jobs:
       run: qmake -makefile -Wall -before
     - name: make
       run: make
+    - uses: actions/download-artifact@v1
+      with:
+      name: CapturStream
+
+      
 
