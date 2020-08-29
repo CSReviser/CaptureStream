@@ -16,7 +16,13 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         modules: 'qtcharts qtscript qtwebengine'
-
+- uses: actions/upload-artifact@v2
+  with:
+    name: my-artifact
+    path: |
+      path/output/bin/
+      path/output/test-results
+      !path/**/*.tmp
     - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile -Wall -before
@@ -25,5 +31,10 @@ jobs:
       
       
 
- - uses: actions/download-artifact@v2
- 
+- uses: actions/upload-artifact@v2
+  with:
+    name: my-artifact
+    path: |
+      path/output/bin/
+      path/output/test-results
+      !path/**/*.tmp
