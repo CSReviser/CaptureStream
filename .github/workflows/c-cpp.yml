@@ -23,5 +23,3 @@ jobs:
     - name: make
       run: make
     - uses: actions/upload-artifact@v2
-        with:
-        path: path/**/[abc]rtifac?/*
