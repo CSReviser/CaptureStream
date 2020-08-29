@@ -23,4 +23,6 @@ jobs:
     - name: make
       run: make
     - name: Download artifact to get url to upload to release
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v2
+with:
+        name: CaptureStream
