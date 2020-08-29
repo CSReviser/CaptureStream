@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Install Qt
@@ -19,7 +19,7 @@ jobs:
 
     - uses: actions/checkout@v2
     - name: qmake
-      run: qmake -makefile -o CaptureStream
+      run: qmake -makefile -before -o CaptureStream
     - name: make
       run: make
     - name: make check
