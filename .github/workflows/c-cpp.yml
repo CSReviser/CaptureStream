@@ -14,8 +14,11 @@ jobs:
     steps:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
+
+    steps:
+    - uses: actions/checkout@v2
     - name: qmake
-      run: qmake -makefile CaptureStream
+      run: qmake -makefile -o CaptureStream
     - name: make
       run: make
     - name: make check
