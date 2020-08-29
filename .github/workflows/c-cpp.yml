@@ -17,18 +17,11 @@ jobs:
       with:
         modules: 'qtcharts qtscript qtwebengine'
 
-- uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile -Wall -before
     - name: make
       run: make
-      
-      
-
-- uses: actions/upload-artifact@v2
-  with:
-    name: my-artifact
-    path: |
-      path/output/bin/
-      path/output/test-results
-      !path/**/*.tmp
+    - uses: actions/upload-artifact@v2
+        with:
+        name: 'CaptureStream'
