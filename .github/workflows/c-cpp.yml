@@ -19,9 +19,9 @@ jobs:
 
     - uses: actions/checkout@v2
     - name: qmake
-      run: qmake -makefile -Wall -before -o CaptureStream
+      run: qmake -makefile -Wall -before
     - name: make
-      run: make CaptureStream
+      run: make
     - name: make check
       run: make check
     - name: make distcheck
