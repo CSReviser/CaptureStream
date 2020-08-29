@@ -15,6 +15,10 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
 
+  uses: jurplel/install-qt-action@v2
+      with:
+        modules: 'qtcharts qtscript qtwebengine'
+
     - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile -o CaptureStream
