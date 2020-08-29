@@ -24,5 +24,6 @@ jobs:
       run: make
     - name: Download all workflow run artifacts
       uses: actions/upload-artifact@v2
-      
-
+      with:
+      name: my-artifact
+      path: CaptutreStream
