@@ -22,4 +22,7 @@ jobs:
       run: qmake -makefile -Wall -before
     - name: make
       run: make
-    - uses: actions/upload-artifact@v2
+    - name: Download artifact to get url to upload to release
+      uses: actions/download-artifact@v1
+      with:
+        name: artifact
