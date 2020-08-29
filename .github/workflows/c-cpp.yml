@@ -22,8 +22,9 @@ jobs:
       run: qmake -makefile -Wall -before
     - name: make
       run: make
-   - users: actions/upload-artifact@v2
-     with:
-     name: CaptureStream
-     path: ./
+  
+    - users: actions/upload-artifact@v2
+      with:
+        name: CaptureStream
+        path: ./
 
