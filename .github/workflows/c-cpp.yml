@@ -14,7 +14,7 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         modules: 'qtcharts qtscript qtwebengine'
-        arch: win32_mingw32
+        arch: win64_mingw81
 
     - uses: actions/checkout@v2
     - name: qmake
