@@ -7,15 +7,15 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-16.04
 
     steps:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
+        version: 5.5
         modules: 'qtcharts qtscript qtwebengine'
-        arch: win64_mingw81
-
+        
     - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile -Wall -before
