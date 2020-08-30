@@ -7,13 +7,12 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latst
+    runs-on: windows-latest
 
     steps:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: 5.5.1
         modules: 'qtcharts qtscript qtwebengine'
         arch: win32_mingw32
 
