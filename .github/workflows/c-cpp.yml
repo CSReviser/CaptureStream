@@ -7,7 +7,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-16.04
+    runs-on: windows-latst
 
     steps:
     - name: Install Qt
@@ -15,6 +15,7 @@ jobs:
       with:
         version: 5.5.1
         modules: 'qtcharts qtscript qtwebengine'
+        arch: win32_mingw32
 
     - uses: actions/checkout@v2
     - name: qmake
