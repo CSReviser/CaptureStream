@@ -7,12 +7,13 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-16.04
 
     steps:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
+        version: 5.5.1
         modules: 'qtcharts qtscript qtwebengine'
 
     - uses: actions/checkout@v2
