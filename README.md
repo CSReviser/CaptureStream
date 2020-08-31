@@ -7,7 +7,7 @@
 GUI版  [2020/08/26版](https://github.com/CSReviser/CaptureStream/releases/tag/20200826)   
 Windows版:32ビット   
 [CaptureStream-Windows-20200826.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200826/CaptureStream-Windows-20200826.zip)   
-Ubuntu版:64ビット  
+Ubuntu版:64ビット : [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
 [CaptureStream-Ubuntu-20200826.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200826/CaptureStream-Ubuntu-20200826.zip)             
 
 
