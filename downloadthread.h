@@ -53,8 +53,7 @@ private:
 	bool checkOutputDir( QString dirPath );
 	void downloadENews( bool re_read );
 	
-	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a );
-	bool captureStream2( QString kouza, QString hdate, QString file, QString nendo, QString filem3u8a );
+	bool captureStream( QString kouza, QString hdate, QString file, QString nendo );
 	
 	QString formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
