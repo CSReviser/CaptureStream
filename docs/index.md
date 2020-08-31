@@ -8,6 +8,7 @@
 ### Windows版:      
 ### [CaptureStream-Windows-20200826.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200826/CaptureStream-Windows-20200826.zip)       
 ### Ubuntu版:       
+### [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)
 ### [CaptureStream-Ubuntu-20200826.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200826/CaptureStream-Ubuntu-20200826.zip)            　　　            
 ※ファイル名をクリックするとzipファイルがダウンロードされます。
 ## 　　　                                
