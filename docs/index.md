@@ -10,6 +10,7 @@
 ### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
 ### 【qt4】[CaptureStream-Ubuntu-qt4-20200831.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200831/CaptureStream-Ubuntu-qt4-20200831.zip)                                    
 ### 【qt5】[CaptureStream-Ubuntu-qt5-20200831.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200831/CaptureStream-Ubuntu-qt5-20200831.zip)                                 　　　            
+### Macintosh版: [Macintosh版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 ※ファイル名をクリックするとzipファイルがダウンロードされます。
 ## 　　　                                
 ※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
