@@ -682,14 +682,12 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			emit critical( QString::fromUtf8( "ダウンロード失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
 			QFile::remove( dstPath );
 			return false;
-		} else {
+		}
+	}
 #ifdef QT4_QT5_WIN
 		QFile::rename( dstPath, outputDir + outFileName );
 #endif
 			return true;
-		}
-	}
-	return true;
 }
 
 
