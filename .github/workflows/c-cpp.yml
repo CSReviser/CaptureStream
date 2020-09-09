@@ -20,6 +20,9 @@ jobs:
       run: qmake -makefile
     - name: make
       run: make
+
+    - name: framework_osx_x86_64
+      run: ./_framework_osx_x86_64.sh
   
     - uses: actions/upload-artifact@v2
       with:
