@@ -16,7 +16,7 @@
 ### GUI版  [2020/09/12版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20200912)   
 ### Windows版:32ビット(※openssl.exeが別途必要です。)   
 ### [CaptureStream-hls-Windows-20200912.zip](https://github.com/CSReviser/CaptureStream-hls/releases/download/20200912/CaptureStream-hls-Windows-20200912.zip)   
-### Ubuntu版:64ビット : [バイナリビルド手順](https://github.com/CSReviser/CaptureStream-hls/wiki/ubuntuビルド手順)                          
+### Ubuntu版:64ビット : [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ビルド手順(hls版))                          
 ### 【qt4】[CaptureStream-hls-Ubuntu-qt4-20200912.zip](https://github.com/CSReviser/CaptureStream-hls/releases/download/20200912/CaptureStream-hls-Ubuntu-qt4-20200912.zip)                                                                                                            
 ### 【qt5】[CaptureStream-hls-Ubuntu-qt5-20200912.zip](https://github.com/CSReviser/CaptureStream-hls/releases/download/20200912/CaptureStream-hls-Ubuntu-qt5-20200912.zip)                                                                                                    　　　            
 
