@@ -12,7 +12,7 @@
 ### 【qt5】[CaptureStream-Ubuntu-qt5-20200909.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200909/CaptureStream-Ubuntu-qt5-20200909.zip)                                 　　　            
 ### Macintosh版: [Macintosh版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 ※ファイル名をクリックするとzipファイルがダウンロードされます。
-### [HLS方式独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)                          
+### [HLS方式独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)※通常版(上記)が動作しない場合にお試しください。                          
 ### GUI版  [2020/09/12版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20200912)   
 ### Windows版:32ビット(※openssl.exeが別途必要です。)   
 ### [CaptureStream-hls-Windows-20200912.zip](https://github.com/CSReviser/CaptureStream-hls/releases/download/20200912/CaptureStream-hls-Windows-20200912.zip)   
