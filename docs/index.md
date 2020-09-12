@@ -13,6 +13,9 @@
 ### Macintosh版: [Macintosh版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 ※ファイル名をクリックするとzipファイルがダウンロードされます。
 ## 　　　                                
+## 　　　                                
+### [HLS方式独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)                          
+## 　　　                                
 ※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
 ### ffmpeg最新版入手サイト
 ### [For Windows](https://ffmpeg.zeranoe.com/builds/)               [【ffmpeg Download】](https://www.ffmpeg.org/download.html)        　                
