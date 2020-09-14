@@ -18,6 +18,7 @@
 ### Ubuntu版:64ビット : [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ビルド手順(hls版))                          
 ### 【qt4】[CaptureStream-hls-Ubuntu-qt4-20200912.zip](https://github.com/CSReviser/CaptureStream-hls/releases/download/20200912/CaptureStream-hls-Ubuntu-qt4-20200912.zip)                                                                                                            
 ### 【qt5】[CaptureStream-hls-Ubuntu-qt5-20200912.zip](https://github.com/CSReviser/CaptureStream-hls/releases/download/20200912/CaptureStream-hls-Ubuntu-qt5-20200912.zip)                                                                                                    　　　            
+### Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
 
 ## 　　　                                
