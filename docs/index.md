@@ -26,7 +26,7 @@
 ### ffmpeg最新版入手サイト
 ### [For Windows](https://ffmpeg.zeranoe.com/builds/)               [【ffmpeg Download】](https://www.ffmpeg.org/download.html)        　                
 
-        
+         
 
 
 
