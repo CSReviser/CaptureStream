@@ -4,7 +4,7 @@
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
  [類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)への移行をご検討ください。      
 ### ※2020/10/05版は2020年度後期講座に対応しました。
-### 最新リリース GUI版  [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201905)     
+### 最新リリース GUI版  [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)     
 ### Windows版:      
 ### [CaptureStream-Windows-20201005.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Windows-20201005.zip)       
 ### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
