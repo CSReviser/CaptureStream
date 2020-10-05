@@ -696,7 +696,7 @@ QString DownloadThread::paths[] = {
 	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
 	"english/business2", "english/gakusyu", "english/gendai", "english/enjoy", 
-	"chinese/kouza", "chinese/omotenashi", "french/kouza", "french/kouza2",
+	"chinese/kouza", "chinese/stepup", "french/kouza", "french/kouza2",
 	"italian/kouza", "italian/kouza2", "hangeul/kouza", "hangeul/omotenashi",
 	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2", 
 	"english/vr-radio", "english/vr-radio"
@@ -708,7 +708,7 @@ void DownloadThread::run() {
 		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
 		ui->toolButton_business2, ui->toolButton_gakusyu, ui->toolButton_gendai, ui->toolButton_enjoy,
-		ui->toolButton_chinese, ui->toolButton_omotenashi_chinese, 
+		ui->toolButton_chinese, ui->toolButton_stepup_chinese, 
 		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
 		ui->toolButton_hangeul, ui->toolButton_omotenashi_hangeul,
 		ui->toolButton_german, ui->toolButton_german, ui->toolButton_spanish,  ui->toolButton_spanish, 

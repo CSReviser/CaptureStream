@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
-    <height>550</height>
+    <width>540</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>590</width>
-    <height>550</height>
+    <width>540</width>
+    <height>500</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>590</width>
-    <height>550</height>
+    <width>540</width>
+    <height>500</height>
    </size>
   </property>
   <property name="font">
@@ -48,8 +48,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>571</width>
-      <height>477</height>
+      <width>521</width>
+      <height>437</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
@@ -605,7 +605,7 @@
      <item row="1" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_9_1">
        <item>
-        <widget class="QToolButton" name="toolButton_omotenashi_chinese">
+        <widget class="QToolButton" name="toolButton_stepup_chinese">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -618,7 +618,7 @@
           </font>
          </property>
          <property name="text">
-          <string>おもてなしの中国語</string>
+          <string>ステップアップ中国語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -1176,7 +1176,7 @@
   <tabstop>toolButton_gendai</tabstop>
   <tabstop>toolButton_enjoy</tabstop>
   <tabstop>toolButton_chinese</tabstop>
-  <tabstop>toolButton_omotenashi_chinese</tabstop>
+  <tabstop>toolButton_stepup_chinese</tabstop>
   <tabstop>toolButton_french</tabstop>
   <tabstop>toolButton_italian</tabstop>
   <tabstop>toolButton_hangeul</tabstop>
@@ -1477,7 +1477,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_omotenashi_chinese</sender>
+   <sender>toolButton_stepup_chinese</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
    <slot>toggled(bool)</slot>
