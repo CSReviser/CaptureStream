@@ -4,12 +4,12 @@
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。       
    
 ### 安定版(master)最新リリース  
-GUI版  [2020/09/09版](https://github.com/CSReviser/CaptureStream/releases/tag/20200909)   
+GUI版  [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)   
 Windows版:32ビット   
-[CaptureStream-Windows-20200909.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200909/CaptureStream-Windows-20200909.zip)   
+[CaptureStream-Windows-20201005.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Windows-20201005.zip)   
 Ubuntu版:64ビット : [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
-【qt4】[CaptureStream-Ubuntu-qt4-20200909.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200909/CaptureStream-Ubuntu-qt4-20200909.zip)                                                                                                            
-【qt5】[CaptureStream-Ubuntu-qt5-20200909.zip](https://github.com/CSReviser/CaptureStream/releases/download/20200909/CaptureStream-Ubuntu-qt5-20200909.zip)                                                              
+【qt4】[CaptureStream-Ubuntu-qt4-20201905.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Ubuntu-qt4-20201905.zip)                                                                                                            
+【qt5】[CaptureStream-Ubuntu-qt5-20201005.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Ubuntu-qt5-20201005.zip)                                                              
 Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
 ### 2020年度の対応講座  
