@@ -8,7 +8,7 @@ GUI版  [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/
 Windows版:32ビット   
 [CaptureStream-Windows-20201005.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Windows-20201005.zip)   
 Ubuntu版:64ビット : [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
-【qt4】[CaptureStream-Ubuntu-qt4-20201905.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Ubuntu-qt4-20201905.zip)                                                                                                            
+【qt4】[CaptureStream-Ubuntu-qt4-20201005.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Ubuntu-qt4-20201005.zip)                                                                                                            
 【qt5】[CaptureStream-Ubuntu-qt5-20201005.zip](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Ubuntu-qt5-20201005.zip)                                                              
 Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
