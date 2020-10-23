@@ -30,7 +30,6 @@ Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/
 まいにちフランス語　　※１    
 まいにちイタリア語　　※１   
 まいにちハングル講座  
-おもてなしのハングル講座  
 まいにちドイツ語　　※１     
 まいにちスペイン語　　※１     
 まいにちロシア語　　※１ 
