@@ -2,7 +2,7 @@
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。[類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)       
 ※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。          
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
- [類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)への移行をご検討ください。      
+ 更新を終了する予定です。[類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)への移行をご検討ください。      
 ### ※2020/10/05版は2020年度後期講座に対応しました。
 ### 最新リリース GUI版  [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)     
 ### Windows版:      
