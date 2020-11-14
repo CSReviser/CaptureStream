@@ -4,11 +4,12 @@
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 英語講座に特化した[CS-English（作成中）](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。[類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)への移行をご検討ください。      
 ### CS-English [2020/11/14版](https://github.com/CSReviser/CS-English/releases/tag/20201114)
-###
+### 旧名称の部分は順次訂正していきます。
+                 
 ### 旧名称最終版 [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)     
 ### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
 ### Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
-※ファイル名をクリックするとzipファイルがダウンロードされます。
+　
 ### [HLS独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)  [2020/10/05版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20201005)            
 ※通常版(上記)が動作しない場合にお試しください。                          
 ### Ubuntu版:[バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ビルド手順(hls版))                          
