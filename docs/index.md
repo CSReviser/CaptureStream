@@ -5,7 +5,7 @@
 ### 英語講座に特化した[CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。
 ### [類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)への移行をご検討ください。      
 ### CS-English [2020/11/14版](https://github.com/CSReviser/CS-English/releases/tag/20201114)
-###    Windows版: [2020/11/14版](https://github.com/CSReviser/CS-English/releases/download/20201114/CS-English-Windows-20201114.zip)                          
+### 　　Windows版: [2020/11/14版](https://github.com/CSReviser/CS-English/releases/download/20201114/CS-English-Windows-20201114.zip)                          
 ### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
 ### 　　Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
 
