@@ -9,7 +9,6 @@
 ### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
 ### 　　Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
 
-downloads)
          
 
                        
