@@ -46,7 +46,7 @@
 
 
 ###                           
-### 　　　　　                        
+###  ーーーーーーーー　　　　　                        
 ### [旧アプリの詳細はこちら](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)                 　　　
 ### Wikiメニュー     
 [概要](https://github.com/CSReviser/CaptureStream/wiki/%E6%A6%82%E8%A6%81)   
