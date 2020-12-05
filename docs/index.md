@@ -30,8 +30,7 @@
 
 
  
-### [CS-Englishの詳細はこちら](https://github.com/CSReviser/CS-English/wiki/CS-English)                 
-## 　　　　
+### [CS-Englishの詳細はこちら](https://github.com/CSReviser/CS-English/wiki/CS-English)                 　　　　
 ### Wikiメニュー     
 [概要](https://github.com/CSReviser/CS-English/wiki/%E6%A6%82%E8%A6%81)   
 [対応講座](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)    
@@ -41,14 +40,13 @@
 [制限事項](https://github.com/CSReviser/CS-English/wiki/%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85)   
 [FAQ](https://github.com/CSReviser/CS-English/wiki/FAQ)   
 [音声形式mp3](https://github.com/CSReviser/CaptureStream/wiki/%E9%9F%B3%E5%A3%B0%E5%BD%A2%E5%BC%8Fmp3)           
-[スクリーンショット](https://github.com/CSReviser/CaptureStream/wiki/スクリーンショット)   
 [作者・改版者](https://github.com/CSReviser/CaptureStream/wiki/作者・改版者)   
 [リンク](https://github.com/CSReviser/CaptureStream/wiki/リンク)   
 
 
 
-
- 
+###                      
+###                        
 ### [旧アプリの詳細はこちら](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)                 　　　
 ### Wikiメニュー     
 [概要](https://github.com/CSReviser/CaptureStream/wiki/%E6%A6%82%E8%A6%81)   
