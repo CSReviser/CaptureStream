@@ -29,7 +29,9 @@
          
 
 
- 
+
+                         
+###  ーーーーーーーー　　　　　                         
 ### [CS-Englishの詳細はこちら](https://github.com/CSReviser/CS-English/wiki/CS-English)                 　　　　
 ### Wikiメニュー     
 [概要](https://github.com/CSReviser/CS-English/wiki/%E6%A6%82%E8%A6%81)   
@@ -45,7 +47,7 @@
 
 
 
-###                           
+                         
 ###  ーーーーーーーー　　　　　                        
 ### [旧アプリの詳細はこちら](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)                 　　　
 ### Wikiメニュー     
