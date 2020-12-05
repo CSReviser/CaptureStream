@@ -22,15 +22,15 @@
 
 
 ## 　　　                                
-※ ffmpegの脆弱性が指摘され、改善版がリリースされています。最新版のffmpegを入手して CaptureStreamフォルダ内のffmpegと置き換えて下さい。
 ### ffmpeg最新版入手サイト
 ### [For Windows](https://www.gyan.dev/ffmpeg/builds/)               [【ffmpeg Download】](https://www.ffmpeg.org/download.html)        　                
 ### [こちらからご使用のOS環境に合ったファイルをお選び頂くこともできます](https://ffbinaries.com/downloads)
          
 
+                       
 
 
-                         
+## 　　　                                
 ###  ーーーーーーーー　　　　　                         
 ### [CS-Englishの詳細はこちら](https://github.com/CSReviser/CS-English/wiki/CS-English)                 　　　　
 ### Wikiメニュー     
@@ -47,7 +47,13 @@
 
 
 
-                         
+ downloads)
+         
+
+                       
+
+
+## 　　　                                                        
 ###  ーーーーーーーー　　　　　                        
 ### [旧アプリの詳細はこちら](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)                 　　　
 ### Wikiメニュー     
