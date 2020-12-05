@@ -9,8 +9,15 @@
 ### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
 ### 　　Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
 
-### 旧名称の部分は順次訂正していきます。
-                 
+downloads)
+         
+
+                       
+
+
+## 　　　                                
+###  ーーーーーーーー　　　　　           
+### 旧名称の部分は順次訂正していきます。                                      
 ### 旧名称最終版 [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)     
 ### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
 ### Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
@@ -46,8 +53,6 @@
 [リンク](https://github.com/CSReviser/CaptureStream/wiki/リンク)   
 
 
-
- downloads)
          
 
                        
