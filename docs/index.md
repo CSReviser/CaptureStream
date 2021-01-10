@@ -1,6 +1,8 @@
 ### 語学講座ダウンローダ (2020年度)      
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為2021年度以降は使用できない可能性があります。[類似アプリ](https://github.com/CSReviser/CaptureStream/wiki/類似アプリ)       
-※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。          
+※ ダウンロードした語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
+## [［NHKゴガクのお知らせ］](https://www2.nhk.or.jp/gogaku/topics.cgi)   
+### NHKの語学講座の再放送やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 英語講座に特化した[CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。
 ### [類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。      
