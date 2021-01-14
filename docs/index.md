@@ -14,11 +14,13 @@
 ###  ーーーーーーーー　　　　　            　　       
 ### CS-Mult [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/tag/20210112)         
 ※ 英語以外の語学講座の一部に対応(月/火/水と木/金を別ボタン)
+### 　　Windows版: [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/download/20210112/CS-Mult-Windows-20210112.zip)                          
+### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
                        
 
 
 ## 　　　                                
-###  ーーーーーーーー　　　　　           
+###  ーーーーーーーーーーーーーーーー　　　　　           
 ### 旧名称の部分は順次訂正していきます。                                      
 ### 旧名称最終版 [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)     
 ### Windows版: [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Windows-20201005.zip)                          
