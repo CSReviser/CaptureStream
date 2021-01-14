@@ -16,6 +16,7 @@
 ※ 英語以外の語学講座の一部に対応(月/火/水と木/金を別ボタン)
 ### 　　Windows版: [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/download/20210112/CS-Mult-Windows-20210112.zip)                          
 ### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
+### 　　Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
                        
 
 
