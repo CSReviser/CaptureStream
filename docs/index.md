@@ -21,7 +21,7 @@
 
 
 ## 　　　                                
-###  ーーーーーーーーーーーーーーーー　　　　　           
+──────────────────────────── 　　　　　           
 ### 旧名称の部分は順次訂正していきます。                                      
 ### 旧名称最終版 [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)     
 ### Windows版: [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/download/20201005/CaptureStream-Windows-20201005.zip)                          
