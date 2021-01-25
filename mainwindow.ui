@@ -593,7 +593,7 @@
           </font>
          </property>
          <property name="text">
-          <string>おもてなしのハングル講座</string>
+          <string></string>
          </property>
          <property name="checkable">
           <bool>true</bool>
