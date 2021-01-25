@@ -472,13 +472,17 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 	int month = hdate.left( 2 ).toInt();
 	int year = nendo.right( 4 ).toInt();
 	int day = hdate.mid( 3, 2 ).toInt();
+	int year1 = QDate::currentDate().year();
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
 		if ( month == 3 && ( day == 30 || day == 31) && year == 2020 ) 
 		year += 0;
+ 		else
+		if ( month < 4 )
+		year += 1;
 	} else {
 	if ( month <= 4 && QDate::currentDate().year() > year )
-		year += 1;
+		year = year + (year1 - year);
 	}
 
 	if ( file.right( 4 ) == ".flv" )
@@ -556,20 +560,21 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	int year = nendo.right( 4 ).toInt();
 	int day = hdate.mid( 3, 2 ).toInt();
 	if ( 2020 > year ) return false;
+	int year1 = QDate::currentDate().year();
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
 		if ( month == 3 && ( day == 30 || day == 31) && year == 2020 ) 
-		year += 0;
+		year += 0; 
+ 		else
+		if ( month < 4 )
+		year += 1;
 	} else {
 	if ( month <= 4 && QDate::currentDate().year() > year )
-		year += 1;
+		year = year + (year1 - year);
 	}
 	QDate onair( year, month, day );
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 
-	int year1 = QDate::currentDate().year();
-	if ( month < 4 )
-		year1 += 1;
 	QString kon_nendo = "2020"; //QString::number(year1);
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
