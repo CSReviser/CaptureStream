@@ -6,9 +6,9 @@
 ※ NHKの語学講座の放送日時やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 2021年度から中学校の新しい学習指導要領が適用されます。「基礎英語」系の番組内容が変更されます。2021年度への準備として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。      
-### CS-English [2020/11/14版](https://github.com/CSReviser/CS-English/releases/tag/20201114)
+### CS-English [2021/01/31版](https://github.com/CSReviser/CS-English/releases/tag/20210131)
 ※ 英語講座のみに対応
-### 　　Windows版: [2020/11/14版](https://github.com/CSReviser/CS-English/releases/download/20201114/CS-English-Windows-20201114.zip)                          
+### 　　Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
 ### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
 ### 　　Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
 ────────────────────────────　　　　　            　　       
