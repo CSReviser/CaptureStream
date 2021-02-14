@@ -12,6 +12,7 @@
    * Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
+
 ---        
 ### CS-Mult [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/tag/20210112)         
 ※ 欧州系語学講座に主に対応。従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
@@ -30,13 +31,9 @@
    * Windows版: [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/download/20210125/CaptureStream-Windows-20210125.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
-　
-
-────────────────────────────　　　　　           　　     
+　　　           　　     
 
 ***
-
----
 
 ### [HLS独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)  [2020/10/05版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20201005)            
 ※通常版(上記)が動作しない場合にお試しください。                          
