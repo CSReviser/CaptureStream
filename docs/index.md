@@ -14,7 +14,7 @@
 ***
 ### CS-English [2021/01/31版](https://github.com/CSReviser/CS-English/releases/tag/20210131)
 ※ 英語講座のみに対応
-   * Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
+   * #### Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
 
