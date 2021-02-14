@@ -5,7 +5,8 @@
 ## [［放送内容変更のお知らせ］](https://www2.nhk.or.jp/gogaku/topics2.cgi)   
 ※ NHKの語学講座の放送日時やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
-### 2021年度は「基礎英語」「ビジネス英語」の番組内容がリニューアルされます。2021年度への準備として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。      
+### 2021年度は「基礎英語」「ビジネス英語」の番組内容がリニューアルされます。2021年度への準備として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。             
+────────────────────────────　　　　　           　　       
 ### CS-English [2021/01/31版](https://github.com/CSReviser/CS-English/releases/tag/20210131)
 ※ 英語講座のみに対応
    * Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
@@ -14,7 +15,7 @@
 
 ────────────────────────────　　　　　           　　       
 ### CS-Mult [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/tag/20210112)         
-※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
+※ 欧州系語学講座に主に対応。従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
    * Windows版: [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/download/20210112/CS-Mult-Windows-20210112.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
@@ -25,6 +26,7 @@
 ──────────────────────────── 　　　　　           
 ### 英語講座に特化した[CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。               
 ### 旧名称の部分は順次訂正していきます。                                      
+────────────────────────────　　　　　           　　       
 ### 旧名称最終版 [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/tag/20210125)     
    * Windows版: [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/download/20210125/CaptureStream-Windows-20210125.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
