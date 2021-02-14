@@ -13,7 +13,7 @@
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
 
----        
+---
 ### CS-Mult [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/tag/20210112)         
 ※ 欧州系語学講座に主に対応。          
 ※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
@@ -23,11 +23,11 @@
                        
 
 
----           
+---
 ### 英語講座に特化した[CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。               
 ### 旧名称の部分は順次訂正していきます。   
                                    
----　           　　       
+***
 ### 旧名称最終版 [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/tag/20210125)     
    * Windows版: [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/download/20210125/CaptureStream-Windows-20210125.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
@@ -42,7 +42,7 @@
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
                    
----        　　     
+---
 ### ffmpeg最新版入手サイト
 ### [For Windows](https://www.gyan.dev/ffmpeg/builds/)               [【ffmpeg Download】](https://www.ffmpeg.org/download.html)        　                
 ### [こちらからご使用のOS環境に合ったファイルをお選び頂くこともできます](https://ffbinaries.com/downloads)
@@ -51,7 +51,7 @@
                        
 
                                 
----　           　　     　　　                         
+***
 ### [CS-Englishの詳細はこちら](https://github.com/CSReviser/CS-English/wiki/CS-English)                 　　　　
 ### Wikiメニュー     
 - [概要](https://github.com/CSReviser/CS-English/wiki/%E6%A6%82%E8%A6%81)   
@@ -71,7 +71,7 @@
                        
 
                                                      
----                    
+---
 ### [旧アプリの詳細はこちら](https://github.com/CSReviser/CaptureStream/wiki/CaptureStream)                 　　　
 ### Wikiメニュー     
 [概要](https://github.com/CSReviser/CaptureStream/wiki/%E6%A6%82%E8%A6%81)   
