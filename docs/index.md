@@ -29,8 +29,8 @@
 
 
 ---
-### 英語講座に特化した[CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。               
-### 旧名称の部分は順次訂正していきます。   
+##### 英語講座に特化した[CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)に移行し、更新を終了する予定です。               
+##### 旧名称の部分は順次訂正していきます。   
                                    
 ***
 ### 旧名称最終版 [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/tag/20210125)     
