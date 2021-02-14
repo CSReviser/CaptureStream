@@ -4,6 +4,7 @@
 ## [［NHKゴガクのお知らせ］](https://www2.nhk.or.jp/gogaku/topics.cgi)   
 ## [［放送内容変更のお知らせ］](https://www2.nhk.or.jp/gogaku/topics2.cgi)   
 ※ NHKの語学講座の放送日時やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
+- ### [NHK英語テキスト　2021](https://www.nhk-book.co.jp/text/index.html)
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 2021年度は「基礎英語」「ビジネス英語」の番組内容がリニューアルされます。2021年度への準備として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。             　　           　　       
 
