@@ -9,9 +9,10 @@
 ### CS-English [2021/01/31版](https://github.com/CSReviser/CS-English/releases/tag/20210131)
 ※ 英語講座のみに対応
    * Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
-### 　　Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
-### 　　Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
-────────────────────────────　　　　　            　　       
+   * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
+   * Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
+────────────────────────────　　　　　
+===            　　       
 ### CS-Mult [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/tag/20210112)         
 ※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。
 ### 　　Windows版: [2021/01/12版](https://github.com/CSReviser/CS-Mult/releases/download/20210112/CS-Mult-Windows-20210112.zip)                          
