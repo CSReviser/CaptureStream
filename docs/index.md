@@ -1,9 +1,9 @@
 ### 語学講座ダウンローダ (2020年度)      
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為2021年度以降は使用できない可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)       
-※ 録音した語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
+#### ※ 録音した語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
 ### [［NHKゴガクのお知らせ］](https://www2.nhk.or.jp/gogaku/topics.cgi)   
 ### [［放送内容変更のお知らせ］](https://www2.nhk.or.jp/gogaku/topics2.cgi)   
-※ NHKの語学講座の放送日時やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
+#### ※ NHKの語学講座の放送日時やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
 - #### [NHKテキスト 2021](https://www.nhk-book.co.jp/text/index.html)
 - #### [英語力測定テスト 2021](https://eigoryoku.nhk-book.co.jp/?_ga=2.177137829.1000592643.1613186020-1646930887.1611275979)
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
