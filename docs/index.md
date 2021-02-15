@@ -34,7 +34,7 @@
                                    
 ***
 ### 旧名称最終版 [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/tag/20210125)     
-#### ※ オリジナルアプリ名称で更新した最終版です。                  
+#### ※ オリジナルアプリの名称で更新した最終版です。                  
    * #### Windows版: [2021/01/25版](https://github.com/CSReviser/CaptureStream/releases/download/20210125/CaptureStream-Windows-20210125.zip)                          
    * #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
    * #### Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
