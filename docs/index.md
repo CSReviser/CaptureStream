@@ -11,6 +11,8 @@
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
 ### 2021年度は「基礎英語」「ビジネス英語」の番組内容がリニューアルされます。2021年度への準備として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。             　　           　　       
 
+[Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
+
 ***
 ### CS-English [2021/01/31版](https://github.com/CSReviser/CS-English/releases/tag/20210131)
 #### ※ 英語講座のみに対応
