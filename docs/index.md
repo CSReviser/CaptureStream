@@ -1,4 +1,5 @@
 ### 語学講座CS-English (2020年度)      
+#### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について)             
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為2021年度以降は使用できない可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)       
 ##### ※ 録音した語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
 ### [［NHKゴガクのお知らせ］](https://www2.nhk.or.jp/gogaku/topics.cgi)   
