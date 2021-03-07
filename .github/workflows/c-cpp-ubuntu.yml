@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up MinGW
-
     
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
