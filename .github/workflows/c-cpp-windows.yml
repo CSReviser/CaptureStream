@@ -21,13 +21,13 @@ jobs:
         platform: x86
 
     - name: Install Qt
-    uses: jurplel/install-qt-action@v2
-    with:
+      uses: jurplel/install-qt-action@v2
+      with:
         arch:    ${{ env.MINGW_VERSION }}
         setup-python: 'false'
         extra:   --external 7z
         modules: 'qtcharts qtscript qtwebengine'
-        
+       
     - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile
