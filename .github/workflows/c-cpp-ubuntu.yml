@@ -8,20 +8,18 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set up MinGW
-      uses: egor-tensin/setup-mingw@v2
-      with:
-        platform: x86
+
     
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
         target: 'desktop'
         modules: 'qtcharts qtscript qtwebengine'
-        set-env: 'false'
+
         
     - uses: actions/checkout@v2
     - name: qmake
