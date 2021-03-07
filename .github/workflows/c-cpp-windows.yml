@@ -15,6 +15,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: npm install
+      run: npm install @actions/core@1.2.6
+      
     - name: Install correct version of mingw
       run: |
         choco uninstall mingw --force
@@ -23,9 +26,6 @@ jobs:
       with:
         msystem: MINGW32
 
-    - name: npm install
-      run: npm install @actions/core@1.2.6
-      
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.5.3
       with:
