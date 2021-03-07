@@ -1,0 +1,28 @@
+name: C/C++ CI
+
+on:
+  workflow_dispatch:
+      branches: [ master ]
+      
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+
+    steps:
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        modules: 'qtcharts qtscript qtwebengine'
+        
+    - uses: actions/checkout@v2
+    - name: qmake
+      run: qmake -makefile
+    - name: make
+      run: make
+  
+    - uses: actions/upload-artifact@v2
+      with:
+        name: CaptureStream
+        path: ./
