@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: C/C++ CI win
 
 env:
   MINGW_VERSION:  "win32_mingw73"
