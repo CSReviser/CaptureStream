@@ -27,7 +27,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-              version: ${{ env.QT_VERSION }}
+          version: ${{ env.QT_VERSION }}
         arch:    ${{ env.MINGW_VERSION }}
         extra:   --external 7z
         modules: 'qtcharts qtscript qtwebengine'
