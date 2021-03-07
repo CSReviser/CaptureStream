@@ -1,0 +1,41 @@
+name: C/C++ CI
+
+env:
+  QT_VERSION:     "5.12.7"
+  MINGW_VERSION:  "win32_mingw73"
+  MINGW_PATH:     "mingw73_32"
+
+on:
+  workflow_dispatch:
+      branches: [ master ]
+      
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Install correct version of mingw
+      run: |
+        choco uninstall mingw --force
+        choco uninstall strawberryperl --force
+    - uses: numworks/setup-msys2@v1
+      with:
+        msystem: MINGW32
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        modules: 'qtcharts qtscript qtwebengine'
+        
+    - uses: actions/checkout@v2
+    - name: qmake
+      run: qmake -makefile
+    - name: make
+      run: make
+  
+    - uses: actions/upload-artifact@v2
+      with:
+        name: CaptureStream
+        path: ./
