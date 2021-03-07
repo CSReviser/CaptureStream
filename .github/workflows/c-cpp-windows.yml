@@ -1,7 +1,6 @@
 name: C/C++ CI win
 
 env:
-  QT_VERSION:     "5.12.7"
   MINGW_VERSION:  "win32_mingw73"
   MINGW_PATH:     "mingw73_32"
 
@@ -27,7 +26,6 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.5.3
       with:
-        version: ${{ env.QT_VERSION }}
         arch:    ${{ env.MINGW_VERSION }}
         extra:   --external 7z
         modules: 'qtcharts qtscript qtwebengine'
