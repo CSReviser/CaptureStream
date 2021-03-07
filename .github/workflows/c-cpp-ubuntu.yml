@@ -14,10 +14,10 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
+        version: '5.5'
         modules: 'qtcharts qtscript qtwebengine'
-        version: '5.15.2'
-        host: 'windows'
-        target: 'desktop'
+        setup-python: 'false'
+        set-env: 'false'
         
     - uses: actions/checkout@v2
     - name: qmake
