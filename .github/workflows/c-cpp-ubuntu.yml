@@ -15,6 +15,9 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         modules: 'qtcharts qtscript qtwebengine'
+        version: '5.15.2'
+        host: 'windows'
+        target: 'desktop'
         
     - uses: actions/checkout@v2
     - name: qmake
