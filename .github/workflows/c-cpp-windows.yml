@@ -28,6 +28,7 @@ jobs:
       with:
         arch:    ${{ env.MINGW_VERSION }}
         extra:   --external 7z
+        set-env: 'false'
         modules: 'qtcharts qtscript qtwebengine'
         
     - uses: actions/checkout@v2
