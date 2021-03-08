@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 1
       - name: build ubuntu
         run: |
-          qmake
+          qmake -makefile
           make
           
       - uses: actions/upload-artifact@v2
