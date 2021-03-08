@@ -2,8 +2,7 @@ name: Ubuntu
 on:
   workflow_dispatch:
       branches: [ master ]
-  push:
-    paths:
+      paths:
       - '*.pro'
       - 'src/**'
       - '.github/workflows/ubuntu.yml'
