@@ -125,13 +125,14 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true 
           
-    - uses: actions/checkout@v2
-    - name: qmake
-      run: qmake -makefile
-    - name: make
-      run: make
+          
+      - uses: actions/checkout@v2
+      - name: qmake
+        run: qmake -makefile
+      - name: make
+        run: make
   
-    - uses: actions/upload-artifact@v2
-      with:
-        name: CaptureStream
-        path: ./
+      - uses: actions/upload-artifact@v2
+        with:
+         name: CaptureStream
+         path: ./
