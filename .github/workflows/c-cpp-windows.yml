@@ -23,6 +23,8 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
+        host: 'windows'
+        target: 'desktop'
         arch:    ${{ env.MINGW_VERSION }}
         setup-python: 'false'
         extra:   --external 7z
