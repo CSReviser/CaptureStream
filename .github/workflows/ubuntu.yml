@@ -1,6 +1,7 @@
 name: Ubuntu
-# Qt官方没有linux平台的x86包
-on: 
+on:
+  workflow_dispatch:
+      branches: [ master ]
   push:
     paths:
       - '*.pro'
