@@ -10,7 +10,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
-### 2021年度のストリーミングは4／5(月)開始です。「基礎英語」「ビジネス英語」の番組内容がリニューアルされます。2021年度への準備として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。             　　           　　       
+### 2021年度のストリーミングは4／5(月)開始です。「基礎英語」「ビジネス英語」の番組内容がリニューアルされます。2021年度への対応として、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。             　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
