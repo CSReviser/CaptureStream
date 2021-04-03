@@ -10,7 +10,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
-### 現在公開しているリリースバイナリは2021年度講座に対応していません。らじる★らじる対応は予定してません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 現在公開しているリリースバイナリは2021年度講座に対応していません。らじる★らじる配信講座への対応は予定していません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
