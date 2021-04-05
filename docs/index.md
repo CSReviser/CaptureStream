@@ -1,6 +1,6 @@
-### 語学講座CS-English (2020年度)      
+### 語学講座CS-English (2021年度)      
 ##### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について)             
-らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為2021年度以降は使用できない可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)       
+らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為、今後使用できなくなる可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。       
 ##### ※ 録音した語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
 ### [［NHKゴガクのお知らせ］](https://www2.nhk.or.jp/gogaku/topics.cgi)   
 ### [［放送内容変更のお知らせ］](https://www2.nhk.or.jp/gogaku/topics2.cgi)   
@@ -10,14 +10,14 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
-### 現在公開しているリリースバイナリは2021年度講座に対応していません。らじる★らじる配信講座への対応は予定していません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 2021年度講座に暫定対応しました。らじる★らじる配信講座への対応予定ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
 ***
-### CS-English [2021/01/31版](https://github.com/CSReviser/CS-English/releases/tag/20210131)
+### CS-English [2021/04/05版](https://github.com/CSReviser/CS-English/releases/tag/20210405)
 #### ※ 英語講座のみに対応
-   - #### Windows版: [2021/01/31版](https://github.com/CSReviser/CS-English/releases/download/20210131/CS-English-Windows-20210131.zip)                          
+   - #### Windows版: [2021/04/05版](https://github.com/CSReviser/CS-English/releases/download/20210405/CS-English-Windows-20210405.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
    - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
 
