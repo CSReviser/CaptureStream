@@ -34,7 +34,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>語学講座ダウンローダ</string>
+   <string>語学講座ＣＳ</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -119,7 +119,7 @@
           </font>
          </property>
          <property name="text">
-          <string>入門ビジネス英語</string>
+          <string>ラジオビジネス英語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -191,7 +191,7 @@
        </item>
       </layout>
      </item>
-     <item row="8" column="0">
+     <item row="7" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_21">
        <item>
         <widget class="QToolButton" name="toolButton_gakusyu">
@@ -363,7 +363,7 @@
        </item>
       </layout>
      </item>
-     <item row="9" column="0">
+     <item row="8" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_27">
        <item>
         <widget class="QToolButton" name="toolButton_gendai">
@@ -454,7 +454,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語0</string>
+          <string>小学生の基礎英語</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -479,7 +479,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語1</string>
+          <string>中学生の基礎英語レベル１</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -543,7 +543,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語2</string>
+          <string>中学生の基礎英語レベル２</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -568,7 +568,7 @@
           </font>
          </property>
          <property name="text">
-          <string>基礎英語3</string>
+          <string>中高生の基礎英語 in English</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -580,7 +580,7 @@
      <item row="5" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_11_1">
        <item>
-        <widget class="QToolButton" name="toolButton_omotenashi_hangeul">
+        <widget class="QToolButton" name="toolButton_stepup_hangeul">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -593,7 +593,7 @@
           </font>
          </property>
          <property name="text">
-          <string></string>
+          <string>ステップアップハングル講座</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -702,7 +702,7 @@
        </item>
       </layout>
      </item>
-     <item row="10" column="0">
+     <item row="9" column="0">
       <layout class="QHBoxLayout" name="horizontalLayout_29">
        <item>
         <widget class="QToolButton" name="toolButton_enjoy">
@@ -728,31 +728,6 @@
       </layout>
      </item>
      <item row="9" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_29_1">
-       <item>
-        <widget class="QToolButton" name="toolButton_vrradio">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>ボキャブライダー(先週分)</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="10" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_29_2">
        <item>
         <widget class="QToolButton" name="toolButton_vrradio1">
@@ -768,32 +743,7 @@
           </font>
          </property>
          <property name="text">
-          <string>ボキャブライダー(今週分）</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="7" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_20">
-       <item>
-        <widget class="QToolButton" name="toolButton_business2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>実践ビジネス英語</string>
+          <string>ボキャブライダー</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -1180,7 +1130,7 @@
   <tabstop>toolButton_french</tabstop>
   <tabstop>toolButton_italian</tabstop>
   <tabstop>toolButton_hangeul</tabstop>
-  <tabstop>toolButton_omotenashi_hangeul</tabstop>
+  <tabstop>toolButton_stepup_hangeul</tabstop>
   <tabstop>toolButton_german</tabstop>
   <tabstop>toolButton_spanish</tabstop>
   <tabstop>toolButton_russian</tabstop>
@@ -1541,7 +1491,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_omotenashi_hangeul</sender>
+   <sender>toolButton_stepup_hangeul</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
    <slot>toggled(bool)</slot>
