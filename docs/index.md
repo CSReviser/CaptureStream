@@ -9,7 +9,7 @@
 - #### [英語力測定テスト 2021](https://eigoryoku.nhk-book.co.jp/?_ga=2.177137829.1000592643.1613186020-1646930887.1611275979)
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
-## [［お知らせ］](https://github.com/CSReviser/CaptureStream/wiki/お知らせ)     
+## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
 ### 2021年度講座に暫定対応しました。らじる★らじる配信講座への対応予定ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
