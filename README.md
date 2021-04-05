@@ -7,7 +7,7 @@
 ### 更新を終了して、英語講座に限定し名称変更して「CS-English」に移行します。既に「CS-English」専用レポジトリを作成済みです。元の名称が一般に他の意味に使われており誤解や問題が発生する懸念があることが変更の一因です。この機会に類似アプリへの移行をご検討ください。
 
 ### 安定版(master)最新リリース  
-GUI版  [2020/10/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20201005)                              
+GUI版  [2021/04/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20210405)                              
 Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
 ### 2021年度後期の対応講座  
