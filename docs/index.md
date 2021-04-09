@@ -1,5 +1,5 @@
 ### 語学講座CS (2021年度)      
-(語学講座CS-English／CS-Mult)
+(CS-English／CS-Mult)
 ##### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について)             
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為、今後使用できなくなる可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。       
 ##### ※ 録音した語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
