@@ -22,10 +22,10 @@
    - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
 
 ---
-### CS-Mult [2021/04/04版](https://github.com/CSReviser/CS-Mult/releases/tag/20210404)         
+### CS-Mult [2021/04/09版](https://github.com/CSReviser/CS-Mult/releases/tag/20210409)         
 #### ※ 英語以外の語学講座と一部の英語講座に対応。          
 ※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
-   - #### Windows版: [2021/04/04版](https://github.com/CSReviser/CS-Mult/releases/download/20210404/CS-Mult-Windows-20210404.zip)                          
+   - #### Windows版: [2021/04/09版](https://github.com/CSReviser/CS-Mult/releases/download/20210409/CS-Mult-Windows-20210409.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
    - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
                        
