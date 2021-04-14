@@ -69,7 +69,7 @@
     <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>基礎英語1:</string>
+       <string>基礎英語L1:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -89,7 +89,7 @@
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>基礎英語2:</string>
+       <string>基礎英語L2:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -106,7 +106,7 @@
     <item row="2" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>基礎英語3:</string>
+       <string>中高生の基礎:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -157,7 +157,7 @@
     <item row="5" column="0">
      <widget class="QLabel" name="label_6">
       <property name="text">
-       <string>入門ビジネス:</string>
+       <string>ラジオビジネス:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -174,7 +174,7 @@
     <item row="6" column="0">
      <widget class="QLabel" name="label_7">
       <property name="text">
-       <string>実践ビジネス:</string>
+       <string>:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -286,7 +286,7 @@
        <bool>true</bool>
       </property>
       <property name="text">
-       <string>レベルアップハングル:</string>
+       <string>ステップアップハングル:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -428,7 +428,7 @@
        <bool>true</bool>
       </property>
       <property name="text">
-       <string>レベルアップ中国語:</string>
+       <string>ステップアップ中国語:</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -441,7 +441,7 @@
        <bool>true</bool>
       </property>
       <property name="text">
-       <string>基礎英語0：</string>
+       <string>小学生の基礎：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -503,7 +503,7 @@
     <item row="0" column="1">
      <widget class="QLabel" name="label_29">
       <property name="text">
-       <string>XMLの講座名　「基礎英語1」「まいにち中国語」</string>
+       <string>XMLの講座名　「ラジオ英会話」「まいにち中国語」</string>
       </property>
      </widget>
     </item>

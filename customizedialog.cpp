@@ -51,14 +51,14 @@ QStringList CustomizeDialog::titleKeys = QStringList()
 		<< "basic0_title" << "basic1_title" << "basic2_title" << "basic3_title" << "timetrial_title"
 		<< "kaiwa_title" << "business1_title" << "business2_title" << "gakusyu_title" << "gendai_title"
 		<< "chinese_title" << "french_title" << "italian_title" << "hangeul_title"
-		<< "german_title" << "spanish_title" << "levelup-chinese_title" << "levelup-hangeul_title"
+		<< "german_title" << "spanish_title" << "stepup-chinese_title" << "stepup-hangeul_title"
 		<< "gendai_title" 
 		<< "enjoy_title" << "russian_title" << "vrradio_title";
 QStringList CustomizeDialog::fileNameKeys = QStringList()
 		<< "basic0_file_name" << "basic1_file_name" << "basic2_file_name" << "basic3_file_name" << "timetrial_file_name"
 		<< "kaiwa_file_name" << "business1_file_name" << "business2_file_name" << "gakusyu_file_name" << "gendai_file_name" 
 		<< "chinese_file_name" << "french_file_name" << "italian_file_name" << "hangeul_file_name"
-		<< "german_file_name" << "spanish_file_name" << "levelup-chinese_file_name" << "levelup-hangeul_file_name"
+		<< "german_file_name" << "spanish_file_name" << "stepup-chinese_file_name" << "stepup-hangeul_file_name"
 		<< "enjoy_file_name" << "russian_file_name" << "vrradio_file_name";
 
 void CustomizeDialog::formats( QString course, QString& titleFormat, QString& fileNameFormat ) {
