@@ -17,7 +17,7 @@ jobs:
       with:
         host: 'linux'
         target: 'desktop'
-        version: '5.12.8'
+        version: '5.9.5'
         modules: 'qtcharts qtscript qtwebengine'
 
         
@@ -26,8 +26,6 @@ jobs:
       run: qmake -makefile
     - name: make
       run: make
-    - name: chmod
-      run: chmod g+x,o+x CaptureStream
   
     - uses: actions/upload-artifact@v2
       with:
