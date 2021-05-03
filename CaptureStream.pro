@@ -35,6 +35,10 @@ FORMS += mainwindow.ui \
 	messagewindow.ui \
 	scrambledialog.ui
 
+linux {
+	QMAKE_LFLAGS += -no-pie
+}
+
 macx {
 	QMAKE_CFLAGS_RELEASE += -fvisibility=hidden
 	QMAKE_CXXFLAGS_RELEASE += -fvisibility=hidden
