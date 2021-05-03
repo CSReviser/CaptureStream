@@ -26,6 +26,8 @@ jobs:
       run: qmake -makefile
     - name: make
       run: make
+    - name: chmod
+      run: chmod g+x,o+x CaptureStream
   
     - uses: actions/upload-artifact@v2
       with:
