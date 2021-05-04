@@ -25,6 +25,7 @@ jobs:
       with:
         host: 'windows'
         target: 'desktop'
+        version: '5.9.5'
         arch:    ${{ env.MINGW_VERSION }}
         setup-python: 'false'
         extra:   --external 7z
