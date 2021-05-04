@@ -38,26 +38,25 @@ jobs:
       with:
         version: ${{ matrix.qt_version }}
 
-    - name: cmake
-      run: cmake . ${{ matrix.additional_arguments }}
-
-    - name: cmake build
-      run: cmake --build .
+    - name: qmake
+      run: qmake -makefile
+    - name: make
+      run: make . ${{ matrix.additional_arguments }}
 
     - name: Build example - basic (cmake)
       working-directory: examples/basic/
       run: |
-        cmake . ${{ matrix.additional_arguments }}
-        cmake --build .
+        make . ${{ matrix.additional_arguments }}
+        make --build .
 
     - name: Build example - calculator (cmake)
       working-directory: examples/calculator/
       run: |
-        cmake . ${{ matrix.additional_arguments }}
-        cmake --build .
+        make . ${{ matrix.additional_arguments }}
+        make --build .
 
     - name: Build example - sending_arguments (cmake)
       working-directory: examples/sending_arguments/
       run: |
-        cmake . ${{ matrix.additional_arguments }}
-        cmake --build .
+        make . ${{ matrix.additional_arguments }}
+        make --build .
