@@ -7,15 +7,14 @@ env:
 
 on:
   workflow_dispatch:
-    branches: [ master ] 
+   branches: [ master ] 
       
 jobs:
   build:
-
-    runs-on: windows-latest
+    runs-on: windows-2019
     strategy:
       matrix:
-       include:
+        include:
         - qt_ver: 5.9.9
           qt_arch: win32_msvc2015
           msvc_arch: x86
@@ -30,28 +29,26 @@ jobs:
 
 
     steps:
-    - name: Set up MinGW
-      uses: egor-tensin/setup-mingw@v2
-      with:
-        platform: x64
-        
-    - uses: actions/checkout@v2.3.4
+    
+      - name: Install Qt
+        # 使用外部action。这个action专门用来安装Qt
+        uses: jurplel/install-qt-action@v2.13.0
+        with:
+          # Version of Qt to install
+          version: ${{ matrix.qt_ver }}
+          # Target platform for build
+          # target: ${{ matrix.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+     
+      - uses: actions/checkout@v2.3.4
 
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v2.11.1
-      with:
-        version: ${{ matrix.qt_ver }}
-        target: ${{ matrix.qt_target }}
-        arch: ${{ matrix.qt_arch }}
-        dir: ${{ github.workspace }}
-        cached: 'false'
-
-    - name: qmake
-      run: qmake -makefile
-    - name: make
-      run: make
+      - name: qmake
+        run: qmake -makefile
+      - name: make
+        run: make
   
-    - uses: actions/upload-artifact@v2
-      with:
-        name: CaptureStream
-        path: ./
+      - uses: actions/upload-artifact@v2
+        with:
+          name: CaptureStream
+          path: ./
