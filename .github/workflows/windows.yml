@@ -1,13 +1,12 @@
 name: C/C++ CI win
 
-env:
-  MINGW_VERSION:  "win32_mingw73"
-  MINGW_PATH:     "mingw73_32"
-
 on:
   workflow_dispatch:
       branches: [ master ]
-      
+
+env:
+  MINGW_VERSION:  "win32_mingw73"
+  MINGW_PATH:     "mingw73_32
 
 jobs:
   build:
