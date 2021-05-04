@@ -23,14 +23,21 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
+        version: '5.9.5'
         host: 'windows'
         target: 'desktop'
-        version: '5.9.5'
-        cached: 'false'
         arch:    ${{ env.MINGW_VERSION }}
-        extra:   --external 7z
+        install-deps: 'true'
         modules: 'qtcharts qtscript qtwebengine'
-       
+        cached: 'false'
+        setup-python: 'true'
+        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.13.2-0,qt.tools.qtcreator'
+        set-env: 'false'
+        tools-only: 'false'
+        aqtversion: '==1.1.3'
+        py7zrversion: '==0.14.0'
+        extra: '--external 7z'
+      
     - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile
