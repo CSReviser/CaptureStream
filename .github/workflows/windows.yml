@@ -27,6 +27,7 @@ jobs:
     uses: jurplel/install-qt-action@v2
     with:
         arch:    ${{ env.MINGW_VERSION }}
+        version: '5.9.5'
         setup-python: 'false'
         extra:   --external 7z
         modules: 'qtcharts qtscript qtwebengine'
