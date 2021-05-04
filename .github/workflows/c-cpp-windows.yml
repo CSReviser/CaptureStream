@@ -21,7 +21,7 @@ jobs:
         platform: x64
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v2.13.2
       with:
         version: '5.9.5'
         host: 'windows'
