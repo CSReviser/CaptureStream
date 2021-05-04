@@ -32,22 +32,28 @@ jobs:
     
       - name: Install Qt
         # 使用外部action。这个action专门用来安装Qt
-        uses: jurplel/install-qt-action@v2.13.0
+        uses: jurplel/install-qt-action@v2.10.0
         with:
           # Version of Qt to install
           version: ${{ matrix.qt_ver }}
           # Target platform for build
           # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
+          aqtversion: '==0.10.0'
           cached: 'false'
-     
-      - uses: actions/checkout@v2.3.4
-
-      - name: qmake
-        run: qmake -makefile
-      - name: make
-        run: make
-  
+      # 拉取代码
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      # msvc编译
+      - name: msvc-build
+        id: build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          qmake
+          nmake
+ 
       - uses: actions/upload-artifact@v2
         with:
           name: CaptureStream
