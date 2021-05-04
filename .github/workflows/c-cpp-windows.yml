@@ -26,7 +26,9 @@ jobs:
           qt_arch: win32_msvc2019
           msvc_arch: x86
 
-
+    env:
+      targetName: CaptureStream.exe 
+      
     steps:
     
       - name: Install Qt
@@ -49,8 +51,8 @@ jobs:
         shell: cmd
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
-          qmake
-          nmake
+          qmake CaptureStream.pro
+          make
  
       - uses: actions/upload-artifact@v2
         with:
