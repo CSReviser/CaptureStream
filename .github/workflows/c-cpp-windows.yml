@@ -48,7 +48,7 @@ jobs:
         version: ${{ matrix.qt_ver }}
         target: ${{ matrix.qt_target }}
         arch: ${{ matrix.qt_arch }}
-        dir: '${{ github.workspace }}'
+        dir: ${{ github.workspace }}
         cached: 'false'
 
     - name: qmake
