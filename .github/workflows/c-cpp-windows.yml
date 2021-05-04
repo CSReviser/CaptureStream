@@ -26,7 +26,7 @@ jobs:
         version: '5.9.5'
         host: 'windows'
         target: 'desktop'
-        arch:    ${{ env.MINGW_VERSION }}
+        arch:  'win64_msvc2019_64'
         install-deps: 'true'
         modules: 'qtcharts qtscript qtwebengine'
         cached: 'false'
