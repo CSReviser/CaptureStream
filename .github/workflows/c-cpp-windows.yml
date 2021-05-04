@@ -7,7 +7,7 @@ env:
 
 on:
   workflow_dispatch:
-     branches: [ master ]
+    branches: [ master ] 
       
 jobs:
   build:
@@ -27,12 +27,8 @@ jobs:
         - qt_ver: 5.15.2
           qt_arch: win32_msvc2019
           msvc_arch: x86
-        - qt_ver: 5.9.9
-          qt_arch: win32_mingw73
-          msvc_arch: x86
-          qt_arch_install: ingw73_32
-          
-          
+
+
     steps:
     - name: Set up MinGW
       uses: egor-tensin/setup-mingw@v2
