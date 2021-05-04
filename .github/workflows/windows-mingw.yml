@@ -125,7 +125,6 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true 
           
-          
       - uses: actions/checkout@v2
       - name: qmake
         run: qmake -makefile
