@@ -24,6 +24,8 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2.13.2
       with:
+        host: 'windows'
+        target: 'desktop'
         version: ${{ env.QT_VERSION }}
         arch:    ${{ env.MINGW_VERSION }}
         aqtversion: '>=0.9.0'
