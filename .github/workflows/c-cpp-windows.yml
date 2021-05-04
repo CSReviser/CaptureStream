@@ -35,7 +35,7 @@ jobs:
         set-env: 'false'
         tools-only: 'false'
         aqtversion: '==1.1.3'
-        py7zrversion: '==0.14.0'
+        py7zrversion: '==0.7'
         extra: '--external 7z'
       
     - uses: actions/checkout@v2
