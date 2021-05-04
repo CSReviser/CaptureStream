@@ -1,7 +1,8 @@
 name: C/C++ CI win
 
 env:
-  MINGW_VERSION:  "win64_mingw73"
+  QT_VERSION:     "5.12.7"
+  MINGW_VERSION:  "win32_mingw73"
   MINGW_PATH:     "mingw73_32"
 
 on:
@@ -15,29 +16,21 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Set up MinGW
-      uses: egor-tensin/setup-mingw@v2
+    - name: Install correct version of mingw
+      run: |
+        choco uninstall mingw --force
+        choco uninstall strawberryperl --force
+    - uses: numworks/setup-msys2@v1
       with:
-        platform: x64
+        msystem: MINGW32
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2.13.2
+      uses: jurplel/install-qt-action@v2.5.3
       with:
-        version: '5.9.5'
-        host: 'windows'
-        target: 'desktop'
-        arch:  'win64_msvc2019_64'
-        install-deps: 'true'
-        modules: 'qtcharts qtscript qtwebengine'
-        cached: 'false'
-        setup-python: 'false'
-        tools: 'tools_ifw,4.0,qt.tools.ifw.40 tools_qtcreator,4.13.2-0,qt.tools.qtcreator'
-        set-env: 'false'
-        tools-only: 'false'
-        aqtversion: '>=0.9.0'
-        py7zrversion: '==0.7'
-        extra: '--external 7z'
-      
+        version: ${{ env.QT_VERSION }}
+        arch:    ${{ env.MINGW_VERSION }}
+        extra:   --external 7z
+   
     - uses: actions/checkout@v2
     - name: qmake
       run: qmake -makefile
