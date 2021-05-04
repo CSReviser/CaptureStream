@@ -37,7 +37,7 @@ jobs:
         uses: jurplel/install-qt-action@v2.13.0
         with:
           # Version of Qt to install
-         # version: ${{ matrix.qt_ver }}
+          version: ${{ matrix.qt_ver }}
           # Target platform for build
           # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
