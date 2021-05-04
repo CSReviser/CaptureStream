@@ -20,9 +20,11 @@ jobs:
       uses: egor-tensin/setup-mingw@v2
       with:
         platform: x64
+        
+    - uses: actions/checkout@v2.3.4
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2.13.2
+      uses: jurplel/install-qt-action@v2.11.1
       with:
         host: 'windows'
         target: 'desktop'
@@ -31,8 +33,7 @@ jobs:
         aqtversion: '0.9.0'
         py7zrversion: '0.7'
         extra:   --external 7z
-   
-    - uses: actions/checkout@v2
+
     - name: qmake
       run: qmake -makefile
     - name: make
