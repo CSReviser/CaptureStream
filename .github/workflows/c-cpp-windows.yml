@@ -2,8 +2,7 @@ name: C/C++ CI win
 
 env:
   QT_VERSION:     "5.12.7"
-  MINGW_VERSION:  "win32_mingw73"
-  MINGW_PATH:     "mingw73_32"
+
 
 on:
   workflow_dispatch:
@@ -33,13 +32,8 @@ jobs:
         # 使用外部action。这个action专门用来安装Qt
         uses: jurplel/install-qt-action@v2.10.0
         with:
-          # Version of Qt to install
           version: ${{ matrix.qt_ver }}
-          # Target platform for build
-          # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
-          aqtversion: '==0.10.0'
-          cached: 'false'
 
       - uses: actions/checkout@v1
         with:
