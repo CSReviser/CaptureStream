@@ -26,8 +26,8 @@ jobs:
         host: 'windows'
         target: 'desktop'
         version: '5.9.5'
+        cached: 'false'
         arch:    ${{ env.MINGW_VERSION }}
-        setup-python: 'false'
         extra:   --external 7z
         modules: 'qtcharts qtscript qtwebengine'
        
