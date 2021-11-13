@@ -137,7 +137,7 @@ $default_target（配列）に指定しておくことで引数指定なしで�
 #--------------------------------------------------------------------------------
 
 $default_target = []
-$english = %w!basic0 basic1 basic2 basic3 timetrial kaiwa business1 business2 gendai gakusyu enjoy vr-radio!
+$english = %w!basic0 basic1 basic2 basic3 timetrial kaiwa business1 business2 gendai gakusyu enjoy everybody vr-radio!
 $multilingual = %w!chinese omotenashi_chinese french french2 italian italian2 hangeul omotenashi_hangeul german german2 spanish spanish2 russian russian2!
 
 #--------------------------------------------------------------------------------
