@@ -7,7 +7,7 @@
 ### 更新を終了して、名称変更して「CS-English/CS-Mult」に移行します。新しい専用レポジトリを作成済みです。元の名称が一般に他の意味に使われており誤解や問題が発生する懸念があることが変更の一因です。この機会に類似アプリへの移行をご検討ください。
 
 ### 安定版(master)最新リリース  
-GUI版  [2021/04/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20211113)                              
+GUI版  [2021/11/13版](https://github.com/CSReviser/CaptureStream/releases/tag/20211113)                              
 Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
 ### 2021年度の対応講座  
@@ -18,7 +18,7 @@ Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/
 英会話タイムトライアル   
 ラジオ英会話  
 ラジオビジネス英語     
-遠山顕の英会話楽習    
+ラジオで！カムカムエヴリバディ    
 高校生からはじめる「現代英語」     
 エンジョイ・シンプル・イングリッシュ      
 まいにち中国語     
