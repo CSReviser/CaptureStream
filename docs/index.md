@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### 2022年度から、らじる★らじるの聴き逃し配信開始が放送後１週間に変更になりました。らじる非対応の語学講座CSに影響はないです。2022年度の講座は2021年度版がそのまま使える見込みです。らじる★らじる配信講座への対応予定ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 2022年度から、らじる★らじるの聴き逃し配信開始が放送後１週間に変更になりました。らじる非対応の語学講座CSに影響はありません。2022年度の講座は2021年度版がそのまま使える見込みです。らじる★らじる配信講座への対応予定ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
@@ -74,7 +74,7 @@
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 　　　           　　     
-
+い
 ***
 ### [HLS独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)  [2021/04/05版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20210405)            
 #### ※通常版(旧名称最終版)が動作しない場合にお試しください。                          
