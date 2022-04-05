@@ -20,16 +20,7 @@
 #### ※ 英語講座のみに対応
    - #### Windows版: [2021/11/13版](https://github.com/CSReviser/CS-English/releases/download/20211113/CS-English-Windows-20211113.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
-
----
-### CS-Mult [2021/11/13版](https://github.com/CSReviser/CS-Mult/releases/tag/20211113)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)          
-#### ※ 英語以外の語学講座と一部の英語講座に対応。          
-※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
-   - #### Windows版: [2021/11/13版](https://github.com/CSReviser/CS-Mult/releases/download/20211113/CS-Mult-Windows-20211113.zip)                          
-   - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
-                       
+   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　                            
 
 
 ---
@@ -61,6 +52,15 @@
 - [リンク](https://github.com/CSReviser/CS-English/wiki/リンク)   
 
 
+  
+
+---
+### CS-Mult [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/tag/20220405)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)          
+#### ※ 英語以外の語学講座と一部の英語講座に対応。          
+※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
+   - #### Windows版: [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/download/20220405/CS-Mult-Windows-20220405.zip)                          
+   - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
+   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
          
 
 ---
