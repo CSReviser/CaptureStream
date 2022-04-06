@@ -1,4 +1,4 @@
-### 語学講座CS (2021年度)      
+### 語学講座CS (2022年度)      
 ### (CS-English／CS-Mult)
 ##### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について)             
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為、今後使用できなくなる可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。       
@@ -11,14 +11,14 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### 2022年度から、らじる★らじるの聴き逃し配信開始が放送後１週間に変更になりました。らじる非対応の語学講座CSに影響はありません。2022年度の講座は2021年度版がそのまま使える見込みです。らじる★らじる配信講座への対応予定ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 2022年度の暫定版をリリースしました。2022年度から、らじる★らじるの聴き逃し配信開始が放送後１週間に変更になりましたが、らじる非対応の語学講座CSに影響はありません。らじる★らじる配信講座への対応予定は、ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
 ***
-### CS-English [2021/11/13版](https://github.com/CSReviser/CS-English/releases/tag/20211113)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)
+### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)
 #### ※ 英語講座のみに対応
-   - #### Windows版: [2021/11/13版](https://github.com/CSReviser/CS-English/releases/download/20211113/CS-English-Windows-20211113.zip)                          
+   - #### Windows版: [2021/11/13版](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
    - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　                            
 
