@@ -10,7 +10,7 @@
 GUI版  [2021/11/13版](https://github.com/CSReviser/CaptureStream/releases/tag/20211113)                              
 Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
-### 2021年度後期の対応講座  
+### 2022年度の対応講座  
 小学生の基礎英語  
 中学生の基礎英語レベル1  
 中学生の基礎英語レベル2  
@@ -18,8 +18,6 @@ Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/
 英会話タイムトライアル   
 ラジオ英会話  
 ラジオビジネス英語     
-ラジオで！カムカムエヴリバディ    
-高校生からはじめる「現代英語」     
 エンジョイ・シンプル・イングリッシュ      
 まいにち中国語     
 ステップアップ中国語    
