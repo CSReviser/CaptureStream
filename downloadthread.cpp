@@ -475,7 +475,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 	int year1 = QDate::currentDate().year();
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
-		if ( month == 3 && ( day == 29 || day == 30 || day == 31) && year == 2021 ) 
+		if ( month == 3 && ( day == 29 || day == 30 || day == 31) && year == 2022 ) 
 		year += 0;
  		else
 		if ( month < 4 )
@@ -563,7 +563,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	int year1 = QDate::currentDate().year();
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
-		if ( month == 3 && ( day == 29 || day == 30 || day == 31) && year == 2021 ) 
+		if ( month == 3 && ( day == 29 || day == 30 || day == 31) && year == 2022 ) 
 		year += 0; 
  		else
 		if ( month < 4 )
@@ -575,7 +575,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QDate onair( year, month, day );
 	QString yyyymmdd = onair.toString( "yyyy_MM_dd" );
 
-	QString kon_nendo = "2021"; //QString::number(year1);
+	QString kon_nendo = "2022"; //QString::number(year1);
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
 		QDate today;
@@ -701,7 +701,8 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 QString DownloadThread::paths[] = {
 	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
-	"english/everybody", "english/gendai", "english/enjoy", 
+	"english/enjoy", 
+//	"english/everybody", "english/gendai", "english/enjoy", 
 	"chinese/kouza", "chinese/stepup", "french/kouza", "french/kouza2",
 	"italian/kouza", "italian/kouza2", "hangeul/kouza", "hangeul/stepup",
 	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2", 
@@ -713,7 +714,8 @@ void DownloadThread::run() {
 	QAbstractButton* checkbox[] = {
 		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
-		ui->toolButton_gakusyu, ui->toolButton_gendai, ui->toolButton_enjoy,
+		ui->toolButton_enjoy,
+//		ui->toolButton_gakusyu, ui->toolButton_gendai, ui->toolButton_enjoy,
 		ui->toolButton_chinese, ui->toolButton_stepup_chinese, 
 		ui->toolButton_french, ui->toolButton_french, ui->toolButton_italian, ui->toolButton_italian, 
 		ui->toolButton_hangeul, ui->toolButton_stepup_hangeul,
