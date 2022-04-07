@@ -1,4 +1,4 @@
-### 語学講座CS (2021年度)      
+### 語学講座CS (2022年度)      
 ### (CS-English／CS-Mult)
 ##### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について)             
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為、今後使用できなくなる可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。       
@@ -6,30 +6,21 @@
 ### [［NHKゴガクのお知らせ］](https://www2.nhk.or.jp/gogaku/topics.cgi)   
 ### [［放送内容変更のお知らせ］](https://www2.nhk.or.jp/gogaku/topics2.cgi)   
 ##### ※ NHKの語学講座の放送日時やストリーミングの日程変更は[NHKゴガクのお知らせ](https://www2.nhk.or.jp/gogaku/topics.cgi) をご確認下さい。                     
-- #### [NHKテキスト 2021](https://www.nhk-book.co.jp/text/index.html)
-- #### [英語力測定テスト 2021](https://eigoryoku.nhk-book.co.jp/?_ga=2.177137829.1000592643.1613186020-1646930887.1611275979)
+- #### [NHKテキスト 2022](https://www.nhk-book.co.jp/text/index.html)
+- #### [英語力測定テスト 2022](https://eigoryoku.nhk-book.co.jp/?_ga=2.177137829.1000592643.1613186020-1646930887.1611275979)
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### 2021年度講座に暫定対応しました。らじる★らじる配信講座への対応予定ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 2022年度の暫定版をリリースしました。2022年度から、らじる★らじるの聴き逃し配信開始が放送後１週間に変更になりましたが、らじる非対応の語学講座CSに影響はありません。らじる★らじる配信講座への対応予定は、ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
 ***
-### CS-English [2021/04/05版](https://github.com/CSReviser/CS-English/releases/tag/20210405)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)
+### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)
 #### ※ 英語講座のみに対応
-   - #### Windows版: [2021/04/05版](https://github.com/CSReviser/CS-English/releases/download/20210405/CS-English-Windows-20210405.zip)                          
+   - #### Windows版: [2022/04/06版](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　       
-
----
-### CS-Mult [2021/04/15版](https://github.com/CSReviser/CS-Mult/releases/tag/20210415)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)          
-#### ※ 英語以外の語学講座と一部の英語講座に対応。          
-※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
-   - #### Windows版: [2021/04/15版](https://github.com/CSReviser/CS-Mult/releases/download/20210415/CS-Mult-Windows-20210415.zip)                          
-   - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
-                       
+   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　                            
 
 
 ---
@@ -61,6 +52,15 @@
 - [リンク](https://github.com/CSReviser/CS-English/wiki/リンク)   
 
 
+  
+
+---
+### CS-Mult [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/tag/20220405)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)          
+#### ※ 英語以外の語学講座と一部の英語講座に対応。          
+※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
+   - #### Windows版: [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/download/20220405/CS-Mult-Windows-20220405.zip)                          
+   - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
+   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
          
 
 ---
@@ -68,13 +68,13 @@
 ##### 旧名称の部分は順次訂正していきます。   
                                    
 ***
-### 旧名称最終版 [2021/05/05版](https://github.com/CSReviser/CaptureStream/releases/tag/20210505)     
+### 旧名称最終版 [2021/11/13版](https://github.com/CSReviser/CaptureStream/releases/tag/20211113)     
 #### ※ オリジナルアプリの名称で更新した最終版です。                  
-   * Windows版: [2021/05/05版](https://github.com/CSReviser/CaptureStream/releases/download/20210505/CaptureStream-Windows-20210505.zip)                          
+   * Windows版: [2021/11/13版](https://github.com/CSReviser/CaptureStream/releases/download/20211113/CaptureStream-Windows-20211113.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 　　　           　　     
-
+い
 ***
 ### [HLS独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)  [2021/04/05版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20210405)            
 #### ※通常版(旧名称最終版)が動作しない場合にお試しください。                          
