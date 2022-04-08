@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### 2022年度の暫定版をリリースしました。2022年度から、らじる★らじるの聴き逃し配信開始が放送後１週間に変更になりましたが、らじる非対応の語学講座CSに影響はありません。らじる★らじる配信講座への対応予定は、ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 2022年度の配信開始は4/11（月）10時の予定です。らじる★らじる配信講座への対応予定は、ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
