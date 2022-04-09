@@ -77,7 +77,7 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2022/04/07)" ); 
+			result = QString( " (2022/04/09)" ); 
 		}
 		return result;
 	}
@@ -103,6 +103,7 @@ MainWindow::MainWindow( QWidget *parent )
 	setGeometry( rect );
 #endif
 #ifdef Q_OS_LINUX		// Linuxでは高さが足りなくなるので縦方向に伸ばしておく
+	menuBar()->setNativeMenuBar(false);	// メニューバーが表示されなくなったに対応
 	setMaximumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
 	setMinimumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
 	QRect rect = geometry();
