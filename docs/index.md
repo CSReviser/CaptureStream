@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### 2022年度の配信は4/11（月）10時から開始されました。従来通り放送の翌週月曜日から１週間です。。らじる★らじる配信講座への対応予定は、ありません。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### 2022年度のMac版バイナリファイル(実行ファイル)に、dmgイメージファイルを追加しました。zipファイルで発生していた「アクセス権」のエラー回避を期待しています。但し、Mac環境がないので試せていません。エラー回避できたら、ご報告頂けると他のMacユーザの助けになると思います。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
