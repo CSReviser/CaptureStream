@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### 2022年度のMac版バイナリファイル(実行ファイル)に、dmgイメージファイルを追加しました。zipファイルで発生していた「アクセス権」のエラー回避を期待しています。但し、Mac環境がないので試せていません。エラー回避できたら、ご報告頂けると他のMacユーザの助けになると思います。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### Mac版で発生しているffmpegのパス不正問題の対策としてffmpegの配置フォルダをアプリのメインプログラムと同じ階層に変えました。但し、Mac環境がないので試せていません。エラー回避できたら、ご報告頂けると他のMacユーザの助けになると思います。この版はMac版のみです。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
