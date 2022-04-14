@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### Mac版のインストール手順と動作確認を[Twitter](https://twitter.com/mtssthr/status/1514400745357213697?s=20&t=BXwelvn-kS3kNz3elhbUDw)で情報提供して頂きました。ご協力に感謝します。ここのトップページにMac版のリンクを貼りました。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### Mac版にパーミッション済ファイルを追加しました。インストール手順簡略化を期待したものです。Mac版のインストール手順と動作確認を[Twitter](https://twitter.com/mtssthr/status/1514400745357213697?s=20&t=BXwelvn-kS3kNz3elhbUDw)で情報提供して頂きました。ご協力に感謝します。ここのトップページにMac版のリンクを貼りました。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
@@ -20,7 +20,8 @@
 #### ※ 英語講座のみに対応
    - #### Windows版: [2022/04/06版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413.dmg)              
+   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413.dmg)         
+     Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413-1.dmg) ※パーミッション済ファイル格納                   
    -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 
@@ -61,7 +62,8 @@
 ※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
    - #### Windows版: [2022/04/05版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220405/CS-Mult-Windows-20220405.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413.dmg)              
+   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413.dmg)         
+     Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413-1.dmg)  ※パーミッション済ファイル格納                               
    -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 ---
@@ -73,7 +75,7 @@
 #### ※ オリジナルアプリの名称で更新した最終版です。                  
    * Windows版: [2022/04/07版ダウンロード](https://github.com/CSReviser/CaptureStream/releases/download/20220407/CaptureStream-Windows-20220407.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
-   * Macintosh版:  [2022/04/14版ダウンロード](https://github.com/CSReviser/CaptureStream/releases/download/20220414/CaptureStream-Macintosh-20220414.dmg)              
+   * Macintosh版:  [2022/04/14版ダウンロード](https://github.com/CSReviser/CaptureStream/releases/download/20220414/CaptureStream-Macintosh-20220414.dmg) ※パーミッション済ファイル格納              
    -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                                                    
 　　　           　　     
 
