@@ -11,16 +11,17 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### Mac版で発生しているffmpegのパス不正問題の対策としてffmpegの配置フォルダをアプリのメインプログラムと同じ階層に変えました。但し、Mac環境がないので試せていません。エラー回避できたら、ご報告頂けると他のMacユーザの助けになると思います。この版はMac版のみです。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### Mac版のインストール手順と動作確認をtwitterで情報提供して頂きました。ご協力に感謝します。ここのトップシートにMac版のリンクを貼りました。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
 ***
-### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)
+### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)   [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-English/releases/tag/20220413)         
 #### ※ 英語講座のみに対応
-   - #### Windows版: [2022/04/06版](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
+   - #### Windows版: [2022/04/06版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          　　　           　　                            
+   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413.dmg)              
+   -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 
 ---
@@ -55,13 +56,13 @@
   
 
 ---
-### CS-Mult [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/tag/20220405)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)          
+### CS-Mult [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/tag/20220405)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)    [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-Mult/releases/tag/20220413)                  
 #### ※ 英語以外の語学講座と一部の英語講座に対応。          
 ※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
-   - #### Windows版: [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/download/20220405/CS-Mult-Windows-20220405.zip)                          
+   - #### Windows版: [2022/04/05版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220405/CS-Mult-Windows-20220405.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [macOS版について](https://github.com/CSReviser/CS-English/wiki/Macintosh%E7%89%88)                          
-         
+   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413.dmg)              
+   -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 ---
 ##### 名称を変更した語学講座CS([CS-English](https://github.com/CSReviser/CS-English/wiki/CS-English)/CS-Mult)に移行し、更新を終了する予定です。               
