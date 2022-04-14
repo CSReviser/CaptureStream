@@ -69,19 +69,21 @@
 ##### 旧名称の部分は順次訂正していきます。   
                                    
 ***
-### 旧名称最終版 [2022/04/07版](https://github.com/CSReviser/CaptureStream/releases/tag/20220407)     
+### 旧名称最終版 [2022/04/07版](https://github.com/CSReviser/CaptureStream/releases/tag/20220407)     [macOS版のみ：2022/04/14版](https://github.com/CSReviser/CaptureStream/releases/tag/20220414)                
 #### ※ オリジナルアプリの名称で更新した最終版です。                  
-   * Windows版: [2022/04/07版](https://github.com/CSReviser/CaptureStream/releases/download/20220407/CaptureStream-Windows-20220407.zip)                          
+   * Windows版: [2022/04/07版ダウンロード](https://github.com/CSReviser/CaptureStream/releases/download/20220407/CaptureStream-Windows-20220407.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
    * Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 　　　           　　     
-い
+
 ***
 ### [HLS独自対応版：](https://github.com/CSReviser/CaptureStream/wiki/HLS%E6%96%B9%E5%BC%8F%E7%8B%AC%E8%87%AA%E5%AF%BE%E5%BF%9C%E7%89%88)  [2022/04/07版](https://github.com/CSReviser/CaptureStream-hls/releases/tag/20220407)            
 #### ※通常版(旧名称最終版)が動作しない場合にお試しください。                          
    * Windows版: [2022/04/07版](https://github.com/CSReviser/CaptureStream-hls/releases/download/20220407/CaptureStream-hls-Windows-20220407.zip)                          
    * Ubuntu版:[バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ビルド手順(hls版))                          
-   * Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
+   * Macintosh版: [2022/04/14版ダウンロード](https://github.com/CSReviser/CaptureStream/releases/download/20220414/CaptureStream-Macintosh-20220414.dmg)              
+   -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
+
 
                                                                                            
 ---
