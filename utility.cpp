@@ -58,9 +58,9 @@ namespace {
 // Macの場合はアプリケーションバンドル、それ以外はアプリケーションが含まれるディレクトリを返す
 QString Utility::applicationBundlePath() {
 	QString result = QCoreApplication::applicationDirPath();
-#ifdef QT4_QT5_MAC
-	result = QDir::cleanPath( result + UPUPUP );
-#endif
+//#ifdef QT4_QT5_MAC				//Macのffmpegパス不正対策　2022/04/14
+//	result = QDir::cleanPath( result + UPUPUP );
+//#endif
 	result += QDir::separator();
 	return result;
 }
