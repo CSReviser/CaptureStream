@@ -16,12 +16,13 @@
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
 ***
-### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)   [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-English/releases/tag/20220413)         
+### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)                 
+### 　　　　　　 [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-English/releases/tag/20220413)         
 #### ※ 英語講座のみに対応
    - #### Windows版: [2022/04/06版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
    - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413.dmg)         
-     Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413-1.dmg) ※パーミッション済ファイル格納                    
+   - #### Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413-1.dmg) ※パーミッション済ファイル格納                    
    -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 
@@ -57,13 +58,14 @@
   
 
 ---
-### CS-Mult [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/tag/20220405)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)    [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-Mult/releases/tag/20220413)                  
+### CS-Mult [2022/04/05版](https://github.com/CSReviser/CS-Mult/releases/tag/20220405)[【対応講座】](https://github.com/CSReviser/CS-Mult/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)                  
+### 　　　　 [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-Mult/releases/tag/20220413)                  
 #### ※ 英語以外の語学講座と一部の英語講座に対応。          
 ※ 従来１つのボタンであった欧州系の語学講座を【月/火/水】と【木/金】に分けました。              
    - #### Windows版: [2022/04/05版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220405/CS-Mult-Windows-20220405.zip)                          
    - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-Mult/wiki/ubuntuビルド手順)                          
    - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413.dmg)         
-     Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413-1.dmg)  ※パーミッション済ファイル格納                               
+   - #### Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-Mult/releases/download/20220413/CS-Mult-Macintosh-20220413-1.dmg)  ※パーミッション済ファイル格納                               
    -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 ---
@@ -71,7 +73,8 @@
 ##### 旧名称の部分は順次訂正していきます。   
                                    
 ***
-### 旧名称最終版 [2022/04/07版](https://github.com/CSReviser/CaptureStream/releases/tag/20220407)     [macOS版のみ：2022/04/14版](https://github.com/CSReviser/CaptureStream/releases/tag/20220414)                
+### 旧名称最終版 [2022/04/07版](https://github.com/CSReviser/CaptureStream/releases/tag/20220407)              
+### 　　　　　　 [macOS版のみ：2022/04/14版](https://github.com/CSReviser/CaptureStream/releases/tag/20220414)                
 #### ※ オリジナルアプリの名称で更新した最終版です。                  
    * Windows版: [2022/04/07版ダウンロード](https://github.com/CSReviser/CaptureStream/releases/download/20220407/CaptureStream-Windows-20220407.zip)                          
    * Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CaptureStream/wiki/ubuntuビルド手順)                          
