@@ -11,18 +11,18 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### Mac版にパーミッション済ファイルを追加しました。インストール手順簡略化を期待したものです。Mac版のインストール手順と動作確認を[Twitter](https://twitter.com/mtssthr/status/1514400745357213697?s=20&t=BXwelvn-kS3kNz3elhbUDw)で情報提供して頂きました。ご協力に感謝します。ここのトップページにMac版のリンクを貼りました。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### CS-EnglishのMac版2022/04/16版をリリースしました。ダウンロードボタン表示問題の修正を意図したものです。動作確認ができていませんのでMacユーザからの情報提供をお願いします。パーミッション済dmgファイルのインストール手順を[Twitter](https://twitter.com/Miiaaenglish/status/1515131329112858626?s=20&t=fKw38ZN5fkIG9q911hDAFw)で情報提供して頂きました。ご協力に感謝します。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
 ***
 ### CS-English [2022/04/06版](https://github.com/CSReviser/CS-English/releases/tag/20220406)[【対応講座】](https://github.com/CSReviser/CS-English/wiki/%E5%AF%BE%E5%BF%9C%E8%AC%9B%E5%BA%A7)                 
-### 　　　　　　 [macOS版のみ：2022/04/13版](https://github.com/CSReviser/CS-English/releases/tag/20220413)         
+### 　　　 [macOS版のみ：2022/04/16版](https://github.com/CSReviser/CS-English/releases/tag/20220416)         
 #### ※ 英語講座のみに対応
    - #### Windows版: [2022/04/06版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220406/CS-English-Windows-20220406.zip)                          
-   - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順)                          
-   - #### Macintosh版: [2022/04/13版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413.dmg)         
-   - #### Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413-1.dmg) ※パーミッション済ファイル格納                    
+   - #### Ubuntu版: [バイナリビルド手順](https://github.com/CSReviser/CS-English/wiki/ubuntuビルド手順) 
+   - #### Macintosh版: [2022/04/13版※パーミッション済ファイルダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220413/CS-English-Macintosh-20220413-1.dmg)                                               
+   - #### Macintosh版: [2022/04/16版ダウンロード](https://github.com/CSReviser/CS-English/releases/download/20220416/CS-English-Macintosh-20220416.dmg) 　　※ダウンロードボタンの表示問題対策        
    -  [Mac版インストール手順](https://github.com/CSReviser/CS-English/wiki/Mac%E7%89%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86)                          　　　           　　                            
 
 
