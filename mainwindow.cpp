@@ -97,7 +97,7 @@ MainWindow::MainWindow( QWidget *parent )
 #ifdef QT4_QT5_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
 //	setMaximumHeight( maximumHeight() - menuBar()->height() );
 //	setMinimumHeight( maximumHeight() - menuBar()->height() );
-	setMaximumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
+	setMaximumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16 
 	setMinimumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
 	QRect rect = geometry();
 //	rect.setHeight( rect.height() - menuBar()->height() );
