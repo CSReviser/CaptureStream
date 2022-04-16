@@ -77,7 +77,7 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2022/04/09)" ); 
+			result = QString( " (2022/04/16)" ); 
 		}
 		return result;
 	}
@@ -95,10 +95,13 @@ MainWindow::MainWindow( QWidget *parent )
 	this->setWindowTitle( this->windowTitle() + version() );
 
 #ifdef QT4_QT5_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
-	setMaximumHeight( maximumHeight() - menuBar()->height() );
-	setMinimumHeight( maximumHeight() - menuBar()->height() );
+//	setMaximumHeight( maximumHeight() - menuBar()->height() );
+//	setMinimumHeight( maximumHeight() - menuBar()->height() );
+	setMaximumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
+	setMinimumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
 	QRect rect = geometry();
-	rect.setHeight( rect.height() - menuBar()->height() );
+//	rect.setHeight( rect.height() - menuBar()->height() );
+	rect.setHeight( rect.height() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
 	rect.moveTop( rect.top() + menuBar()->height() );	// 4.6.3だとこれがないとウィンドウタイトルがメニューバーに隠れる
 	setGeometry( rect );
 #endif
