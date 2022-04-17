@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### Macユーザーの方から動作確認情報と[Twitter](https://twitter.com/Miiaaenglish/status/1515131329112858626?s=20&t=fKw38ZN5fkIG9q911hDAFw)でインストール手順を情報提供して頂きました。ご協力に感謝します。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)から更新が遅れている一部のアプリを一時的に削除しました。このサイトの2022年度対応になっていない記述は順次更新します。ストリーミングの公開は放送日の翌月曜日10時から1週間です。らじる★らじるの聞き逃しとは公開時期/期間が異なりますのでご注意ください。                     　　           　　       
+### 多くのMacユーザーの方から動作確認情報と[Twitter](https://twitter.com/Miiaaenglish/status/1515131329112858626?s=20&t=fKw38ZN5fkIG9q911hDAFw)でインストール手順を情報提供して頂きました。ご協力に感謝します。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)から更新が遅れている一部のアプリを一時的に削除しました。このサイトの2022年度対応になっていない記述は順次更新します。ストリーミングの公開は放送日の翌月曜日10時から1週間です。らじる★らじるの聞き逃しとは公開時期/期間が異なりますのでご注意ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
