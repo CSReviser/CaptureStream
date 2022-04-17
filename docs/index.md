@@ -11,7 +11,7 @@
 - #### [NHK語学テキストのはじめかた](https://www.nhk-book.co.jp/pr/text/hajimekata.html)
 
 ## [［お知らせ］](https://github.com/CSReviser/CS-English/wiki/お知らせ)     
-### Mac版2022/04/16版をリリースしました。ダウンロードボタン表示問題の修正を意図したものです。動作確認ができていませんのでMacユーザからの情報提供をお願いします。パーミッション済dmgファイルのインストール手順を[Twitter](https://twitter.com/Miiaaenglish/status/1515131329112858626?s=20&t=fKw38ZN5fkIG9q911hDAFw)で情報提供して頂きました。ご協力に感謝します。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
+### Mac版2022/04/16版をリリースしました。ダウンロードボタン表示問題の修正を意図したものです。Macユーザーの方から動作確認情報を頂きました。パーミッション済dmgファイルのインストール手順を[Twitter](https://twitter.com/Miiaaenglish/status/1515131329112858626?s=20&t=fKw38ZN5fkIG9q911hDAFw)で情報提供して頂きました。ご協力に感謝します。更新が遅れている一部の[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の代替として一時しのぎにご活用ください。らじる★らじる配信講座をご希望の方は、[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)の利用をご検討ください。                     　　           　　       
 
 * #### [Linux系OSでの使用について](https://github.com/CSReviser/CS-English/wiki/Linux)       
 
