@@ -1,6 +1,6 @@
 # 語学講座CS (2022年度)      
 ### (CS-English／CS-Mult)
-### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について)             
+### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について) 　  【[制限事項](https://github.com/CSReviser/CS-English/wiki/%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85)】           
 ### こちらのサイトは発生版です。          
 ### [オリジナルのツール](https://osdn.net/projects/capturestream/)の[オリジナル作者](https://github.com/CSReviser/CaptureStream/wiki/%E4%BD%9C%E8%80%85%E3%83%BB%E6%94%B9%E7%89%88%E8%80%85)による正規の更新版ではありません。                
 ### 誤解された方には申し訳ありません。[元のツール](https://osdn.net/projects/capturestream/)とは別のツールであると、ご理解の上、ご利用ください。　　　　　　　　
