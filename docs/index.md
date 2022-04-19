@@ -1,9 +1,9 @@
 # 語学講座CS (2022年度)      
 ### (CS-English／CS-Mult)
 ### ※ [名称変更について](https://github.com/CSReviser/CaptureStream/wiki/名称変更について) 　  【[制限事項](https://github.com/CSReviser/CS-English/wiki/%E5%88%B6%E9%99%90%E4%BA%8B%E9%A0%85)】           
-### こちらのサイトは派生版です。誤解された方には申し訳ありません。          
+### こちらは語学講座CSのサイトです。誤解された方には申し訳ありません。          
 ### [オリジナルのツール](https://osdn.net/projects/capturestream/)の[オリジナル作者](https://github.com/CSReviser/CaptureStream/wiki/%E4%BD%9C%E8%80%85%E3%83%BB%E6%94%B9%E7%89%88%E8%80%85)による正規の更新版ではありません。                
-### [オリジナル](https://osdn.net/projects/capturestream/)とは別のツールであるとご理解の上ご利用ください。　　　　　　　　
+### [オリジナル](https://osdn.net/projects/capturestream/)の派生版で別のツールであるとご理解の上ご利用ください。　　　　　　　　
                                
 らじる★らじる配信講座には対応していません。らじる配信講座をご希望の方はらじる配信に対応したアプリをご利用ください。らじる★らじる非対応の為、今後使用できなくなる可能性があります。[類似アプリ](https://github.com/CSReviser/CS-English/wiki/類似アプリ)への移行をご検討ください。       
 ##### ※ 録音した語学講座のファイルは著作権法で許されている範囲内でご利用ください。            
