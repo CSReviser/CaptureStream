@@ -1,1 +1,2 @@
-theme: jekyll-theme-modernist
+plugins:
+  - jekyll-redirect-from
