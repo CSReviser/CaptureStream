@@ -71,6 +71,7 @@ QString DownloadThread::suffix = "listdataflv.xml";
 
 QString DownloadThread::prefix1 = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
 QString DownloadThread::prefix2 = "https://nhks-vh.akamaihd.net/i/gogaku-stream/mp4/";
+//QString DownloadThread::prefix1 = "https://vod-stream.nhk.jp/radioondemand/r/";
 
 QString DownloadThread::flv_host = "flv.nhk.or.jp";
 QString DownloadThread::flv_app = "ondemand/";
@@ -90,22 +91,22 @@ QHash<QProcess::ProcessError, QString> DownloadThread::processError;
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
 	if ( ffmpegHash.empty() ) {
-		ffmpegHash["3g2"] = "\"%1\" -y -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["3gp"] = "\"%1\" -y -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["aac"] = "\"%1\" -y -i %2 -vn -acodec copy \"%3\"";
-		ffmpegHash["avi"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["m4a"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mka"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["mkv"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["mov"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mp3"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
-		ffmpegHash["ts"] = "\"%1\" -y -i %2 -vn -acodec copy \"%3\"";
-		ffmpegHash["op0"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k -ac 1 \"%3\"";
-		ffmpegHash["op1"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
-		ffmpegHash["op2"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 40k -ac 1 \"%3\"";
-		ffmpegHash["op3"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 32k -ac 1 \"%3\"";
-		ffmpegHash["op4"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 24k -ar 22050 -ac 1 \"%3\"";
-		ffmpegHash["op5"] = "\"%1\" -y -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 16k -ar 22050 -ac 1 \"%3\"";
+		ffmpegHash["3g2"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["3gp"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["aac"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -acodec copy \"%3\"";
+		ffmpegHash["avi"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["m4a"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["mka"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["mkv"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
+		ffmpegHash["mov"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
+		ffmpegHash["mp3"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
+		ffmpegHash["ts"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -acodec copy \"%3\"";
+		ffmpegHash["op0"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k -ac 1 \"%3\"";
+		ffmpegHash["op1"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
+		ffmpegHash["op2"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 40k -ac 1 \"%3\"";
+		ffmpegHash["op3"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 32k -ac 1 \"%3\"";
+		ffmpegHash["op4"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 24k -ar 22050 -ac 1 \"%3\"";
+		ffmpegHash["op5"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 16k -ar 22050 -ac 1 \"%3\"";
 	}
 	if ( processError.empty() ) {
 		processError[QProcess::FailedToStart] = "FailedToStart";
@@ -559,7 +560,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	int month = hdate.left( 2 ).toInt();
 	int year = nendo.right( 4 ).toInt();
 	int day = hdate.mid( 3, 2 ).toInt();
-	if ( 2021 > year ) return false;
+	if ( 2022 > year ) return false;
 	int year1 = QDate::currentDate().year();
 
 	if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 ){
