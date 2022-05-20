@@ -210,7 +210,35 @@
           </font>
          </property>
          <property name="text">
-          <string>ダウンロード</string>
+          <string>レコーディング</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="14" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_32">
+       <item>
+        <widget class="QToolButton" name="toolButton_thisweek">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>今週放送分（試行）</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -1085,6 +1113,7 @@
   <tabstop>toolButton_russian</tabstop>
   <tabstop>toolButton_vrradio</tabstop>
   <tabstop>toolButton_skip</tabstop>
+  <tabstop>toolButton_thisweek</tabstop>
   <tabstop>comboBox_extension</tabstop>
   <tabstop>downloadButton</tabstop>
   <tabstop>past_days</tabstop>
@@ -1296,6 +1325,22 @@
   </connection>
   <connection>
    <sender>toolButton_skip</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindowClass</receiver>
+   <slot>toggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>277</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_thisweek</sender>
    <signal>toggled(bool)</signal>
    <receiver>MainWindowClass</receiver>
    <slot>toggled(bool)</slot>

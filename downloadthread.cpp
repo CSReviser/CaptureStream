@@ -99,7 +99,7 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 		ffmpegHash["mka"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
 		ffmpegHash["mkv"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
 		ffmpegHash["mov"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mp3"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k -ac 2 \"%3\"";
+		ffmpegHash["mp3"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
 		ffmpegHash["ts"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -acodec copy \"%3\"";
 		ffmpegHash["op0"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k -ac 1 \"%3\"";
 		ffmpegHash["op1"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
@@ -441,6 +441,55 @@ QStringList one2two( QStringList hdateList ) {
 	return result;
 }
 
+QStringList one2two2( QStringList hdateList2 ) {
+	QStringList result;
+	QRegExp rx("(\\d+)(?:\\D+)(\\d+)");
+
+	for ( int i = 0; i < hdateList2.count(); i++ ) {
+		QString hdate = hdateList2[i];
+		if ( rx.indexIn( hdate, 0 ) != -1 ) {
+			uint length = rx.cap( 2 ).length();
+			if ( length == 1 )
+				hdate.replace( rx.pos( 2 ), 1, "0" + rx.cap( 2 ) );
+			length = rx.cap( 1 ).length();
+			if ( length == 1 )
+				hdate.replace( rx.pos( 1 ), 1, "0" + rx.cap( 1 ) );
+		}
+		QString month2 = hdate.left( 2 );
+		QString day2 = hdate.mid( 3, 2 );
+		QDate today;
+		today.setDate(QDate::currentDate().year(), QDate::currentDate().month(), QDate::currentDate().day());
+		QDateTime dt = QDateTime::fromString( month2 + "/" + day2, "MM/dd" ).addDays(7);
+	
+		QString str1 = dt.toString("MM");
+		QString str2 = dt.toString("dd");
+
+
+			hdate.replace( day2, str2 );
+			hdate.replace( month2, str1 );
+
+		result << hdate;
+	}
+
+	return result;
+}
+
+QStringList thisweekfile( QStringList fileList2, QStringList codeList ) {
+	QStringList result;
+	
+	for ( int i = 0; i < fileList2.count(); i++ ) {
+		QString filex = fileList2[i];
+		int filexxx = codeList[i].toInt() + fileList2.count() ;
+		filex.replace( codeList[i].right( 3 ) ,  QString::number( filexxx ).right( 3 ) );
+		filex.remove( "-re01" );
+			
+		result << filex;
+	}
+
+	return result;
+}
+
+
 //--------------------------------------------------------------------------------
 
 bool illegal( char c ) {
@@ -528,8 +577,14 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
-bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo ) {
+bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo, QString this_week ) {
 	QString outputDir = MainWindow::outputDir + kouza;
+	if ( QString::compare( this_week, "今週放送分" ) ==0 ){
+		outputDir = outputDir + "/" + "今週放送分";
+		if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 )
+		return true;
+	}	
+		
 	if ( !checkOutputDir( outputDir ) )
 		return false;
 	outputDir += QDir::separator();	//通常ファイルが存在する場合のチェックのために後から追加する
@@ -698,7 +753,6 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 }
 
 
-
 QString DownloadThread::paths[] = {
 	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
@@ -740,14 +794,25 @@ void DownloadThread::run() {
 			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
 			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
 			QStringList nendoList = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
-
+			
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
-						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j] );
+						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j], "今週公開分" );
 					}
 				}
 			}
+			
+			if ( ui->toolButton_thisweek->isChecked() ) {
+				QStringList fileList2 = thisweekfile( getAttribute( prefix + paths[i] + "/" + suffix, "@file" ) , getAttribute( prefix + paths[i] + "/" + suffix, "@code" ) );
+				QStringList kouzaList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
+				QStringList hdateList2 = one2two2( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
+				QStringList nendoList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
+	
+				for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
+						captureStream( kouzaList2[j], hdateList2[j], fileList2[j], nendoList2[j], "今週放送分" );
+				}
+			}			
 		}
 	     }
 	

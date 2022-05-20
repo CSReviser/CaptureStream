@@ -77,7 +77,7 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2022/05/18)" ); 
+			result = QString( " (2022/05/20)" ); 
 		}
 		return result;
 	}
@@ -223,6 +223,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
 		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
 		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
+		{ ui->toolButton_thisweek, "next_week", false, "", "", "", "" },
 		{ ui->toolButton_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },
@@ -242,7 +243,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ NULL, NULL, false }
 	};
 	ComboBox textComboBoxes[] = {
-		{ ui->comboBox_extension, "audio_extension", "mp3" },
+		{ ui->comboBox_extension, "audio_extension", "m4a" },	//デフォルト拡張子をmp3からm4aに変更
 		{ NULL, NULL, false }
 	};
 
@@ -372,7 +373,7 @@ void MainWindow::finished() {
 		}
 		delete downloadThread;
 		downloadThread = NULL;
-		ui->downloadButton->setText( QString::fromUtf8( "ダウンロード" ) );
+		ui->downloadButton->setText( QString::fromUtf8( "レコーディング" ) );
 		ui->downloadButton->setEnabled( true );
 	}
 	//ui->label->setText( "" );
