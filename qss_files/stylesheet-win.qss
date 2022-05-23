@@ -26,6 +26,11 @@ QToolButton {
 	color: white;
 }
 
+#checkBox_next_week2 {
+	background-color: black;
+	color: white;
+}
+
 /* ツールボタンにマウスが乗った時 */
 QToolButton:hover {
    background-color: midnightblue;
