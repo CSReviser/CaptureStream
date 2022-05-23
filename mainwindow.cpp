@@ -77,7 +77,7 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2022/05/20)" ); 
+			result = QString( " (2022/05/23)" ); 
 		}
 		return result;
 	}
@@ -123,16 +123,16 @@ MainWindow::MainWindow( QWidget *parent )
 	// 「カスタマイズ」メニューの構築
 	customizeMenu = menuBar()->addMenu( QString::fromUtf8( "カスタマイズ" ) );
 
-	QAction* action = new QAction( QString::fromUtf8( "ファイル名設定..." ), this );
+	QAction* action = new QAction( QString::fromUtf8( "保存フォルダ..." ), this );
+	connect( action, SIGNAL( triggered() ), this, SLOT( customizeSaveFolder() ) );
+	customizeMenu->addAction( action );
+
+	action = new QAction( QString::fromUtf8( "ファイル名設定..." ), this );
 	connect( action, SIGNAL( triggered() ), this, SLOT( customizeFileName() ) );
 	customizeMenu->addAction( action );
 
 	action = new QAction( QString::fromUtf8( "タイトルタグ設定..." ), this );
 	connect( action, SIGNAL( triggered() ), this, SLOT( customizeTitle() ) );
-	customizeMenu->addAction( action );
-
-	action = new QAction( QString::fromUtf8( "保存フォルダ..." ), this );
-	connect( action, SIGNAL( triggered() ), this, SLOT( customizeSaveFolder() ) );
 	customizeMenu->addAction( action );
 
 	//action = new QAction( QString::fromUtf8( "スクランブル文字列..." ), this );
@@ -223,7 +223,6 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
 		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
 		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
-		{ ui->toolButton_thisweek, "next_week", false, "", "", "", "" },
 		{ ui->toolButton_skip, "skip", true, "", "", "", "" },
 		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
 		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },

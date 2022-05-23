@@ -580,10 +580,12 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo, QString this_week ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( QString::compare( this_week, "今週放送分" ) ==0 ){
-		outputDir = outputDir + "/" + "今週放送分";
-		if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 )
+		outputDir = outputDir + "/" + QString::fromUtf8( "今週放送分" );
+		QDate today;
+		today.setDate(QDate::currentDate().year(),QDate::currentDate().month(),QDate::currentDate().day());
+		if ( QString::compare(  kouza , QString::fromUtf8( "ボキャブライダー" ) ) ==0 || (today.dayOfWeek() >= 1 && today.dayOfWeek() <= 3))
 		return true;
-	}	
+	}
 		
 	if ( !checkOutputDir( outputDir ) )
 		return false;
@@ -803,7 +805,7 @@ void DownloadThread::run() {
 				}
 			}
 			
-			if ( ui->toolButton_thisweek->isChecked() ) {
+			if ( ui->checkBox_next_week2->isChecked() ) {
 				QStringList fileList2 = thisweekfile( getAttribute( prefix + paths[i] + "/" + suffix, "@file" ) , getAttribute( prefix + paths[i] + "/" + suffix, "@code" ) );
 				QStringList kouzaList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
 				QStringList hdateList2 = one2two2( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
