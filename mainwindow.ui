@@ -216,34 +216,6 @@
        </item>
       </layout>
      </item>
-     <item row="14" column="0">
-      <layout class="QHBoxLayout" name="horizontalLayout_32">
-       <item>
-        <widget class="QCheckBox" name="checkBox_next_week2"> 
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font color="white">
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>今週放送分（試行）</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
      <item row="13" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_26">
        <item>

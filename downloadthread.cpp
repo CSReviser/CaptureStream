@@ -248,7 +248,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 			QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
 						.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, flv, flv_file, null );
 				QProcess process;
-				emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
+				emit current( QString::fromUtf8( "レコーディング中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 			int exitCode = 0;
 			if ( !failed1935 && !isCanceled ) {
 				if ( (exitCode = process.execute( command1935 )) != 0 )
@@ -269,7 +269,7 @@ void DownloadThread::downloadENews( bool re_read ) {
 					if ( exitCode && !isCanceled ) {
 						if ( !keep_on_error )
 							flv.remove();
-						emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
+						emit critical( QString::fromUtf8( "レコーディングを完了できませんでした：　" ) +
 									   kouza + QString::fromUtf8( "　" ) + hdate );
 					}
 				}
@@ -375,7 +375,7 @@ void DownloadThread::downloadShower() {
 			QString commandResume = QString( "\"%1\"%2 -r \"rtmpt://%3:80/%4%5%6\" -o \"%7\" --resume > %8" )
 					.arg( flvstreamer, TimeOut, flv_host, flv_app, flv_service_prefix, server_file, flv_file, null );
 			QProcess process;
-			emit current( QString::fromUtf8( "ダウンロード中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
+			emit current( QString::fromUtf8( "レコーディング中：　" ) + kouza + QString::fromUtf8( "　" ) + hdate );
 			int exitCode = 0;
 			if ( !failed1935 && !isCanceled ) {
 				if ( (exitCode = process.execute( command1935 )) != 0 )
@@ -396,7 +396,7 @@ void DownloadThread::downloadShower() {
 				if ( exitCode && !isCanceled ) {
 					if ( !keep_on_error )
 						flv.remove();
-					emit critical( QString::fromUtf8( "ダウンロードを完了できませんでした：　" ) +
+					emit critical( QString::fromUtf8( "レコーディングを完了できませんでした：　" ) +
 							kouza + QString::fromUtf8( "　" ) + hdate );
 				}
 			}
@@ -657,7 +657,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		emit current( QString::fromUtf8( "スキップ：　　　　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 		return true;
 	}
-  	emit current( QString::fromUtf8( "ダウンロード中：　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
+  	emit current( QString::fromUtf8( "レコーディング中：　　" ) + kouza + QString::fromUtf8( "　" ) + yyyymmdd );
 	
 	Q_ASSERT( ffmpegHash.contains( extension ) );
 	QString dstPath;
@@ -676,6 +676,9 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	dstPath = outputDir + outFileName;
 #endif
 	QString filem3u8a = prefix1 + file + "/master.m3u8";
+	if ( file.right(3) != "mp4" ) 
+		 filem3u8a = prefix1 + file + ".mp4/master.m3u8";
+
 	QString filem3u8b3 = prefix1 + file.replace ( QString::fromUtf8( ".mp4" ), QString::fromUtf8( "-re01.mp4" ) )  + "/master.m3u8";
 	QString commandFfmpeg = ffmpegHash[extension]
 			.arg( ffmpeg, filem3u8a, dstPath, id3tagTitle, kouza, QString::number( year ) );
@@ -752,7 +755,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 
 	// ffmpeg終了ステータスに応じた処理をしてリターン
 		if ( process2.exitCode() ) {
-			emit critical( QString::fromUtf8( "ダウンロード失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
+			emit critical( QString::fromUtf8( "レコーディング失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
 			QFile::remove( dstPath );
 			return false;
 		}
@@ -814,16 +817,16 @@ void DownloadThread::run() {
 				}
 			}
 			
-			if ( ui->checkBox_next_week2->isChecked() ) {
-				QStringList fileList2 = thisweekfile( getAttribute( prefix + paths[i] + "/" + suffix, "@file" ) , getAttribute( prefix + paths[i] + "/" + suffix, "@code" ) );
-				QStringList kouzaList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
-				QStringList hdateList2 = one2two2( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
-				QStringList nendoList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
-	
-				for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
-						captureStream( kouzaList2[j], hdateList2[j], fileList2[j], nendoList2[j], "今週放送分" );
-				}
-			}			
+//			if ( ui->checkBox_next_week2->isChecked() ) {
+//				QStringList fileList2 = thisweekfile( getAttribute( prefix + paths[i] + "/" + suffix, "@file" ) , getAttribute( prefix + paths[i] + "/" + suffix, "@code" ) );
+//				QStringList kouzaList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
+//				QStringList hdateList2 = one2two2( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
+//				QStringList nendoList2 = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
+//	
+//				for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
+//						captureStream( kouzaList2[j], hdateList2[j], fileList2[j], nendoList2[j], "今週放送分" );
+//				}
+//			}			
 		}
 	     }
 	
@@ -838,5 +841,5 @@ void DownloadThread::run() {
 
 	emit current( "" );
 	//キャンセル時にはdisconnectされているのでemitしても何も起こらない
-	emit information( QString::fromUtf8( "ダウンロード作業が終了しました。" ) );
+	emit information( QString::fromUtf8( "レコーディング作業が終了しました。" ) );
 }
