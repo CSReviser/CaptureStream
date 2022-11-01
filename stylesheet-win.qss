@@ -1,6 +1,6 @@
 QWidget {
 	font-family: Meiryo, "Yu Mincho", "MS PMincho", serif;
-/*	font-size: 9pt;  */
+	font-size: 9pt;
 	font-weight: normal;
 	font-style: normal;
 	background-color: gainsboro;

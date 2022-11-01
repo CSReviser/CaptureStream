@@ -120,6 +120,7 @@ QString Utility::flare( QString& error ) {
 	return result;
 }
 
+#if 0
 // gnashの出力を利用してスクランブル文字列を解析する
 QString Utility::gnash( QString& error ) {
 	QString result;
@@ -155,6 +156,7 @@ QString Utility::gnash( QString& error ) {
 		error = QString::fromUtf8( "gnashが存在しないか実行に失敗しました。" );
 	return result;
 }
+#endif
 
 // ウィキからスクランブル文字列を取得する
 QString Utility::wiki() {

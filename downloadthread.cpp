@@ -91,22 +91,22 @@ QHash<QProcess::ProcessError, QString> DownloadThread::processError;
 DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), failed1935(false) {
 	this->ui = ui;
 	if ( ffmpegHash.empty() ) {
-		ffmpegHash["3g2"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["3gp"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["aac"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -acodec copy \"%3\"";
-		ffmpegHash["avi"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["m4a"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mka"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["mkv"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec copy \"%3\"";
-		ffmpegHash["mov"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -bsf aac_adtstoasc -acodec copy \"%3\"";
-		ffmpegHash["mp3"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec libmp3lame \"%3\"";
-		ffmpegHash["ts"] = "\"%1\" -y -http_seekable 0 -i %2 -vn -acodec copy \"%3\"";
-		ffmpegHash["op0"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 64k -ac 1 \"%3\"";
-		ffmpegHash["op1"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 \"%3\"";
-		ffmpegHash["op2"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 40k -ac 1 \"%3\"";
-		ffmpegHash["op3"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 32k -ac 1 \"%3\"";
-		ffmpegHash["op4"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 24k -ar 22050 -ac 1 \"%3\"";
-		ffmpegHash["op5"] = "\"%1\" -y -http_seekable 0 -i %2 -id3v2_version 3 -metadata title=\"%4\" -metadata artist=\"NHK\" -metadata album=\"%5\" -metadata date=\"%6\" -metadata genre=\"Speech\" -vn -acodec:a libmp3lame -ab 16k -ar 22050 -ac 1 \"%3\"";
+		ffmpegHash["3g2"] = "%1 -vn -bsf aac_adtstoasc -acodec copy %2";
+		ffmpegHash["3gp"] = "%1 -vn -bsf aac_adtstoasc -acodec copy %2";
+		ffmpegHash["aac"] = "%1 -vn -acodec copy %2";
+		ffmpegHash["avi"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec copy %2";
+		ffmpegHash["m4a"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -bsf aac_adtstoasc -acodec copy %2";
+		ffmpegHash["mka"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec copy %2";
+		ffmpegHash["mkv"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec copy %2";
+		ffmpegHash["mov"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -bsf aac_adtstoasc -acodec copy %2";
+		ffmpegHash["mp3"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec libmp3lame %2";
+		ffmpegHash["ts"] = "%1 -vn -acodec copy %2";
+		ffmpegHash["op0"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec:a libmp3lame -ab 64k -ac 1 %2";
+		ffmpegHash["op1"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec:a libmp3lame -ab 48k -ar 24000 -ac 1 %2";
+		ffmpegHash["op2"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec:a libmp3lame -ab 40k -ac 1 %2";
+		ffmpegHash["op3"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec:a libmp3lame -ab 32k -ac 1 %2";
+		ffmpegHash["op4"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec:a libmp3lame -ab 24k -ar 22050 -ac 1 %2";
+		ffmpegHash["op5"] = "%1 -id3v2_version 3 -metadata title=%3 -metadata artist=NHK -metadata album=%4 -metadata date=%5 -metadata genre=Speech -vn -acodec:a libmp3lame -ab 16k -ar 22050 -ac 1 %2";
 	}
 	if ( processError.empty() ) {
 		processError[QProcess::FailedToStart] = "FailedToStart";
@@ -677,22 +677,30 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 #endif
 	QString filem3u8a = prefix1 + file + "/master.m3u8";
 	if ( file.right(3) != "mp4" ) 
-		 filem3u8a = prefix1 + file + ".mp4/master.m3u8";
+		 file = file + ".mp4";
 
-	QString filem3u8b3 = prefix1 + file.replace ( QString::fromUtf8( ".mp4" ), QString::fromUtf8( "-re01.mp4" ) )  + "/master.m3u8";
-	QString commandFfmpeg = ffmpegHash[extension]
-			.arg( ffmpeg, filem3u8a, dstPath, id3tagTitle, kouza, QString::number( year ) );
+	QString arguments00 = "-y -http_seekable 0 -i";
+	QStringList arguments0 = arguments00.split(" ");
+	QStringList arguments = arguments0 + ffmpegHash[extension]
+			.arg( filem3u8a, dstPath, id3tagTitle, kouza, QString::number( year ) ).split(" ");
 
 	QString filem3u8b = prefix2 + file + "/master.m3u8";
+	QString filem3u8b3 = prefix1 + file.replace ( QString::fromUtf8( ".mp4" ), QString::fromUtf8( "-re01.mp4" ) )  + "/master.m3u8";
 	QString commandFfmpeg2 = ffmpegHash[extension]
-			.arg( ffmpeg, filem3u8b, dstPath, id3tagTitle, kouza, QString::number( year ) );
+			.arg( filem3u8b, dstPath, id3tagTitle, kouza, QString::number( year ) );
+	QStringList arguments2 = arguments0 + commandFfmpeg2.split(" "); 
 	QString commandFfmpeg3 = ffmpegHash[extension]
-			.arg( ffmpeg, filem3u8b3, dstPath, id3tagTitle, kouza, QString::number( year ) );
+			.arg( filem3u8b3, dstPath, id3tagTitle, kouza, QString::number( year ) );
+	QStringList arguments3 = arguments0 + commandFfmpeg3.split(" "); 
 
 	//qDebug() << commandFfmpeg;
 	//DebugLog( commandFfmpeg );
 	QProcess process;
-	process.start( commandFfmpeg );
+	process.setProgram( ffmpeg );
+	process.setArguments( arguments );
+	process.start();
+//	process.start( commandFfmpeg );
+
 	if ( !process.waitForStarted( -1 ) ) {
 		emit critical( QString::fromUtf8( "ffmpeg起動エラー(%3)：　%1　　%2" )
 				.arg( kouza, yyyymmdd,  processError[process.error()] ) );
@@ -723,10 +731,13 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	process.kill();
 	process.close();
 	QProcess process2;
+	process2.setProgram( ffmpeg );
 	     if ( QString::compare( this_week, "今週放送分" ) ==0 ){
-		process2.start( commandFfmpeg3 );
+		process2.setArguments( arguments3 );
+		process2.start();
 	     } else {
-		process2.start( commandFfmpeg2 );
+		process2.setArguments( arguments2 );
+		process2.start();
 	     }
 		if ( !process2.waitForStarted( -1 ) ) {
 			emit critical( QString::fromUtf8( "ffmpeg起動エラー(%3)：　%1　　%2" )

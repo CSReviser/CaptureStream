@@ -1,6 +1,6 @@
 QWidget {
 	font-family: "Times New Roman", serif;
-/*	font-size: 10pt;  */
+	font-size: 10pt;
 	font-weight: bold;
 	font-style: normal;
 	background-color: gainsboro;
