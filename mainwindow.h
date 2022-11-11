@@ -24,6 +24,14 @@
 #include <QMainWindow>
 #include <QMutex>
 #include <QCloseEvent>
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QList>
+#include <QNetworkReply>
+#include <QUrl>
+#include <QEventLoop>
+#include <QMutex>
+#include <QStringList>
 #include "messagewindow.h"
 
 #define INI_FILE "CaptureStream.ini"
@@ -54,6 +62,14 @@ public:
 	static QString scramble;
 	static QString scrambleUrl1;
 	static QString scrambleUrl2;
+	static QString optional1;
+	static QString optional2;
+	static QString optional3;
+	static QString optional4;
+	static QString program_title1;
+	static QString program_title2;
+	static QString program_title3;
+	static QString program_title4;
 
 protected:
 	virtual void closeEvent( QCloseEvent *event );
@@ -70,10 +86,16 @@ private slots:
 	void customizeScramble();
 
 private:
+	QStringList getAttribute( QString url, QString attribute );
+	QString getJsonData( QString url );
 	Ui::MainWindowClass *ui;
 	DownloadThread* downloadThread;
 	QMenu* customizeMenu;
 	MessageWindow messagewindow;
+	QEventLoop eventLoop;
+	static QString prefix;
+	static QString suffix;
+	static QString json_prefix;
 
 	void settings( enum ReadWriteMode mode );
 };

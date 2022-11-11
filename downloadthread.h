@@ -36,6 +36,11 @@ public:
 	~DownloadThread() {}
 	void cancel() { isCanceled = true; }
 
+	static QString opt_title1;
+	static QString opt_title2;
+	static QString opt_title3;
+	static QString opt_title4;
+	
 protected:
 	void run();
 
@@ -47,6 +52,7 @@ signals:
 
 private:
 	QStringList getAttribute( QString url, QString attribute );
+	QStringList getJsonData( QString url, QString attribute );
 	bool checkExecutable( QString path );
 	bool isFfmpegAvailable( QString& path );
 	bool istestAvailable( QString& path );
@@ -54,22 +60,26 @@ private:
 	void downloadENews( bool re_read );
 	
 	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString this_week );
-	
+	bool captureStream_json( QString kouza, QString hdate, QString file, QString nendo, QString title, QString this_week );
+
 	QString formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
 	void downloadShower();
 
 	Ui::MainWindowClass* ui;
 	bool isCanceled;
-    bool failed1935;
+	bool failed1935;
+        bool ff_end;
 
 	static QString paths[];
 	static QString paths2[];
 	static QString paths3[];
+	static QString json_paths[];
 	static QString prefix;
 	static QString prefix1;
 	static QString prefix2;
 	static QString suffix;
+	static QString json_prefix;
 
 	static QString flv_host;
 	static QString flv_app;
@@ -80,6 +90,11 @@ private:
 	static QString test;
 	static QString scramble;
 	static QStringList malformed;
+	
+	static QString optional1;
+	static QString optional2;
+	static QString optional3;
+	static QString optional4;
 
 	static QHash<QString, QString> ffmpegHash;
 	static QHash<QProcess::ProcessError, QString>processError;
