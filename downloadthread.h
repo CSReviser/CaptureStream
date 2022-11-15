@@ -78,7 +78,11 @@ private:
 	static QString prefix;
 	static QString prefix1;
 	static QString prefix2;
+	static QString prefix3;
 	static QString suffix;
+	static QString suffix1;
+	static QString suffix2;
+	static QString suffix3;
 	static QString json_prefix;
 
 	static QString flv_host;

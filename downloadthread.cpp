@@ -78,7 +78,10 @@ QString DownloadThread::json_prefix = "https://www.nhk.or.jp/radioondemand/json/
 
 QString DownloadThread::prefix1 = "https://nhk-vh.akamaihd.net/i/gogaku-stream/mp4/";
 QString DownloadThread::prefix2 = "https://nhks-vh.akamaihd.net/i/gogaku-stream/mp4/";
-//QString DownloadThread::prefix1 = "https://vod-stream.nhk.jp/radioondemand/r/";
+QString DownloadThread::prefix3 = "https://vod-stream.nhk.jp/gogaku-stream/mp4/";
+QString DownloadThread::suffix1 = "/master.m3u8";
+QString DownloadThread::suffix2 = ".mp4/master.m3u8";
+QString DownloadThread::suffix3 = "/index.m3u8";
 
 QString DownloadThread::flv_host = "flv.nhk.or.jp";
 QString DownloadThread::flv_app = "ondemand/";
@@ -736,10 +739,15 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 #else
 	dstPath = outputDir + outFileName;
 #endif
-	if ( file.right(4) != ".mp4" ) 
-		 file = file + ".mp4";
-	QString filem3u8a = prefix1 + file + "/master.m3u8";
-	
+	QString filem3u8a; QString filem3u8b;
+	if ( file.right(4) != ".mp4" ) {
+		filem3u8a = prefix1 + file + ".mp4/master.m3u8";
+		filem3u8b = prefix2 + file + ".mp4/master.m3u8";
+	} else {
+		filem3u8a = prefix1 + file + "/master.m3u8";
+		filem3u8b = prefix2 + file + "/master.m3u8";
+	}
+	QString filem3u8c = prefix3 + file  + "/index.m3u8";
 	QStringList arguments_v = { "-http_seekable", "0", "-version", "0" };
 	QProcess process_v;
 	process_v.setProgram( ffmpeg );
@@ -757,24 +765,26 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	QStringList arguments0 = arguments00.split(" ");
 	QStringList arguments = arguments0 + ffmpegHash[extension]
 			.arg( filem3u8a, dstPath, id3tagTitle, kouza, QString::number( year ) ).split(",");
-
-	QString filem3u8b = prefix2 + file + "/master.m3u8";
-	QString filem3u8b3 = prefix1 + file.replace ( QString::fromUtf8( ".mp4" ), QString::fromUtf8( "-re01.mp4" ) )  + "/master.m3u8";
-	QString commandFfmpeg2 = ffmpegHash[extension]
-			.arg( filem3u8b, dstPath, id3tagTitle, kouza, QString::number( year ) );
-	QStringList arguments2 = arguments0 + commandFfmpeg2.split(","); 
-	QString commandFfmpeg3 = ffmpegHash[extension]
-			.arg( filem3u8b3, dstPath, id3tagTitle, kouza, QString::number( year ) );
-	QStringList arguments3 = arguments0 + commandFfmpeg3.split(","); 
+	QStringList arguments2 = arguments0 + ffmpegHash[extension]
+			.arg( filem3u8b, dstPath, id3tagTitle, kouza, QString::number( year ) ).split(","); 
+	QStringList arguments3 = arguments0 + ffmpegHash[extension]
+			.arg( filem3u8c, dstPath, id3tagTitle, kouza, QString::number( year ) ).split(","); 
 
 	//qDebug() << commandFfmpeg;
 	//DebugLog( commandFfmpeg );
 	QProcess process;
 	process.setProgram( ffmpeg );
 	process.setArguments( arguments );
+	
+	QProcess process2;
+	process2.setProgram( ffmpeg );
+	process2.setArguments( arguments2 );
+	
+	QProcess process3;
+	process3.setProgram( ffmpeg );
+	process3.setArguments( arguments3 );
+	
 	process.start();
-//	process.start( commandFfmpeg );
-
 	if ( !process.waitForStarted( -1 ) ) {
 		emit critical( QString::fromUtf8( "ffmpeg起動エラー(%3)：　%1　　%2" )
 				.arg( kouza, yyyymmdd,  processError[process.error()] ) );
@@ -800,6 +810,7 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 		return false;
 	}
 
+
 	QString ffmpeg_Error;
 	ffmpeg_Error.append(process.readAllStandardError());
 
@@ -807,18 +818,11 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	if ( process.exitCode() || ffmpeg_Error.contains("HTTP error") || ffmpeg_Error.contains("Unable to open resource:") ) {
 	process.kill();
 	process.close();
-	QProcess process2;
-	process2.setProgram( ffmpeg );
-	     if ( QString::compare( this_week, "今週放送分" ) ==0 ){
-		process2.setArguments( arguments3 );
-		process2.start();
-	     } else {
-		process2.setArguments( arguments2 );
-		process2.start();
-	     }
+	process2.start();
+
 		if ( !process2.waitForStarted( -1 ) ) {
-			emit critical( QString::fromUtf8( "ffmpeg起動エラー(%3)：　%1　　%2" )
-					.arg( kouza, yyyymmdd,  processError[process.error()] ) );
+			emit critical( QString::fromUtf8( "ffmpeg起動エラー2(%3)：　%1　　%2" )
+					.arg( kouza, yyyymmdd,  processError[process2.error()] ) );
 			QFile::remove( dstPath );
 			return false;
 		}
@@ -835,35 +839,56 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 			if ( process2.error() == QProcess::Timedout )
 				continue;
 		// エラー発生時はメッセージを表示し、出力ファイルを削除してリターン
-			emit critical( QString::fromUtf8( "ffmpeg実行エラー(%3)：　%1　　%2" )
-					.arg( kouza, yyyymmdd,  processError[process.error()] ) );
+			emit critical( QString::fromUtf8( "ffmpeg実行エラー2(%3)：　%1　　%2" )
+					.arg( kouza, yyyymmdd,  processError[process2.error()] ) );
 			QFile::remove( dstPath );
 			return false;
 		}
 
-		ffmpeg_Error.append(process2.readAllStandardError());
-			emit critical( QString::fromUtf8( "ffmpeg_Error：　%1　" )
-					.arg( ffmpeg_Error ));	
+	QString ffmpeg_Error2;
+	ffmpeg_Error2.append(process2.readAllStandardError());
 
 	// ffmpeg終了ステータスに応じた処理をしてリターン
-		if ( process2.exitCode() ) {
-			emit critical( QString::fromUtf8( "レコーディング失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
-			QFile::remove( dstPath );
-			return false;
-		}
-						
-		if ( ffmpeg_Error.contains("HTTP error") ) 
-			emit critical( QString::fromUtf8( "HTTP error" ));
-		if ( ffmpeg_Error.contains("Unable to open resource:") ) 
-			emit critical( QString::fromUtf8( "Unable to open resource:" ));
+	if ( process2.exitCode() || ffmpeg_Error2.contains("HTTP error") || ffmpeg_Error2.contains("Unable to open resource:") ) {
+	process2.kill();
+	process2.close();
+	process3.start();
 
-		if ( ffmpeg_Error.contains("HTTP error") || ffmpeg_Error.contains("Unable to open resource:") ) {
-			emit critical( QString::fromUtf8( "レコーディング失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
+		if ( !process3.waitForStarted( -1 ) ) {
+			emit critical( QString::fromUtf8( "ffmpeg起動エラー(%3)：　%1　　%2" )
+					.arg( kouza, yyyymmdd,  processError[process3.error()] ) );
 			QFile::remove( dstPath );
 			return false;
 		}
 
-	}
+	// ユーザのキャンセルを確認しながらffmpegの終了を待つ
+		while ( !process3.waitForFinished( CancelCheckTimeOut ) ) {
+		// キャンセルボタンが押されていたらffmpegをkillし、ファイルを削除してリターン
+			if ( isCanceled ) {
+				process3.kill();
+				QFile::remove( dstPath );
+				return false;
+			}
+		// 単なるタイムアウトは継続
+			if ( process3.error() == QProcess::Timedout )
+				continue;
+		// エラー発生時はメッセージを表示し、出力ファイルを削除してリターン
+			emit critical( QString::fromUtf8( "ffmpeg実行エラー(%3)：　%1　　%2" )
+					.arg( kouza, yyyymmdd,  processError[process3.error()] ) );
+			QFile::remove( dstPath );
+			return false;
+		}
+	
+	QString ffmpeg_Error3;
+	ffmpeg_Error3.append(process3.readAllStandardError());
+	
+	// ffmpeg終了ステータスに応じた処理をしてリターン
+	if ( process3.exitCode() || ffmpeg_Error3.contains("HTTP error") || ffmpeg_Error3.contains("Unable to open resource:") ) {	
+				emit critical( QString::fromUtf8( "レコーディング失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
+			QFile::remove( dstPath );
+			return false;
+		}
+	}}
 #ifdef QT4_QT5_WIN
 		QFile::rename( dstPath, outputDir + outFileName );
 #endif
