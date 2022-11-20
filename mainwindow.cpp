@@ -71,10 +71,10 @@
 #define SETTING_OPT_TITLE2 "opt_title2"
 #define SETTING_OPT_TITLE3 "opt_title3"
 #define SETTING_OPT_TITLE4 "opt_title4"
-#define OPTIONAL1 "0953"
-#define OPTIONAL2 "4412"
-#define OPTIONAL3 "0937"
-#define OPTIONAL4 "2769"
+#define OPTIONAL1 "7512"	// ニュースで学ぶ「現代英語」
+#define OPTIONAL2 "0937"	// アラビア語講座
+#define OPTIONAL3 "7629"	// Learn Japanese from the News
+#define OPTIONAL4 "2769"	// ポルトガル語 ステップアップ
 #define Program_TITLE1 "ニュースで学ぶ「現代英語」"
 #define Program_TITLE2 "アラビア語講座"
 #define Program_TITLE3 "Learn Japanese from the News"
@@ -105,7 +105,7 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2022/11/15)" ); 
+			result = QString( " (2022/11/20)" ); 
 		}
 		return result;
 	}
@@ -174,6 +174,10 @@ MainWindow::MainWindow( QWidget *parent )
 	connect( action, SIGNAL( triggered() ), this, SLOT( customizeTitle() ) );
 	customizeMenu->addAction( action );
 
+	action = new QAction( QString::fromUtf8( "任意番組設定..." ), this );
+	connect( action, SIGNAL( triggered() ), this, SLOT( customizeScramble() ) );
+	customizeMenu->addAction( action );
+	
 	//action = new QAction( QString::fromUtf8( "スクランブル文字列..." ), this );
 	//connect( action, SIGNAL( triggered() ), this, SLOT( customizeScramble() ) );
 	//customizeMenu->addAction( action );
@@ -353,7 +357,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 //		program_title2 = opt_TITLE2;
 //		program_title3 = opt_TITLE3;
 //		program_title4 = opt_TITLE4;
-		
+//		
 		ui->toolButton_optional1->setText( QString( program_title1 ) );
 		ui->toolButton_optional2->setText( QString( program_title2 ) );
 		ui->toolButton_optional3->setText( QString( program_title3 ) );
@@ -402,29 +406,6 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 void MainWindow::customizeTitle() {
 	CustomizeDialog dialog( Ui::TitleMode );
 	dialog.exec();
-/*	
-	ScrambleDialog dialog( optional1, optional2, optional3, optional4 );
-	dialog.exec();
-	optional1 = dialog.scramble1();
-	optional2 = dialog.scramble2();
-	optional3 = dialog.scramble3();
-	optional4 = dialog.scramble4();
-
-//	QString opt_TITLE1 = getJsonData( optional1 );
-//	QString opt_TITLE2 = getJsonData( optional2 );
-//	QString opt_TITLE3 = getJsonData( optional3 );
-//	QString opt_TITLE4 = getJsonData( optional4 );
-	
-//		program_title1 = opt_TITLE1;
-//		program_title2 = opt_TITLE2;
-//		program_title3 = opt_TITLE3;
-//		program_title4 = opt_TITLE4;
-
-	ui->toolButton_optional1->setText( QString( program_title1 ) );
-	ui->toolButton_optional2->setText( QString( program_title2 ) );
-	ui->toolButton_optional3->setText( QString( program_title3 ) );
-	ui->toolButton_optional4->setText( QString( program_title4 ) );
-*/
 }
 
 void MainWindow::customizeFileName() {
@@ -442,9 +423,30 @@ void MainWindow::customizeSaveFolder() {
 }
 
 void MainWindow::customizeScramble() {
-	ScrambleDialog dialog( scramble );
+//	ScrambleDialog dialog( scramble );
+//	dialog.exec();
+//	scramble = dialog.scramble();
+
+	ScrambleDialog dialog( optional1, optional2, optional3, optional4 );
 	dialog.exec();
-	scramble = dialog.scramble();
+	optional1 = dialog.scramble1();
+	optional2 = dialog.scramble2();
+	optional3 = dialog.scramble3();
+	optional4 = dialog.scramble4();
+
+	QString opt_TITLE1 = getJsonData( optional1.left(4) );
+	QString opt_TITLE2 = getJsonData( optional2.left(4) );
+	QString opt_TITLE3 = getJsonData( optional3.left(4) );
+	QString opt_TITLE4 = getJsonData( optional4.left(4) );
+
+	program_title1 = opt_TITLE1;
+	ui->toolButton_optional1->setText( QString( program_title1 ) );
+	program_title2 = opt_TITLE2;
+	ui->toolButton_optional2->setText( QString( program_title2 ) );
+	program_title3 = opt_TITLE3;
+	ui->toolButton_optional3->setText( QString( program_title3 ) );
+	program_title4 = opt_TITLE4;
+	ui->toolButton_optional4->setText( QString( program_title4 ) );
 }
 
 void MainWindow::download() {	//「ダウンロード」または「キャンセル」ボタンが押されると呼び出される
@@ -478,7 +480,7 @@ QString MainWindow::getJsonData( QString url ) {
 	QNetworkRequest req;
 	req.setUrl(url_json);
 	QNetworkReply *reply = mgr.get(req);
-	eventLoop.exec(); // blocks stack until "finished()" has been called
+	eventLoop.exec(); 
 	
 	if (reply->error() == QNetworkReply::NoError) {
 		QString strReply = (QString)reply->readAll();
@@ -488,9 +490,13 @@ QString MainWindow::getJsonData( QString url ) {
     
 		QJsonArray jsonArray = jsonObject[ "main" ].toArray();
 		QJsonObject objx2 = jsonObject[ "main" ].toObject();
-		attribute = objx2[ "program_name" ].toString();
-//                emit critical( QString::fromUtf8( "program_name2：(%1) " )
-//					.arg( program_name2 ) );
+		attribute = objx2[ "program_name" ].toString().replace( "　", " " );
+		    for (ushort i = 0xFF1A; i < 0xFF5F; ++i) {
+		        attribute = attribute.replace(QChar(i), QChar(i - 0xFEE0));
+		    }
+		    for (ushort i = 0xFF10; i < 0xFF1A; ++i) {
+		        attribute = attribute.replace( QChar(i - 0xFEE0), QChar(i) );
+		    }
 	}
 	return attribute;
 }

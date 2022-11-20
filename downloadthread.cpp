@@ -167,7 +167,13 @@ QStringList DownloadThread::getJsonData( QString url, QString attribute ) {
     
 		QJsonArray jsonArray = jsonObject[ "main" ].toArray();
 		QJsonObject objx2 = jsonObject[ "main" ].toObject();
-		QString program_name = objx2[ "program_name" ].toString();
+		QString program_name = objx2[ "program_name" ].toString().replace( "　", " " );
+		    for (ushort i = 0xFF1A; i < 0xFF5F; ++i) {
+		        program_name = program_name.replace(QChar(i), QChar(i - 0xFEE0));
+		    }
+		    for (ushort i = 0xFF10; i < 0xFF1A; ++i) {
+		        program_name = program_name.replace( QChar(i - 0xFEE0), QChar(i) );
+		    }
 		QJsonArray detail_list2 = objx2[ "detail_list" ].toArray();
 		QJsonArray detail_list = objx2[ "detail_list" ].toArray();
 
@@ -1101,14 +1107,14 @@ void DownloadThread::run() {
 
 	for ( int i = 0; checkbox[i] && !isCanceled; i++ ) {
 	
-//		optional1 = MainWindow::optional1;
-//		optional2 = MainWindow::optional2;
-//		optional3 = MainWindow::optional3;
-//		optional4 = MainWindow::optional4;
-//		if ( paths[i].right( 9 ).startsWith("optional1") ) json_paths[i] = optional1;
-//		if ( paths[i].right( 9 ).startsWith("optional2") ) json_paths[i] = optional2;
-//		if ( paths[i].right( 9 ).startsWith("optional3") ) json_paths[i] = optional3;
-//		if ( paths[i].right( 9 ).startsWith("optional4") ) json_paths[i] = optional4;
+		optional1 = MainWindow::optional1;
+		optional2 = MainWindow::optional2;
+		optional3 = MainWindow::optional3;
+		optional4 = MainWindow::optional4;
+		if ( paths[i].right( 9 ).startsWith("optional1") ) json_paths[i] = optional1;
+		if ( paths[i].right( 9 ).startsWith("optional2") ) json_paths[i] = optional2;
+		if ( paths[i].right( 9 ).startsWith("optional3") ) json_paths[i] = optional3;
+		if ( paths[i].right( 9 ).startsWith("optional4") ) json_paths[i] = optional4;
 
 		if ( checkbox[i]->isChecked() ) {
 		   if ( (paths[i].left( 4 ) != "null" && !(ui->checkBox_next_week2->isChecked())) || json_paths[i] == "0000" ) {

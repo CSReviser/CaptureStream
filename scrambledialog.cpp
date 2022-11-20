@@ -21,16 +21,47 @@
 #include "scrambledialog.h"
 #include "ui_scrambledialog.h"
 
-ScrambleDialog::ScrambleDialog( QString scramble, QWidget *parent )
+#define OPTIONAL1 "french/kouza"
+#define OPTIONAL2 "french/kouza2"
+#define OPTIONAL3 "german/kouza"
+#define OPTIONAL4 "german/kouza2"
+
+QString ScrambleDialog::optional1;
+QString ScrambleDialog::optional2;
+QString ScrambleDialog::optional3;
+QString ScrambleDialog::optional4;
+
+ScrambleDialog::ScrambleDialog( QString optional1, QString optional2, QString optional3, QString optional4, QWidget *parent )
+//ScrambleDialog::ScrambleDialog( QString scramble, QWidget *parent )
 		: QDialog(parent), ui(new Ui::ScrambleDialog) {
     ui->setupUi(this);
-	ui->scramble->setText( scramble );
+//	ui->scramble->setText( scramble );
+	ui->optional1->setText( optional1 ),
+	ui->optional2->setText( optional2 ),
+	ui->optional3->setText( optional3 ),
+	ui->optional4->setText( optional4 );
 }
 
 ScrambleDialog::~ScrambleDialog() {
     delete ui;
 }
 
-QString ScrambleDialog::scramble() {
-	return ui->scramble->text();
+//QString ScrambleDialog::scramble() {
+//	return ui->scramble->text();
+//}
+
+QString ScrambleDialog::scramble1() {
+	return ui->optional1->text();
+}
+
+QString ScrambleDialog::scramble2() {
+	return ui->optional2->text();
+}
+
+QString ScrambleDialog::scramble3() {
+	return ui->optional3->text();
+}
+
+QString ScrambleDialog::scramble4() {
+	return ui->optional4->text();
 }
