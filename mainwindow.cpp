@@ -105,7 +105,7 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2022/11/20)" ); 
+			result = QString( " (2022/11/25)" ); 
 		}
 		return result;
 	}
@@ -428,7 +428,7 @@ void MainWindow::customizeScramble() {
 //	scramble = dialog.scramble();
 
 	ScrambleDialog dialog( optional1, optional2, optional3, optional4 );
-	dialog.exec();
+    if (dialog.exec() ) {
 	optional1 = dialog.scramble1();
 	optional2 = dialog.scramble2();
 	optional3 = dialog.scramble3();
@@ -441,12 +441,17 @@ void MainWindow::customizeScramble() {
 
 	program_title1 = opt_TITLE1;
 	ui->toolButton_optional1->setText( QString( program_title1 ) );
+	ui->toolButton_optional1->setChecked(false);
 	program_title2 = opt_TITLE2;
 	ui->toolButton_optional2->setText( QString( program_title2 ) );
+	ui->toolButton_optional2->setChecked(false);
 	program_title3 = opt_TITLE3;
 	ui->toolButton_optional3->setText( QString( program_title3 ) );
+	ui->toolButton_optional3->setChecked(false);
 	program_title4 = opt_TITLE4;
 	ui->toolButton_optional4->setText( QString( program_title4 ) );
+	ui->toolButton_optional4->setChecked(false);
+    }
 }
 
 void MainWindow::download() {	//「ダウンロード」または「キャンセル」ボタンが押されると呼び出される
