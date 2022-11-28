@@ -59,7 +59,7 @@ private:
 	bool checkOutputDir( QString dirPath );
 	void downloadENews( bool re_read );
 	
-	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString this_week );
+	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString dir, QString this_week );
 	bool captureStream_json( QString kouza, QString hdate, QString file, QString nendo, QString title, QString this_week );
 
 	QString formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, bool checkIllegal );

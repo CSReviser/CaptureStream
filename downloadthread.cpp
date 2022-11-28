@@ -649,7 +649,7 @@ QString DownloadThread::formatName( QString format, QString kouza, QString hdate
 
 //--------------------------------------------------------------------------------
 
-bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo, QString this_week ) {
+bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, QString nendo, QString dir, QString this_week ) {
 	QString outputDir = MainWindow::outputDir + kouza;
 	if ( QString::compare( this_week, "今週放送分" ) ==0 ){
 		outputDir = outputDir + "/" + QString::fromUtf8( "今週放送分" );
@@ -746,6 +746,8 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 	dstPath = outputDir + outFileName;
 #endif
 	QString filem3u8a; QString filem3u8b;
+	if ( dir == "") {prefix1 = prefix1.remove("/mp4"); prefix2 = prefix2.remove("/mp4"); prefix3 = prefix3.remove("/mp4");
+	} else {prefix1 = prefix1.replace( "mp4", dir ); prefix2 = prefix2.replace( "mp4", dir ); prefix3 = prefix3.replace( "mp4", dir ); };
 	if ( file.right(4) != ".mp4" ) {
 		filem3u8a = prefix1 + file + ".mp4/master.m3u8";
 		filem3u8b = prefix2 + file + ".mp4/master.m3u8";
@@ -1122,11 +1124,12 @@ void DownloadThread::run() {
 			QStringList kouzaList = getAttribute( prefix + paths[i] + "/" + suffix, "@kouza" );
 			QStringList hdateList = one2two( getAttribute( prefix + paths[i] + "/" + suffix, "@hdate" ) );
 			QStringList nendoList = getAttribute( prefix + paths[i] + "/" + suffix, "@nendo" );
+			QStringList dirList = getAttribute( prefix + paths[i] + "/" + suffix, "@dir" );
 			
 			if ( fileList.count() && fileList.count() == kouzaList.count() && fileList.count() == hdateList.count() ) {
 				if ( true /*ui->checkBox_this_week->isChecked()*/ ) {
 					for ( int j = 0; j < fileList.count() && !isCanceled; j++ ){
-						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j], "今週公開分" );
+						captureStream( kouzaList[j], hdateList[j], fileList[j], nendoList[j], dirList[j], "今週公開分" );
 					}
 				}
 			}
