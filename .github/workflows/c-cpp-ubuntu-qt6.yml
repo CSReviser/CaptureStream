@@ -1,4 +1,4 @@
-name: C/C++ CI ubuntu
+name: C/C++ CI ubuntu-qt6
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
       with:
         host: 'linux'
         target: 'desktop'
-        version: '6.2.*'
+        version: '6.2.4'
         modules: 'qtcharts qtscript qtwebengine'
 
 
