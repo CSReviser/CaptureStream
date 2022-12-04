@@ -56,7 +56,7 @@ jobs:
           qmake CaptureStream.pro
           nmake
  #         nmake
-      - uses: actions/upload-artifact@3
+      - uses: actions/upload-artifact@2
         with:
           name: CaptureStream
           path: ./
