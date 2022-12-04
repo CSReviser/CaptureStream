@@ -26,7 +26,7 @@ jobs:
         #arch: 'win64_msvc2019_64'
         #arch: 'win64_mingw81'
         #arch: 'win32_mingw81'
-        #modules: 'Desktop MinGW 8.1.0 32-bit Debug Information Files Qt Charts for MinGW 8.1.0 32-bit Qt Data Visualization for MinGW 8.1.0 32-bit Qt Lottie Animation for MinGW 8.1.0 32-bit Qt Network Authorization for MinGW 8.1.0 32-bit Qt Purchasing for MinGW 8.1.0 32-bit Qt Quick 3D for MinGW 8.1.0 32-bit Qt Quick Timeline for MinGW 8.1.0 32-bit Qt Script for MinGW 8.1.0 32-bit Qt Virtual Keyboard for MinGW 8.1.0 32-bit Qt WebGL Streaming Plugin for MinGW 8.1.0 32-bit'
+        modules: 'Desktop MinGW 8.1.0 32-bit Debug Information Files Qt Charts for MinGW 8.1.0 32-bit Qt Data Visualization for MinGW 8.1.0 32-bit Qt Lottie Animation for MinGW 8.1.0 32-bit Qt Network Authorization for MinGW 8.1.0 32-bit Qt Purchasing for MinGW 8.1.0 32-bit Qt Quick 3D for MinGW 8.1.0 32-bit Qt Quick Timeline for MinGW 8.1.0 32-bit Qt Script for MinGW 8.1.0 32-bit Qt Virtual Keyboard for MinGW 8.1.0 32-bit Qt WebGL Streaming Plugin for MinGW 8.1.0 32-bit'
         tools: 'tools_cmake tools_generic'
         #modules: 'qtcharts qtscript qtwebengine'
         #modules: 'Desktop MinGW 8.1.0 32-bit Debug Information Files Qt Charts for MinGW 8.1.0 32-bit Qt Data Visualization for MinGW 8.1.0 32-bit Qt Lottie Animation for MinGW 8.1.0 32-bit Qt Network Authorization for MinGW 8.1.0 32-bit Qt Purchasing for MinGW 8.1.0 32-bit Qt Quick 3D for MinGW 8.1.0 32-bit Qt Quick Timeline for MinGW 8.1.0 32-bit Qt Script for MinGW 8.1.0 32-bit Qt Virtual Keyboard for MinGW 8.1.0 32-bit Qt WebGL Streaming Plugin for MinGW 8.1.0 32-bit'
