@@ -1,7 +1,7 @@
 name: C/C++ CI win
 
 env:
-  QT_VERSION:     "5.12.7"
+  QT_VERSION:     "5.15.2"
 
 
 on:
@@ -35,11 +35,16 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
+          aqtversion: '==2.1.*'
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win32_mingw81'
           # Version of Qt to install
-          version: ${{ matrix.qt_ver }}
+          # version: ${{ matrix.qt_ver }}
           # Target platform for build
           # target: ${{ matrix.qt_target }}
-          arch: ${{ matrix.qt_arch }}
+          # arch: ${{ matrix.qt_arch }}
           modules: 'qtcharts qtscript qtwebengine'
           cached: 'false'
 
