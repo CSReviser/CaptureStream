@@ -50,7 +50,7 @@ jobs:
           # Target platform for build
           # target: ${{ matrix.qt_target }}
           # arch: ${{ matrix.qt_arch }}
-          modules: 'qtcharts qtscript qtwebengine'
+          modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
           cached: 'false'
 
       - uses: actions/checkout@v3
