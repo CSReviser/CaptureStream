@@ -31,7 +31,11 @@ jobs:
       targetName: CaptureStream.exe 
       
     steps:
-    
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+         python-version: '3.10'  
+ 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -49,7 +53,7 @@ jobs:
           modules: 'qtcharts qtscript qtwebengine'
           cached: 'false'
 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       # msvc编译
