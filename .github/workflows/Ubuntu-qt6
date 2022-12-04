@@ -3,7 +3,7 @@ name: C/C++ CI ubuntu
 on:
   workflow_dispatch:
       branches: [ master ]
-      
+
 
 jobs:
   build:
@@ -11,23 +11,24 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
         host: 'linux'
         target: 'desktop'
-        version: '6.9.5'
+        version: '5.9.5'
         modules: 'qtcharts qtscript qtwebengine'
 
-        
+
     - uses: actions/checkout@v3
     - name: qmake
       run: qmake -makefile
     - name: make
       run: make
-  
+
     - uses: actions/upload-artifact@v3
       with:
         name: CaptureStream
         path: ./
+Footer
