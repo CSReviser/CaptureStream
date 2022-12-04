@@ -45,7 +45,7 @@ jobs:
           target: 'desktop'
           #arch: 'win32_mingw81'
           #arch: 'win32_msvc2019'
-          arch: 'win64_msvc2019_64'
+          #arch: 'win64_msvc2019_64'
           setup-python: 'true'
           tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
           # Version of Qt to install
