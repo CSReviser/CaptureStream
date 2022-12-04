@@ -44,7 +44,8 @@ jobs:
           host: 'windows'
           target: 'desktop'
           #arch: 'win32_mingw81'
-          arch: 'win32_msvc2019'
+          #arch: 'win32_msvc2019'
+          arch: 'win64_msvc2019_64'
           setup-python: 'true'
           tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
           # Version of Qt to install
@@ -53,6 +54,11 @@ jobs:
           # target: ${{ matrix.qt_target }}
           # arch: ${{ matrix.qt_arch }}
           modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
+          set-env: 'true'
+          tools-only: 'false'
+          #aqtversion: '==2.1.*'
+          py7zrversion: '==0.19.*'
+          extra: '--external 7z'
           cached: 'false'
 
       - uses: actions/checkout@v3
