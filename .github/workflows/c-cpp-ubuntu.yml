@@ -28,7 +28,7 @@ jobs:
       run: make
       
     - name: Make CaptureStream executable
-      run: sudo chmod -R 755 ./CaptureStream
+      run: chmod -R 755 ./CaptureStream
   
     - uses: actions/upload-artifact@v3
       with:
