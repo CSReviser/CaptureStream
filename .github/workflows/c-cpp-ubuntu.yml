@@ -8,12 +8,12 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     
     - name: Install Qt
-      uses: jurplel/install-qt-action@v2
+      uses: jurplel/install-qt-action@v3
       with:
         host: 'linux'
         target: 'desktop'
@@ -21,13 +21,13 @@ jobs:
         modules: 'qtcharts qtscript qtwebengine'
 
         
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: qmake
       run: qmake -makefile
     - name: make
       run: make
   
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: CaptureStream
         path: ./
