@@ -17,7 +17,7 @@ jobs:
       with:
         host: 'linux'
         target: 'desktop'
-        version: '5.9.5'
+        version: '5.15.2'
         modules: 'qtcharts qtscript qtwebengine'
 
         
