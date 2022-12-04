@@ -17,7 +17,7 @@ jobs:
       with:
         host: 'linux'
         target: 'desktop'
-        version: '5.10.1'
+        version: '5.9.1'
         modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtnetworkauth qtwebglplugin debug_info'
         ##arch: 'gcc_64'
         #modules: 'Desktop gcc 64-bit Debug Information Files Qt Charts for gcc 64-bit Qt Data Visualization for gcc 64-bit Qt Lottie Animation for gcc 64-bit Qt Network Authorization for gcc 64-bit Qt Purchasing for gcc 64-bit Qt Quick 3D for gcc 64-bit Qt Quick Timeline for gcc 64-bit Qt Script for gcc 64-bit Qt Virtual Keyboard for gcc 64-bit Qt Wayland Compositor for gcc 64-bit Qt WebEngine for Desktop gcc 64-bit Qt WebGL Streaming Plugin for gcc 64-bit'
