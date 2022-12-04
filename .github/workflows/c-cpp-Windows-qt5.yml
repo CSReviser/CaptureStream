@@ -18,13 +18,14 @@ jobs:
         host: 'windows'
         target: 'desktop'
         version: '5.15.2'
+        aqtversion: '==2.1.*'
         arch: 'win64_msvc2019_64'
         modules: 'qtcharts qtscript qtwebengine'
 
         
     - uses: actions/checkout@v3
     - name: qmake
-      run: qmake -makefile
+      run: qmake -makefile CaptureStream.pro
     - name: make
       run: make
       
