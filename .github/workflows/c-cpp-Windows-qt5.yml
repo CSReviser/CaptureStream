@@ -17,7 +17,7 @@ jobs:
       with:
         host: 'windows'
         target: 'desktop'
-        version: '5.15.2'
+        version: '5.14.2'
         aqtversion: '==2.1.*'
         archives: 'qtbase qtsvg'
         cache: 'false'
