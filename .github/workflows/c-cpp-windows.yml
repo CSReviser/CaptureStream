@@ -55,8 +55,6 @@ jobs:
           # arch: ${{ matrix.qt_arch }}
           modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
           set-env: 'true'
-          "tools-only: 'false
-
           cached: 'false'
 
       - uses: actions/checkout@v3
