@@ -15,7 +15,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        host: 'Windows'
+        host: 'windows'
         target: 'desktop'
         version: '5.15.2'
         modules: 'qtcharts qtscript qtwebengine'
