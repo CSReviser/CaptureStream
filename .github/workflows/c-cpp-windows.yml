@@ -6,7 +6,7 @@ env:
 
 on:
   workflow_dispatch:
-   branches: [ master ] 
+     branches: [ master ] 
       
 jobs:
   build:
@@ -45,6 +45,8 @@ jobs:
           target: 'desktop'
           #arch: 'win32_mingw81'
           arch: 'win32_msvc2019'
+          setup-python: 'true'
+          tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
           # Version of Qt to install
           # version: ${{ matrix.qt_ver }}
           # Target platform for build
