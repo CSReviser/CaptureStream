@@ -1,0 +1,36 @@
+name: C/C++ CI Windows
+
+on:
+  workflow_dispatch:
+      branches: [ master ]
+      
+
+jobs:
+  build:
+
+    runs-on: Windows-2019
+
+    steps:
+    
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        host: 'Windows'
+        target: 'desktop'
+        version: '5.15.2'
+        modules: 'qtcharts qtscript qtwebengine'
+
+        
+    - uses: actions/checkout@v3
+    - name: qmake
+      run: qmake -makefile
+    - name: make
+      run: make
+      
+    - name: Make CaptureStream executable
+      run: chmod -R 755 ./CaptureStream
+  
+    - uses: actions/upload-artifact@v3
+      with:
+        name: CaptureStream
+        path: ./CaptureStream
