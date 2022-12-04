@@ -40,11 +40,11 @@ jobs:
         uses: jurplel/install-qt-action@v3
         with:
           aqtversion: '==2.1.*'
-          #version: '5.15.2'
+          version: '5.9.2'
           host: 'windows'
           target: 'desktop'
           #arch: 'win32_mingw81'
-          #arch: 'win32_msvc2019'
+          arch: 'win32_msvc2019'
           #arch: 'win64_msvc2019_64'
           setup-python: 'true'
           tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
