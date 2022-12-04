@@ -19,7 +19,8 @@ jobs:
         target: 'desktop'
         version: '5.15.2'
         aqtversion: '==2.1.*'
-        arch: 'win64_msvc2019_64'
+        #arch: 'win64_msvc2019_64'
+        arch: 'win64_mingw81'
         modules: 'qtcharts qtscript qtwebengine'
 
         
