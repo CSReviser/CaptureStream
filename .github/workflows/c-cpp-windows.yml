@@ -43,8 +43,8 @@ jobs:
           version: '5.15.2'
           host: 'windows'
           target: 'desktop'
-          arch: 'win32_mingw81'
-          #arch: 'win32_msvc2019'
+          #arch: 'win32_mingw81'
+          arch: 'win32_msvc2019'
           # Version of Qt to install
           # version: ${{ matrix.qt_ver }}
           # Target platform for build
