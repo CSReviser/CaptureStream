@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
 
     steps:
     
@@ -25,7 +25,7 @@ jobs:
         
     - uses: actions/checkout@v3
     - name: qmake
-      run: qmake -makefile
+      run: qmake -makefile CaptureStream.pro
     - name: make
       run: make
       
