@@ -60,7 +60,7 @@ jobs:
           # arch: ${{ matrix.qt_arch }}
           modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
           set-env: 'true'
-          #dir: 'C:\'
+          dir: 'D:/'
           setup-python: 'fales'
           cached: 'false'
 
