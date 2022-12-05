@@ -45,7 +45,7 @@ jobs:
         uses: jurplel/install-qt-action@v3
         with:
           aqtversion: '==2.1.*'
-          version: '5.9.2'
+          version: '5.15.2'
           host: 'windows'
           target: 'desktop'
           #arch: 'win32_mingw81'
@@ -59,7 +59,7 @@ jobs:
           # target: ${{ matrix.qt_target }}
           # arch: ${{ matrix.qt_arch }}
           modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
-          set-env: 'true'
+          #set-env: 'true'
           dir: 'D:/'
           setup-python: 'fales'
           cached: 'false'
@@ -72,9 +72,9 @@ jobs:
         id: build
         shell: cmd
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+         # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake CaptureStream.pro
-          nmake
+          make
  #         nmake
       - uses: actions/upload-artifact@v3
         with:
