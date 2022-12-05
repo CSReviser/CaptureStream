@@ -30,6 +30,8 @@ jobs:
         setup-python: 'false'
         extra:   --external 7z
         modules: 'qtcharts qtscript qtwebengine'
+        setup-python: 'fales'
+        dir: 'D:/'
         
     - uses: actions/checkout@v2
     - name: qmake
