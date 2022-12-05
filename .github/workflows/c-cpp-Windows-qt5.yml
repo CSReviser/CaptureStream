@@ -10,36 +10,6 @@ env:
     MINGW_URL: https://download.qt.io/online/qtsdkrepository/windows_x86/desktop/tools_mingw/qt.tools.win32_mingw810/8.1.0-1-202004170606i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z
     INSTALLBUILDER_URL: https://installbuilder.com/installbuilder-enterprise-22.6.0-windows-installer.exe
 
-
-               
-            - name: Install Qt
-              uses: jurplel/install-qt-action@v3
-              with:
-                cache: true
-                version: ${{ env.QT_VERSION }}
-                host: 'windows'
-                arch: ${{ env.QT_ARCH }}
-                # jurplel/install-qt-action has a bug due to which we cannot use ${{ github.workspace }} for the "dir" property, because it will fail.
-                dir: 'D:/'
-                setup-python: 'false'
-
-            - uses: actions/setup-python@v4
-              with:
-                python-version: ${{ env.PYTHON_VERSION }}
-                architecture: 'x86'
-                
-            - name: Clone repo
-              uses: actions/checkout@v3
-              with:
-                ref: ${{ github.event.client_payload.branch }}
-
-            - name: Install dependencies
-              shell: bash
-              run: |
-                7z x -o".." win_deps/win32_deps.zip
-                echo "../lib" >> $GITHUB_PATH
-
-
 name: C/C++ CI Windows 32-bit release build
 
 on:
