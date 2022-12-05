@@ -35,7 +35,12 @@ jobs:
       - uses: actions/setup-python@v4
         with:
          python-version: '3.10'  
- 
+
+      - name: Set up MinGW
+      - uses: egor-tensin/setup-mingw@v2
+        with:
+          platform: x86
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -44,10 +49,10 @@ jobs:
           host: 'windows'
           target: 'desktop'
           #arch: 'win32_mingw81'
-          arch: 'win32_msvc2019'
+          #arch: 'win32_msvc2019'
           #arch: 'win64_msvc2019_64'
-          setup-python: 'true'
-          tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
+          #setup-python: 'true'
+          #tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
           # Version of Qt to install
           # version: ${{ matrix.qt_ver }}
           # Target platform for build
@@ -55,8 +60,8 @@ jobs:
           # arch: ${{ matrix.qt_arch }}
           modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
           set-env: 'true'
-          dir: 'C:\'
-          #setup-python: 'fales'
+          #dir: 'C:\'
+          setup-python: 'fales'
           cached: 'false'
 
       - uses: actions/checkout@v3
