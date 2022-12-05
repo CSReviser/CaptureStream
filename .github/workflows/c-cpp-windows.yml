@@ -56,6 +56,7 @@ jobs:
           modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtvirtualkeyboard qtwebengine qtnetworkauth debug_info'
           set-env: 'true'
           dir: 'C:\'
+          #setup-python: 'fales'
           cached: 'false'
 
       - uses: actions/checkout@v3
