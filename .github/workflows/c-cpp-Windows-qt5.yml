@@ -19,7 +19,6 @@ on:
 
 jobs:
   build:
-
     runs-on: Windows-2019
 
     steps:
