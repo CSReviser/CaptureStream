@@ -27,7 +27,7 @@ jobs:
         version: '5.15.2'
         #modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtnetworkauth qtwebglplugin'
         #dir: '${{ github.workspace }}/example/'
-        dir: 'D:\'
+        #dir: 'D:\'
         #arch: 'win32_msvc2019'
         #arch: 'win32_mingw53'
         arch: 'win32_mingw81'
