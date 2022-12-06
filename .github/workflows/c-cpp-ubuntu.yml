@@ -44,13 +44,13 @@ jobs:
       with:
        platform: x86
 
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+#    - name: Add msbuild to PATH
+#      uses: microsoft/setup-msbuild@v1.1
       
-    - name: Set up Visual Studio shell
-      uses: egor-tensin/vs-shell@v2
-      with:
-         arch: x86
+#    - name: Set up Visual Studio shell
+#      uses: egor-tensin/vs-shell@v2
+#      with:
+#         arch: x86
         
 #    - name: setup GCC
 #      uses: egor-tensin/setup-gcc@v1
@@ -58,15 +58,18 @@ jobs:
 #        version: latest
 #        platform: x64
         
+#    - uses: actions/checkout@v3
+#    - name: qmake
+#      shell: cmd
+#      run: |
+#       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars32.bat'"
     - uses: actions/checkout@v3
     - name: qmake
-#      shell: cmd
-      run: |
-       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars32.bat'"
-       qmake.exe -makefile CaptureStream.pro
-       mingw32-make.exe
-#    - name: make
-#      run: make.exe
+      run:
+       qmake -makefile CaptureStream.pro
+#       mingw32-make.exe
+    - name: make
+      run: make
       
 #    - name: Make CaptureStream executable
 #      run: chmod -R 755 ./CaptureStream
