@@ -19,7 +19,8 @@ on:
 
 jobs:
 build:
-    runs-on: Windows-2019
+    #runs-on: Windows-2019
+    run-on: ubuntu-latest
 
     steps:
             - name: Set up MinGW
@@ -42,9 +43,9 @@ build:
                 host: 'windows'
                 arch: ${{ env.QT_ARCH }}
                 # jurplel/install-qt-action has a bug due to which we cannot use ${{ github.workspace }} for the "dir" property, because it will fail.
-                dir: 'D:/'
+                #dir: 'D:/'
                 setup-python: 'false'
-                
+
 #    - name: Install Qt
  #     uses: jurplel/install-qt-action@v3
 #      with:
@@ -68,9 +69,10 @@ build:
 #        #tools: 'tools_cmake tools_generic'
 #        py7zrversion: '==0.19.*'
 #        extra: '--external 7z'
-
-        
-    - uses: actions/checkout@v3
+   #- name: Checkout
+      
+- name: Checkout
+  uses: actions/checkout@v3
     - name: qmake
       run: qmake -makefile CaptureStream.pro
     - name: make
