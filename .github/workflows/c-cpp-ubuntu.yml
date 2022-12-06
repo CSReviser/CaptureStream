@@ -12,11 +12,17 @@ jobs:
 
     steps:
     
-    - uses: actions/setup-python@v4
+#    - uses: actions/setup-python@v4
+#      with:
+#        python-version: '3.9'
+#        archtecture: 'x86'
+
+    - name: setup GCC
+      uses: egor-tensin/setup-gcc@v1
       with:
-        python-version: '3.9'
-        archtecture: 'x86'
-    
+        version: latest
+        platform: x64
+       
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
