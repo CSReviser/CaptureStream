@@ -28,7 +28,7 @@ jobs:
         modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtnetworkauth qtwebglplugin'
         #dir: '${{ github.workspace }}/example/'
         dir: 'D:\'
-        arch: 'win64_msvc2019_64'
+        arch: 'win32_msvc2019'
         #arch: 'win32_mingw53'
         #arch: 'win32_mingw81'
         #modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtnetworkauth qtwebglplugin Desktop MinGW 8.1.0 32-bit Debug Information Files Qt Charts for MinGW 8.1.0 32-bit Qt Data Visualization for MinGW 8.1.0 32-bit Qt Lottie Animation for MinGW 8.1.0 32-bit Qt Network Authorization for MinGW 8.1.0 32-bit Qt Purchasing for MinGW 8.1.0 32-bit Qt Quick 3D for MinGW 8.1.0 32-bit Qt Quick Timeline for MinGW 8.1.0 32-bit Qt Script for MinGW 8.1.0 32-bit Qt Virtual Keyboard for MinGW 8.1.0 32-bit Qt WebGL Streaming Plugin for MinGW 8.1.0 32-bit'
@@ -41,13 +41,13 @@ jobs:
 #      with:
 #       platform: x86
 
-#    - name: Add msbuild to PATH
-#      uses: microsoft/setup-msbuild@v1.1
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
       
     - name: Set up Visual Studio shell
       uses: egor-tensin/vs-shell@v2
       with:
-         arch: x64
+         arch: x86
         
 #    - name: setup GCC
 #      uses: egor-tensin/setup-gcc@v1
@@ -58,7 +58,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: qmake
       run: |
-       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat'"
+       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars32.bat'"
        qmake.exe -makefile CaptureStream.pro
     - name: make
       run: make
