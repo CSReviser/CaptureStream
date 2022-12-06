@@ -25,22 +25,24 @@ jobs:
         host: 'windows'
         target: 'desktop'
         version: '5.15.2'
-        modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtnetworkauth qtwebglplugin'
+        #modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtnetworkauth qtwebglplugin'
         #dir: '${{ github.workspace }}/example/'
         dir: 'D:\'
         #arch: 'win32_msvc2019'
         #arch: 'win32_mingw53'
-        #arch: 'win32_mingw81'
-        arch: 'win64_msvc2019_64'
+        arch: 'win32_mingw81'
+        tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win32_mingw810"
+        modules: 'qtcharts qtscript qtwebengine'
+        #arch: 'win64_msvc2019_64'
         #modules: 'qtcharts qtscript qtwebengine qtdatavis3d qtpurchasing qtnetworkauth qtwebglplugin Desktop MinGW 8.1.0 32-bit Debug Information Files Qt Charts for MinGW 8.1.0 32-bit Qt Data Visualization for MinGW 8.1.0 32-bit Qt Lottie Animation for MinGW 8.1.0 32-bit Qt Network Authorization for MinGW 8.1.0 32-bit Qt Purchasing for MinGW 8.1.0 32-bit Qt Quick 3D for MinGW 8.1.0 32-bit Qt Quick Timeline for MinGW 8.1.0 32-bit Qt Script for MinGW 8.1.0 32-bit Qt Virtual Keyboard for MinGW 8.1.0 32-bit Qt WebGL Streaming Plugin for MinGW 8.1.0 32-bit'
         #setup-python: 'fales'
         ##arch: 'gcc_64'
         #modules: 'Desktop gcc 64-bit Debug Information Files Qt Charts for gcc 64-bit Qt Data Visualization for gcc 64-bit Qt Lottie Animation for gcc 64-bit Qt Network Authorization for gcc 64-bit Qt Purchasing for gcc 64-bit Qt Quick 3D for gcc 64-bit Qt Quick Timeline for gcc 64-bit Qt Script for gcc 64-bit Qt Virtual Keyboard for gcc 64-bit Qt Wayland Compositor for gcc 64-bit Qt WebEngine for Desktop gcc 64-bit Qt WebGL Streaming Plugin for gcc 64-bit'
 
- #   - name: Set up MinGW
- #     uses: egor-tensin/setup-mingw@v2
- #     with:
- #      platform: x86
+    - name: Set up MinGW
+      uses: egor-tensin/setup-mingw@v2
+      with:
+       platform: x86
 
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
@@ -48,7 +50,7 @@ jobs:
     - name: Set up Visual Studio shell
       uses: egor-tensin/vs-shell@v2
       with:
-         arch: x64
+         arch: x86
         
 #    - name: setup GCC
 #      uses: egor-tensin/setup-gcc@v1
@@ -60,9 +62,9 @@ jobs:
     - name: qmake
 #      shell: cmd
       run: |
-       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat'"
+       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars32.bat'"
        qmake.exe -makefile CaptureStream.pro
-       nmake.exe
+       make.exe
 #    - name: make
 #      run: make.exe
       
