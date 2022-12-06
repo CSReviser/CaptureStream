@@ -52,7 +52,7 @@ jobs:
         
     - uses: actions/checkout@v3
     - name: qmake
-      run: qmake -makefile CaptureStream.pro
+      run: D:\Qt\5.15.2\msvc2019_64\qmake -makefile CaptureStream.pro
     - name: make
       run: make
       
