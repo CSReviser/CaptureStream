@@ -31,7 +31,8 @@ jobs:
         #dir: 'D:\'
         #arch: 'win32_msvc2019'
         #arch: 'win32_mingw53'
-        arch: 'win32_mingw81'
+        #arch: 'win32_mingw81'
+        arch: 'gcc_64'
         #tools: "tools_mingw,8.1.0-1-202004170606"
         modules: 'qtcharts qtscript'
         #arch: 'win64_msvc2019_64'
@@ -40,10 +41,10 @@ jobs:
         ##arch: 'gcc_64'
         #modules: 'Desktop gcc 64-bit Debug Information Files Qt Charts for gcc 64-bit Qt Data Visualization for gcc 64-bit Qt Lottie Animation for gcc 64-bit Qt Network Authorization for gcc 64-bit Qt Purchasing for gcc 64-bit Qt Quick 3D for gcc 64-bit Qt Quick Timeline for gcc 64-bit Qt Script for gcc 64-bit Qt Virtual Keyboard for gcc 64-bit Qt Wayland Compositor for gcc 64-bit Qt WebEngine for Desktop gcc 64-bit Qt WebGL Streaming Plugin for gcc 64-bit'
 
-    - name: Set up MinGW
-      uses: egor-tensin/setup-mingw@v2
-      with:
-       platform: x86
+#    - name: Set up MinGW
+#      uses: egor-tensin/setup-mingw@v2
+#      with:
+#       platform: x86
 
 #    - name: Add msbuild to PATH
 #      uses: microsoft/setup-msbuild@v1.1
@@ -53,11 +54,11 @@ jobs:
 #      with:
 #         arch: x86
         
-#    - name: setup GCC
-#      uses: egor-tensin/setup-gcc@v1
-#      with:
-#        version: latest
-#        platform: x64
+    - name: setup GCC
+      uses: egor-tensin/setup-gcc@v1
+      with:
+        version: latest
+        platform: x64
         
 #    - uses: actions/checkout@v3
 #    - name: qmake
