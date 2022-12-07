@@ -65,12 +65,6 @@ jobs:
       with:
           key: Linux-qt-geoservices-maplibre-gl
 
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
-      with:
-          name: maplibre-gl-native_Linux
-          path: install-qmaplibregl
-
     - name: Build qt-geoservices-maplibre-gl
       uses: ./source/.github/actions/qt5-build
       with:
