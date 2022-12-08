@@ -117,14 +117,14 @@ DownloadThread::DownloadThread( Ui::MainWindowClass* ui ) : isCanceled(false), f
 		ffmpegHash["mka"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec,copy,%2";
 		ffmpegHash["mkv"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec,copy,%2";
 		ffmpegHash["mov"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-bsf,aac_adtstoasc,-acodec,copy,%2";
-		ffmpegHash["mp3"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec,libmp3lame,%2";
+		ffmpegHash["mp3"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,64k,-write_xing,0,%2";
 		ffmpegHash["ts"] = "%1,-vn,-acodec,copy,%2";
-		ffmpegHash["op0"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,64k,-ac,1,%2";
-		ffmpegHash["op1"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,48k,-ar,24000,-ac,1,%2";
-		ffmpegHash["op2"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,40k,-ac,1,%2";
-		ffmpegHash["op3"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,32k,-ac,1,%2";
-		ffmpegHash["op4"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,24k,-ar,22050,-ac,1,%2";
-		ffmpegHash["op5"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,16k,-ar,22050,-ac,1,%2";
+		ffmpegHash["op0"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,64k,-ac,1,-write_xing,0,%2";
+		ffmpegHash["op1"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,48k,-ar,24000,-ac,1,-write_xing,0,%2";
+		ffmpegHash["op2"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,40k,-ac,1,-write_xing,0,%2";
+		ffmpegHash["op3"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,32k,-ac,1,-write_xing,0,%2";
+		ffmpegHash["op4"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,24k,-ar,22050,-ac,1,-write_xing,0,%2";
+		ffmpegHash["op5"] = "%1,-id3v2_version,3,-metadata,title=%3,-metadata,artist=NHK,-metadata,album=%4,-metadata,date=%5,-metadata,genre=Speech,-vn,-acodec:a,libmp3lame,-ab,16k,-ar,22050,-ac,1,-write_xing,0,%2";
 	}
 	if ( processError.empty() ) {
 		processError[QProcess::FailedToStart] = "FailedToStart";
@@ -1038,12 +1038,12 @@ bool DownloadThread::captureStream_json( QString kouza, QString hdate, QString f
 		QString ffmpeg_Error;
 		 ffmpeg_Error.append(process.readAllStandardError());
 				
-	if ( ffmpeg_Error.contains("HTTP error") ) 
+		if ( ffmpeg_Error.contains("HTTP error") ) 
 			emit critical( QString::fromUtf8( "HTTP error" ));
-	if ( ffmpeg_Error.contains("Unable to open resource:") ) 
+		if ( ffmpeg_Error.contains("Unable to open resource:") ) 
 			emit critical( QString::fromUtf8( "Unable to open resource:" ));
 				
-	if ( ffmpeg_Error.contains("HTTP error") || ffmpeg_Error.contains("Unable to open resource:") ) {
+		if ( ffmpeg_Error.contains("HTTP error") || ffmpeg_Error.contains("Unable to open resource:") ) {
 			emit critical( QString::fromUtf8( "レコーディング失敗：　%1　　%2" ).arg( kouza, yyyymmdd ) );
 			QFile::remove( dstPath );
 			return false;
@@ -1055,9 +1055,9 @@ bool DownloadThread::captureStream_json( QString kouza, QString hdate, QString f
 	process.close();
 	}
 #ifdef QT4_QT5_WIN
-		QFile::rename( dstPath, outputDir + outFileName );
+	QFile::rename( dstPath, outputDir + outFileName );
 #endif
-			return true;
+	return true;
 }
 
 
@@ -1161,7 +1161,8 @@ void DownloadThread::run() {
 					}
 			}
 		   }		   
-	  }}	
+	        }
+	}	
 	  
 	//if ( !isCanceled && ui->checkBox_shower->isChecked() )
 		//downloadShower();
