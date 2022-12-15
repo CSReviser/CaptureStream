@@ -74,9 +74,11 @@ jobs:
 #      run: |
 #       cmd.exe /c "call `C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars32.bat'"
     - uses: actions/checkout@v3
-    - name: qmake
+    - name: configure 1
       run:
        cd /home/runner/work/CaptureStream/Qt/5.15.2
+    - name: configure 2
+      run:
        ./configure -commercial -release -static \
             -prefix /opt/qt5 -hostprefix $HOST_PREFIX \
             -device $TARGET_DEVICE \
@@ -87,7 +89,8 @@ jobs:
             -no-xcb -opengl es2 \
             -nomake tests -nomake examples \
             -skip qtwebengine
-       qmake -makefile CaptureStream.pro
+    - name: qmake
+        qmake -makefile CaptureStream.pro
 #       mingw32-make.exe
     - name: make
       run: make
