@@ -37,6 +37,7 @@
 #include <QScriptValue>
 #include <QDebug>
 #include <QDateTime>
+#include <QStandardPaths>
 
 namespace {
 	const QString UPUPUP( "/../../.." );
@@ -53,6 +54,7 @@ namespace {
     const QString WIKIXML1( "doc('" );
     const QString WIKIXML2( "')/flv/scramble[@date=\"" );
 	const QString WIKIXML3( "\"]/@code/string()" );
+	const QString APPNAME( "CaptureStream" );
 }
 
 // Macの場合はアプリケーションバンドル、それ以外はアプリケーションが含まれるディレクトリを返す
@@ -61,6 +63,30 @@ QString Utility::applicationBundlePath() {
 //#ifdef QT4_QT5_MAC				//Macのffmpegパス不正対策　2022/04/14
 //	result = QDir::cleanPath( result + UPUPUP );
 //#endif
+	result += QDir::separator();
+	return result;
+}
+
+QString Utility::appLocaldataLocationPath() {
+	QString result = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/";
+	result += QDir::separator();
+	return result;
+}
+
+QString Utility::appConfigLocationPath() {
+	QString result = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/";
+	result += QDir::separator();
+	return result;
+}
+
+QString Utility::ConfigLocationPath() {
+	QString result = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "/";
+	result += QDir::separator();
+	return result;
+}
+
+QString Utility::DownloadLocationPath() {
+	QString result = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation) + "/";
 	result += QDir::separator();
 	return result;
 }

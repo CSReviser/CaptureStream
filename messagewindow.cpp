@@ -53,6 +53,7 @@ MessageWindow::MessageWindow(QWidget *parent) :
 }
 
 MessageWindow::~MessageWindow() {
+	if ( MainWindow::no_write_ini == "yes" )
 	settings( true );
 	//delete ui;
 }
@@ -115,8 +116,14 @@ void MessageWindow::clearText() {
 }
 
 void MessageWindow::settings( bool write ) {
-#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )
+#if !defined( QT4_QT5_MAC )
 	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
+#endif
+#ifdef QT4_QT5_MAC
+	QSettings settings( Utility::ConfigLocationPath() + INI_FILE, QSettings::IniFormat );
+#endif
+//#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )
+//	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
 
 	if ( !write ) {
@@ -130,8 +137,8 @@ void MessageWindow::settings( bool write ) {
 	}
 
 	settings.endGroup();
-#else
-	Q_UNUSED( write )
-	resize( DEFAULT_WIDTH, DEFAULT_HEIGHT );
-#endif
+//#else
+//	Q_UNUSED( write )
+//	resize( DEFAULT_WIDTH, DEFAULT_HEIGHT );
+//#endif
 }
