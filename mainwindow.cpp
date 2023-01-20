@@ -208,6 +208,13 @@ MainWindow::MainWindow( QWidget *parent )
 		res.open( QFile::ReadOnly );
 		styleSheet = QLatin1String( res.readAll() );
 	}
+#ifdef QT4_QT5_MAC    // MacのみoutputDirフォルダに置かれたSTYLE_SHEETを優先する
+	QFile real2( MainWindow::outputDir + STYLE_SHEET );
+	if ( real2.exists() ) {
+		real2.open( QFile::ReadOnly );
+		styleSheet = QLatin1String( real2.readAll() );
+	} 
+#endif	
 	qApp->setStyleSheet( styleSheet );
 
 //	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
