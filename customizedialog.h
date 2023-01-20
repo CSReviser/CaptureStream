@@ -48,6 +48,8 @@ private:
 	static QStringList courses;
 	static QStringList titleKeys;
 	static QStringList fileNameKeys;
+	static QStringList titleDefaults;
+	static QStringList fileNameDefaults;
 
 	void settings( bool write );
 };

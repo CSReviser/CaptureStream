@@ -27,6 +27,8 @@
 
 int main(int argc, char *argv[])
 {
+	qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+	qputenv("QT_SCALE_FACTOR", "1");
 #if defined(QT_NO_DEBUG)
 #ifdef QT4_QT5_WIN
 	const char* null = "nul";

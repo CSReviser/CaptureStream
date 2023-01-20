@@ -27,8 +27,14 @@
 
 #define SETTING_GROUP "CustomizeDialog"
 #define DefaultTitle "%k_%Y_%M_%D"
+#define DefaultTitle1 "%f"
+#define DefaultTitle2 "%k_%Y_%M_%D"
 #define DefaultFileName "%k_%Y_%M_%D"
-
+#define DefaultFileName1 "%f_%Y_%M_%D"
+#define DefaultFileName2 "%k_%Y-%M-%D"
+#define DefaultFileName3 "%h"
+#define DefaultFileName4 "%f"
+#define DefaultFileName5 "%k_%h"
 
 typedef struct LineEdit {
 	QLineEdit* lineEdit;
@@ -37,51 +43,28 @@ typedef struct LineEdit {
 } LineEdit;
 
 QStringList CustomizeDialog::courses = QStringList()
-		<< QString::fromUtf8( "小学生の基礎英語" ) << QString::fromUtf8( "中学生の基礎英語【レベル1】" ) 
-		<< QString::fromUtf8( "中学生の基礎英語【レベル2】" ) << QString::fromUtf8( "中高生の基礎英語_in_English" )
-		<< QString::fromUtf8( "英会話タイムトライアル" ) << QString::fromUtf8( "ラジオ英会話" ) 
-		<< QString::fromUtf8( "ラジオビジネス英語" ) << QString::fromUtf8( "エンジョイ・シンプル・イングリッシュ" )
-		<< QString::fromUtf8( "ボキャブライダー" )
-		<< QString::fromUtf8( "まいにち中国語" ) << QString::fromUtf8( "ステップアップ中国語" ) 
-		<< QString::fromUtf8( "まいにちフランス語" ) << QString::fromUtf8( "まいにちイタリア語" )
-		<< QString::fromUtf8( "まいにちハングル講座" ) << QString::fromUtf8( "ステップアップハングル講座" )
-		<< QString::fromUtf8( "まいにちドイツ語" ) << QString::fromUtf8( "まいにちスペイン語" ) 
-		<< QString::fromUtf8( "まいにちロシア語" );
+		<< QString::fromUtf8( "json" ) << QString::fromUtf8( "xml" );
 QStringList CustomizeDialog::titleKeys = QStringList()
-		<< "basic0_title" << "basic1_title" << "basic2_title" << "basic3_title"
-		<< "timetrial_title" << "kaiwa_title" 
-		<< "business1_title" << "enjoy_title"
-		<< "vrradio_title"
-		<< "chinese_title" << "stepup-chinese_title" 
-		<< "french_title" << "italian_title"
-		<< "hangeul_title" << "stepup-hangeul_title"
-		<< "german_title" << "spanish_title"
-		<< "russian_title";
+		<< "customized_title1" << "customized_title2";
 QStringList CustomizeDialog::fileNameKeys = QStringList()
-		<< "basic0_file_name" << "basic1_file_name" << "basic2_file_name" << "basic3_file_name"
-		<< "timetrial_file_name" << "kaiwa_file_name"
-		<< "business1_file_name" << "enjoy_file_name"
-		<< "vrradio_file_name"
-		<< "chinese_file_name" << "stepup-chinese_file_name" 
-		<< "french_file_name" << "italian_file_name"
-		<< "hangeul_file_name" << "stepup-hangeul_file_name"
-		<< "german_file_name" << "spanish_file_name"
-		<< "russian_file_name";
-
+		<< "customized_file_name1" << "customized_file_name2";
+QStringList CustomizeDialog::titleDefaults = QStringList()
+		<< DefaultTitle1 << DefaultTitle;
+QStringList CustomizeDialog::fileNameDefaults = QStringList()
+		<< DefaultFileName << DefaultFileName;
+				
 void CustomizeDialog::formats( QString course, QString& titleFormat, QString& fileNameFormat ) {
-        course.remove( QString::fromUtf8( "【初級編】" ) ); course.remove( QString::fromUtf8( "【入門編】" ) );
-        course.remove( QString::fromUtf8( "【中級編】" ) ); course.remove( QString::fromUtf8( "【応用編】" ) );
 	int index = courses.indexOf( course );
 	if ( index >= 0 ) {
-		QString path = Utility::applicationBundlePath();
+		QString path = MainWindow::ini_file_path;
 		QSettings settings( path + INI_FILE, QSettings::IniFormat );
 		settings.beginGroup( SETTING_GROUP );
-		titleFormat = settings.value( titleKeys[index], DefaultTitle ).toString();
-		fileNameFormat = settings.value( fileNameKeys[index], DefaultFileName ).toString();
+		titleFormat = settings.value( titleKeys[index], titleDefaults[index] ).toString();
+		fileNameFormat = settings.value( fileNameKeys[index], fileNameDefaults[index] ).toString();
 		settings.endGroup();
 	} else {
-		titleFormat = DefaultTitle;
-		fileNameFormat = DefaultFileName;
+		titleFormat = titleDefaults[index]; 
+		fileNameFormat = fileNameDefaults[index];
 	}
 }
 
@@ -93,41 +76,48 @@ CustomizeDialog::CustomizeDialog( Ui::DialogMode mode, QWidget *parent ) :
 		this->setWindowTitle( mode == Ui::TitleMode ? QString::fromUtf8( "タイトルタグ設定" ) : QString::fromUtf8( "ファイル名設定" ) );
 		settings( false );
 		connect( this, SIGNAL( accepted() ), this, SLOT( accepted() ) );
+		ui.radioButton_9->setChecked(true);
+		ui.radioButton_19->setChecked(true);
 }
 
 void CustomizeDialog::settings( bool write ) {
+ 	if (ui.radioButton->isChecked()) ui.lineEdit->setText( DefaultFileName );
+ 	if (ui.radioButton_1->isChecked()) ui.lineEdit->setText( DefaultFileName1 );
+  	if (ui.radioButton_2->isChecked()) ui.lineEdit->setText( DefaultFileName2 );
+  	if (ui.radioButton_3->isChecked()) ui.lineEdit->setText( DefaultFileName3 );
+  	if (ui.radioButton_4->isChecked()) ui.lineEdit->setText( DefaultFileName4 );
+	if (ui.radioButton_5->isChecked()) ui.lineEdit->setText( DefaultFileName5 );
+  	if (ui.radioButton_10->isChecked()) ui.lineEdit_2->setText( DefaultFileName );
+
 	QLineEdit* lineEdits[] = {
-		ui.lineEdit_0, ui.lineEdit_1, ui.lineEdit_2, ui.lineEdit_3, 
-		ui.lineEdit_4, ui.lineEdit_5, ui.lineEdit_6,
-		ui.lineEdit_7, ui.lineEdit_8, ui.lineEdit_9, ui.lineEdit_10,
-		ui.lineEdit_11, ui.lineEdit_12, ui.lineEdit_13, ui.lineEdit_14,
-		ui.lineEdit_15, ui.lineEdit_16, ui.lineEdit_17,
+		ui.lineEdit, ui.lineEdit_2,
 		NULL
 	};
-
-	QString path = Utility::applicationBundlePath();
+	
+	QString path =  MainWindow::ini_file_path;
 	QSettings settings( path + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
-
+	
 	if ( !write ) {
 		for ( int i = 0; lineEdits[i] != NULL; i++ ) {
 			QString format = mode == Ui::TitleMode ?
-							 settings.value( titleKeys[i], DefaultTitle ).toString() :
-							 settings.value( fileNameKeys[i], DefaultFileName ).toString();
+							 settings.value( titleKeys[i], titleDefaults[i] ).toString() :
+							 settings.value( fileNameKeys[i], fileNameDefaults[i] ).toString();
 			lineEdits[i]->setText( format );
 		}
 	} else {
 		for ( int i = 0; lineEdits[i] != NULL; i++ ) {
 			QString text = lineEdits[i]->text();
-			if ( mode == Ui::TitleMode )
-				settings.setValue( titleKeys[i], text.length() == 0 ? DefaultTitle : text );
-			else
-				settings.setValue( fileNameKeys[i], text.length() == 0 ? DefaultFileName : text );
+			if ( mode == Ui::TitleMode ) 
+				settings.setValue( titleKeys[i], text.length() == 0 ? titleDefaults[i] : text );
+			else 
+				settings.setValue( fileNameKeys[i], text.length() == 0 ? fileNameDefaults[i] : text );
 		}
 	}
 	settings.endGroup();
 }
 
 void CustomizeDialog::accepted() {
+	if ( MainWindow::no_write_ini == "yes" )
 	settings( true );
 }

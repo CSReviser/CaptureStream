@@ -75,6 +75,7 @@ private:
 	static QString paths2[];
 	static QString paths3[];
 	static QString json_paths[];
+	static QString json_paths2[];
 	static QString prefix;
 	static QString prefix1;
 	static QString prefix2;
@@ -84,6 +85,7 @@ private:
 	static QString suffix2;
 	static QString suffix3;
 	static QString json_prefix;
+	static QString Xml_koza;
 
 	static QString flv_host;
 	static QString flv_app;

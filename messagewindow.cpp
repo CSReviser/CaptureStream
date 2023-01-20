@@ -116,12 +116,7 @@ void MessageWindow::clearText() {
 }
 
 void MessageWindow::settings( bool write ) {
-#if !defined( QT4_QT5_MAC )
-	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
-#endif
-#ifdef QT4_QT5_MAC
-	QSettings settings( Utility::ConfigLocationPath() + INI_FILE, QSettings::IniFormat );
-#endif
+	QSettings settings( MainWindow::ini_file_path + INI_FILE, QSettings::IniFormat );
 //#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )
 //	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );

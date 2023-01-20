@@ -55,6 +55,8 @@
 
 #define SETTING_GROUP "MainWindow"
 #define SETTING_GEOMETRY "geometry"
+#define SETTING_WINDOWSTATE "windowState"
+#define SETTING_MAINWINDOW_POSITION "Mainwindow_Position"
 #define SETTING_SAVE_FOLDER "save_folder"
 #define SETTING_SCRAMBLE "scramble"
 #define SETTING_SCRAMBLE_URL1 "scramble_url1"
@@ -71,14 +73,14 @@
 #define SETTING_OPT_TITLE2 "opt_title2"
 #define SETTING_OPT_TITLE3 "opt_title3"
 #define SETTING_OPT_TITLE4 "opt_title4"
-#define OPTIONAL1 "7512"	// ニュースで学ぶ「現代英語」
-#define OPTIONAL2 "0937"	// アラビア語講座
-#define OPTIONAL3 "7629"	// Learn Japanese from the News
-#define OPTIONAL4 "2769"	// ポルトガル語 ステップアップ
-#define Program_TITLE1 "ニュースで学ぶ「現代英語」"
-#define Program_TITLE2 "アラビア語講座"
-#define Program_TITLE3 "Learn Japanese from the News"
-#define Program_TITLE4 "ポルトガル語 ステップアップ"
+#define OPTIONAL1 "7155"	//Living in Japan
+#define OPTIONAL2 "0937"	//アラビア語講座
+#define OPTIONAL3 "0701"	//やさしい日本語
+#define OPTIONAL4 "7629"	//Learn Japanese from the News
+#define Program_TITLE1 "任意らじる聴き逃し番組１"
+#define Program_TITLE2 "任意らじる聴き逃し番組２"
+#define Program_TITLE3 "任意らじる聴き逃し番組３"
+#define Program_TITLE4 "任意らじる聴き逃し番組４"
 
 #ifdef QT4_QT5_WIN
 #define STYLE_SHEET "stylesheet-win.qss"
@@ -105,13 +107,14 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2023/01/14)" ); 
+			result = QString( " (2023/01/20)" ); 
 		}
 		return result;
 	}
 }
 
 QString MainWindow::outputDir;
+QString MainWindow::ini_file_path;
 QString MainWindow::scramble;
 QString MainWindow::scrambleUrl1;
 QString MainWindow::scrambleUrl2;
@@ -130,6 +133,12 @@ QString MainWindow::no_write_ini;
 
 MainWindow::MainWindow( QWidget *parent )
 		: QMainWindow( parent ), ui( new Ui::MainWindowClass ), downloadThread( NULL ) {
+#ifdef QT4_QT5_MAC
+	ini_file_path = Utility::ConfigLocationPath();
+#endif
+#if !defined( QT4_QT5_MAC )
+	ini_file_path = Utility::applicationBundlePath();
+#endif	
 	ui->setupUi( this );
 	settings( ReadMode );
 	this->setWindowTitle( this->windowTitle() + version() );
@@ -201,16 +210,16 @@ MainWindow::MainWindow( QWidget *parent )
 	}
 	qApp->setStyleSheet( styleSheet );
 
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
-	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps); //HiDPI pixmaps
-	adjustSize();                             //高DPIディスプレイ対応
-	setFixedSize(size());
-        int dpiX = qApp->desktop()->logicalDpiX();
-	QFont f;
-	int defaultFontSize = f.pointSize() * ( 96.0 / dpiX );
-	f.setPointSize( defaultFontSize );
-	qApp->setFont(f);
+//	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+//	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
+//	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps); //HiDPI pixmaps
+//	adjustSize();                             //高DPIディスプレイ対応
+//	setFixedSize(size());
+//        int dpiX = qApp->desktop()->logicalDpiX();
+//	QFont f;
+//	int defaultFontSize = f.pointSize() * ( 96.0 / dpiX );
+//	f.setPointSize( defaultFontSize );
+//	qApp->setFont(f);
 }
 
 MainWindow::~MainWindow() {
@@ -238,56 +247,47 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		QAbstractButton* checkBox;
 		QString key;
 		QVariant defaultValue;
-		QString titleKey;
-		QVariant titleFormat;
-		QString fileNameKey;
-		QVariant fileNameFormat;
+//		QString titleKey;
+//		QVariant titleFormat;
+//		QString fileNameKey;
+//		QVariant fileNameFormat;
 	} CheckBox;
 #define DefaultTitle "%k_%Y_%M_%D"
 #define DefaultFileName "%k_%Y_%M_%D.m4a"
 	CheckBox checkBoxes[] = {
-		{ ui->toolButton_basic0, "basic0", false, "basic0_title", DefaultTitle, "basic0_file_name", DefaultFileName },
-		{ ui->toolButton_basic1, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
-		{ ui->toolButton_basic2, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
-		{ ui->toolButton_basic3, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
-		{ ui->toolButton_timetrial, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
-		{ ui->toolButton_kaiwa, "kaiwa", false, "kaiwa_title", DefaultTitle, "kaiwa_file_name", DefaultFileName },
-		{ ui->toolButton_business1, "business1", false, "business1_title", DefaultTitle, "business1_file_name", DefaultFileName },
-//		{ ui->toolButton_business2, "business2", false, "business2_title", DefaultTitle, "business2_file_name", DefaultFileName },
-//		{ ui->toolButton_gakusyu, "gakusyu", false, "gakusyu_title", DefaultTitle, "gakusyu_file_name", DefaultFileName },
-//		{ ui->toolButton_gendai, "gendai", false, "gendai_title", DefaultTitle, "gendai_file_name", DefaultFileName },
-		{ ui->toolButton_chinese, "chinese", false, "chinese_title", DefaultTitle, "chinese_file_name", DefaultFileName },
-		{ ui->toolButton_french, "french", false, "french_title", DefaultTitle, "french_file_name", DefaultFileName },
-		{ ui->toolButton_italian, "italian", false, "italian_title", DefaultTitle, "italian_file_name", DefaultFileName },
-		{ ui->toolButton_hangeul, "hangeul", false, "hangeul_title", DefaultTitle, "hangeul_file_name", DefaultFileName },
-		{ ui->toolButton_german, "german", false, "german_title", DefaultTitle, "german_file_name", DefaultFileName },
-		{ ui->toolButton_spanish, "spanish", false, "spanish_title", DefaultTitle, "spanish_file_name", DefaultFileName },
-//		{ ui->toolButton_levelup_chinese, "levelup-chinese", false, "levelup-chinese_title", DefaultTitle, "levelup-chinese_file_name", DefaultFileName },
-//		{ ui->toolButton_levelup_hangeul, "levelup-hangeul", false, "levelup-hangeul_title", DefaultTitle, "levelup-hangeul_file_name", DefaultFileName },
-		{ ui->toolButton_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
-		{ ui->toolButton_russian, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
-//		{ ui->toolButton_vrradio, "vrradio", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
-		{ ui->toolButton_vrradio1, "vrradio1", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
-		{ ui->toolButton_optional1, "optional_1", false, "optional1_title", DefaultTitle, "optional1_file_name", DefaultFileName },
-		{ ui->toolButton_optional2, "optional_2", false, "optional2_title", DefaultTitle, "optional2_file_name", DefaultFileName },
-		{ ui->toolButton_optional3, "optional_3", false, "optional3_title", DefaultTitle, "optional3_file_name", DefaultFileName },
-		{ ui->toolButton_optional4, "optional_4", false, "optional4_title", DefaultTitle, "optional4_file_name", DefaultFileName },
-		{ ui->toolButton_stepup_chinese, "stepup-chinese", false, "stepup-chinese_title", DefaultTitle, "stepup-chinese_file_name", DefaultFileName },
-//		{ ui->toolButton_omotenashi_chinese, "omotenashi-chinese", false, "omotenashi-chinese_title", DefaultTitle, "omotenashi-chinese_file_name", DefaultFileName },
-//		{ ui->toolButton_omotenashi_hangeul, "omotenashi-hangeul", false, "omotenashi-hangeul_title", DefaultTitle, "omotenashi-hangeul_file_name", DefaultFileName },
-		{ ui->toolButton_stepup_hangeul, "stepup-hangeul", false, "stepup-hangeul_title", DefaultTitle, "stepup-hangeul_file_name", DefaultFileName },
-		{ ui->checkBox_13, "charo", false, "charo_title", DefaultTitle, "charo_file_name", DefaultFileName },
-		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
-		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
-		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
-		{ ui->toolButton_skip, "skip", true, "", "", "", "" },
-		{ ui->checkBox_keep_on_error, "keep_on_error", false, "", "", "", "" },
-		{ ui->checkBox_this_week, "this_week", true, "", "", "", "" },
-		{ ui->checkBox_next_week, "next_week", false, "", "", "", "" },
-		{ ui->checkBox_next_week2, "next_week", false, "", "", "", "" },
-		{ ui->checkBox_past_week, "past_week", false, "", "", "", "" },
-		{ ui->toolButton_detailed_message, "detailed_message", false, "", "", "", "" },
-		{ NULL, NULL, false, "", "", "", "" }
+		{ ui->toolButton_basic0, "basic0", false },
+		{ ui->toolButton_basic1, "basic1", false },
+		{ ui->toolButton_basic2, "basic2", false },
+		{ ui->toolButton_basic3, "basic3", false },
+		{ ui->toolButton_timetrial, "timetrial", false },
+		{ ui->toolButton_kaiwa, "kaiwa", false },
+		{ ui->toolButton_business1, "business1", false },
+		{ ui->toolButton_gendai, "gendai", false },
+		{ ui->toolButton_chinese, "chinese", false },
+		{ ui->toolButton_french, "french", false },
+		{ ui->toolButton_italian, "italian", false },
+		{ ui->toolButton_hangeul, "hangeul", false },
+		{ ui->toolButton_german, "german", false },
+		{ ui->toolButton_spanish, "spanish", false },
+		{ ui->toolButton_enjoy, "enjoy", false },
+		{ ui->toolButton_russian, "russian", false },
+		{ ui->toolButton_vrradio, "vrradio", false},
+		{ ui->toolButton_optional1, "optional_1", false },
+		{ ui->toolButton_optional2, "optional_2", false },
+		{ ui->toolButton_optional3, "optional_3", false },
+		{ ui->toolButton_optional4, "optional_4", false },
+//		{ ui->checkBox_13, "charo", false, "charo_title", DefaultTitle, "charo_file_name", DefaultFileName },
+//		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
+//		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
+//		{ ui->checkBox_15, "e-news-reread", false, "e-news-reread_title", DefaultTitle, "e-news-reread_file_name", DefaultFileName },
+		{ ui->toolButton_skip, "skip", true },
+		{ ui->checkBox_keep_on_error, "keep_on_error", false },
+		{ ui->checkBox_this_week, "this_week", true },
+		{ ui->checkBox_next_week, "next_week", false },
+		{ ui->checkBox_next_week2, "next_week", false },
+		{ ui->checkBox_past_week, "past_week", false },
+		{ ui->toolButton_detailed_message, "detailed_message", false },
+		{ NULL, NULL, false }
 	};
 	typedef struct ComboBox {
 		QComboBox* comboBox;
@@ -304,16 +304,14 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ NULL, NULL, false }
 	};
 
-#if !defined( QT4_QT5_MAC )
-	QSettings settings( Utility::applicationBundlePath() + INI_FILE, QSettings::IniFormat );
-#endif
-#ifdef QT4_QT5_MAC
-	QSettings settings( Utility::ConfigLocationPath() + INI_FILE, QSettings::IniFormat );
-#endif
+	QSettings settings( ini_file_path + INI_FILE, QSettings::IniFormat );
+
 	settings.beginGroup( SETTING_GROUP );
 
 	if ( mode == ReadMode ) {	// 設定読み込み
 		QVariant saved;
+
+#if !defined( QT4_QT5_MAC )
 //#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )	// X11では正しく憶えられないので位置をリストアしない(2022/11/01:Linux向けに変更）
 		saved = settings.value( SETTING_GEOMETRY );
 		if ( saved.type() == QVariant::Invalid )
@@ -325,15 +323,30 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 			resize( windowSize );
 		}
 //#endif                                              　//(2022/11/01:Linux向けに変更） 
+#endif
+#ifdef QT4_QT5_MAC
+		saved = settings.value( SETTING_MAINWINDOW_POSITION );
+		if ( saved.type() == QVariant::Invalid )
+			move( 70, 22 );
+		else {
+			QSize windowSize = size();
+			move( saved.toPoint() );
+			resize( windowSize );
+		}
+		saved = settings.value( SETTING_WINDOWSTATE );
+		if ( !(saved.type() == QVariant::Invalid) )
+			restoreState( saved.toByteArray() );
+#endif
 
 		saved = settings.value( SETTING_SAVE_FOLDER );
 #if !defined( QT4_QT5_MAC )
 		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationBundlePath() : saved.toString();
 #endif
 #ifdef QT4_QT5_MAC
-		if ( saved.type() == QVariant::Invalid )
+		if ( saved.type() == QVariant::Invalid ) {
+			outputDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
 			MainWindow::customizeSaveFolder();
-		else
+		} else
 			outputDir = saved.toString();
 #endif
 
@@ -393,9 +406,14 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 			textComboBoxes[i].comboBox->setCurrentIndex( textComboBoxes[i].comboBox->findText( extension ) );
 		}
 	} else {	// 設定書き出し
-//#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )　//(2022/11/01:Linux向けに変更）
+
+#if !defined( QT4_QT5_MAC )
 		settings.setValue( SETTING_GEOMETRY, saveGeometry() );
-//#endif                                              　//(2022/11/01:Linux向けに変更）   
+#endif
+#ifdef QT4_QT5_MAC
+		settings.setValue( SETTING_WINDOWSTATE, saveState());
+		settings.setValue( SETTING_MAINWINDOW_POSITION, pos() );
+#endif
 		if ( outputDirSpecified )
 			settings.setValue( SETTING_SAVE_FOLDER, outputDir );
 		settings.setValue( SETTING_SCRAMBLE, scramble );
@@ -434,14 +452,8 @@ void MainWindow::customizeFileName() {
 }
 
 void MainWindow::customizeSaveFolder() {
-#if !defined( QT4_QT5_MAC )
 	QString dir = QFileDialog::getExistingDirectory( 0, QString::fromUtf8( "書き込み可能な保存フォルダを指定してください" ),
 									   outputDir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
-#endif
-#ifdef QT4_QT5_MAC
-	QString dir = QFileDialog::getExistingDirectory( 0, QString::fromUtf8( "書き込み可能な保存フォルダを指定してください" ),
-									   QStandardPaths::writableLocation(QStandardPaths::HomeLocation), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks );
-#endif
 	if ( dir.length() ) {
 		outputDir = dir + QDir::separator();
 		outputDirSpecified = true;
@@ -567,12 +579,9 @@ void MainWindow::closeEvent2( ) {
 	int res = QMessageBox::question(this, tr("設定削除"), tr("削除しますか？"));
 	if (res == QMessageBox::Yes) {
 	no_write_ini = "no";
-#if !defined( QT4_QT5_MAC )
-	QFile::remove( Utility::applicationBundlePath() + INI_FILE );
-#endif
-#ifdef QT4_QT5_MAC
-	QFile::remove( Utility::ConfigLocationPath() + INI_FILE );
-#endif
+
+	QFile::remove( ini_file_path + INI_FILE );
+
 	if ( downloadThread ) {
 		messagewindow.appendParagraph( QString::fromUtf8( "レコーディングをキャンセル中..." ) );
 		download();

@@ -32,7 +32,7 @@
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>570</y>
+     <y>574</y>
      <width>201</width>
      <height>32</height>
     </rect>
@@ -59,352 +59,27 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>253</y>
-     <width>527</width>
-     <height>312</height>
+     <x>60</x>
+     <y>191</y>
+     <width>441</width>
+     <height>31</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_0">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>小学生の基礎：</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_0">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
+    <item row="0" column="0" alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>基礎英語L1:</string>
+       <string>らじる★らじる（聴き逃し）</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_1">
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="lineEdit">
       <property name="toolTip">
        <string/>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>基礎英語L2:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_2">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>中高生の基礎:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_3">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>タイムトライアル:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_4">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>ラジオ英会話:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="lineEdit_5">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>ラジオビジネス:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLineEdit" name="lineEdit_6">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>エンジョイ:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLineEdit" name="lineEdit_7">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="label_8">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>ライダー:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLineEdit" name="lineEdit_8">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>まいにち中国語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QLineEdit" name="lineEdit_9">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QLabel" name="label_10">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>ステップ中国語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QLineEdit" name="lineEdit_10">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
-     <widget class="QLabel" name="label_11">
-      <property name="text">
-       <string>フランス語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="4">
-     <widget class="QLineEdit" name="lineEdit_11">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="3">
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string>イタリア語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="4">
-     <widget class="QLineEdit" name="lineEdit_12">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="3">
-     <widget class="QLabel" name="label_13">
-      <property name="text">
-       <string>ハングル講座:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="4">
-     <widget class="QLineEdit" name="lineEdit_13">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="3">
-     <widget class="QLabel" name="label_14">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>ステップハングル:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="4">
-     <widget class="QLineEdit" name="lineEdit_14">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="3">
-     <widget class="QLabel" name="label_15">
-      <property name="text">
-       <string>ドイツ語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="4">
-     <widget class="QLineEdit" name="lineEdit_15">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="3">
-     <widget class="QLabel" name="label_16">
-      <property name="text">
-       <string>スペイン語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="4">
-     <widget class="QLineEdit" name="lineEdit_16">
-      <property name="text">
-       <string>%k_%Y_%M_%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="3">
-     <widget class="QLabel" name="label_17">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>ロシア語:</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="4">
-     <widget class="QLineEdit" name="lineEdit_17">
-      <property name="enabled">
-       <bool>true</bool>
       </property>
       <property name="text">
        <string>%k_%Y_%M_%D</string>
@@ -416,13 +91,20 @@
   <widget class="QWidget" name="gridLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>10</y>
-     <width>478</width>
-     <height>210</height>
+     <x>80</x>
+     <y>348</y>
+     <width>386</width>
+     <height>221</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="1">
+     <widget class="QLabel" name="label_30">
+      <property name="text">
+       <string>放送日　「MM月DD日放送分」</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label_18">
       <property name="text">
@@ -430,24 +112,24 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="label_29">
+    <item row="8" column="1">
+     <widget class="QLabel" name="label_39">
       <property name="text">
-       <string>XMLの講座名　「まいにちドイツ語」「まいにち中国語」</string>
+       <string>放送日(1~31)</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_19">
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_25">
       <property name="text">
-       <string>%h</string>
+       <string>%M</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label_30">
+    <item row="2" column="1">
+     <widget class="QLabel" name="label_31">
       <property name="text">
-       <string>XMLの放送日　「MM月DD日放送分」</string>
+       <string>JSONの「file_title」(らじる)、XMLの「file」(ゴガク独自)</string>
       </property>
      </widget>
     </item>
@@ -458,17 +140,17 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="label_31">
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_19">
       <property name="text">
-       <string>XMLのファイル名から拡張子を除いたもの　「10-ek2-4253-399」</string>
+       <string>%h</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_23">
+    <item row="8" column="0">
+     <widget class="QLabel" name="label_28">
       <property name="text">
-       <string>%Y</string>
+       <string>%d</string>
       </property>
      </widget>
     </item>
@@ -479,10 +161,38 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_24">
+    <item row="6" column="1">
+     <widget class="QLabel" name="label_37">
       <property name="text">
-       <string>%y</string>
+       <string>放送月(1~12)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLabel" name="label_38">
+      <property name="text">
+       <string>2桁の放送日(01~31)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_27">
+      <property name="text">
+       <string>%D</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="label_36">
+      <property name="text">
+       <string>2桁の放送月(01~12)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="label_29">
+      <property name="text">
+       <string>講座名　「中学生の基礎英語レベル1」「ラジオ英会話」</string>
       </property>
      </widget>
     </item>
@@ -493,87 +203,24 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_23_1">
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_24">
       <property name="text">
-       <string>%N</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLabel" name="label_34_1">
-      <property name="text">
-       <string>4桁の年度（暦年ではなく年度）　「2022年度」</string>
+       <string>%y</string>
       </property>
      </widget>
     </item>
     <item row="6" column="0">
-     <widget class="QLabel" name="label_24_1">
-      <property name="text">
-       <string>%n</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLabel" name="label_35_1">
-      <property name="text">
-       <string>2桁の年度（暦年ではなく年度）　「22年度」</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_25">
-      <property name="text">
-       <string>%M</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLabel" name="label_36">
-      <property name="text">
-       <string>2桁の放送月(01~12)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0">
      <widget class="QLabel" name="label_26">
       <property name="text">
        <string>%m</string>
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
-     <widget class="QLabel" name="label_37">
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_23">
       <property name="text">
-       <string>放送月(1~12)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QLabel" name="label_27">
-      <property name="text">
-       <string>%D</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1">
-     <widget class="QLabel" name="label_38">
-      <property name="text">
-       <string>2桁の放送日(01~31)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="0">
-     <widget class="QLabel" name="label_28">
-      <property name="text">
-       <string>%d</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QLabel" name="label_39">
-      <property name="text">
-       <string>放送日(1~31)</string>
+       <string>%Y</string>
       </property>
      </widget>
     </item>
@@ -583,7 +230,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>227</y>
+     <y>220</y>
      <width>531</width>
      <height>20</height>
     </rect>
@@ -592,26 +239,194 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>7</y>
+     <width>461</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>らじる★らじる（聴き逃し）　放送後１週間</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>25</y>
+      <width>391</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>講座名_YYYY_MM_DD　　（ファイル名の初期値）</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>65</y>
+      <width>401</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>講座名_YYYY-MM-DD</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_1">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>45</y>
+      <width>421</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>JSONの「file_title」_YYYY_MM_DD</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_3">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>85</y>
+      <width>391</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>MM月DD日放送分　　（講座名なし）</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_9">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>150</y>
+      <width>301</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>任意のカスタマイズ</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_4">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>105</y>
+      <width>411</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>JSONの「file_title」　　（タグタイトルの初期値）</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_5">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>125</y>
+      <width>361</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>講座名_MM月DD日放送分</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>300</y>
+     <width>441</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0" alignment="Qt::AlignHCenter">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>NHKゴガク独自配信講座</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="lineEdit_2">
+      <property name="text">
+       <string>%k_%Y_%M_%D</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>328</y>
+     <width>531</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>234</y>
+     <width>461</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>NHKゴガク独自配信講座　[前週]放送翌週月曜から１週間</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_10">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>361</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>講座名_YYYY_MM_DD　　（初期値）</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_19">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>40</y>
+      <width>241</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>任意のカスタマイズ</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEdit_0</tabstop>
-  <tabstop>lineEdit_1</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>lineEdit_3</tabstop>
-  <tabstop>lineEdit_4</tabstop>
-  <tabstop>lineEdit_5</tabstop>
-  <tabstop>lineEdit_6</tabstop>
-  <tabstop>lineEdit_7</tabstop>
-  <tabstop>lineEdit_8</tabstop>
-  <tabstop>lineEdit_9</tabstop>
-  <tabstop>lineEdit_10</tabstop>
-  <tabstop>lineEdit_11</tabstop>
-  <tabstop>lineEdit_12</tabstop>
-  <tabstop>lineEdit_13</tabstop>
-  <tabstop>lineEdit_14</tabstop>
-  <tabstop>lineEdit_15</tabstop>
-  <tabstop>lineEdit_16</tabstop>
-  <tabstop>lineEdit_17</tabstop>
+  <tabstop>lineEdit</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>

@@ -32,6 +32,7 @@ class ScrambleDialog : public QDialog {
 
 public:
 	explicit ScrambleDialog( QString optional1, QString optional2, QString optional3, QString optional4, QWidget *parent = 0 );
+//	explicit ScrambleDialog( QString optional1, QString optional2, QString optional3, QString optional4, QString optional5, QString optional6, QString optional7, QString optional8, QWidget *parent = 0 );
     ~ScrambleDialog();
 //	explicit ScrambleDialog( QString scramble, QWidget *parent = 0 );
 //    ~ScrambleDialog();
@@ -45,6 +46,13 @@ public:
 	static QString optional2;
 	static QString optional3;
 	static QString optional4;
+
+	static QString opt1[];
+	static QString opt2[];
+	static QString opt3[];
+	static QString opt4[];
+	static QString opt5[];
+	static QString opt6[];
 
 private:
     Ui::ScrambleDialog *ui;
