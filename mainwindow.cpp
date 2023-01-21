@@ -345,13 +345,13 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #endif
 #ifdef QT4_QT5_MAC
 		saved = settings.value( SETTING_MAINWINDOW_POSITION );
-		if ( saved.type() == QVariant::Invalid )
+		if ( saved.type() == QVariant::Invalid ) {
 			move( 70, 22 );
 			QRect rect = geometry();
 			rect.setHeight( rect.height() );
 			rect.moveTop( rect.top() );
 			setGeometry( rect );
-		else {
+		} else {
 			QSize windowSize = size();
 			move( saved.toPoint() );
 			resize( windowSize );
