@@ -149,11 +149,11 @@ MainWindow::MainWindow( QWidget *parent )
 //	setMinimumHeight( maximumHeight() - menuBar()->height() );
 	setMaximumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16 
 	setMinimumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
-	QRect rect = geometry();
+//	QRect rect = geometry();
 //	rect.setHeight( rect.height() - menuBar()->height() );
-	rect.setHeight( rect.height() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
-	rect.moveTop( rect.top() + menuBar()->height() );	// 4.6.3だとこれがないとウィンドウタイトルがメニューバーに隠れる
-	setGeometry( rect );
+//	rect.setHeight( rect.height() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
+//	rect.moveTop( rect.top() + menuBar()->height() );	// 4.6.3だとこれがないとウィンドウタイトルがメニューバーに隠れる
+//	setGeometry( rect );
 #endif
 #ifdef Q_OS_LINUX		// Linuxでは高さが足りなくなるので縦方向に伸ばしておく
 	menuBar()->setNativeMenuBar(false);	// メニューバーが表示されなくなったに対応
@@ -213,6 +213,18 @@ MainWindow::MainWindow( QWidget *parent )
 	if ( real2.exists() ) {
 		real2.open( QFile::ReadOnly );
 		styleSheet = QLatin1String( real2.readAll() );
+	} else {
+		QFile real3( Utility::appConfigLocationPath() + STYLE_SHEET );
+		if ( real3.exists() ) {
+			real3.open( QFile::ReadOnly );
+			styleSheet = QLatin1String( real3.readAll() );
+		} else {
+			QFile real4( Utility::ConfigLocationPath() + STYLE_SHEET );
+			if ( real4.exists() ) {
+				real4.open( QFile::ReadOnly );
+				styleSheet = QLatin1String( real4.readAll() );
+			}
+		}
 	} 
 #endif	
 	qApp->setStyleSheet( styleSheet );
@@ -335,6 +347,10 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		saved = settings.value( SETTING_MAINWINDOW_POSITION );
 		if ( saved.type() == QVariant::Invalid )
 			move( 70, 22 );
+			QRect rect = geometry();
+			rect.setHeight( rect.height() );
+			rect.moveTop( rect.top() );
+			setGeometry( rect );
 		else {
 			QSize windowSize = size();
 			move( saved.toPoint() );
