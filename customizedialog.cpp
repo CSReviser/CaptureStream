@@ -73,7 +73,7 @@ void CustomizeDialog::formats( QString course, QString& titleFormat, QString& fi
         course.remove( QString::fromUtf8( "【中級編】" ) ); course.remove( QString::fromUtf8( "【応用編】" ) );
 	int index = courses.indexOf( course );
 	if ( index >= 0 ) {
-		QString path = Utility::applicationBundlePath();
+		QString path = MainWindow::ini_file_path;
 		QSettings settings( path + INI_FILE, QSettings::IniFormat );
 		settings.beginGroup( SETTING_GROUP );
 		titleFormat = settings.value( titleKeys[index], DefaultTitle ).toString();
@@ -105,7 +105,7 @@ void CustomizeDialog::settings( bool write ) {
 		NULL
 	};
 
-	QString path = Utility::applicationBundlePath();
+	QString path = MainWindow::ini_file_path;
 	QSettings settings( path + INI_FILE, QSettings::IniFormat );
 	settings.beginGroup( SETTING_GROUP );
 
