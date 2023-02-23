@@ -72,7 +72,7 @@
 #define DebugLog(s) if ( ui->toolButton_detailed_message->isChecked() ) {emit information((s));}
 
 //--------------------------------------------------------------------------------
-QString DownloadThread::prefix = "https://www2.nhk.or.jp/gogaku/st/xml/";
+QString DownloadThread::prefix = "https://www.nhk.or.jp/gogaku/st/xml/";
 QString DownloadThread::suffix = "listdataflv.xml";
 QString DownloadThread::json_prefix = "https://www.nhk.or.jp/radioondemand/json/";
 
