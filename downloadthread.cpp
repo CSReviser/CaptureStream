@@ -72,7 +72,7 @@
 #define DebugLog(s) if ( ui->toolButton_detailed_message->isChecked() ) {emit information((s));}
 
 //--------------------------------------------------------------------------------
-QString DownloadThread::prefix = "https://www2.nhk.or.jp/gogaku/st/xml/";
+QString DownloadThread::prefix = "https://www.nhk.or.jp/gogaku/st/xml/";
 QString DownloadThread::suffix = "listdataflv.xml";
 QString DownloadThread::json_prefix = "https://www.nhk.or.jp/radioondemand/json/";
 
@@ -208,6 +208,23 @@ bool DownloadThread::checkExecutable( QString path ) {
 
 bool DownloadThread::isFfmpegAvailable( QString& path ) {
 	path = Utility::applicationBundlePath() + "ffmpeg";
+	
+	#ifdef QT4_QT5_MAC    // MacのみoutputDirフォルダに置かれたffmpegを優先する
+	path = MainWindow::outputDir + "ffmpeg";
+	QFileInfo fileInfo( path );
+	if ( !fileInfo.exists() ) {
+		path = Utility::appConfigLocationPath() + "ffmpeg";
+		QFileInfo fileInfo( path );
+		if ( !fileInfo.exists() ) {
+			path = Utility::ConfigLocationPath() + "ffmpeg";
+			QFileInfo fileInfo( path );
+			if ( !fileInfo.exists() ) {
+				path = Utility::applicationBundlePath() + "ffmpeg";
+			}
+		}
+	} 
+#endif	
+
 #ifdef QT4_QT5_WIN
 	path += ".exe";
 #endif
