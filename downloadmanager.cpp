@@ -20,11 +20,16 @@
 
 #include "downloadmanager.h"
 
+#ifdef QT5
+#include <QRegExp>
+#endif
+#ifdef QT6
+#include <QRegularExpression>
+#endif
 #include <QFileInfo>
 #include <QStringList>
 #include <QDate>
 #include <QThread>
-#include <QRegExp>
 #include <QtDebug>
 #include <QTimer>
 #include <QMutexLocker>
@@ -75,6 +80,7 @@ void DownloadManager::downloadFinished( QNetworkReply *reply ) {
 	QMutexLocker locker( &mutex );
 
 	QUrl url = reply->url();
+#ifdef QT5
 	if (reply->error()) {
 		//emit critical( QString::fromUtf8( "ページ(" ) + url.toEncoded().constData() +
 					   //QString::fromUtf8( ")を取得できませんでした: " ) + qPrintable( reply->errorString() ) );
@@ -115,6 +121,7 @@ void DownloadManager::downloadFinished( QNetworkReply *reply ) {
 				flvList << regexp.cap( 1 );
 		}
 	}
+#endif
 
 	currentDownloads.removeAll(reply);
 	reply->deleteLater();

@@ -33,6 +33,7 @@ namespace Utility {
 	QString flare( QString& error );
 	QString gnash( QString& error );
 	QString wiki();
+	QString getProgram_name( QString url );
 	bool nogui();
 }
 

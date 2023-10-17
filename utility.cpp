@@ -23,8 +23,16 @@
 #include "mainwindow.h"
 #include "qt4qt5.h"
 
-#include <QUrl>
+#ifdef QT5
+#include <QXmlQuery>
+#include <QScriptEngine>
+#include <QDesktopWidget>
 #include <QRegExp>
+#endif
+#ifdef QT6
+#include <QRegularExpression>
+#endif
+#include <QUrl>
 #include <QCoreApplication>
 #include <QDir>
 #include <QTemporaryFile>
@@ -32,35 +40,45 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QByteArray>
-#include <QXmlQuery>
-#include <QScriptEngine>
-#include <QScriptValue>
 #include <QDebug>
 #include <QDateTime>
 #include <QStandardPaths>
+#include <QtNetwork>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
 
 namespace {
 	const QString UPUPUP( "/../../.." );
 	const QString FLARE( "flare" );
-	const QString GNASH( "gnash -r0 -v http://www.nhk.or.jp/gogaku/common/swf/streaming.swf" );
+	const QString GNASH( "gnash" );
+	const QString GNASH_arguments { "-r0 -v http://www.nhk.or.jp/gogaku/common/swf/streaming.swf" };
 	const QUrl STREAMINGSWF( "http://www.nhk.or.jp/gogaku/common/swf/streaming.swf" );
 	const QString TEMPLATE( "streamingXXXXXX.swf" );
 
+#ifdef QT5
 	const QRegExp REGEXP( "function startInit\\(\\) \\{[^}]*\\}\\s*function (\\w*).*startInit\\(\\);" );
 	const QRegExp PREFIX( "load\\('([A-Z0-9]*)' \\+ CONNECT_DIRECTORY" );
 	const QRegExp SUFFIX( "CONNECT_DIRECTORY \\+ '(.*)/' \\+ INIT_URI" );
+#endif
+#ifdef QT6
+	const QRegularExpression REGEXP( "function startInit\\(\\) \\{[^}]*\\}\\s*function (\\w*).*startInit\\(\\);" );
+	const QRegularExpression PREFIX( "load\\('([A-Z0-9]*)' \\+ CONNECT_DIRECTORY" );
+	const QRegularExpression SUFFIX( "CONNECT_DIRECTORY \\+ '(.*)/' \\+ INIT_URI" );
+#endif
 
 	const QString LISTDATAFLV( "http://www.nhk.or.jp/gogaku/common/swf/(\\w+)/listdataflv.xml" );
-    const QString WIKIXML1( "doc('" );
-    const QString WIKIXML2( "')/flv/scramble[@date=\"" );
+        const QString WIKIXML1( "doc('" );
+        const QString WIKIXML2( "')/flv/scramble[@date=\"" );
 	const QString WIKIXML3( "\"]/@code/string()" );
-	const QString APPNAME( "CaptureStream" );
+	const QString APPNAME( "CaptureStream2" );
 }
 
 // Macの場合はアプリケーションバンドル、それ以外はアプリケーションが含まれるディレクトリを返す
 QString Utility::applicationBundlePath() {
 	QString result = QCoreApplication::applicationDirPath();
-//#ifdef QT4_QT5_MAC				//Macのffmpegパス不正対策　2022/04/14
+//#ifdef QT4_QT5_MAC				//Macのffmpegパス不正対策　2022/04/13
 //	result = QDir::cleanPath( result + UPUPUP );
 //#endif
 	result += QDir::separator();
@@ -91,6 +109,59 @@ QString Utility::DownloadLocationPath() {
 	return result;
 }
 
+QString Utility::HomeLocationPath() {
+	QString result = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/" + APPNAME + "/";
+	result += QDir::separator();
+	return result;
+}
+
+QString Utility::getProgram_name( QString url ) {
+	QString attribute;
+	attribute.clear() ;
+    	QEventLoop eventLoop;
+	QNetworkAccessManager mgr;
+ 	QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+	QString pattern( "[0-9]{4}" );
+    	pattern = QRegularExpression::anchoredPattern(pattern);
+ 	QString pattern2( "[A-Z0-9][0-9]{3}_[0-9]{2}" );
+    	if ( QRegularExpression(pattern).match( url ).hasMatch() ) url += "_01";
+    	if ( !(QRegularExpression(pattern2).match( url ).hasMatch()) ) return attribute;
+	const QString jsonUrl = "https://www.nhk.or.jp/radioondemand/json/" + url.left(4) + "/bangumi_" + url + ".json";
+	QUrl url_json( jsonUrl );
+	QNetworkRequest req;
+	req.setUrl(url_json);
+	QNetworkReply *reply = mgr.get(req);
+	eventLoop.exec(); 
+	
+	if (reply->error() == QNetworkReply::NoError) {
+		QString strReply = (QString)reply->readAll();
+		QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+		QJsonObject jsonObject = jsonResponse.object();
+		QJsonObject jsonObj = jsonResponse.object();
+    
+		QJsonArray jsonArray = jsonObject[ "main" ].toArray();
+		QJsonObject objx2 = jsonObject[ "main" ].toObject();
+		attribute = objx2[ "program_name" ].toString().replace( "　", " " );
+		if ( !(objx2[ "corner_name" ].toString().isNull()) ) attribute = objx2[ "corner_name" ].toString().replace( "　", " " );
+		    for (ushort i = 0xFF1A; i < 0xFF5F; ++i) {
+		        attribute = attribute.replace(QChar(i), QChar(i - 0xFEE0));
+		    }
+		    for (ushort i = 0xFF10; i < 0xFF1A; ++i) {
+		        attribute = attribute.replace( QChar(i - 0xFEE0), QChar(i) );
+		    }
+	}
+	attribute = attribute.remove( "【らじる文庫】" ).remove( "より" ).remove( "カルチャーラジオ" ).remove( "【恋する朗読】" ).remove( "【ラジオことはじめ】" ).remove( "【生朗読！】" );
+        attribute.replace( QString::fromUtf8( "初級編" ), QString::fromUtf8( "【初級編】" ) ); attribute.replace( QString::fromUtf8( "入門編" ), QString::fromUtf8( "【入門編】" ) );
+        attribute.replace( QString::fromUtf8( "中級編" ), QString::fromUtf8( "【中級編】" ) ); attribute.replace( QString::fromUtf8( "応用編" ), QString::fromUtf8( "【応用編】" ) );
+	return attribute;
+}
+
+
+bool Utility::nogui() {
+	return QCoreApplication::arguments().contains( "-nogui" );
+}
+
+#ifdef QT5
 // flareの出力を利用してスクランブル文字列を解析する
 QString Utility::flare( QString& error ) {
 	QString result;
@@ -150,11 +221,12 @@ QString Utility::flare( QString& error ) {
 // gnashの出力を利用してスクランブル文字列を解析する
 QString Utility::gnash( QString& error ) {
 	QString result;
+	QStringList arguments = GNASH_arguments.split(" ");
 	QProcess process;
-	process.start( GNASH );
+	process.start( GNASH, arguments );
 	bool started = process.waitForStarted();
     if ( !started ) {
-		process.start( "sdl-" + GNASH );
+		process.start( "sdl-" + GNASH, arguments );
 		started = process.waitForStarted();
 	}
     if ( !started ) {
@@ -212,7 +284,5 @@ QString Utility::wiki() {
     }
 	return result;
 }
+#endif
 
-bool Utility::nogui() {
-	return QCoreApplication::arguments().contains( "-nogui" );
-}

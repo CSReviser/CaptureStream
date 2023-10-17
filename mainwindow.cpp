@@ -26,9 +26,16 @@
 #include "utility.h"
 #include "qt4qt5.h"
 
+#ifdef QT5
+#include <QXmlQuery>
+#include <QDesktopWidget>
+#include <QRegExp>
+#endif
+#ifdef QT6
+#include <QRegularExpression>
+#endif
 #include <QMessageBox>
 #include <QByteArray>
-#include <QXmlQuery>
 #include <QStringList>
 #include <QProcess>
 #include <QCoreApplication>
@@ -37,7 +44,6 @@
 #include <QFileInfo>
 #include <QThread>
 #include <QSettings>
-#include <QDesktopWidget>
 #include <QInputDialog>
 #include <QFileDialog>
 #include <QTextStream>
@@ -52,6 +58,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
+#include <QVariant>
+#include <QFont>
 
 #define SETTING_GROUP "MainWindow"
 #define SETTING_GEOMETRY "geometry"
@@ -98,6 +106,7 @@ namespace {
 		QString result;
 		// 日本語ロケールではQDate::fromStringで曜日なしは動作しないのでQRegExpを使う
 		// __DATE__の形式： "Jul  8 2011"
+#ifdef QT5
 		static QRegExp regexp( "([a-zA-Z]{3})\\s+(\\d{1,2})\\s+(\\d{4})" );
 		static QStringList months = QStringList()
 				<< "Jan" << "Feb" << "Mar" << "Apr" << "May" << "Jun"
@@ -107,8 +116,12 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( " (2023/02/23)" ); 
+			result = QString( "  (2023/10/17)" ); 
 		}
+#endif
+#ifdef QT6
+			result = QString( "  (2023/10/17)" ); 
+#endif
 		return result;
 	}
 }
@@ -346,7 +359,8 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #if !defined( QT4_QT5_MAC )
 //#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )	// X11では正しく憶えられないので位置をリストアしない(2022/11/01:Linux向けに変更）
 		saved = settings.value( SETTING_GEOMETRY );
-		if ( saved.type() == QVariant::Invalid )
+//		if ( saved.type() == QVariant::Invalid )
+		if ( saved.toString() == "" )
 			move( 70, 22 );
 		else {
 			// ウィンドウサイズはバージョン毎に変わる可能性があるのでウィンドウ位置だけリストアする
@@ -358,7 +372,8 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #endif
 #ifdef QT4_QT5_MAC
 		saved = settings.value( SETTING_MAINWINDOW_POSITION );
-		if ( saved.type() == QVariant::Invalid ) {
+//		if ( saved.type() == QVariant::Invalid ) {
+		if ( saved.toString() == "" ){
 			move( 70, 22 );
 			QRect rect = geometry();
 			rect.setHeight( rect.height() );
@@ -370,16 +385,19 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 			resize( windowSize );
 		}
 		saved = settings.value( SETTING_WINDOWSTATE );
-		if ( !(saved.type() == QVariant::Invalid) )
+//		if ( !(saved.type() == QVariant::Invalid) )
+		if ( !(saved.toString() == "" )
 			restoreState( saved.toByteArray() );
 #endif
 
 		saved = settings.value( SETTING_SAVE_FOLDER );
 #if !defined( QT4_QT5_MAC )
-		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationBundlePath() : saved.toString();
+//		outputDir = saved.type() == QVariant::Invalid ? Utility::applicationBundlePath() : saved.toString();
+		outputDir = saved.toString() == "" ? Utility::applicationBundlePath() : saved.toString();
 #endif
 #ifdef QT4_QT5_MAC
-		if ( saved.type() == QVariant::Invalid ) {
+//		if ( saved.type() == QVariant::Invalid ) {
+		if ( saved.toString() == "" ) {
 			outputDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
 			MainWindow::customizeSaveFolder();
 		} else
@@ -387,30 +405,41 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 #endif
 
 		saved = settings.value( SETTING_SCRAMBLE );
-		scramble = saved.type() == QVariant::Invalid ? "" : saved.toString();
+//		scramble = saved.type() == QVariant::Invalid ? "" : saved.toString();
+		scramble = saved.toString() == "" ? "" : saved.toString();
 
 		saved = settings.value( SETTING_SCRAMBLE_URL1 );
-		scrambleUrl1 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL1 : saved.toString();
+//		scrambleUrl1 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL1 : saved.toString();
+		scrambleUrl1 = saved.toString() == "" ? SCRAMBLE_URL1 : saved.toString();
 		saved = settings.value( SETTING_SCRAMBLE_URL2 );
-		scrambleUrl2 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL2 : saved.toString();
-		
+//		scrambleUrl2 = saved.type() == QVariant::Invalid ? SCRAMBLE_URL2 : saved.toString();
+		scrambleUrl2 = saved.toString() == "" ? SCRAMBLE_URL2 : saved.toString();	
+			
 		saved = settings.value( SETTING_OPTIONAL1 );
-		optional1 = saved.type() == QVariant::Invalid ? OPTIONAL1 : saved.toString();
+//		optional1 = saved.type() == QVariant::Invalid ? OPTIONAL1 : saved.toString();
+		optional1 = saved.toString() == "" ? OPTIONAL1 : saved.toString();
 		saved = settings.value( SETTING_OPTIONAL2 );
-		optional2 = saved.type() == QVariant::Invalid ? OPTIONAL2 : saved.toString();
+//		optional2 = saved.type() == QVariant::Invalid ? OPTIONAL2 : saved.toString();
+		optional2 = saved.toString() == "" ? OPTIONAL2 : saved.toString();
 		saved = settings.value( SETTING_OPTIONAL3 );
-		optional3 = saved.type() == QVariant::Invalid ? OPTIONAL3 : saved.toString();
+//		optional3 = saved.type() == QVariant::Invalid ? OPTIONAL3 : saved.toString();
+		optional3 = saved.toString() == "" ? OPTIONAL3 : saved.toString();
 		saved = settings.value( SETTING_OPTIONAL4 );
-		optional4 = saved.type() == QVariant::Invalid ? OPTIONAL4 : saved.toString();
+//		optional4 = saved.type() == QVariant::Invalid ? OPTIONAL4 : saved.toString();
+		optional4 = saved.toString() == "" ? OPTIONAL4 : saved.toString();		
 
 		saved = settings.value( SETTING_OPT_TITLE1 );
-		program_title1 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE1 ) : saved.toString();
+//		program_title1 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE1 ) : saved.toString();
+		program_title1 = saved.toString() == "" ? QString::fromUtf8( Program_TITLE1 ) : saved.toString();
 		saved = settings.value( SETTING_OPT_TITLE2 );
-		program_title2 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE2 ) : saved.toString();
+//		program_title2 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE2 ) : saved.toString();
+		program_title2 = saved.toString() == "" ? QString::fromUtf8( Program_TITLE2 ) : saved.toString();
 		saved = settings.value( SETTING_OPT_TITLE3 );
-		program_title3 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE3 ) : saved.toString();
+//		program_title3 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE3 ) : saved.toString();
+		program_title3 = saved.toString() == "" ? QString::fromUtf8( Program_TITLE3 ) : saved.toString();
 		saved = settings.value( SETTING_OPT_TITLE4 );
-		program_title4 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE4 ) : saved.toString();
+//		program_title4 = saved.type() == QVariant::Invalid ? QString::fromUtf8( Program_TITLE4 ) : saved.toString();
+		program_title4 = saved.toString() == "" ? QString::fromUtf8( Program_TITLE4 ) : saved.toString();
 
 		ui->toolButton_optional1->setText( QString( program_title1 ) );
 		ui->toolButton_optional2->setText( QString( program_title2 ) );

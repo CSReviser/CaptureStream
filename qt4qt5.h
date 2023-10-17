@@ -9,4 +9,12 @@
 #define QT4_QT5_MAC
 #endif
 
+#if (QT_VERSION < 0x060000)
+#define QT5
+#endif
+
+#if (QT_VERSION >= 0x060000)
+#define QT6
+#endif
+
 #endif // QT4QT5_H
