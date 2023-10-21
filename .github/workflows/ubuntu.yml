@@ -30,7 +30,7 @@ jobs:
           modules: 'qtcharts'
       - name: ubuntu install GL library
         run: sudo apt-get install -y libglew-dev libglfw3-dev
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: build ubuntu
