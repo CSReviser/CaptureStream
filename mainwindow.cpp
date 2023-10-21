@@ -116,11 +116,11 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( "  (2023/10/17)" ); 
+			result = QString( "  (2023/10/21)" ); 
 		}
 #endif
 #ifdef QT6
-			result = QString( "  (2023/10/17)" ); 
+			result = QString( "  (2023/10/21)" ); 
 #endif
 		return result;
 	}
