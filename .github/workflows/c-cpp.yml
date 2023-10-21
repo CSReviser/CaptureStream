@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: MacOS Intel C/C++ CI
 
 on:
   workflow_dispatch:
@@ -14,11 +14,12 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        modules: 'qtcharts qtscript qtwebengine'
+        version: 6.5.*
+        modules: 'qtcharts'
         
     - uses: actions/checkout@v3
     - name: qmake
-      run: qmake -makefile
+      run: qmake -makefile CaptureStream2.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64"
     - name: make
       run: make
   
