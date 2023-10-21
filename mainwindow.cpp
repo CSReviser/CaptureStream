@@ -386,7 +386,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		}
 		saved = settings.value( SETTING_WINDOWSTATE );
 //		if ( !(saved.type() == QVariant::Invalid) )
-		if ( !(saved.toString() == "" )
+		if ( !(saved.toString() == "" ) )
 			restoreState( saved.toByteArray() );
 #endif
 
