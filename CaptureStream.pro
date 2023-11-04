@@ -51,6 +51,10 @@ FORMS += mainwindow.ui \
 	messagewindow.ui \
 	scrambledialog.ui
 
+windows {
+	RC_ICONS = icon.ico
+}
+
 linux {
 	QMAKE_LFLAGS += -no-pie
 }
@@ -67,6 +71,7 @@ macx {
 #		QMAKE_MAC_SDK = /Developer/SDKs/MacOSX10.12u.sdk
 		QMAKE_CFLAGS_RELEASE += -mmacosx-version-min=10.12
 		QMAKE_CXXFLAGS_RELEASE += -mmacosx-version-min=10.12
+		ICON = icon.icns
 	}
 
 	release {
