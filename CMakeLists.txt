@@ -22,10 +22,6 @@ set(prefix "${PROJECT_NAME}.app/Contents")
 set(INSTALL_RUNTIME_DIR "${prefix}/MacOS")
 set(INSTALL_CMAKE_DIR "${prefix}/Resources")
 
-#get_target_property(_qmake_executable Qt6::/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/qmake IMPORTED_LOCATION)
-#get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
-#find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
-
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets Xml)
 
 qt_add_executable(CaptureStream WIN32 MACOSX_BUNDLE ${app_icon_macos} ${app_Frameworks_macos}
@@ -113,10 +109,14 @@ if(CMAKE_PREFIX_PATH)
     endforeach()
 endif()
 
-#add_custom_command(TARGET CaptureStream POST_BUILD
-#        COMMAND "${MACDEPLOYQT_EXECUTABLE}"
-#        ARGS "CaptureStream.app"
-#        COMMENT "Execute macdeployqt to create macOS bundle")
+get_target_property(_qmake_executable "Qt6::qmake" IMPORTED_LOCATION)
+get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
+find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
+
+add_custom_command(TARGET CaptureStream POST_BUILD
+        COMMAND "${MACDEPLOYQT_EXECUTABLE}"
+        ARGS "CaptureStream.app"
+        COMMENT "Execute macdeployqt to create macOS bundle")
         
 install(TARGETS CaptureStream
     BUNDLE DESTINATION .
