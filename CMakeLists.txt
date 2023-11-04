@@ -17,7 +17,7 @@ set(MACOSX_BUNDLE_ICON_FILE icon.icns)
 set(app_icon_macos "${CMAKE_SOURCE_DIR}/icon.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
-get_target_property(_qmake_executable "/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/" IMPORTED_LOCATION)
+get_target_property(_qmake_executable "/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/qmake" IMPORTED_LOCATION)
 get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 
