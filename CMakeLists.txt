@@ -17,9 +17,9 @@ set(MACOSX_BUNDLE_ICON_FILE icon.icns)
 set(app_icon_macos "${CMAKE_SOURCE_DIR}/icon.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
-#get_target_property(_qmake_executable "/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/")
-#get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
-#find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
+get_target_property(_qmake_executable "/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/" IMPORTED_LOCATION)
+get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
+find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets Xml)
 
@@ -66,10 +66,10 @@ qt_add_resources(CaptureStream "stylesheet"
         ${stylesheet_resource_files}
 )
 
-#add_custom_command(TARGET CaptureStream POST_BUILD
-#        COMMAND "${MACDEPLOYQT_EXECUTABLE}"
-#        ARGS "CaptureStream.app"
-#        COMMENT "Execute macdeployqt to create macOS bundle")
+add_custom_command(TARGET CaptureStream POST_BUILD
+        COMMAND "${MACDEPLOYQT_EXECUTABLE}"
+        ARGS "CaptureStream.app"
+        COMMENT "Execute macdeployqt to create macOS bundle")
         
 install(TARGETS CaptureStream
     BUNDLE DESTINATION .
