@@ -65,8 +65,7 @@ qt_add_resources(CaptureStream "stylesheet"
     FILES
         ${stylesheet_resource_files}
 )
-add_cust
-om_command(TARGET CaptureStream POST_BUILD
+add_custom_command(TARGET CaptureStream POST_BUILD
         COMMAND "${MACDEPLOYQT_EXECUTABLE}"
         ARGS "CaptureStream.app"
         COMMENT "Execute macdeployqt to create macOS bundle")
