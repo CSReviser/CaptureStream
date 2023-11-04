@@ -36,11 +36,11 @@ target_compile_definitions(CaptureStream PRIVATE
 )
 
 target_link_libraries(CaptureStream PRIVATE
-    Qt::Core
-    Qt::Gui
-    Qt::Network
-    Qt::Widgets
-    Qt::Xml
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Network
+    Qt6::Widgets
+    Qt6::Xml
 )
 
 set_target_properties(CaptureStream PROPERTIES
@@ -70,7 +70,7 @@ find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 
 add_custom_command(TARGET CaptureStream POST_BUILD
         COMMAND "${MACDEPLOYQT_EXECUTABLE}"
-        ARGS "CaptureStream.app"
+        ARGS "CaptureStream.app" "-dmg" "-always-overwrite" "-no-strip"
         COMMENT "Execute macdeployqt to create macOS bundle")
         
 install(TARGETS CaptureStream
