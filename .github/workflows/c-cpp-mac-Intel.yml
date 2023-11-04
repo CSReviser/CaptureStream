@@ -1,4 +1,4 @@
-name: MacOS Univarsal C/C++ CI
+name: MacOS Intel C/C++ CI
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
     - name: Install Qt
@@ -19,15 +19,15 @@ jobs:
         
     - uses: actions/checkout@v3
     - name: qmake
-      run: qmake -makefile CaptureStream.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
+      run: qmake -makefile CaptureStream.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64"
     - name: make
       run: make
       
-    - name: Make CaptureStream2 executable
+    - name: Make CaptureStream executable
       run: chmod -R 755 ./CaptureStream.app
   
     - uses: actions/upload-artifact@v3
       with:
-        name: CaptureStream-Univarsal
+        name: CaptureStream-Intel
         path: ./
 

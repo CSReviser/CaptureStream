@@ -1,4 +1,4 @@
-name: MacOS Univarsal C/C++ CI
+name: MacOS Univarsal cmake C/C++ CI
 
 on:
   workflow_dispatch:
@@ -18,12 +18,12 @@ jobs:
         modules: 'qtcharts'
         
     - uses: actions/checkout@v3
-    - name: qmake
-      run: qmake -makefile CaptureStream.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
+    - name: cmake
+      run: cmake -S ./ -B ./ -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
     - name: make
       run: make
       
-    - name: Make CaptureStream2 executable
+    - name: Make CaptureStream executable
       run: chmod -R 755 ./CaptureStream.app
   
     - uses: actions/upload-artifact@v3
