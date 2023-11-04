@@ -16,14 +16,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(MACOSX_BUNDLE_ICON_FILE icon.icns)
 set(app_icon_macos "${CMAKE_SOURCE_DIR}/icon.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+set_source_files_properties(${app_Frameworks_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Frameworks")
 
-get_target_property(_qmake_executable Qt6::/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/qmake IMPORTED_LOCATION)
-get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
-find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
+#get_target_property(_qmake_executable Qt6::/Users/runner/work/CaptureStream/Qt/6.5.3/macos/bin/qmake IMPORTED_LOCATION)
+#get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
+#find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets Xml)
 
-qt_add_executable(CaptureStream WIN32 MACOSX_BUNDLE ${app_icon_macos}
+qt_add_executable(CaptureStream WIN32 MACOSX_BUNDLE ${app_icon_macos} ${app_Frameworks_macos}
     customizedialog.cpp customizedialog.h customizedialog.ui
     downloadmanager.cpp downloadmanager.h
     downloadthread.cpp downloadthread.h
@@ -66,10 +67,10 @@ qt_add_resources(CaptureStream "stylesheet"
         ${stylesheet_resource_files}
 )
 
-add_custom_command(TARGET CaptureStream POST_BUILD
-        COMMAND "${MACDEPLOYQT_EXECUTABLE}"
-        ARGS "CaptureStream.app"
-        COMMENT "Execute macdeployqt to create macOS bundle")
+#add_custom_command(TARGET CaptureStream POST_BUILD
+#        COMMAND "${MACDEPLOYQT_EXECUTABLE}"
+#        ARGS "CaptureStream.app"
+#        COMMENT "Execute macdeployqt to create macOS bundle")
         
 install(TARGETS CaptureStream
     BUNDLE DESTINATION .
