@@ -51,6 +51,7 @@ target_link_libraries(CaptureStream PRIVATE
 set_target_properties(CaptureStream PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
+    FRAMEWORK ON
 )
 
 # Resources:
