@@ -72,7 +72,7 @@ qt_add_resources(CaptureStream "stylesheet"
         ${stylesheet_resource_files}
 )
 # based on code from CMake's QtDialog/CMakeLists.txt
-macro(install_qt5_plugin _qt_plugin_name _qt_plugins_var _prefix)
+macro(install_qt6_plugin _qt_plugin_name _qt_plugins_var _prefix)
     get_target_property(_qt_plugin_path "${_qt_plugin_name}" LOCATION)
     if(EXISTS "${_qt_plugin_path}")
         get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
@@ -88,7 +88,7 @@ macro(install_qt5_plugin _qt_plugin_name _qt_plugins_var _prefix)
     endif()
 endmacro()
 
-install_qt5_plugin("Qt5::QCocoaIntegrationPlugin" QT_PLUGINS ${prefix})
+install_qt6_plugin("Qt6::QCocoaIntegrationPlugin" QT_PLUGINS ${prefix})
 file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/qt.conf"
     "[Paths]\nPlugins = ${_qt_plugin_dir}\n")
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/qt.conf"
