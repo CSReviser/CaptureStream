@@ -16,15 +16,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(MACOSX_BUNDLE_ICON_FILE icon.icns)
 set(app_icon_macos "${CMAKE_SOURCE_DIR}/icon.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-set_source_files_properties(${app_Frameworks_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Frameworks")
-
-set(prefix "${PROJECT_NAME}.app/Contents")
-set(INSTALL_RUNTIME_DIR "${prefix}/MacOS")
-set(INSTALL_CMAKE_DIR "${prefix}/Resources")
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets Xml)
 
-qt_add_executable(CaptureStream WIN32 MACOSX_BUNDLE ${app_icon_macos} ${app_Frameworks_macos}
+qt_add_executable(CaptureStream WIN32 MACOSX_BUNDLE ${app_icon_macos}
     customizedialog.cpp customizedialog.h customizedialog.ui
     downloadmanager.cpp downloadmanager.h
     downloadthread.cpp downloadthread.h
@@ -67,47 +62,6 @@ qt_add_resources(CaptureStream "stylesheet"
     FILES
         ${stylesheet_resource_files}
 )
-# based on code from CMake's QtDialog/CMakeLists.txt
-macro(install_qt6_plugin _qt_plugin_name _qt_plugins_var _prefix)
-    get_target_property(_qt_plugin_path "${_qt_plugin_name}" LOCATION)
-    if(EXISTS "${_qt_plugin_path}")
-        get_filename_component(_qt_plugin_file "${_qt_plugin_path}" NAME)
-        get_filename_component(_qt_plugin_type "${_qt_plugin_path}" PATH)
-        get_filename_component(_qt_plugin_type "${_qt_plugin_type}" NAME)
-        set(_qt_plugin_dest "${_prefix}/PlugIns/${_qt_plugin_type}")
-        install(FILES "${_qt_plugin_path}"
-            DESTINATION "${_qt_plugin_dest}")
-        set(${_qt_plugins_var}
-            "${${_qt_plugins_var}};\$ENV{DEST_DIR}\${CMAKE_INSTALL_PREFIX}/${_qt_plugin_dest}/${_qt_plugin_file}")
-    else()
-        message(FATAL_ERROR "QT plugin ${_qt_plugin_name} not found")
-    endif()
-endmacro()
-
-install_qt6_plugin("Qt6::QCocoaIntegrationPlugin" QT_PLUGINS ${prefix})
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/qt.conf"
-    "[Paths]\nPlugins = ${_qt_plugin_dir}\n")
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/qt.conf"
-    DESTINATION "${INSTALL_CMAKE_DIR}")
-
-# Destination paths below are relative to ${CMAKE_INSTALL_PREFIX}
-install(TARGETS ${PROJECT_NAME}
-    BUNDLE DESTINATION . COMPONENT Runtime
-    RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR} COMPONENT Runtime
-    )
-
-# Note Mac specific extension .app
-set(APPS "\$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}.app")
-
-# Directories to look for dependencies
-set(DIRS "${CMAKE_BINARY_DIR}")
-
-# Path used for searching by FIND_XXX(), with appropriate suffixes added
-if(CMAKE_PREFIX_PATH)
-    foreach(dir ${CMAKE_PREFIX_PATH})
-        list(APPEND DIRS "${dir}/bin" "${dir}/lib")
-    endforeach()
-endif()
 
 get_target_property(_qmake_executable "Qt6::qmake" IMPORTED_LOCATION)
 get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
