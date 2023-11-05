@@ -71,7 +71,7 @@ find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 add_custom_command(TARGET CaptureStream POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
         "${CMAKE_CURRENT_SOURCE_DIR}/qss_files/stylesheet-mac.qss"
-        "$<TARGET_FILE_DIR:PicPicker>/../MacOS/"
+        "$<TARGET_FILE_DIR:CaptureStream>/../MacOS/"
         COMMENT "Copy stylesheet-mac.qss to MacOS/"
         &&
         COMMAND "${MACDEPLOYQT_EXECUTABLE}"
