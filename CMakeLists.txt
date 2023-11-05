@@ -69,8 +69,13 @@ get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 
 add_custom_command(TARGET CaptureStream POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_CURRENT_SOURCE_DIR}/qss_files/stylesheet-mac.qss"
+        "$<TARGET_FILE_DIR:PicPicker>/../MacOS/"
+        COMMENT "Copy stylesheet-mac.qss to MacOS/"
+        &&
         COMMAND "${MACDEPLOYQT_EXECUTABLE}"
-        ARGS "CaptureStream.app" "-dmg" "-always-overwrite" "-no-strip"
+        ARGS "CaptureStream.app"
         COMMENT "Execute macdeployqt to create macOS bundle")
         
 install(TARGETS CaptureStream
