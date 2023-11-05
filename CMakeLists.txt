@@ -68,9 +68,6 @@ get_target_property(_qmake_executable "Qt6::qmake" IMPORTED_LOCATION)
 get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
 find_program(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_qt_bin_dir}")
 
-file(CHMOD "$<TARGET_FILE_DIR:CaptureStream>"
-    "(FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_WRITE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)")
-
 add_custom_command(TARGET CaptureStream POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
         "${CMAKE_CURRENT_SOURCE_DIR}/qss_files/stylesheet-mac.qss"
@@ -85,6 +82,9 @@ install(TARGETS CaptureStream
     BUNDLE DESTINATION .
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+file(CHMOD "$<TARGET_FILE_DIR:CaptureStream>"
+    "PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_WRITE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE" )
 
 qt_generate_deploy_app_script(
     TARGET CaptureStream
