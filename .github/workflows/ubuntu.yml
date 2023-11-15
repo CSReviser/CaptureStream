@@ -2,15 +2,6 @@ name: Ubuntu
 on:
   workflow_dispatch:
       branches: [ master ]
-      paths:
-      - '*.pro'
-      - 'src/**'
-      - '.github/workflows/ubuntu.yml'
-  pull_request:
-    paths:
-      - '*.pro'
-      - 'src/**'
-      - '.github/workflows/ubuntu.yml' 
 jobs:
   build:
     name: Build
@@ -33,7 +24,7 @@ jobs:
           fetch-depth: 1
       - name: build ubuntu
         run: |
-          qmake -makefile
+          cmake ./ ./
           make
           
       - uses: actions/upload-artifact@v3
