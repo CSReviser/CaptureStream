@@ -35,7 +35,6 @@ jobs:
           arch: ${{ matrix.qt_arch }}
           tools: ${{ matrix.qt_tools }}
           cached: 'false'
-          modules: 'qtcharts qtscript qtwebengine'
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
