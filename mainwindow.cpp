@@ -172,6 +172,7 @@ MainWindow::MainWindow( QWidget *parent )
 	menuBar()->setNativeMenuBar(false);	// メニューバーが表示されなくなったに対応
 	setMaximumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
 	setMinimumHeight( maximumHeight() + X11_WINDOW_VERTICAL_INCREMENT );
+	setWindowIcon(QIcon( ":icon.png" ));
 	QRect rect = geometry();
 	rect.setHeight( rect.height() + X11_WINDOW_VERTICAL_INCREMENT );
 	setGeometry( rect );

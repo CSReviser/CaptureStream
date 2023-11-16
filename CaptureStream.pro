@@ -57,6 +57,8 @@ windows {
 
 linux {
 	QMAKE_LFLAGS += -no-pie
+	LIBS +=-lrt
+	CONFIG += static
 }
 
 macx {
@@ -82,7 +84,8 @@ macx {
 OTHER_FILES += \
 	stylesheet-mac.qss \
 	stylesheet-win.qss \
-	stylesheet-ubu.qss
+	stylesheet-ubu.qss \
+	icon.png
 
 RESOURCES += \
     stylesheet.qrc
