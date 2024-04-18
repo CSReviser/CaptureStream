@@ -40,6 +40,16 @@ public:
 	static QString opt_title2;
 	static QString opt_title3;
 	static QString opt_title4;
+	static QString nendo1;
+	static QString nendo2;
+	static QDate nendo_end_date1;
+	static QDate nendo_end_date2;
+	static QDate nendo_start_date1;
+	static QDate nendo_start_date2;
+	static QDate nendo_start_date;
+	static QDate zenki_end_date;
+	static QDate kouki_start_date;
+	static QDate nendo_end_date;
 	
 protected:
 	void run();
@@ -51,18 +61,22 @@ signals:
 	void messageWithoutBreak( QString );
 
 private:
-	QStringList getAttribute( QString url, QString attribute );
-	QStringList getJsonData( QString url, QString attribute );
+	std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> getAttribute( QString url );
+	std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> getJsonData( QString url );
+	std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> getJsonData1( QString url );
+	std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> getJsonData2( QString url );
+	QString getJsonFile( QString jsonUrl );
 	bool checkExecutable( QString path );
 	bool isFfmpegAvailable( QString& path );
 	bool istestAvailable( QString& path );
 	bool checkOutputDir( QString dirPath );
 	void downloadENews( bool re_read );
-	
-	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString dir, QString this_week );
-	bool captureStream_json( QString kouza, QString hdate, QString file, QString nendo, QString title, QString this_week );
+	QString ffmpeg_process( QStringList arguments );
+		
+	bool captureStream( QString kouza, QString hdate, QString file, QString nendo, QString dir );
+	bool captureStream_json( QString kouza, QString hdate, QString file, QString nendo, QString title, QString dupnmb, QString json_path, bool nogui_flag, QString this_week );
 
-	QString formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, bool checkIllegal );
+	QString formatName( QString format, QString kouza, QString hdate, QString file, QString nendo, QString dupnmb, bool checkIllegal );
 	QStringList getElements( QString url, QString path );
 	void downloadShower();
 
@@ -70,11 +84,13 @@ private:
 	bool isCanceled;
 	bool failed1935;
         bool ff_end;
-
+	static QString Error_mes;
+	
 	static QString paths[];
 	static QString paths2[];
 	static QString paths3[];
 	static QString json_paths[];
+	static QMap<QString, QString> map;
 	static QString prefix;
 	static QString prefix1;
 	static QString prefix2;

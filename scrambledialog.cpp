@@ -23,25 +23,25 @@
 #include "mainwindow.h"
 #include "urldownloader.h"
 
-#define OPTIONAL1 "7512"	// ニュースで学ぶ「現代英語」
-#define OPTIONAL2 "0937"	// アラビア語講座
-#define OPTIONAL3 "7629"	// Learn Japanese from the News
-#define OPTIONAL4 "2769"	// ポルトガル語 ステップアップ
+#define OPTIONAL1 "7512_01"	// ニュースで学ぶ「現代英語」
+#define OPTIONAL2 "0937_01"	// アラビア語講座
+#define OPTIONAL3 "7629_01"	// Learn Japanese from the News
+#define OPTIONAL4 "2769_01"	// ポルトガル語 ステップアップ
 
-#define french1 "0953"
-#define french2 "4412"
-#define german1 "0943"
-#define german2 "4410"
-#define italian1 "0946"
-#define italian2 "4411"
-#define spanish1 "0948"
-#define spanish2 "4413"
-#define russian1 "0956"
-#define russian2 "4414"
-#define chinese1 "0915"
-#define chinese2 "6581"
-#define hangeul1 "0951"
-#define hangeul2 "6810"
+#define french1 "0953_01"
+#define french2 "4412_01"
+#define german1 "0943_01"
+#define german2 "4410_01"
+#define italian1 "0946_01"
+#define italian2 "4411_01"
+#define spanish1 "0948_01"
+#define spanish2 "4413_01"
+#define russian1 "0956_01"
+#define russian2 "4414_01"
+#define chinese1 "0915_01"
+#define chinese2 "6581_01"
+#define hangeul1 "0951_01"
+#define hangeul2 "6810_01"
 
 QString ScrambleDialog::optional1;
 QString ScrambleDialog::optional2;
@@ -74,23 +74,23 @@ QString ScrambleDialog::scramble1() {
 		ui->optional1->setText( optional1 );
 	}
 	if (ui->radioButton_1->isChecked()) {
-		optional1 = "7155";
+		optional1 = "7155_01";
 		ui->optional1->setText( optional1 );
 	}
 	if (ui->radioButton_2->isChecked()) {
-		optional1 = "0164";
+		optional1 = "0164_01";
 		ui->optional1->setText( optional1 );
 	}
 	if (ui->radioButton_3->isChecked()) {
-		optional1 = "6311";
+		optional1 = "6311_01";
 		ui->optional1->setText( optional1 );
 	}
 	if (ui->radioButton_4->isChecked()) {
-		optional1 = "0933";
+		optional1 = "8367_01";
 		ui->optional1->setText( optional1 );
 	}
 	if (ui->radioButton_5->isChecked()) {
-		optional1 = "7155";
+		optional1 = "7155_01";
 		ui->optional1->setText( optional1 );
 	}
 	return ui->optional1->text();
@@ -102,23 +102,23 @@ QString ScrambleDialog::scramble2() {
 		ui->optional2->setText( optional2 );
 	}
 	if (ui->radioButton_1->isChecked()) {
-		optional2 = "0701";
+		optional2 = "0701_01";
 		ui->optional2->setText( optional2 );
 	}
 	if (ui->radioButton_2->isChecked()) {
-		optional2 = "0930";
+		optional2 = "0930_01";
 		ui->optional2->setText( optional2 );
 	}
 	if (ui->radioButton_3->isChecked()) {
-		optional2 = "1929";
+		optional2 = "1929_01";
 		ui->optional2->setText( optional2 );
 	}
 	if (ui->radioButton_4->isChecked()) {
-		optional2 = "0960";
+		optional2 = "0960_01";
 		ui->optional2->setText( optional2 );
 	}
 	if (ui->radioButton_5->isChecked()) {
-		optional2 = "0701";
+		optional2 = "0701_01";
 		ui->optional2->setText( optional2 );
 	}
 	return ui->optional2->text();
@@ -130,23 +130,23 @@ QString ScrambleDialog::scramble3() {
 		ui->optional3->setText( optional3 );
 	}
 	if (ui->radioButton_1->isChecked()) {
-		optional3 = "7629";
+		optional3 = "7629_01";
 		ui->optional3->setText( optional3 );
 	}
 	if (ui->radioButton_2->isChecked()) {
-		optional3 = "0058";
+		optional3 = "0058_01";
 		ui->optional3->setText( optional3 );
 	}
 	if (ui->radioButton_3->isChecked()) {
-		optional3 = "0961";
+		optional3 = "0961_01";
 		ui->optional3->setText( optional3 );
 	}
 	if (ui->radioButton_4->isChecked()) {
-		optional3 = "7412";
+		optional3 = "7412_01";
 		ui->optional3->setText( optional3 );
 	}
 	if (ui->radioButton_5->isChecked()) {
-		optional3 = "7629";
+		optional3 = "7629_01";
 		ui->optional3->setText( optional3 );
 	}
 	return ui->optional3->text();
@@ -158,23 +158,23 @@ QString ScrambleDialog::scramble4() {
 		ui->optional4->setText( optional4 );
 	}
 	if (ui->radioButton_1->isChecked()) {
-		optional4 = "1893";
+		optional4 = "7880_01";
 		ui->optional4->setText( optional4 );
 	}
 	if (ui->radioButton_2->isChecked()) {
-		optional4 = "7413";
+		optional4 = "7413_01";
 		ui->optional4->setText( optional4 );
 	}
 	if (ui->radioButton_3->isChecked()) {
-		optional4 = "3065";
+		optional4 = "3065_01";
 		ui->optional4->setText( optional4 );
 	}
 	if (ui->radioButton_4->isChecked()) {
-		optional4 = "0424";
+		optional4 = "0424_01";
 		ui->optional4->setText( optional4 );
 	}
 	if (ui->radioButton_5->isChecked()) {
-		optional4 = "0164";
+		optional4 = "0164_01";
 		ui->optional4->setText( optional4 );
 	}
 	return ui->optional4->text();
