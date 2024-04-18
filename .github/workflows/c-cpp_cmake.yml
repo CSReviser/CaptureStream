@@ -1,4 +1,4 @@
-name: MacOS Univarsal cmake C/C++ CI
+name: MacOS qt6.5 Univarsal cmake C/C++ CI
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-11
+    runs-on: macos-12
 
     steps:
     - name: Install Qt
@@ -17,7 +17,7 @@ jobs:
         version: 6.5.*
         modules: 'qtcharts'
         
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: cmake
       run: cmake -S ./ -B ./ -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
     - name: make
@@ -26,8 +26,13 @@ jobs:
     - name: Make CaptureStream executable
       run: chmod -R 755 ./CaptureStream.app
   
-    - uses: actions/upload-artifact@v3
+    - name: mkdir
+      run: mkdir ./build
+    - name: cp
+      run: mv ./CaptureStream2.app ./build/
+      
+    - uses: actions/upload-artifact@v4
       with:
-        name: CaptureStream-Univarsal
-        path: ./
+        name: CaptureStream-Univarsal-qt65
+        path: ./build
 
