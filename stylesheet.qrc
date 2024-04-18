@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>stylesheet-mac.qss</file>
-        <file>stylesheet-ubu.qss</file>
-        <file>stylesheet-win.qss</file>
-    </qresource>
-</RCC>
