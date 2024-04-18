@@ -19,7 +19,7 @@ jobs:
           modules: 'qtcharts'
       - name: ubuntu install GL library
         run: sudo apt-get install -y libglew-dev libglfw3-dev
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: build ubuntu
@@ -27,7 +27,7 @@ jobs:
           cmake ./ ./
           make
           
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
            name: CaptureStream
            path: ./
