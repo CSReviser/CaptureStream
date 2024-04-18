@@ -29,7 +29,7 @@ jobs:
     - name: mkdir
       run: mkdir ./build
     - name: cp
-      run: mv ./CaptureStream2.app ./build/
+      run: mv ./CaptureStream.app ./build/
       
     - uses: actions/upload-artifact@v4
       with:
