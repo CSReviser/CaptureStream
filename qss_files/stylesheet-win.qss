@@ -170,7 +170,7 @@ MessageWindow QPushButton {
 	background-color: darkslategray;
 	color: white;
 }
-
+/*
 QPushButton {
 	background-color: steelblue;
 	color: white;
@@ -190,4 +190,4 @@ QPushButton:pressed {
 	border-bottom: 1px solid white;
 	
 }
-
+*/
