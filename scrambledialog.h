@@ -40,11 +40,21 @@ public:
 	QString scramble2();
 	QString scramble3();
 	QString scramble4();
+	QString scramble_set( QString opt, int i );
+	void download();
 
 	static QString optional1;
 	static QString optional2;
 	static QString optional3;
 	static QString optional4;
+
+	static QString opt1[];
+	static QString opt2[];
+	static QString opt3[];
+	static QString opt4[];
+	static QString opt5[];
+	static QString opt6[];
+	static QString opt7[];
 
 private:
     Ui::ScrambleDialog *ui;
