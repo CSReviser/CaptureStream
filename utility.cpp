@@ -292,9 +292,10 @@ QString Utility::getProgram_name( QString url ) {
 	if ( url.contains( "_x1" ) ) { url.replace( "_x1", "_01" ); json_ohyo = 1 ; };
 	if ( url.contains( "_y1" ) ) { url.replace( "_y1", "_01" ); json_ohyo = 2 ; };
 	if (json_ohyo != 0){
-		if ( QDate::currentDate() < zenki_end_date ) 
+//		if ( today < zenki_end_date ) 
+		if ( QDate::currentDate() <  DownloadThread::zenki_end_date )
 			if ( koza_zenki.contains( url_tmp ) ) return koza_zenki.value( url_tmp );
-		if ( QDate::currentDate() < nendo_end_date )
+		if ( DownloadThread::nendo_end_date < QDate::currentDate() && QDate::currentDate() < DownloadThread::nendo_end_date )
 			if ( koza_kouki.contains( url_tmp ) ) return koza_kouki.value( url_tmp );
 		if ( koza_unkown.contains( url_tmp ) ) return koza_unkown.value( url_tmp );
 	}
