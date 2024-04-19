@@ -49,7 +49,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>任意設定：4桁の数字の番組IDを入力してください。</string>
+    <string>任意設定：番組IDを入力してください。</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="optional2">
@@ -151,12 +151,12 @@
      <rect>
       <x>21</x>
       <y>42</y>
-      <width>241</width>
+      <width>271</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>プリセット１</string>
+     <string>プリセット１（欧州語学　入門編/初級編）</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_2">
@@ -164,12 +164,12 @@
      <rect>
       <x>21</x>
       <y>62</y>
-      <width>251</width>
+      <width>271</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>プリセット２</string>
+     <string>プリセット２（欧州語学　中級編/応用編）</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_9">
@@ -190,12 +190,12 @@
      <rect>
       <x>21</x>
       <y>82</y>
-      <width>205</width>
+      <width>321</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>プリセット３</string>
+     <string>プリセット３（ロシア語　初級編/応用編）</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_4">
