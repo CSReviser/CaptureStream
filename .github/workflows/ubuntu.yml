@@ -21,7 +21,9 @@ jobs:
         run: sudo apt-get install -y libglew-dev libglfw3-dev build-essential libgl1-mesa-dev
         
       - name: Install LinuxDeployQt
-        uses: miurahr/install-linuxdeployqt-action@v1.0.1
+        uses: miurahr/install-linuxdeploy-action@v1
+        with:
+          plugins: qt appimage
         
       - uses: actions/checkout@v4
         with:
