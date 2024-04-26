@@ -18,7 +18,7 @@ jobs:
           cached: 'false'
           modules: 'qtcharts'
       - name: ubuntu install GL library
-        run: sudo apt-get install -y libglew-dev libglfw3-dev
+        run: sudo apt-get install -y libglew-dev libglfw3-dev build-essential libgl1-mesa-dev
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
