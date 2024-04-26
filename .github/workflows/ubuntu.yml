@@ -32,6 +32,8 @@ jobs:
         run: |
           cmake ./ ./
           make
+          mkdir lib
+          cp /lib/x86_64-linux-gnu/*.* ./lib/
 
           
       - uses: actions/upload-artifact@v4
