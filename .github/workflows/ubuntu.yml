@@ -19,6 +19,10 @@ jobs:
           modules: 'qtcharts'
       - name: ubuntu install GL library
         run: sudo apt-get install -y libglew-dev libglfw3-dev build-essential libgl1-mesa-dev
+        
+      - name: Install LinuxDeployQt
+        uses: miurahr/install-linuxdeployqt-action@v0
+        
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
@@ -26,6 +30,7 @@ jobs:
         run: |
           cmake ./ ./
           make
+          linuxdeployqt-continuous-x86_64.AppImage CaptureStream
           
       - uses: actions/upload-artifact@v4
         with:
