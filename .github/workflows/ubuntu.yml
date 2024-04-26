@@ -14,7 +14,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          version: 6.2.*
+          version: 6.5.*
           cached: 'false'
           modules: 'qtcharts'
       - name: ubuntu install GL library
@@ -32,7 +32,7 @@ jobs:
         run: |
           cmake ./ ./
           make
-          linuxdeployqt-continuous-x86_64.AppImage CaptureStream
+
           
       - uses: actions/upload-artifact@v4
         with:
