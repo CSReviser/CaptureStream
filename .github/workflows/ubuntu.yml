@@ -33,7 +33,7 @@ jobs:
           cmake ./ ./
           make
           mkdir lib
-          cp /lib/x86_64-linux-gnu/*.* ./lib/
+          cp -r /lib/x86_64-linux-gnu/libQt6Core.so.6 ./lib/
 
           
       - uses: actions/upload-artifact@v4
