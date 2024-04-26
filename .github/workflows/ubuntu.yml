@@ -30,11 +30,11 @@ jobs:
           fetch-depth: 1
       - name: build ubuntu
         run: |
-          cmake ./ ./ -CMAKE_INSTALL_RPATH="./local/lib"
-          make
           mkdir lib
           cp -r ../Qt/6.5.3/gcc_64/lib ./local/
           cp -r ../Qt/6.5.3/gcc_64/plugins ./local/
+          cmake ./ ./ -CMAKE_INSTALL_RPATH="./local/lib"
+          make
           mkdir Build
           cp -r  ./local ./Build/
           cp -r  CaptureStream ./Build/
