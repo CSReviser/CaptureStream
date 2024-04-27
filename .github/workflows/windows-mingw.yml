@@ -25,7 +25,6 @@ jobs:
           target: 'desktop'
           arch: 'win64_mingw'
           tools: 'tools_mingw,qt.tools.win64_mingw810'
-          cached: 'false'
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
