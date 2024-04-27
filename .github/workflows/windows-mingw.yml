@@ -39,13 +39,13 @@ jobs:
         shell: pwsh
         run: |
           Get-Command -Name 'qmake' | Format-List
-          Get-Command -Name 'mingw32-make' | Format-List
+          Get-Command -Name 'mingw64-make' | Format-List
       - name: mingw-build
         id: build
         shell: cmd
         run: |
           qmake
-          mingw32-make
+          mingw64-make
       - uses: actions/checkout@v3
       - name: qmake
         run: qmake -makefile
