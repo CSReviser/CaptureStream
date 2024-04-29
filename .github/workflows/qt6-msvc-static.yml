@@ -31,13 +31,12 @@ jobs:
       - name: Pack artifacts
         # use tar pack artifacts in order to preserve potential symbol-links
         run: |
-          cd ..\..
-          .\qt6\qt6-release\bin\qt-cmake.bat -S ./ -B ./
-          make
+          ..\qt6-release\bin\qt-cmake.bat -S .. -B .
+          cmake --build . --parallel
           
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: CaptureStream
-          path: .\
+          path: .
           
