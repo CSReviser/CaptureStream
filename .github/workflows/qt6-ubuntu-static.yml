@@ -16,10 +16,6 @@ jobs:
           git clone -b ${{ env.QT6_VERSION }} https://code.qt.io/qt/qt5.git qt6
           cd qt6
           perl init-repository --module-subset=qtbase
-      - name: Setup VS Developer Command Prompt
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
       - name: Build Qt6
         run: |
           mkdir qt6-build
