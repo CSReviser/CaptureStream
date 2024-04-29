@@ -1,0 +1,40 @@
+name: qt6-ubuntu-static
+on: workflow_dispatch
+
+jobs:
+  qt6-base-msvc-static:
+    runs-on: ubuntu-latest
+    env:
+      QT6_VERSION: 'v6.5.3'
+    steps:
+      - name: Use Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Clone Qt6 source
+        run: |
+          git clone -b ${{ env.QT6_VERSION }} https://code.qt.io/qt/qt5.git qt6
+          cd qt6
+          perl init-repository --module-subset=qtbase
+      - name: Setup VS Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Build Qt6
+        run: |
+          mkdir qt6-build
+          mkdir qt6-release
+          cd qt6-build
+          ..\qt6\configure -release -static -static-runtime -no-pch -optimize-size -platform win32-msvc -prefix ..\qt6-release -no-feature-accessibility -confirm-license
+          cmake --build . --parallel
+          cmake --install .
+      - name: Pack artifacts
+        # use tar pack artifacts in order to preserve potential symbol-links
+        run: |
+          tar -czvf qt6-base-msvc-mt-release.tar.gz qt6-release
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: qt6-base-msvc-mt-release.tar.gz
+          path: qt6-base-msvc-mt-release.tar.gz
+          
