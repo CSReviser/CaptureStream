@@ -13,7 +13,7 @@ jobs:
           python-version: '3.10'
       - name: Clone Qt6 source
         run: |
-          git clone -b ${{ env.QT6_VERSION }} git://git.qt-users.jp/mirror/qt/qt5.git qt6
+          git clone -b ${{ env.QT6_VERSION }} https://git.qt-users.jp/mirror/qt/qt5.git qt6
           cd qt6
           perl init-repository --module-subset=qtbase
       - name: Setup VS Developer Command Prompt
