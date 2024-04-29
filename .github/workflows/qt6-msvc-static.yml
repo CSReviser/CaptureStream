@@ -3,7 +3,7 @@ on: workflow_dispatch
 
 jobs:
   qt6-base-msvc-static:
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
     env:
       QT6_VERSION: 'v6.5.3'
     steps:
