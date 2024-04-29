@@ -14,7 +14,7 @@ jobs:
       - name: Clone Qt6 source
         run: |
           wget https://download.qt.io/official_releases/qt/6.5/6.5.3/single/qt-everywhere-src-6.5.3.tar.xz
-          tar xzf qt-everywhere-opensource-src-5.7.1.tar.gz -C qt6
+          tar xzf qt-everywhere-src-6.5.3.tar.xz -C qt6
           cd qt6
           perl init-repository --module-subset=qtbase
       - name: Setup VS Developer Command Prompt
