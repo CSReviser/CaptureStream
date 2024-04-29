@@ -25,7 +25,7 @@ jobs:
           mkdir qt6-build
           mkdir qt6-release
           cd qt6-build
-          ..\qt6\configure -release -static -static-runtime -no-pch -optimize-size -platform win32-msvc -prefix ..\qt6-release -no-feature-accessibility -confirm-license
+          ../qt6/configure -release -static -static-runtime -no-pch -optimize-size -platform win32-msvc -prefix ../qt6-release -no-feature-accessibility -confirm-license
           cmake --build . --parallel
           cmake --install .
       - name: Pack artifacts
