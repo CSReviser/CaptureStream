@@ -33,7 +33,7 @@ jobs:
         run: |
           tar -czvf qt6-base-msvc-mt-release.tar.gz qt6-release
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: qt6-base-msvc-mt-release.tar.gz
           path: qt6-base-msvc-mt-release.tar.gz
