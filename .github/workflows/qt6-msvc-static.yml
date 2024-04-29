@@ -5,7 +5,7 @@ jobs:
   qt6-base-msvc-static:
     runs-on: windows-2022
     env:
-      QT6_VERSION: 'v6.5.4'
+      QT6_VERSION: 'v6.5.3'
     steps:
       - name: Use Python 3.10
         uses: actions/setup-python@v5
