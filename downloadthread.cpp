@@ -230,7 +230,6 @@ std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> Down
 	if ( url.contains( "_y1" ) ) { url.replace( "_y1", "_01" ); json_ohyo = 2 ; };
 
  	const QString jsonUrl1 = "https://www.nhk.or.jp/radio-api/app/v1/web/ondemand/series?site_id=" + url.left(4) + "&corner_site_id=" + url.right(2);
-	const QString jsonUrl2 = json_prefix + url.left(4) + "/bangumi_" + url + ".json";
  
 	QString strReply;
 	int flag = 0;
@@ -239,10 +238,6 @@ std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> Down
 	int Timer = TimerMin;
 	int retry = 15;
 	for ( int i = 0 ; i < retry ; i++ ) {
-		strReply = Utility::getJsonFile( jsonUrl2, Timer );
-		if ( strReply != "error" )  {
-			flag = 2; break;
-		}
 		strReply = Utility::getJsonFile( jsonUrl1, Timer );
 		if ( strReply != "error" )  {
 			flag = 1; break;
@@ -254,7 +249,7 @@ std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> Down
 	switch ( flag ) {
 	case 0: kouzaList += ""; emit critical( QString::fromUtf8( "番組ID：" ) + url + QString::fromUtf8( "のデータ取得エラー" ) ); break;
 	case 1: std::tie( fileList, kouzaList, file_titleList, hdateList, yearList ) = Utility::getJsonData1( strReply, json_ohyo ); break;
-	case 2: std::tie( fileList, kouzaList, file_titleList, hdateList, yearList ) = Utility::getJsonData2( strReply, json_ohyo ); break;
+//	case 2: std::tie( fileList, kouzaList, file_titleList, hdateList, yearList ) = Utility::getJsonData2( strReply, json_ohyo ); break;
 	default: kouzaList += ""; emit critical( QString::fromUtf8( "番組ID：" ) + url + QString::fromUtf8( "のデータ取得エラー" ) ); break;
 	}
 
