@@ -10,7 +10,7 @@
 GUI版  [2022/04/07版](https://github.com/CSReviser/CaptureStream/releases/tag/20220407)                              
 Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/wiki/Macintosh%E7%89%88)                          
 
-### 2022年度の対応講座  
+### 2024年度の対応講座  
 小学生の基礎英語  
 中学生の基礎英語レベル1  
 中学生の基礎英語レベル2  
