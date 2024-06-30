@@ -34,11 +34,6 @@ Macintosh版: [macOS版について](https://github.com/CSReviser/CaptureStream/
 [任意講座設定手順はこちらです。](https://github.com/CSReviser/CS-English/wiki/%E4%BB%BB%E6%84%8F%E3%82%89%E3%81%98%E3%82%8B%E7%95%AA%E7%B5%84%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86)     
 
 
-＜非対応講座＞   
-ボキャブライダー       
-世界へ発信！ニュースで英語術      
-アラビア語       
-ポルトガル語       
 
 ### 作者  
 [jakago](https://github.com/jakago) 2014年度版以前  
