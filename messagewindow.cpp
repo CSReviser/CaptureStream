@@ -93,7 +93,9 @@ QString MessageWindow::text() {
 
 // 改行あり
 void MessageWindow::appendParagraph( const QString& text ) {
-	if ( !Utility::nogui() ) {
+	bool nogui_flag = Utility::nogui();
+	if ( !nogui_flag ) {
+//	if ( !Utility::nogui() ) {
 		show();
 		textEdit->appendPlainText( text );
 	}
@@ -101,7 +103,9 @@ void MessageWindow::appendParagraph( const QString& text ) {
 
 // 改行なし
 void MessageWindow::append( const QString& text ) {
-	if ( !Utility::nogui() ) {
+	bool nogui_flag = Utility::nogui();
+	if ( !nogui_flag ) {
+//	if ( !Utility::nogui() ) {
 		show();
 		//textEdit->setPlainText( textEdit->toPlainText().append( text ) );	// これはとても遅い
 		QTextCursor cursor = textEdit->textCursor();

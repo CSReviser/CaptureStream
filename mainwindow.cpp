@@ -268,7 +268,8 @@ MainWindow::~MainWindow() {
 		downloadThread->terminate();
 		delete downloadThread;
 	}
-	if ( !Utility::nogui() && no_write_ini == "yes" )
+	bool nogui_flag = Utility::nogui();
+	if ( !nogui_flag && no_write_ini == "yes" )
 		settings( WriteMode );
 	delete ui;
 }
@@ -656,7 +657,9 @@ void MainWindow::finished() {
 		ui->downloadButton->setEnabled( true );
 	}
 	//ui->label->setText( "" );
-	if ( Utility::nogui() )
+//	if ( Utility::nogui() )
+	bool nogui_flag = Utility::nogui();
+	if ( nogui_flag )
 		QCoreApplication::exit();
 }
 
