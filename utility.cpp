@@ -85,43 +85,93 @@ QDate nendo_end_date = DownloadThread::nendo_end_date;
 
 
 QMap<QString, QString> koza_zenki = { 
-	{ "0953_x1", "まいにちフランス語【初級編】" },	// まいにちフランス語 初級編
-	{ "0953_y1", "まいにちフランス語【応用編】" },	// まいにちフランス語 応用編
-	{ "0943_x1", "まいにちドイツ語【初級編】" },	// まいにちドイツ語 初級編
-	{ "0943_y1", "まいにちドイツ語【応用編】" },	// まいにちドイツ語 応用編
-	{ "0948_x1", "まいにちスペイン語【初級編】" },	// まいにちスペイン語 初級編
-	{ "0948_y1", "まいにちスペイン語【応用編】" },	// まいにちスペイン語 応用編
-	{ "0946_x1", "まいにちイタリア語【初級編】" },	// まいにちイタリア語 初級編
-	{ "0946_y1", "まいにちイタリア語【応用編】" },	// まいにちイタリア語 応用編
-	{ "0956_x1", "まいにちロシア語【初級編】" },	// まいにちロシア語 初級編
-	{ "0956_y1", "まいにちロシア語【応用編】" },	// まいにちロシア語 応用編
+	{ "XQ487ZM61K_x1", "まいにちフランス語【初級編】" },	// まいにちフランス語 初級編
+	{ "XQ487ZM61K_y1", "まいにちフランス語【応用編】" },	// まいにちフランス語 応用編
+	{ "N8PZRZ9WQY_x1", "まいにちドイツ語【初級編】" },	// まいにちドイツ語 初級編
+	{ "N8PZRZ9WQY_y1", "まいにちドイツ語【応用編】" },	// まいにちドイツ語 応用編
+	{ "NRZWXVGQ19_x1", "まいにちスペイン語【初級編】" },	// まいにちスペイン語 初級編
+	{ "NRZWXVGQ19_y1", "まいにちスペイン語【応用編】" },	// まいにちスペイン語 応用編
+	{ "LJWZP7XVMX_x1", "まいにちイタリア語【初級編】" },	// まいにちイタリア語 初級編
+	{ "LJWZP7XVMX_y1", "まいにちイタリア語【応用編】" },	// まいにちイタリア語 応用編
+	{ "YRLK72JZ7Q_x1", "まいにちロシア語【初級編】" },	// まいにちロシア語 初級編
+	{ "YRLK72JZ7Q_y1", "まいにちロシア語【応用編】" },	// まいにちロシア語 応用編
 };	
 
 QMap<QString, QString> koza_kouki = { 
-	{ "0953_x1", "まいにちフランス語【入門編】" },	// まいにちフランス語 入門編
-	{ "0953_y1", "まいにちフランス語【応用編】" },	// まいにちフランス語 応用編
-	{ "0943_x1", "まいにちドイツ語【入門編】" },	// まいにちドイツ語 入門編
-	{ "0943_y1", "まいにちドイツ語【応用編】" },	// まいにちドイツ語 応用編
-	{ "0948_x1", "まいにちスペイン語【入門編】" },	// まいにちスペイン語 入門編
-	{ "0948_y1", "【まいにちスペイン語応用編】" },	// まいにちスペイン語 応用編
-	{ "0946_x1", "まいにちイタリア語【入門編】" },	// まいにちイタリア語 入門編
-	{ "0946_y1", "まいにちイタリア語【応用編】" },	// まいにちイタリア語 応用編
-	{ "0956_x1", "まいにちロシア語【入門編】" },	// まいにちロシア語 入門編
-	{ "0956_y1", "まいにちロシア語【応用編】" },	// まいにちロシア語 応用編
+	{ "XQ487ZM61K_x1", "まいにちフランス語【入門編】" },	// まいにちフランス語 入門編
+	{ "XQ487ZM61K_y1", "まいにちフランス語【応用編】" },	// まいにちフランス語 応用編
+	{ "N8PZRZ9WQY_x1", "まいにちドイツ語【入門編】" },	// まいにちドイツ語 入門編
+	{ "N8PZRZ9WQY_y1", "まいにちドイツ語【応用編】" },	// まいにちドイツ語 応用編
+	{ "NRZWXVGQ19_x1", "まいにちスペイン語【入門編】" },	// まいにちスペイン語 入門編
+	{ "NRZWXVGQ19_y1", "まいにちスペイン語【応用編】" },	// まいにちスペイン語 応用編
+	{ "LJWZP7XVMX_x1", "まいにちイタリア語【入門編】" },	// まいにちイタリア語 入門編
+	{ "LJWZP7XVMX_y1", "まいにちイタリア語【応用編】" },	// まいにちイタリア語 応用編
+	{ "YRLK72JZ7Q_x1", "まいにちロシア語【入門編】" },	// まいにちロシア語 入門編
+	{ "YRLK72JZ7Q_y1", "まいにちロシア語【応用編】" },	// まいにちロシア語 応用編
 };	
 
 QMap<QString, QString> koza_unkown = { 
-	{ "0953_x1", "まいにちフランス語【入門/初級編】" },	// まいにちフランス語 入門編
-	{ "0953_y1", "まいにちフランス語【応用編】" },		// まいにちフランス語 応用編
-	{ "0943_x1", "まいにちドイツ語【入門/初級編】" },	// まいにちドイツ語 入門編
-	{ "0943_y1", "まいにちドイツ語【応用編】" },		// まいにちドイツ語 応用編
-	{ "0948_x1", "まいにちスペイン語【入門/初級編】" },	// まいにちスペイン語 入門編
-	{ "0948_y1", "まいにちスペイン語【中級/応用編】" },	// まいにちスペイン語 応用編
-	{ "0946_x1", "まいにちイタリア語【入門/初級編】" },	// まいにちイタリア語 入門編
-	{ "0946_y1", "まいにちイタリア語【応用編】" },		// まいにちイタリア語 応用編
-	{ "0956_x1", "まいにちロシア語【入門/初級編】" },	// まいにちロシア語 入門編
-	{ "0956_y1", "まいにちロシア語【応用編】" },		// まいにちロシア語 応用編
+	{ "XQ487ZM61K_x1", "まいにちフランス語【入門/初級編】" },	// まいにちフランス語 入門編
+	{ "XQ487ZM61K_y1", "まいにちフランス語【応用編】" },		// まいにちフランス語 応用編
+	{ "N8PZRZ9WQY_x1", "まいにちドイツ語【入門/初級編】" },		// まいにちドイツ語 入門編
+	{ "N8PZRZ9WQY_y1", "まいにちドイツ語【応用編】" },		// まいにちドイツ語 応用編
+	{ "NRZWXVGQ19_x1", "まいにちスペイン語【入門/初級編】" },	// まいにちスペイン語 入門編
+	{ "NRZWXVGQ19_y1", "まいにちスペイン語【中級/応用編】" },	// まいにちスペイン語 応用編
+	{ "LJWZP7XVMX_x1", "まいにちイタリア語【入門/初級編】" },	// まいにちイタリア語 入門編
+	{ "LJWZP7XVMX_y1", "まいにちイタリア語【応用編】" },		// まいにちイタリア語 応用編
+	{ "YRLK72JZ7Q_x1", "まいにちロシア語【入門/初級編】" },		// まいにちロシア語 入門編
+	{ "YRLK72JZ7Q_y1", "まいにちロシア語【応用編】" },		// まいにちロシア語 応用編
 };	
+
+QMap<QString, QString> four_to_ten_map = { 
+	{ "6805_01", "GGQY3M1929_01" },		// 小学生の基礎英語
+	{ "6806_01", "148W8XX226_01" },		// 中学生の基礎英語 レベル1
+	{ "6807_01", "83RW6PK3GG_01" },		// 中学生の基礎英語 レベル2
+	{ "6808_01", "B2J88K328M_01" },		// 中高生の基礎英語 in English
+	{ "2331_01", "8Z6XJ6J415_01" },		// 英会話タイムトライアル
+	{ "0916_01", "PMMJ59J6N2_01" },		// ラジオ英会話
+	{ "6809_01", "368315KKP8_01" },		// ラジオビジネス英語
+	{ "3064_01", "BR8Z3NX7XM_01" },		// エンジョイ・シンプル・イングリッシュ
+	{ "4121_01", "7Y5N5G674R_01" },		// ボキャブライダー
+	{ "7512_01", "77RQWQX1L6_01" },		// ニュースで学ぶ「現代英語」
+	{ "0953_01", "XQ487ZM61K_01" },		// まいにちフランス語 
+	{ "0953_x1", "XQ487ZM61K_x1" },		// まいにちフランス語 
+	{ "0953_y1", "XQ487ZM61K_y1" },		// まいにちフランス語 
+	{ "0943_01", "N8PZRZ9WQY_01" },		// まいにちドイツ語 
+	{ "0943_x1", "N8PZRZ9WQY_x1" },		// まいにちドイツ語 
+	{ "0943_y1", "N8PZRZ9WQY_y1" },		// まいにちドイツ語 
+	{ "0948_01", "NRZWXVGQ19_01" },		// まいにちスペイン語 
+	{ "0948_x1", "NRZWXVGQ19_x1" },		// まいにちスペイン語 
+	{ "0948_y1", "NRZWXVGQ19_y1" },		// まいにちスペイン語 
+	{ "0946_01", "LJWZP7XVMX_01" },		// まいにちイタリア語 
+	{ "0946_x1", "LJWZP7XVMX_x1" },		// まいにちイタリア語 
+	{ "0946_y1", "LJWZP7XVMX_y1" },		// まいにちイタリア語 
+	{ "0956_01", "YRLK72JZ7Q_01" },		// まいにちロシア語
+	{ "0956_x1", "YRLK72JZ7Q_x1" },		// まいにちロシア語
+	{ "0956_y1", "YRLK72JZ7Q_y1" },		// まいにちロシア語
+	{ "0915_01", "983PKQPYN7_01" },		// まいにち中国語
+	{ "6581_01", "MYY93M57V6_01" },		// ステップアップ中国語
+	{ "0951_01", "LR47WW9K14_01" },		// まいにちハングル講座
+	{ "6810_01", "NLJM5V3WXK_01" },		// ステップアップ ハングル講座
+	{ "0937_01", "WKMNWGMN6R_01" },		//アラビア語講座
+	{ "2769_01", "N13V9K157Y_01" },		//ポルトガル語
+	{ "7155_01", "4MY6Q8XP88_01" },		//Living in Japan
+	{ "7880_01", "GLZQ4M519X_01" },		//Asian View
+	{ "0701_01", "6LPPKP6W8Q_01" },		//やさしい日本語
+	{ "7629_01", "D6RM27PGVM_01" },		//Learn Japanese from the News
+	{ "0164_01", "X4X6N1XG8Z_01" },		//青春アドベンチャー
+	{ "0930_01", "D85RZVGX7W_01" },		//新日曜名作座
+	{ "8062_01", "LRK2VXPK5X_01" },		//朗読
+	{ "0058_01", "M65G6QLKMY_01" },		//FMシアター
+	{ "6311_01", "R5XR783QK3_01" },		//おしゃべりな古典教室
+	{ "1929_01", "DK83KZ8848_01" },		//カルチャーラジオ 文学の世界
+	{ "0961_01", "5L3859P515_01" },		//古典講読
+	{ "3065_01", "XKR4W8GY15_01" },		//カルチャーラジオ 科学と人間
+	{ "7792_01", "4K58V66ZGQ_01" },		//梶裕貴のラジオ劇場
+	{ "0960_01", "X78J5NKWM9_01" },		//こころをよむ
+	{ "7412_01", "MVYJ6PRZMX_01" },		//アナウンサー百年百話
+	{ "0424_01", "JWQ88ZVWQK_01" }		//宗教の時間
+};
 
 }
 // Macの場合はアプリケーションバンドル、それ以外はアプリケーションが含まれるディレクトリを返す
@@ -284,6 +334,9 @@ QString Utility::getProgram_name( QString url ) {
 	attribute.clear() ;
 	int json_ohyo = 0 ;
 	QString url_tmp = url;
+	int l = 10 ;				int l_length = url.length();
+	if ( l_length != 13 ) l = l_length -3 ;
+
 	if ( url.contains( "_x1" ) ) { url.replace( "_x1", "_01" ); json_ohyo = 1 ; };
 	if ( url.contains( "_y1" ) ) { url.replace( "_y1", "_01" ); json_ohyo = 2 ; };
 	if (json_ohyo != 0){
@@ -294,14 +347,19 @@ QString Utility::getProgram_name( QString url ) {
 			if ( koza_kouki.contains( url_tmp ) ) return koza_kouki.value( url_tmp );
 		if ( koza_unkown.contains( url_tmp ) ) return koza_unkown.value( url_tmp );
 	}
-	QString pattern( "[0-9]{4}" );
+	QString pattern( "[A-Z0-9][0-9]{3}|[A-Z0-9]{10}" );
     	pattern = QRegularExpression::anchoredPattern(pattern);
- 	QString pattern2( "[A-Z0-9][0-9]{3}_[0-9]{2}" );
+ 	QString pattern2( "[A-Z0-9][0-9]{3}_[xy0-9][0-9]|[A-Z0-9]{10}_[xy0-9][0-9]" );
     	if ( QRegularExpression(pattern).match( url ).hasMatch() ) url += "_01";
     	
-    	if ( !(QRegularExpression(pattern2).match( url ).hasMatch()) ) return attribute;
+//	QString pattern( "[A-Z0-9]{4}_[0-9]{2}" );
+//    	pattern = QRegularExpression::anchoredPattern(pattern);
+// 	QString pattern2( "[A-Z0-9]{10}_[0-9]{2}" );
+//     	if ( url.right(3) != "_01" ) url += "_01";
+    	
+//    	if ( !(QRegularExpression(pattern).match( url ).hasMatch()) && !(QRegularExpression(pattern2).match( url ).hasMatch()) ) return attribute;
 	
- 	const QString jsonUrl1 = "https://www.nhk.or.jp/radio-api/app/v1/web/ondemand/series?site_id=" + url.left(4) + "&corner_site_id=" + url.right(2);
+ 	const QString jsonUrl1 = "https://www.nhk.or.jp/radio-api/app/v1/web/ondemand/series?site_id=" + url.left( l ) + "&corner_site_id=" + url.right(2);
 //	const QString jsonUrl2 = "https://www.nhk.or.jp/radioondemand/json/" + url.left(4) + "/bangumi_" + url + ".json";
 
 	QString strReply;
@@ -500,14 +558,23 @@ std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> Util
 	return { fileList, kouzaList, file_titleList, hdateList, yearList };
 }
 
+
 bool Utility::nogui() {
-	return QCoreApplication::arguments().contains( "-nogui" );
+	bool nogui_flag = QCoreApplication::arguments().contains( "-nogui" );
+	return nogui_flag;
+}
+
+bool Utility::option_check( QString option ) {
+	bool option_flag = ( QCoreApplication::arguments().contains( option ) && QCoreApplication::arguments().contains( "-nogui" ) );
+	return option_flag;
 }
 
 QStringList Utility::optionList() {
 	QStringList attribute;
 	QStringList ProgList = QCoreApplication::arguments();
-	if ( ProgList.count() < 3 ) { attribute += "erorr" ; return attribute; }
+	int ccc = 3;
+	if ( Utility::option_check( "-z" ) || Utility::option_check( "-b" ) ) ccc = 4;
+	if ( ProgList.count() < ccc ) { attribute += "erorr" ; return attribute; }
 	ProgList.removeAt(0);
 	QStringList idList;
 	QStringList titleList;
@@ -515,10 +582,8 @@ QStringList Utility::optionList() {
 
 	if( Utility::nogui() ) {
 		for( int i = 0; i < ProgList.count() ; i++ ){
+			ProgList[i] = Utility::four_to_ten( ProgList[i] );
 			if ( koza_unkown.contains( ProgList[i] ) ) { attribute += ProgList[i]; continue; }
-			QString pattern( "[0-9]{4}" );
-    			pattern = QRegularExpression::anchoredPattern(pattern);
-			if ( QRegularExpression(pattern).match( ProgList[i] ).hasMatch() ) ProgList[i] += "_01";
 			if ( idList.contains( ProgList[i] ) ) attribute += ProgList[i];
 		}
 		if ( attribute.count() < 1 ) attribute += "return" ;
@@ -537,8 +602,19 @@ std::tuple<QString, QString, QString, QString> Utility::nogui_option( QString ti
 	if ( optionList.contains( "-t" ) ) { titleFormat_out = optionList[ optionList.indexOf( "-t" ) + 1 ].remove( "'" ).remove( "\"" );}
 	if ( optionList.contains( "-f" ) ) { fileNameFormat_out = optionList[ optionList.indexOf( "-f" ) + 1 ].remove( "'" ).remove( "\"" );}
 	if ( optionList.contains( "-o" ) ) { outputDir_out = optionList[ optionList.indexOf( "-o" ) + 1 ].remove( "'" ).remove( "\"" ) + QDir::separator();}
-	if ( optionList.contains( "-e" ) ) { extension_out = optionList[ optionList.indexOf( "-e" ) + 1 ].remove( "'" ).remove( "\"" ); }
+	if ( optionList.contains( "-e" ) ) { extension_out = optionList[ optionList.indexOf( "-e" ) + 1 ].remove( "'" ).remove( "\"" ); if (extension_out == "mp3") extension_out += "-64k-S"; }
 
 	return { titleFormat_out, fileNameFormat_out, outputDir_out, extension_out };
+}
+
+QString Utility::four_to_ten( QString url ) {
+    	QString pattern( "[A-Z0-9][0-9]{3}|[A-Z0-9]{10}" );
+    	pattern = QRegularExpression::anchoredPattern(pattern);
+ 	QString pattern2( "[A-Z0-9][0-9]{3}_[xy0-9][0-9]|[A-Z0-9]{10}_[xy0-9][0-9]" );
+    	if ( QRegularExpression(pattern).match( url ).hasMatch() ) url += "_01";
+    	if ( four_to_ten_map.contains( url ) ) return four_to_ten_map.value( url );
+//    	if ( !(QRegularExpression(pattern2).match( url ).hasMatch()) ) return "error";
+
+	return url;
 }
 
