@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
 
 	QApplication a(argc, argv);
 	MainWindow w;
+	QGuiApplication::setWindowIcon(QIcon(":icon.png"));
 	Utility::nogui() ? w.download() : w.show();
 	return a.exec();
 }

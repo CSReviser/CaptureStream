@@ -62,6 +62,7 @@ qt_add_resources(CaptureStream "stylesheet"
         "/"
     FILES
         ${stylesheet_resource_files}
+        icon.png
 )
 
 if(APPLE)

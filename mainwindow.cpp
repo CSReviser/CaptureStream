@@ -83,13 +83,13 @@
 #define SETTING_OPT_TITLE2 "opt_title2"
 #define SETTING_OPT_TITLE3 "opt_title3"
 #define SETTING_OPT_TITLE4 "opt_title4"
-#define OPTIONAL1 "7512_01"	// ニュースで学ぶ「現代英語」
-#define OPTIONAL2 "0937_01"	// アラビア語講座
-#define OPTIONAL3 "7629_01"	// Learn Japanese from the News
-#define OPTIONAL4 "2769_01"	// ポルトガル語講座
+#define OPTIONAL1 "77RQWQX1L6_01"	// ニュースで学ぶ「現代英語」
+#define OPTIONAL2 "WKMNWGMN6R_01"	// アラビア語講座
+#define OPTIONAL3 "GLZQ4M519X_01"	// Asian View
+#define OPTIONAL4 "N13V9K157Y_01"	// ポルトガル語講座
 #define Program_TITLE1 "ニュースで学ぶ「現代英語」"
 #define Program_TITLE2 "アラビア語講座"
-#define Program_TITLE3 "Learn Japanese from the News"
+#define Program_TITLE3 "Asian View"
 #define Program_TITLE4 "ポルトガル語講座"
 
 #ifdef QT4_QT5_WIN
@@ -118,11 +118,11 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( "  (2024/06/05)" ); 
+			result = QString( "  (2024/08/18)" ); 
 		}
 #endif
 #ifdef QT6
-			result = QString( "  (2024/06/05)" ); 
+			result = QString( "  (2024/08/18)" ); 
 #endif
 		return result;
 	}
@@ -146,6 +146,9 @@ QString MainWindow::suffix = "listdataflv.xml";
 QString MainWindow::json_prefix = "https://www.nhk.or.jp/radioondemand/json/";
 QString MainWindow::no_write_ini;
 bool MainWindow::koza_separation_flag = false;
+bool MainWindow::id_flag = false;
+QStringList MainWindow::idList;
+QStringList MainWindow::titleList;
 
 MainWindow::MainWindow( QWidget *parent )
 		: QMainWindow( parent ), ui( new Ui::MainWindowClass ), downloadThread( NULL ) {
@@ -163,8 +166,8 @@ MainWindow::MainWindow( QWidget *parent )
 #ifdef QT4_QT5_MAC		// Macのウィンドウにはメニューが出ないので縦方向に縮める
 //	setMaximumHeight( maximumHeight() - menuBar()->height() );
 //	setMinimumHeight( maximumHeight() - menuBar()->height() );
-	setMaximumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16 
-	setMinimumHeight( maximumHeight() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
+	setMaximumHeight( maximumHeight() + ( menuBar()->height() - 24 ) * 2 );	// レコーディングボタンが表示されない問題対策　2024/06/06
+	setMinimumHeight( maximumHeight() + ( menuBar()->height() - 24 ) * 2 );	// レコーディングボタンが表示されない問題対策　2024/06/06
 //	QRect rect = geometry();
 //	rect.setHeight( rect.height() - menuBar()->height() );
 //	rect.setHeight( rect.height() );		// ダウンロードボタンが表示されない問題対策　2022/04/16
@@ -476,6 +479,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 			QString extension = settings.value( textComboBoxes[i].key, textComboBoxes[i].defaultValue ).toString();
 			textComboBoxes[i].comboBox->setCurrentIndex( textComboBoxes[i].comboBox->findText( extension ) );
 		}
+		std::tie( idList, titleList ) = Utility::getProgram_List();	
 	} else {	// 設定書き出し
 //#if defined( QT4_QT5_MAC ) || defined( QT4_QT5_WIN )　//(2022/11/01:Linux向けに変更）
 		settings.setValue( SETTING_GEOMETRY, saveGeometry() );
@@ -534,17 +538,18 @@ void MainWindow::customizeScramble() {
 	QString optional_temp[] = { optional1, optional2, optional3, optional4, "NULL" };
 	ScrambleDialog dialog( optional1, optional2, optional3, optional4 );
     if (dialog.exec() ) {
-    	QString pattern( "[0-9]{4}" );
+    	QString pattern( "[A-Z0-9]{4} || [A-Z0-9]{10}" );
     	pattern = QRegularExpression::anchoredPattern(pattern);
 	for ( int i = 0; optional_temp[i] != "NULL"; i++ ) 
 	    	if ( QRegularExpression(pattern).match( optional_temp[i] ).hasMatch() ) optional_temp[i] += "_01";
 
 	QString optional[] = { dialog.scramble1(), dialog.scramble2(), dialog.scramble3(), dialog.scramble4(), "NULL" };	
 	QString title[8];
-	QStringList idList;
-	QStringList titleList;
-	std::tie( idList, titleList ) = Utility::getProgram_List();
+//	QStringList idList;
+//	QStringList titleList;
+//	std::tie( idList, titleList ) = Utility::getProgram_List();
 	for ( int i = 0; optional[i] != "NULL"; i++ ) {
+		optional[i] = Utility::four_to_ten( optional[i] );
 		if ( idList.contains( optional[i] ) ) title[i] = titleList[idList.indexOf( optional[i] )]; 
 //		for ( int k = 0; k < idList.count() ; k++ ) { if ( optional[i] == idList[k] ) {title[i] = titleList[k]; break;} }
 		if ( title[i]  == "" ) { title[i] = Utility::getProgram_name( optional[i] ); }

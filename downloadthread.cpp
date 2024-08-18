@@ -224,12 +224,14 @@ std::tuple<QStringList, QStringList, QStringList, QStringList, QStringList> Down
 	QStringList file_titleList;		file_titleList.clear();
 	QStringList hdateList;			hdateList.clear();
 	QStringList yearList;			yearList.clear();
+	int l = 10 ;				int l_length = url.length();
+	if ( l_length != 13 ) l = l_length -3 ;
 
 	int json_ohyo = 0 ;
 	if ( url.contains( "_x1" ) ) { url.replace( "_x1", "_01" ); json_ohyo = 1 ; };
 	if ( url.contains( "_y1" ) ) { url.replace( "_y1", "_01" ); json_ohyo = 2 ; };
 
- 	const QString jsonUrl1 = "https://www.nhk.or.jp/radio-api/app/v1/web/ondemand/series?site_id=" + url.left(4) + "&corner_site_id=" + url.right(2);
+ 	const QString jsonUrl1 = "https://www.nhk.or.jp/radio-api/app/v1/web/ondemand/series?site_id=" + url.left( l ) + "&corner_site_id=" + url.right(2);
  
 	QString strReply;
 	int flag = 0;
@@ -783,11 +785,13 @@ bool DownloadThread::captureStream_json( QString kouza, QString hdate, QString f
 	CustomizeDialog::formats( "json", titleFormat, fileNameFormat );
 	QString outputDir = MainWindow::outputDir;
 	QString extension = ui->comboBox_extension->currentText();
-	if (MainWindow::koza_separation_flag) fileNameFormat.remove( "%s" );	
+	QString Xml_koza = "";
+	Xml_koza = map.value( json_path );
+	bool ouyou_koza_separation_flag = Xml_koza.contains( "kouza3", Qt::CaseInsensitive) && (fileNameFormat.contains( "%s", Qt::CaseInsensitive) || fileNameFormat.contains( "%x", Qt::CaseInsensitive) || MainWindow::koza_separation_flag ) ;	if (MainWindow::koza_separation_flag) fileNameFormat.remove( "%s" );	
 	if ( nogui_flag ) std::tie( titleFormat, fileNameFormat, outputDir, extension ) = Utility::nogui_option( titleFormat, fileNameFormat, outputDir, extension );
 
 //	QString id3tagTitle = title;
-	if ( json_path.contains( "_01", Qt::CaseInsensitive ) && (fileNameFormat.contains( "%s", Qt::CaseInsensitive) || fileNameFormat.contains( "%x", Qt::CaseInsensitive) || MainWindow::koza_separation_flag ) ) {
+	if ( ouyou_koza_separation_flag ) {
 //	if ( fileNameFormat.contains( "%s", Qt::CaseInsensitive) || fileNameFormat.contains( "%x", Qt::CaseInsensitive) ) {
 		if ( title.contains( "入門", Qt::CaseInsensitive) ) kouza = kouza + " 入門編";
 		if ( title.contains( "初級", Qt::CaseInsensitive) ) kouza = kouza + " 初級編";
@@ -1027,17 +1031,44 @@ QString DownloadThread::paths[] = {
 };
 
 QString DownloadThread::json_paths[] = {
-	"6805_01", "6806_01", "6807_01", "6808_01",
-	"2331_01", "0916_01", "6809_01",
-	"3064_01",
-	"0915_01", "6581_01", "0953_x1", "0000",
-	"0946_x1", "0000", "0951_01", "6810_01",
-	"0943_x1", "0000", "0948_x1", "0000", "0956_x1", "0000", 
-	"4121_01",
-	"7512_01", "0937_01", "7629_01", "2769_01"
+	"GGQY3M1929_01", "148W8XX226_01", "83RW6PK3GG_01", "B2J88K328M_01",
+	"8Z6XJ6J415_01", "PMMJ59J6N2_01", "368315KKP8_01",
+	"BR8Z3NX7XM_01",
+	"983PKQPYN7_01", "MYY93M57V6_01", "XQ487ZM61K_x1", "0000",
+	"LJWZP7XVMX_x1", "0000", "LR47WW9K14_01", "NLJM5V3WXK_01",
+	"N8PZRZ9WQY_x1", "0000", "NRZWXVGQ19_x1", "0000", "YRLK72JZ7Q_x1", "0000", 
+	"7Y5N5G674R_01",
+	"77RQWQX1L6_01", "WKMNWGMN6R_01", "D6RM27PGVM_01", "N13V9K157Y_01"
 };
 
 QMap<QString, QString> DownloadThread::map = { 
+	{ "GGQY3M1929_01", "english/basic0" },		// 小学生の基礎英語
+	{ "148W8XX226_01", "english/basic1" },		// 中学生の基礎英語 レベル1
+	{ "83RW6PK3GG_01", "english/basic2" },		// 中学生の基礎英語 レベル2
+	{ "B2J88K328M_01", "english/basic3" },		// 中高生の基礎英語 in English
+	{ "8Z6XJ6J415_01", "english/timetrial" },	// 英会話タイムトライアル
+	{ "PMMJ59J6N2_01", "english/kaiwa" },		// ラジオ英会話
+	{ "368315KKP8_01", "english/business1" },	// ラジオビジネス英語
+	{ "BR8Z3NX7XM_01", "english/enjoy" },		// エンジョイ・シンプル・イングリッシュ
+	{ "XQ487ZM61K_x1", "french/kouza" },		// まいにちフランス語 入門編
+	{ "XQ487ZM61K_y1", "french/kouza2" },		// まいにちフランス語 応用編
+	{ "N8PZRZ9WQY_x1", "german/kouza" },		// まいにちドイツ語 入門編
+	{ "N8PZRZ9WQY_y1", "german/kouza2" },		// まいにちドイツ語 応用編
+	{ "NRZWXVGQ19_x1", "spanish/kouza" },		// まいにちスペイン語 入門編
+	{ "NRZWXVGQ19_y1", "spanish/kouza2" },		// まいにちスペイン語 応用編
+	{ "LJWZP7XVMX_x1", "italian/kouza" },		// まいにちイタリア語 入門編
+	{ "LJWZP7XVMX_y1", "italian/kouza2" },		// まいにちイタリア語 応用編
+	{ "YRLK72JZ7Q_x1", "russian/kouza" },		// まいにちロシア語 入門編
+	{ "YRLK72JZ7Q_y1", "russian/kouza2" },		// まいにちロシア語 応用編
+	{ "983PKQPYN7_01", "chinese/kouza" },		// まいにち中国語
+	{ "MYY93M57V6_01", "chinese/stepup" },		// ステップアップ中国語
+	{ "LR47WW9K14_01", "hangeul/kouza" },		// まいにちハングル講座
+	{ "NLJM5V3WXK_01", "hangeul/stepup" },		// ステップアップ ハングル講座
+	{ "XQ487ZM61K_01", "french/kouza3" },		// まいにちフランス語 入門編/初級編/応用編
+	{ "N8PZRZ9WQY_01", "german/kouza3" },		// まいにちドイツ語 入門編/初級編/応用編
+	{ "NRZWXVGQ19_01", "spanish/kouza3" },		// まいにちスペイン語 入門編/初級編/中級編/応用編
+	{ "LJWZP7XVMX_01", "italian/kouza3" },		// まいにちイタリア語 入門編/初級編/応用編
+	{ "YRLK72JZ7Q_01", "russian/kouza3" },		// まいにちロシア語 入門編/初級編/応用編
 	{ "6805_01", "english/basic0" },	// 小学生の基礎英語
 	{ "6806_01", "english/basic1" },	// 中学生の基礎英語 レベル1
 	{ "6807_01", "english/basic2" },	// 中学生の基礎英語 レベル2

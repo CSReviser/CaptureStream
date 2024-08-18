@@ -73,7 +73,10 @@ public:
 	static QString program_title4;
 	static QString no_write_ini;
 	static bool koza_separation_flag;
-	
+	static bool id_flag;
+	static QStringList idList;
+	static QStringList titleList;
+		
 protected:
 	virtual void closeEvent( QCloseEvent *event );
 
