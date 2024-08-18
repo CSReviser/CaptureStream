@@ -27,7 +27,7 @@ jobs:
       run: |
         wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-5.1.2.7z
         7z e FFmpeg.7z ffmpeg -o./CaptureStream.app/Contents/MacOS/
-        chmod -R 755 ./CaptureStream2app
+        chmod -R 755 ./CaptureStream.app
 
     - name: mkdir
       run: mkdir -p ./build/MacCaptureStream
