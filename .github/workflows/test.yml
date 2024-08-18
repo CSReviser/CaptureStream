@@ -1,0 +1,47 @@
+name: 1. MacOS 14 qt6.5LTS Univarsal cmake C/C++ CI
+
+on:
+  workflow_dispatch:
+      branches: [ master ]
+      
+
+jobs:
+  build:
+
+    runs-on: macos-14
+
+    steps:
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: 6.5.*
+        modules: 'qtcharts'
+
+    - name: Setup FFmpeg
+      uses: AnimMouse/setup-ffmpeg@v1
+      with:
+        version: 5.1.2
+        
+    - uses: actions/checkout@v4
+    - name: cmake
+      run: cmake -S ./ -B ./ -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+    - name: make
+      run: make
+
+    - name: Make CaptureStream executable
+      run: |
+        wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-5.1.2.7z
+        7z e FFmpeg.7z ffmpeg -o./CaptureStream.app/Contents/MacOS/
+        chmod -R 755 ./CaptureStream.app
+ 
+    - name: mkdir
+      run: mkdir -p ./build/MacCaptureStream
+
+    - name: Tar files
+      run: tar cvf CaptureStream.tar ./CaptureStream.app
+      
+    - uses: actions/upload-artifact@v4
+      with:
+        name: CaptureStream-macos14-Univarsal-qt65
+        path: CaptureStream.tar
+
