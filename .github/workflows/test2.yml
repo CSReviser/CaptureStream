@@ -1,0 +1,44 @@
+name: MacOS 14 qt5.15 Intel qmake C/C++ CI
+
+on:
+  workflow_dispatch:
+      branches: [ master ]
+      
+
+jobs:
+  build:
+
+    runs-on: macos-14
+
+    steps:
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: 5.15.*
+        modules: 'qtcharts qtscript qtwebengine'
+        
+    - uses: actions/checkout@v4
+    - name: qmake
+      run: qmake -makefile CaptureStream.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64"
+    - name: make
+      run: make
+      
+    - name: Make CaptureStream2 executable
+      run: |
+        wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-5.1.2.7z
+        7z e FFmpeg.7z ffmpeg -o./CaptureStream.app/Contents/MacOS/
+        chmod -R 755 ./CaptureStream2app
+
+    - name: mkdir
+      run: mkdir -p ./build/MacCaptureStream
+    - name: cp icon
+      run: cp ./icon.icns ./CaptureStream.app/Contents/Resources/
+    - name: cp qss
+      run: cp ./qss_files/stylesheet-mac.qss ./CaptureStream.app/Contents/MacOS/
+    - name: mv
+      run: mv ./CaptureStream.app ./build/MacCaptureStream/
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: CaptureStream-qt5-Intel
+        path: ./build
