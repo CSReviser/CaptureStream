@@ -98,7 +98,7 @@ jobs:
       - name: Configure with CMake
         run: >
           /opt/mxe/usr/x86_64-w64-mingw32.static/qt6/bin/qt-cmake
-          -S CaptureStream2
+          -S ./
           -B build
           -DCMAKE_BUILD_TYPE=Release
           -DCMAKE_PREFIX_PATH="/opt/mxe/usr/x86_64-w64-mingw32.static/qt6/bin"
@@ -399,7 +399,7 @@ jobs:
           zip -r "CaptureStream2-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip" LinCaptureStream2
       
       - name: Upload zip to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.2.2
         with:
           files: CaptureStream2/build/CaptureStream2-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip
           tag_name: ${{ needs.mac_build.outputs.tag }}
@@ -467,7 +467,7 @@ jobs:
 
 
       - name: Upload DMG to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.2.2
         with:
           files: CaptureStream2/build/CaptureStream2-MacOS-qt5-${{ github.event.inputs.yyyymmdd }}.dmg
           tag_name: ${{ needs.mac_build.outputs.tag }}
@@ -534,7 +534,7 @@ jobs:
                       "CaptureStream2-MacOS-intel-${{ github.event.inputs.yyyymmdd }}.dmg"
 
       - name: Upload DMG to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.2.2
         with:
           files: build/CaptureStream2-MacOS-intel-${{ github.event.inputs.yyyymmdd }}.dmg
           tag_name: ${{ needs.mac_build.outputs.tag }}
