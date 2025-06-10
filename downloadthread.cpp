@@ -586,9 +586,9 @@ bool DownloadThread::captureStream( QString kouza, QString hdate, QString file, 
 //			if ( day2 > 7 || day2 < 0 ) return false;
 //		}
 //		if ( !ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
-		if ( ui->toolButton_vrradio1->isChecked() ) {
-			if ( day2 > 0 || day2 < -7 ) return false;
-		}
+//		if ( ui->toolButton_vrradio1->isChecked() ) {
+//			if ( day2 > 0 || day2 < -7 ) return false;
+//		}
 //		if ( ui->toolButton_vrradio->isChecked() && ui->toolButton_vrradio1->isChecked() ) {
 //			if ( !QString::compare( kon_nendo , nendo ) == 0 ) return false;
 //		}
@@ -1020,24 +1020,24 @@ QString DownloadThread::ffmpeg_process( QStringList arguments ) {
 }
 
 QString DownloadThread::paths[] = {
-	"english/basic0", "english/basic1", "english/basic2", "english/basic3",
+	"english/basic0", "english/basic1", "english/basic2", // "english/basic3",
 	"english/timetrial", "english/kaiwa", "english/business1",
 	"english/enjoy", 
-	"chinese/kouza", "chinese/stepup", "french/kouza", "french/kouza2",
-	"italian/kouza", "italian/kouza2", "hangeul/kouza", "hangeul/stepup",
+	"chinese/kouza", "french/kouza", "french/kouza2",
+	"italian/kouza", "italian/kouza2", "hangeul/kouza",// "hangeul/stepup",
 	"german/kouza", "german/kouza2", "spanish/kouza", "spanish/kouza2", "russian/kouza", "russian/kouza2", 
-	"english/vr-radio",
+//	"english/vr-radio",
 	"null_optional1", "null_optional2", "null_optional3", "null_optional4"
 };
 
 QString DownloadThread::json_paths[] = {
-	"GGQY3M1929_01", "148W8XX226_01", "83RW6PK3GG_01", "B2J88K328M_01",
+	"GGQY3M1929_01", "148W8XX226_01", "83RW6PK3GG_01",// "B2J88K328M_01",
 	"8Z6XJ6J415_01", "PMMJ59J6N2_01", "368315KKP8_01",
 	"BR8Z3NX7XM_01",
-	"983PKQPYN7_01", "MYY93M57V6_01", "XQ487ZM61K_x1", "0000",
-	"LJWZP7XVMX_x1", "0000", "LR47WW9K14_01", "NLJM5V3WXK_01",
-	"N8PZRZ9WQY_x1", "0000", "NRZWXVGQ19_x1", "0000", "YRLK72JZ7Q_x1", "0000", 
-	"7Y5N5G674R_01",
+	"983PKQPYN7_01",  "XQ487ZM61K_x1", "XQ487ZM61K_y1",
+	"LJWZP7XVMX_x1", "LJWZP7XVMX_y1", "LR47WW9K14_01",// "NLJM5V3WXK_01",
+	"N8PZRZ9WQY_x1", "N8PZRZ9WQY_y1", "NRZWXVGQ19_x1", "NRZWXVGQ19_y1", "YRLK72JZ7Q_x1", "YRLK72JZ7Q_y1", 
+//	"7Y5N5G674R_01",
 	"77RQWQX1L6_01", "WKMNWGMN6R_01", "D6RM27PGVM_01", "N13V9K157Y_01"
 };
 
@@ -1050,6 +1050,7 @@ QMap<QString, QString> DownloadThread::map = {
 	{ "PMMJ59J6N2_01", "english/kaiwa" },		// ラジオ英会話
 	{ "368315KKP8_01", "english/business1" },	// ラジオビジネス英語
 	{ "BR8Z3NX7XM_01", "english/enjoy" },		// エンジョイ・シンプル・イングリッシュ
+	{ "77RQWQX1L6_01", "english/gendaieigo" },	// ニュースで学ぶ「現代英語」
 	{ "XQ487ZM61K_x1", "french/kouza" },		// まいにちフランス語 入門編
 	{ "XQ487ZM61K_y1", "french/kouza2" },		// まいにちフランス語 応用編
 	{ "N8PZRZ9WQY_x1", "german/kouza" },		// まいにちドイツ語 入門編
@@ -1100,14 +1101,14 @@ QMap<QString, QString> DownloadThread::map = {
 
 void DownloadThread::run() {
 	QAbstractButton* checkbox[] = {
-		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, ui->toolButton_basic3,
+		ui->toolButton_basic0, ui->toolButton_basic1, ui->toolButton_basic2, // ui->toolButton_basic3,
 		ui->toolButton_timetrial, ui->toolButton_kaiwa, ui->toolButton_business1,
 		ui->toolButton_enjoy,
-		ui->toolButton_chinese, ui->toolButton_stepup_chinese, ui->toolButton_french, ui->toolButton_french,
-		ui->toolButton_italian, ui->toolButton_italian, ui->toolButton_hangeul, ui->toolButton_stepup_hangeul,
+		ui->toolButton_chinese, ui->toolButton_french, ui->toolButton_french,
+		ui->toolButton_italian, ui->toolButton_italian, ui->toolButton_hangeul, // ui->toolButton_stepup_hangeul,
 		ui->toolButton_german, ui->toolButton_german, ui->toolButton_spanish,  ui->toolButton_spanish, 
 		ui->toolButton_russian, ui->toolButton_russian, 
-		ui->toolButton_vrradio1,
+//		ui->toolButton_vrradio1,
 		ui->toolButton_optional1, ui->toolButton_optional2, 
 		ui->toolButton_optional3, ui->toolButton_optional4, 
 		NULL

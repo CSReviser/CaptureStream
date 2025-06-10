@@ -118,11 +118,11 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( "  (2024/08/18)" ); 
+			result = QString( "  (2025/06/10)" ); 
 		}
 #endif
 #ifdef QT6
-			result = QString( "  (2024/08/18)" ); 
+			result = QString( "  (2025/06/10)" ); 
 #endif
 		return result;
 	}
@@ -300,7 +300,7 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->toolButton_basic0, "basic0", false, "basic0_title", DefaultTitle, "basic0_file_name", DefaultFileName },
 		{ ui->toolButton_basic1, "basic1", false, "basic1_title", DefaultTitle, "basic1_file_name", DefaultFileName },
 		{ ui->toolButton_basic2, "basic2", false, "basic2_title", DefaultTitle, "basic2_file_name", DefaultFileName },
-		{ ui->toolButton_basic3, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
+//		{ ui->toolButton_basic3, "basic3", false, "basic3_title", DefaultTitle, "basic3_file_name", DefaultFileName },
 		{ ui->toolButton_timetrial, "timetrial", false, "timetrial_title", DefaultTitle, "timetrial_file_name", DefaultFileName },
 		{ ui->toolButton_kaiwa, "kaiwa", false, "kaiwa_title", DefaultTitle, "kaiwa_file_name", DefaultFileName },
 		{ ui->toolButton_business1, "business1", false, "business1_title", DefaultTitle, "business1_file_name", DefaultFileName },
@@ -318,15 +318,15 @@ void MainWindow::settings( enum ReadWriteMode mode ) {
 		{ ui->toolButton_enjoy, "enjoy", false, "enjoy_title", DefaultTitle, "enjoy_file_name", DefaultFileName },
 		{ ui->toolButton_russian, "russian", false, "russian_title", DefaultTitle, "russian_file_name", DefaultFileName },
 //		{ ui->toolButton_vrradio, "vrradio", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
-		{ ui->toolButton_vrradio1, "vrradio1", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
+//		{ ui->toolButton_vrradio1, "vrradio1", false, "vrradio_title", DefaultTitle, "vrradio_file_name", DefaultFileName },
 		{ ui->toolButton_optional1, "optional_1", false, "optional1_title", DefaultTitle, "optional1_file_name", DefaultFileName },
 		{ ui->toolButton_optional2, "optional_2", false, "optional2_title", DefaultTitle, "optional2_file_name", DefaultFileName },
 		{ ui->toolButton_optional3, "optional_3", false, "optional3_title", DefaultTitle, "optional3_file_name", DefaultFileName },
 		{ ui->toolButton_optional4, "optional_4", false, "optional4_title", DefaultTitle, "optional4_file_name", DefaultFileName },
-		{ ui->toolButton_stepup_chinese, "stepup-chinese", false, "stepup-chinese_title", DefaultTitle, "stepup-chinese_file_name", DefaultFileName },
+//		{ ui->toolButton_stepup_chinese, "stepup-chinese", false, "stepup-chinese_title", DefaultTitle, "stepup-chinese_file_name", DefaultFileName },
 //		{ ui->toolButton_omotenashi_chinese, "omotenashi-chinese", false, "omotenashi-chinese_title", DefaultTitle, "omotenashi-chinese_file_name", DefaultFileName },
 //		{ ui->toolButton_omotenashi_hangeul, "omotenashi-hangeul", false, "omotenashi-hangeul_title", DefaultTitle, "omotenashi-hangeul_file_name", DefaultFileName },
-		{ ui->toolButton_stepup_hangeul, "stepup-hangeul", false, "stepup-hangeul_title", DefaultTitle, "stepup-hangeul_file_name", DefaultFileName },
+//		{ ui->toolButton_stepup_hangeul, "stepup-hangeul", false, "stepup-hangeul_title", DefaultTitle, "stepup-hangeul_file_name", DefaultFileName },
 		{ ui->checkBox_13, "charo", false, "charo_title", DefaultTitle, "charo_file_name", DefaultFileName },
 		{ ui->checkBox_14, "e-news", false, "e-news_title", DefaultTitle, "e-news_file_name", DefaultFileName },
 		{ ui->checkBox_shower, "shower", false, "shower_title", DefaultTitle, "shower_file_name", DefaultFileName },
