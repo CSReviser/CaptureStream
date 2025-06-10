@@ -36,7 +36,7 @@ jobs:
       - name: Configure CMake
         run: |
           mkdir build
-          cmake -S CaptureStream2 -B build -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+          cmake -S ./ -B build -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
 
       - name: Build with Make
         run: cmake --build build --parallel
