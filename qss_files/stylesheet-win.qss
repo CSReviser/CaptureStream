@@ -17,6 +17,22 @@ MainWindow {
 	background-color: black;
 }
 
+QMenuBar {
+	background-color: gainsboro;
+}
+
+QMenuBar::item {
+	background: transparent;
+}
+
+QMenuBar::item:selected {
+	background: #a8a8a8;
+}
+
+QMenuBar::item:pressed {
+	background: #888888;
+}
+
 /*
    ツールボタンクラス
    色は#FFFFFFのような16進表記かwhiteのようなWebカラーネームで指定
@@ -104,6 +120,12 @@ QToolButton:hover {
 /* 拡張子選択ポップアップメニュー */
 #popup_ext {
    background-color: darkslategray;
+   color: black;
+}
+
+#checkBox_thumbnail {
+   background-color: black;
+   color: white;
 }
 
 /*

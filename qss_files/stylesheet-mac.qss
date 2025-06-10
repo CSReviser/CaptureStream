@@ -105,6 +105,12 @@ QToolButton:hover {
 /* 拡張子選択ポップアップメニュー */
 #popup_ext {
    background-color: darkslategray;
+   color: black;
+}
+
+#checkBox_thumbnail {
+   background-color: black;
+   color: white;
 }
 
 /*
@@ -173,7 +179,6 @@ MessageWindow QPushButton {
 }
 
 QMenuBar {
-	color: black;
 	background-color: gainsboro;
 }
 
