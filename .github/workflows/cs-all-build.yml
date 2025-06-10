@@ -45,23 +45,23 @@ jobs:
         run: |
           wget -qO FFmpeg.tar.gz https://github.com/CSReviser/ffmpeg-build/releases/download/7.1.1/ffmpeg-macos-universal.tar.gz || { echo "Failed to download FFmpeg"; exit 1; }
           tar -xzvf FFmpeg.tar.gz ffmpeg
-          cp ffmpeg ./build/CaptureStream2.app/Contents/MacOS/ 
-          cp CaptureStream2/icon.icns ./build/CaptureStream2.app/Contents/Resources/
-          cp CaptureStream2/qss_files/stylesheet-mac.qss ./build/CaptureStream2.app/Contents/MacOS/
+          cp ffmpeg ./build/CaptureStream.app/Contents/MacOS/ 
+          cp ./icon.icns ./build/CaptureStream.app/Contents/Resources/
+          cp ./qss_files/stylesheet-mac.qss ./build/CaptureStream.app/Contents/MacOS/
 
       - name: Create MacCaptureStream2 directory
         run: |
-          mkdir -p build/tmp/MacCaptureStream2
-          mv build/CaptureStream2.app build/tmp/MacCaptureStream2/
-          cp -r CaptureStream2/qss_files/License build/tmp/MacCaptureStream2/
+          mkdir -p build/tmp/MacCaptureStream
+          mv build/CaptureStream.app build/tmp/MacCaptureStream/
+          cp -r ./qss_files/License build/tmp/MacCaptureStream/
           
       - name: Create DMG file
         run: |
           cd build
-          hdiutil create -volname MacCaptureStream2 \
+          hdiutil create -volname MacCaptureStream \
                       -srcfolder tmp \
                       -ov -format UDZO \
-                      "CaptureStream2-MacOS-${{ github.event.inputs.yyyymmdd }}.dmg"
+                      "CaptureStream-MacOS-${{ github.event.inputs.yyyymmdd }}.dmg"
 
       - name: Format release title
         id: format_date
@@ -72,7 +72,7 @@ jobs:
       - name: Upload DMG to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: build/CaptureStream2-MacOS-${{ github.event.inputs.yyyymmdd }}.dmg
+          files: build/CaptureStream-MacOS-${{ github.event.inputs.yyyymmdd }}.dmg
           tag_name: ${{ github.event.inputs.yyyymmdd }}
           name: ${{ steps.format_date.outputs.title }}
           body: "Qt 6.9 build test"
@@ -114,10 +114,10 @@ jobs:
         shell: bash
         run: |
           mkdir -p build/WinCaptureStream2
-          mv build/CaptureStream2.exe build/WinCaptureStream2/
-          cp ./CaptureStream2/qss_files/stylesheet-win.qss build/WinCaptureStream2/
-          cp -r ./CaptureStream2/qss_files/License build/WinCaptureStream2/
-          cp /opt/mxe/usr/x86_64-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream2/
+          mv build/CaptureStream.exe build/WinCaptureStream/
+          cp ./qss_files/stylesheet-win.qss build/WinCaptureStream/
+          cp -r ./qss_files/License build/WinCaptureStream/
+          cp /opt/mxe/usr/x86_64-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream/
 
       - name: Install GitHub CLI
         run: |
@@ -133,7 +133,7 @@ jobs:
       - name: Create ZIP file
         run: |
           cd build
-          zip -r "CaptureStream2-Windows-x64-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
+          zip -r "CaptureStream-Windows-x64-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream
 
       - name: Upload Windows binary to existing release
         env:
@@ -141,7 +141,7 @@ jobs:
         run: |
           cd build
           gh release upload "${{ needs.mac_build.outputs.tag }}" \
-            "CaptureStream2-Windows-x64-${{ github.event.inputs.yyyymmdd }}.zip" \
+            "CaptureStream-Windows-x64-${{ github.event.inputs.yyyymmdd }}.zip" \
             --clobber
 
   win32_build:
