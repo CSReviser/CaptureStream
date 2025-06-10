@@ -113,7 +113,7 @@ jobs:
       - name: Create WinCaptureStream2 directory and move exe
         shell: bash
         run: |
-          mkdir -p build/WinCaptureStream2
+          mkdir -p build/WinCaptureStream
           mv build/CaptureStream.exe build/WinCaptureStream/
           cp ./qss_files/stylesheet-win.qss build/WinCaptureStream/
           cp -r ./qss_files/License build/WinCaptureStream/
