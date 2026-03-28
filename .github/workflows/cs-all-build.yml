@@ -219,7 +219,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: mac_build
     container:
-      image: ghcr.io/csreviser/qt5-mxe-static:5.15.0
+      image: ghcr.io/csreviser/qt5-mxe-static:5.15.18
 
     steps:
       - name: Checkout this repo
@@ -284,7 +284,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: mac_build
     container:
-      image: ghcr.io/csreviser/qt5-mxe-x86-static:5.15.0
+      image: ghcr.io/csreviser/qt5-mxe-x86-static:5.15.18
 
     steps:
       - name: Checkout this repo
@@ -425,7 +425,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: 5.15.*
-          modules: 'qtcharts'
+          modules: 'qtcharts qtscript qtxmlpatterns'
           extra: '--external 7z'
 
       - name: Clone CaptureStream2
