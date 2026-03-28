@@ -425,7 +425,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: 5.15.*
-          modules: 'qtcharts qtscript qtxmlpatterns'
+          modules: 'qtcharts qtscript qtwebengine'
           extra: '--external 7z'
 
       - name: Clone CaptureStream2
