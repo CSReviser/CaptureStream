@@ -228,6 +228,13 @@ jobs:
       - name: Mark repo as safe
         run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
+      - name: Clone CaptureStream
+        run: |
+          git clone https://github.com/CSReviser/CaptureStream.git
+          cd CaptureStream
+          git checkout feature
+          git submodule update --init --recursive
+          
       - name: Create build directory
         run: mkdir -p build
 
@@ -286,6 +293,13 @@ jobs:
       - name: Mark repo as safe
         run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
+      - name: Clone CaptureStream
+        run: |
+          git clone https://github.com/CSReviser/CaptureStream.git
+          cd CaptureStream
+          git checkout feature
+          git submodule update --init --recursive
+          
       - name: Create build directory
         run: mkdir -p build
 
