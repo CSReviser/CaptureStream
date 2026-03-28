@@ -500,14 +500,14 @@ jobs:
         run: |
           wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-7.1.1.7z || { echo "Failed to download FFmpeg"; exit 1; }
           7z e FFmpeg.7z ffmpeg -o./build/CaptureStream.app/Contents/MacOS/ || { echo "Failed to extract FFmpeg"; exit 1; }
-          cp CaptureStream/icon.icns ./build/CaptureStream.app/Contents/Resources/
-          cp CaptureStream/qss_files/stylesheet-mac.qss ./build/CaptureStream.app/Contents/MacOS/
+          cp ./icon.icns ./build/CaptureStream.app/Contents/Resources/
+          cp ./qss_files/stylesheet-mac.qss ./build/CaptureStream.app/Contents/MacOS/
 
       - name: Create MacCaptureStream2 directory
         run: |
           mkdir -p build/tmp/MacCaptureStream
           mv build/CaptureStream.app build/tmp/MacCaptureStream/
-          cp -r CaptureStream/qss_files/License build/tmp/MacCaptureStream/
+          cp -r ./qss_files/License build/tmp/MacCaptureStream/
           
       - name: Create DMG file
         run: |
