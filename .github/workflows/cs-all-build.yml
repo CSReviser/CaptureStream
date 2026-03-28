@@ -1,4 +1,4 @@
-name: 0. Build CaptureStream2 for macOS and Windows
+name: 0. Build CaptureStream for macOS and Windows
 
 on:
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
       - name: Build with Make
         run: cmake --build build --parallel
 
-      - name: Prepare CaptureStream2 executable
+      - name: Prepare CaptureStream executable
         run: |
           wget -qO FFmpeg.tar.gz https://github.com/CSReviser/ffmpeg-build/releases/download/7.1.1/ffmpeg-macos-universal.tar.gz || { echo "Failed to download FFmpeg"; exit 1; }
           tar -xzvf FFmpeg.tar.gz ffmpeg
@@ -49,7 +49,7 @@ jobs:
           cp ./icon.icns ./build/CaptureStream.app/Contents/Resources/
           cp ./qss_files/stylesheet-mac.qss ./build/CaptureStream.app/Contents/MacOS/
 
-      - name: Create MacCaptureStream2 directory
+      - name: Create MacCaptureStream directory
         run: |
           mkdir -p build/tmp/MacCaptureStream
           mv build/CaptureStream.app build/tmp/MacCaptureStream/
@@ -110,7 +110,7 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
-      - name: Create WinCaptureStream2 directory and move exe
+      - name: Create WinCaptureStream directory and move exe
         shell: bash
         run: |
           mkdir -p build/WinCaptureStream
@@ -168,20 +168,13 @@ jobs:
           apt-get update
           apt-get install -y gh
 
-      - name: Clone CaptureStream2
-        run: |
-          git clone https://github.com/CSReviser/CaptureStream2.git
-          cd CaptureStream2
-          git checkout feature
-          git submodule update --init --recursive
-
       - name: Create build directory
         run: mkdir -p build
 
       - name: Configure with CMake
         run: >
           /opt/mxe/usr/i686-w64-mingw32.static/qt6/bin/qt-cmake
-          -S CaptureStream2
+          -S CaptureStream
           -B build
           -DCMAKE_BUILD_TYPE=Release
           -DCMAKE_PREFIX_PATH="/opt/mxe/usr/i686-w64-mingw32.static/qt6/bin"
@@ -193,19 +186,19 @@ jobs:
       - name: Build
         run: cmake --build build --parallel
 
-      - name: Create WinCaptureStream2 directory and move exe
+      - name: Create WinCaptureStream directory and move exe
         shell: bash
         run: |
-          mkdir -p build/WinCaptureStream2
-          mv build/CaptureStream2.exe build/WinCaptureStream2/
-          cp ./CaptureStream2/qss_files/stylesheet-win.qss build/WinCaptureStream2/
-          cp -r ./CaptureStream2/qss_files/License build/WinCaptureStream2/
-          cp /opt/mxe/usr/i686-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream2/
+          mkdir -p build/WinCaptureStream
+          mv build/CaptureStream.exe build/WinCaptureStream/
+          cp ./CaptureStream/qss_files/stylesheet-win.qss build/WinCaptureStream/
+          cp -r ./CaptureStream/qss_files/License build/WinCaptureStream/
+          cp /opt/mxe/usr/i686-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream/
           
       - name: Create ZIP file
         run: |
           cd build
-          zip -r "CaptureStream2-Windows-x86-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
+          zip -r "CaptureStream-Windows-x86-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream
  
       - name: Upload Windows binary to existing release
         env:
@@ -213,7 +206,7 @@ jobs:
         run: |
           cd build
           gh release upload "${{ needs.mac_build.outputs.tag }}" \
-            "CaptureStream2-Windows-x86-${{ github.event.inputs.yyyymmdd }}.zip" \
+            "CaptureStream-Windows-x86-${{ github.event.inputs.yyyymmdd }}.zip" \
             --clobber
 
   wim_qt5_build:
@@ -229,37 +222,30 @@ jobs:
       - name: Mark repo as safe
         run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
-      - name: Clone CaptureStream2
-        run: |
-          git clone https://github.com/CSReviser/CaptureStream2.git
-          cd CaptureStream2
-          git checkout feature
-          git submodule update --init --recursive
-
       - name: Create build directory
         run: mkdir -p build
 
       - name: Configure with CMake
         run: >
           /opt/mxe/usr/x86_64-w64-mingw32.static/qt5/bin/qmake
-          CaptureStream2/CaptureStream2.pro
+          CaptureStream/CaptureStream.pro
           
       - name: Build
         run: make 
 
-      - name: Create WinCaptureStream2 directory and move exe
+      - name: Create WinCaptureStream directory and move exe
         shell: bash
         run: |
-          mkdir -p build/WinCaptureStream2
-          mv ./release/CaptureStream2.exe build/WinCaptureStream2/
-          cp ./CaptureStream2/qss_files/stylesheet-win.qss build/WinCaptureStream2/
-          cp -r ./CaptureStream2/qss_files/License build/WinCaptureStream2/
-          cp /opt/mxe/usr/x86_64-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream2/
+          mkdir -p build/WinCaptureStream
+          mv ./release/CaptureStream.exe build/WinCaptureStream/
+          cp ./CaptureStream/qss_files/stylesheet-win.qss build/WinCaptureStream/
+          cp -r ./CaptureStream/qss_files/License build/WinCaptureStream/
+          cp /opt/mxe/usr/x86_64-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream/
       
       - name: Create ZIP file
         run: |
           cd build
-          zip -r "CaptureStream2-Windows-x64-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
+          zip -r "CaptureStream-Windows-x64-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
 
       - name: Install GitHub CLI
         run: |
@@ -278,7 +264,7 @@ jobs:
         run: |
           cd build
           gh release upload "${{ needs.mac_build.outputs.tag }}" \
-            "CaptureStream2-Windows-x64-qt5-${{ github.event.inputs.yyyymmdd }}.zip" \
+            "CaptureStream-Windows-x64-qt5-${{ github.event.inputs.yyyymmdd }}.zip" \
             --clobber
 
   wim_x68_qt5_build:
@@ -294,20 +280,13 @@ jobs:
       - name: Mark repo as safe
         run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
-      - name: Clone CaptureStream2
-        run: |
-          git clone https://github.com/CSReviser/CaptureStream2.git
-          cd CaptureStream2
-          git checkout feature
-          git submodule update --init --recursive
-
       - name: Create build directory
         run: mkdir -p build
 
       - name: Configure with CMake
         run: >
           /opt/mxe/usr/i686-w64-mingw32.static/qt5/bin/qmake
-          CaptureStream2/CaptureStream2.pro
+          CaptureStream/CaptureStream.pro
           
       - name: Build
         run: make 
@@ -315,16 +294,16 @@ jobs:
       - name: Create WinCaptureStream2 directory and move exe
         shell: bash
         run: |
-          mkdir -p build/WinCaptureStream2
-          mv ./release/CaptureStream2.exe build/WinCaptureStream2/
-          cp ./CaptureStream2/qss_files/stylesheet-win.qss build/WinCaptureStream2/
-          cp -r ./CaptureStream2/qss_files/License build/WinCaptureStream2/
-          cp /opt/mxe/usr/i686-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream2/
+          mkdir -p build/WinCaptureStream
+          mv ./release/CaptureStream.exe build/WinCaptureStream/
+          cp ./CaptureStream/qss_files/stylesheet-win.qss build/WinCaptureStream/
+          cp -r ./CaptureStream/qss_files/License build/WinCaptureStream/
+          cp /opt/mxe/usr/i686-w64-mingw32.static/bin/ffmpeg.exe build/WinCaptureStream/
       
       - name: Create ZIP file
         run: |
           cd build
-          zip -r "CaptureStream2-Windows-x86-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
+          zip -r "CaptureStream-Windows-x86-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
 
       - name: Install GitHub CLI
         run: |
@@ -343,7 +322,7 @@ jobs:
         run: |
           cd build
           gh release upload "${{ needs.mac_build.outputs.tag }}" \
-            "CaptureStream2-Windows-x86-qt5-${{ github.event.inputs.yyyymmdd }}.zip" \
+            "CaptureStream-Windows-x86-qt5-${{ github.event.inputs.yyyymmdd }}.zip" \
             --clobber
             
   ubuntu_build:
@@ -372,36 +351,29 @@ jobs:
       - name: Mark repo as safe
         run: git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 
-      - name: Clone CaptureStream2
-        run: |
-          git clone https://github.com/CSReviser/CaptureStream2.git
-          cd CaptureStream2
-          git checkout feature
-          git submodule update --init --recursive
-
       - name: Build using Docker container with Qt static
         run: |
-          cd CaptureStream2
+          cd CaptureStream
           mkdir -p build && cd build
           qt-cmake .. -DQT_DEBUG_FIND_PACKAGE=ON
           cmake --build . --parallel
-          mkdir -p LinCaptureStream2
-          mv CaptureStream2 ./LinCaptureStream2/
-          cp ../qss_files/stylesheet-ubu.qss ./LinCaptureStream2
-          cp -r ../qss_files/License ./LinCaptureStream2
+          mkdir -p LinCaptureStream
+          mv CaptureStream ./LinCaptureStream/
+          cp ../qss_files/stylesheet-ubu.qss ./LinCaptureStream
+          cp -r ../qss_files/License ./LinCaptureStream
           wget -qO ffmpeg-static-ubuntu.zip https://github.com/CSReviser/ffmpeg-build/releases/download/7.1.1/ffmpeg-static-ubuntu.zip
-          7z e ffmpeg-static-ubuntu.zip ffmpeg -o./LinCaptureStream2
-          chmod -R 755 ./LinCaptureStream2
+          7z e ffmpeg-static-ubuntu.zip ffmpeg -o./LinCaptureStream
+          chmod -R 755 ./LinCaptureStream
 
       - name: Create ZIP file
         run: |
           cd CaptureStream2/build
-          zip -r "CaptureStream2-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip" LinCaptureStream2
+          zip -r "CaptureStream-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip" LinCaptureStream
       
       - name: Upload zip to GitHub Release
         uses: softprops/action-gh-release@v2.2.2
         with:
-          files: CaptureStream2/build/CaptureStream2-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip
+          files: CaptureStream/build/CaptureStream-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip
           tag_name: ${{ needs.mac_build.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -436,40 +408,33 @@ jobs:
           modules: 'qtcharts'
           extra: '--external 7z'
 
-      - name: Clone CaptureStream2
-        run: |
-          git clone https://github.com/CSReviser/CaptureStream2.git
-          cd CaptureStream2
-          git checkout feature
-          git submodule update --init --recursive
-
       - name: qmake
         run: |
-          cd CaptureStream2
-          qmake -makefile CaptureStream2.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64"
+          cd CaptureStream
+          qmake -makefile CaptureStream.pro QMAKE_APPLE_DEVICE_ARCHS="x86_64"
           make
           wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-7.1.1.7z
-          7z e FFmpeg.7z ffmpeg -o./CaptureStream2.app/Contents/MacOS/
-          chmod -R 755 ./CaptureStream2.app
-          mkdir -p ./build/tmp/MacCaptureStream2
-          cp ./icon.icns ./CaptureStream2.app/Contents/Resources/
-          cp ./qss_files/stylesheet-mac.qss ./CaptureStream2.app/Contents/MacOS/
-          mv ./CaptureStream2.app ./build/tmp/MacCaptureStream2/
-          cp -r ./qss_files/License ./build/tmp/MacCaptureStream2/
+          7z e FFmpeg.7z ffmpeg -o./CaptureStream.app/Contents/MacOS/
+          chmod -R 755 ./CaptureStream.app
+          mkdir -p ./build/tmp/MacCaptureStream
+          cp ./icon.icns ./CaptureStream.app/Contents/Resources/
+          cp ./qss_files/stylesheet-mac.qss ./CaptureStream.app/Contents/MacOS/
+          mv ./CaptureStream.app ./build/tmp/MacCaptureStream/
+          cp -r ./qss_files/License ./build/tmp/MacCaptureStream/
           
       - name: Create DMG file
         run: |
           cd CaptureStream2/build
-          hdiutil create -volname MacCaptureStream2 \
+          hdiutil create -volname MacCaptureStream \
                       -srcfolder tmp \
                       -ov -format UDZO \
-                      "CaptureStream2-MacOS-qt5-${{ github.event.inputs.yyyymmdd }}.dmg"
+                      "CaptureStream-MacOS-qt5-${{ github.event.inputs.yyyymmdd }}.dmg"
 
 
       - name: Upload DMG to GitHub Release
         uses: softprops/action-gh-release@v2.2.2
         with:
-          files: CaptureStream2/build/CaptureStream2-MacOS-qt5-${{ github.event.inputs.yyyymmdd }}.dmg
+          files: CaptureStream/build/CaptureStream-MacOS-qt5-${{ github.event.inputs.yyyymmdd }}.dmg
           tag_name: ${{ needs.mac_build.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -497,17 +462,10 @@ jobs:
           modules: 'qtcharts'
           extra: '--external 7z'
 
-      - name: Clone CaptureStream2
-        run: |
-          git clone https://github.com/CSReviser/CaptureStream2.git
-          cd CaptureStream2
-          git checkout feature
-          git submodule update --init --recursive
-
       - name: Configure CMake
         run: |
           mkdir build
-          cmake -S CaptureStream2 -B build -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+          cmake -S CaptureStream -B build -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
 
       - name: Build with Make
         run: cmake --build build --parallel
@@ -515,28 +473,28 @@ jobs:
       - name: Prepare CaptureStream2 executable
         run: |
           wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-7.1.1.7z || { echo "Failed to download FFmpeg"; exit 1; }
-          7z e FFmpeg.7z ffmpeg -o./build/CaptureStream2.app/Contents/MacOS/ || { echo "Failed to extract FFmpeg"; exit 1; }
-          cp CaptureStream2/icon.icns ./build/CaptureStream2.app/Contents/Resources/
-          cp CaptureStream2/qss_files/stylesheet-mac.qss ./build/CaptureStream2.app/Contents/MacOS/
+          7z e FFmpeg.7z ffmpeg -o./build/CaptureStream.app/Contents/MacOS/ || { echo "Failed to extract FFmpeg"; exit 1; }
+          cp CaptureStream/icon.icns ./build/CaptureStream.app/Contents/Resources/
+          cp CaptureStream/qss_files/stylesheet-mac.qss ./build/CaptureStream.app/Contents/MacOS/
 
       - name: Create MacCaptureStream2 directory
         run: |
-          mkdir -p build/tmp/MacCaptureStream2
-          mv build/CaptureStream2.app build/tmp/MacCaptureStream2/
-          cp -r CaptureStream2/qss_files/License build/tmp/MacCaptureStream2/
+          mkdir -p build/tmp/MacCaptureStream
+          mv build/CaptureStream.app build/tmp/MacCaptureStream/
+          cp -r CaptureStream/qss_files/License build/tmp/MacCaptureStream/
           
       - name: Create DMG file
         run: |
           cd build
-          hdiutil create -volname MacCaptureStream2 \
+          hdiutil create -volname MacCaptureStream \
                       -srcfolder tmp \
                       -ov -format UDZO \
-                      "CaptureStream2-MacOS-intel-${{ github.event.inputs.yyyymmdd }}.dmg"
+                      "CaptureStream-MacOS-intel-${{ github.event.inputs.yyyymmdd }}.dmg"
 
       - name: Upload DMG to GitHub Release
         uses: softprops/action-gh-release@v2.2.2
         with:
-          files: build/CaptureStream2-MacOS-intel-${{ github.event.inputs.yyyymmdd }}.dmg
+          files: build/CaptureStream-MacOS-intel-${{ github.event.inputs.yyyymmdd }}.dmg
           tag_name: ${{ needs.mac_build.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
