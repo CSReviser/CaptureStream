@@ -485,7 +485,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: 6.5.*
-          modules: 'qtcharts qtscript qtwebengine'
+          modules: 'qtcharts'
           extra: '--external 7z'
 
       - name: Configure CMake
