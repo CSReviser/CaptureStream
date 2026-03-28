@@ -428,7 +428,7 @@ jobs:
           modules: 'qtcharts qtscript qtwebengine'
           extra: '--external 7z'
 
-      - name: Clone CaptureStream2
+      - name: Clone CaptureStream
         run: |
           git clone https://github.com/CSReviser/CaptureStream.git
           cd CaptureStream
@@ -450,7 +450,7 @@ jobs:
           
       - name: Create DMG file
         run: |
-          cd CaptureStream2/build
+          cd CaptureStream/build
           hdiutil create -volname MacCaptureStream \
                       -srcfolder tmp \
                       -ov -format UDZO \
@@ -485,7 +485,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: 6.5.*
-          modules: 'qtcharts qtscript qtxmlpatterns'
+          modules: 'qtcharts qtscript qtwebengine'
           extra: '--external 7z'
 
       - name: Configure CMake
@@ -496,7 +496,7 @@ jobs:
       - name: Build with Make
         run: cmake --build build --parallel
 
-      - name: Prepare CaptureStream2 executable
+      - name: Prepare CaptureStream executable
         run: |
           wget -qO FFmpeg.7z https://evermeet.cx/ffmpeg/ffmpeg-7.1.1.7z || { echo "Failed to download FFmpeg"; exit 1; }
           7z e FFmpeg.7z ffmpeg -o./build/CaptureStream.app/Contents/MacOS/ || { echo "Failed to extract FFmpeg"; exit 1; }
