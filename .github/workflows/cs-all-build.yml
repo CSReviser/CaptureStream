@@ -414,6 +414,12 @@ jobs:
           modules: 'qtcharts'
           extra: '--external 7z'
 
+      - name: Clone CaptureStream2
+        run: |
+          git clone https://github.com/CSReviser/CaptureStream.git
+          cd CaptureStream
+          git submodule update --init --recursive
+
       - name: qmake
         run: |
           cd CaptureStream
