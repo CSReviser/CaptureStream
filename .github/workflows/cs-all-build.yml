@@ -258,7 +258,7 @@ jobs:
       - name: Create ZIP file
         run: |
           cd build
-          zip -r "CaptureStream-Windows-x64-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
+          zip -r "CaptureStream-Windows-x64-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream
 
       - name: Install GitHub CLI
         run: |
@@ -323,7 +323,7 @@ jobs:
       - name: Create ZIP file
         run: |
           cd build
-          zip -r "CaptureStream-Windows-x86-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream2
+          zip -r "CaptureStream-Windows-x86-qt5-${{ github.event.inputs.yyyymmdd }}.zip" WinCaptureStream
 
       - name: Install GitHub CLI
         run: |
