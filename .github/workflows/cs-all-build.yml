@@ -29,8 +29,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: 6.9.*
-          modules: 'qtcharts'
+          version: 6.11.0
           extra: '--external 7z'
 
       - name: Configure CMake
@@ -75,7 +74,7 @@ jobs:
           files: build/CaptureStream-MacOS-${{ github.event.inputs.yyyymmdd }}.dmg
           tag_name: ${{ github.event.inputs.yyyymmdd }}
           name: ${{ steps.format_date.outputs.title }}
-          body: "Qt 6.9 build test"
+          body: "2026年度更新　Qt 6.11 build test"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
