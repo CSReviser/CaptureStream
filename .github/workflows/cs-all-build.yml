@@ -392,7 +392,7 @@ jobs:
 
       - name: Create ZIP file
         run: |
-          cd CaptureStream2/build
+          cd CaptureStream/build
           zip -r "CaptureStream-ubuntu-${{ github.event.inputs.yyyymmdd }}.zip" LinCaptureStream
       
       - name: Upload zip to GitHub Release
