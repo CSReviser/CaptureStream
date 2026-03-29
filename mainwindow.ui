@@ -577,7 +577,7 @@
           </font>
          </property>
          <property name="text">
-          <string>中学生の基礎英語レベル１</string>
+          <string>基礎英語レベル１</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -641,7 +641,7 @@
           </font>
          </property>
          <property name="text">
-          <string>中学生の基礎英語レベル２</string>
+          <string>基礎英語レベル２</string>
          </property>
          <property name="checkable">
           <bool>true</bool>

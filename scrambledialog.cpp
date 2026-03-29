@@ -33,9 +33,9 @@ QString ScrambleDialog::optional4;
 
 QString ScrambleDialog::opt1[] = {
 		"77RQWQX1L6_01", // ニュースで学ぶ「現代英語」
-		"WKMNWGMN6R_01", // アラビア語講座
-		"GLZQ4M519X_01", // Asian View
-		"N13V9K157Y_01"  // ポルトガル語講座
+		"N13V9K157Y_01", // ポルトガル語講座
+		"XQ487ZM61K_x1", // まいにちフランス語【初級編】
+		"N8PZRZ9WQY_x1"  // まいにちドイツ語【初級編】
 };
 QString ScrambleDialog::opt2[] = {
 		"XQ487ZM61K_x1", //まいにちフランス語 入門編／初級編
@@ -52,14 +52,14 @@ QString ScrambleDialog::opt3[] = {
 QString ScrambleDialog::opt4[] = {
 		"YRLK72JZ7Q_x1", //まいにちロシア語 入門編／初級編
 		"YRLK72JZ7Q_y1", //まいにちロシア語 応用編
-		"4MY6Q8XP88_01", //Living in Japan
-		"6LPPKP6W8Q_01", //やさしい日本語
+		"LJWZP7XVMX_x1", //まいにちイタリア語 入門編／初級編
+		"NRZWXVGQ19_x1"  //まいにちスペイン語 入門編／初級編
 };
 QString ScrambleDialog::opt5[] = {
 		"R5XR783QK3_01", //おしゃべりな古典教室
 		"DK83KZ8848_01", //カルチャーラジオ 文学の世界
 		"5L3859P515_01", //古典講読
-		"XKR4W8GY15_01"  //カルチャーラジオ 科学と人間
+		"GLW7RX3PXL_01"  //お話でてこい
 };
 QString ScrambleDialog::opt6[] = {
 		"X4X6N1XG8Z_01", //青春アドベンチャー

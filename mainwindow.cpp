@@ -84,13 +84,13 @@
 #define SETTING_OPT_TITLE3 "opt_title3"
 #define SETTING_OPT_TITLE4 "opt_title4"
 #define OPTIONAL1 "77RQWQX1L6_01"	// ニュースで学ぶ「現代英語」
-#define OPTIONAL2 "WKMNWGMN6R_01"	// アラビア語講座
-#define OPTIONAL3 "GLZQ4M519X_01"	// Asian View
-#define OPTIONAL4 "N13V9K157Y_01"	// ポルトガル語講座
+#define OPTIONAL2 "N13V9K157Y_01"	// ポルトガル語講座
+#define OPTIONAL3 "XQ487ZM61K_x1"	// まいにちフランス語【初級編】
+#define OPTIONAL4 "N8PZRZ9WQY_x1"	// まいにちドイツ語【初級編】
 #define Program_TITLE1 "ニュースで学ぶ「現代英語」"
-#define Program_TITLE2 "アラビア語講座"
-#define Program_TITLE3 "Asian View"
-#define Program_TITLE4 "ポルトガル語講座"
+#define Program_TITLE2 "ポルトガル語講座"
+#define Program_TITLE3 "まいにちフランス語【初級編】"
+#define Program_TITLE4 "まいにちドイツ語【初級編】"
 
 #ifdef QT4_QT5_WIN
 #define STYLE_SHEET "stylesheet-win.qss"
@@ -118,11 +118,11 @@ namespace {
 //			int day = regexp.cap( 2 ).toInt();
 //			result = QString( " (%1/%2/%3)" ).arg( regexp.cap( 3 ) )
 //					.arg( month, 2, 10, QLatin1Char( '0' ) ).arg( day, 2, 10, QLatin1Char( '0' ) );
-			result = QString( "  (2025/06/10)" ); 
+			result = QString( "  (2026/03/29)" ); 
 		}
 #endif
 #ifdef QT6
-			result = QString( "  (2025/06/10)" ); 
+			result = QString( "  (2026/03/29)" ); 
 #endif
 		return result;
 	}
